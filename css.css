@@ -1,0 +1,264 @@
+
+/* Enquiry Popup Form Styles 
+----------------------------------------------------*/
+div#curtain {
+  background: none repeat scroll 0 0 rgba(0, 0, 0, 0.8);
+  border-radius: 0;
+  bottom: 0;
+  display: none;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+}
+#popupBoxClose {
+  background: none repeat scroll 0 0 #fff;
+  border-radius: 0 0 0 5px;
+  color: #000;
+  cursor: pointer;
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 15px;
+  padding: 3px;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+#popup_box {
+  background: none repeat scroll 0 0 #eee;
+  border: 3px solid #276ab2;
+  border-radius: 5px;
+  bottom: 0;
+  box-shadow: 0 0 15px #555;
+  display: none;
+  font-size: 15px;
+  left: calc(50% - 300px);
+  margin-left: 0px;
+  max-height: 100%;
+  position: fixed;
+  top: 0;
+  width: 600px;
+  max-width: 90%; 
+  z-index: 100000;
+}
+#form_container {
+  height: 85%;
+  overflow-y: scroll;
+}
+
+.cross{float:right; margin:-14px 0px 0px 0px; font-size:12px;}
+#popup_title {
+  background-color: #074c97;
+  color: #fff;
+  font-size: 1.6em;
+  font-weight: bold;
+  line-height: 1.3em;
+  margin-bottom: 10px;
+  padding: 10px 20px;
+  text-align: center;
+}
+#popup_description {
+  color: #333;
+  margin: 30px 20px;
+  text-align:center;
+}
+
+
+/* Form Styles
+***************************************/
+.wpcf7 ul {
+  list-style: none outside none;
+  margin: 0;
+}
+
+#popup_box form{
+	text-align:center;
+}
+#popup_box li > span{
+	width: 100%;
+}
+/* #wpcf7-f251-p24-o2 input, #wpcf7-f251-p24-o2 textarea { */
+#popup_box input,#popup_box input[type="text"], #popup_box textarea, #popup_box  select  { 
+  padding: 10px 7px;
+  width: 90%;
+  max-width:none;
+  box-shadow: 0 0 1px #ccc;
+  border: 1px solid #ccc;
+}
+#popup_box textarea {
+	height:80px!important;
+}
+#popup_box  select  {
+	width: 94%;
+	height: 44px;
+}
+#popup_box .wpcf7-quiz-label {
+  color: #333;
+  display: inline;
+  margin-top: 20px;
+}
+#popup_box .wpcf7-form-control.wpcf7-quiz {
+  margin: 0 0 0 20px;
+  text-align: center;
+  width: 40px;
+}
+#popup_box .wpcf7-form-control.wpcf7-submit {
+  background-color: #074C97;
+  border: 0 none;
+  border-radius: 10px;
+  color: #fff;
+  font-weight: bold;
+  letter-spacing: 4px;
+  margin: 30px auto 0;
+  padding: 10px 0;
+  text-transform: uppercase;
+  width: 50%;
+}
+#popup_box .widget_widget_text {
+    display: none;
+}
+#popup_box div.wpcf7-response-output {
+  background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
+  border: medium none;
+  border-radius: 5px;
+  color: #a31b1f;
+  font-size: 0.8em;
+  line-height: 1.2em;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  bottom: 7px;
+  width: 100%;
+}
+#popup_box div.wpcf7-mail-sent-ok {
+	border: 0px solid #efefef;
+	border-bottom:0;
+	color: #074C97;
+}
+#popup_box span.wpcf7-not-valid-tip {
+  clear: both;
+  color: #A31B1F;
+  display: block;
+  font-size: 0.8em;
+  letter-spacing: 1px;
+  padding-left: 20px;
+  position: absolute;
+  right: 10px;
+  top: 0;
+}
+#popup_box .spam-quiz .wpcf7-not-valid-tip {
+  position: relative;
+  top: 0;
+  left: 0;
+  color: #A31B1F;
+}
+
+/* Side Image Button Handle Styles
+***************************************/
+.side-enquiry-holder {
+	background: url("images/black-texture.png") repeat scroll 0 0 #333; 
+  background: #074C97;
+  bottom: 25%;
+  height: 200px;
+  position: fixed;
+  right: 0;
+  width: 30px;
+  border-radius: 15px 0 0 15px;
+  padding: 3px;
+  float: right;
+  padding: 0 3px 5px;
+  border-radius: 10px 0 0 10px;
+  margin-top: 5px;
+}
+.side-enquiry-holder.holder-get-a-quote {
+	height: 154px; 
+}
+.side-enquiry {
+  position: fixed;
+  right: 0;
+  z-index: 999;
+  height: 2000px;
+  width: 30px;
+  background-position: -5px 0; 
+  cursor:pointer;     
+  text-indent: -9999px;
+  border-radius: 0;
+  border: 0px solid #FFF;
+  border-right: 0;
+  margin-bottom: 3px; 
+}
+.side-enquiry.get-a-quote {
+	background: url('images/get-a-quote.png') no-repeat transparent;
+}
+.side-enquiry.have-a-query {
+	background: url('images/have-a-query.png') no-repeat transparent;
+}
+
+
+
+/* Omak Social Links Styles
+***************************************/
+ul.omaksociallinks {
+  list-style: none outside none;
+  margin: 10px 0 5px;
+}
+.omaksociallinks li {
+  display: inline;
+  height: 37px;
+  width: 41px;
+}
+.omaksociallinks li a {
+  background: url("images/icons-246x37.png") no-repeat scroll 0 0 transparent;
+  display: inline-block;
+  height: 37px;
+  line-height: 37px;
+  margin: 0 1px 5px 0;
+  width: 41px;
+  text-indent: -9999px;
+  border-radius: 10px 10px;
+}
+.omaksociallinks li.twitter a {
+  background-position: -41px 0;
+}
+.omaksociallinks li.gplus a {
+  background-position: -82px 0;
+}
+.omaksociallinks li.linkedin a {
+  background-position: -123px 0;
+}
+.omaksociallinks li.rss a {
+  background-position: -164px 0;
+}
+.omaksociallinks li.website a {
+  background-position: -205px 0;
+}
+
+
+@media (max-width: 767px) {
+	.side-enquiry-holder {
+		border-radius: 10px 0 0;
+		bottom: 0;
+		height: 20px;
+		width: 125px;
+	}
+	.side-enquiry {
+		background: none;
+		color: #efefef;
+		margin: 0;
+		padding: 3px;
+		right: 5px;
+		text-indent: 0;
+		 width: 112px;
+	}
+	
+	.side-enquiry.have-a-query, .side-enquiry.get-a-quote {
+		background: none; 
+	}
+	
+}
+
+@media (max-width: 767px) {
+	#form_container {
+		overflow-x: scroll;
+	}
+}
