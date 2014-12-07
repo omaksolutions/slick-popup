@@ -40,25 +40,26 @@ function set_popup() {
 	popup = jQuery('#popup_box');
 	curtain = jQuery('#curtain');
 	
-	popupHeight = popup.outerHeight();
-	titleHeight = jQuery('#popup_title').outerHeight();
-	descriptionHeight = jQuery('#popup_description').outerHeight();
-	
-	descrptionHeight = 0; 
-	//alert( titleHeight ); 
-	
-	formHeight = popupHeight - titleHeight - descriptionHeight - 0;
-	//alert( 'Popup:' +popupHeight+ ' + FormHeight:' +formHeight );
-	$formContainer = jQuery('#form_container').height(formHeight);
-	
-	
-	// Set Popup Left Position
-	curtainWidth = curtain.width();
-	popupWidth = popup.width();
-	
-	popLeft = (curtainWidth - popupWidth)/2;
-	//alert(popLeft);
-	
-	popup.css( 'left', popLeft+'px' );
-	
+	if ( popup.length ) {
+		popupHeight = popup.outerHeight();
+		titleHeight = jQuery('#popup_title').outerHeight();
+		descriptionHeight = jQuery('#popup_description').outerHeight();
+		
+		descrptionHeight = 0; 
+		//alert( titleHeight ); 
+		
+		formHeight = popupHeight - titleHeight - descriptionHeight - 0;
+		//alert( 'Popup:' +popupHeight+ ' + FormHeight:' +formHeight );
+		$formContainer = jQuery('#form_container').height(formHeight);
+		
+		
+		// Set Popup Left Position
+		curtainWidth = curtain.width();
+		popupWidth = popup.width();
+		
+		popLeft = (curtainWidth - popupWidth)/2;
+		//alert(popLeft);
+		
+		popup.css( 'left', popLeft+'px' );
+	}
 }
