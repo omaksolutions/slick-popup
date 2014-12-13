@@ -14,13 +14,15 @@ Author:       Om Ak Solutions
 
 add_action( 'admin_bar_menu', 'toolbar_link_to_slick_popup', 999 );
 function toolbar_link_to_slick_popup( $wp_admin_bar ) {
-	$args = array(
-		'id'    => 'slick_popup',
-		'title' => 'Slick Popup',
-		'href'  => admin_url('admin.php?page=slick-options.php'),
-		'meta'  => array( 'class' => 'my-toolbar-page' )
-	);
-	$wp_admin_bar->add_node( $args );
+	if ( current_user_can('manage_options') ) {
+		$args = array(
+			'id'    => 'slick_popup',
+			'title' => 'Slick Popup',
+			'href'  => admin_url('admin.php?page=slick-options.php'),
+			'meta'  => array( 'class' => 'my-toolbar-page' )
+		);
+		$wp_admin_bar->add_node( $args );
+	}
 }
 
 //SETUP
