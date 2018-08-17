@@ -1,0 +1,162 @@
+<?php
+
+/**
+ * Add Plugin's Admin Menu
+ * Since Version 2.0  
+ */	
+add_action('admin_menu', 'splite_addmenu_page_in_admin', 99); 
+function splite_addmenu_page_in_admin() {
+	//add_options_page(__('All Settings'), __('All Settings'), 'administrator', 'options.php');
+	global $_wp_last_object_menu;
+	$_wp_last_object_menu++;
+
+	global $splite_hook; 	
+	$splite_hook = array();
+	$icon = SPLITE_PLUGIN_URL . '/libs/admin/img/menu_icon.png';
+	
+	$sppro_hook[] = add_submenu_page( 'slick-options', 'Import Demos', 'Import Demos', 'manage_options', 'import-demos', 'splite_import_demos' );
+	$hook = "load-".$sppro_hook[0];
+	
+	add_action($hook, 'splite_load_admin');	
+}
+
+
+/**
+ * Import Demos Features
+ * Since Version 2.0 - ToDo
+ * @param none
+ 
+ * @return none
+ * Creates the post list table 
+ */
+function splite_import_demos() { ?>
+	<style>
+		.section {
+			overflow: hidden; 
+			margin-bottom: 30px; 
+		}
+		.sp-btn {
+		     
+		}
+		.sp-btn:hover {
+		}
+		.sp-btn-importer {
+			float: right; 
+		}
+		.import-result {
+			width: auto;
+		    height: 30px;
+		    padding: 10px 2px 5px 10px;
+		    display: block;
+		    font-family: sans-serif;
+		    font-size: 20px;
+		    font-weight: bold;
+		    border-radius: 5px;
+		    background: red;
+		    color: white;
+		    margin-top: 10px;
+		    display: none;
+		}
+		
+		.import-box {
+			overflow: hidden; 
+		}
+		.import-box {
+			float: left;
+			margin: 0 4% 4% 0;
+			position: relative;
+			width: 30.6%;
+			border: 1px solid #ddd;
+			box-shadow: 0 1px 1px -1px rgba(0,0,0,.1);
+			box-sizing: border-box;
+		}
+		.import-box:last-child {
+			margin-right: 0; 
+		}
+		.import-box img {
+			max-height: 280px;
+			width: 100%;
+		}
+		.import-box img:hover {
+			transform: scale(0.99);
+		}
+		.import-box-title {
+			padding: .25rem 1rem;
+		}
+		.sp-label {
+			font-weight: bold; 
+		}
+		.sp-btn-importer {
+			
+		}
+		.sp-import-handle {
+			float: right; 
+		}
+		
+		.sp-loader:before {
+			font: 400 20px/1 dashicons;
+			color: #f56e28;
+			content: "\f463";
+			position: relative; 
+			left: -5px;
+		}
+		.import-box-result {
+			text-align: center;
+			padding: 3px 10px;
+			color: #efefef;
+			position: absolute;
+			width: 100%;
+			bottom: 30px;
+		}
+		.import-box-result a {
+			color: #efefef; 
+		}
+		.import-box-result.success {
+			background: green; 
+			color: #efefef; 
+		}
+		.import-box-result.error {
+			background: red; 
+			color: #efefef; 
+			margin: 0 !important; 
+		}
+		@media only screen and (max-width: 769px) {
+			.section-inline {
+				display: block;
+				width: auto; 
+				margin-right: 0; 
+			}
+		}
+	
+	</style>
+	
+	<div class="wrap">
+		<h1>One-click Import for Contact Form 7</h1>
+		<p>Choose a form and click import button, this will create a <a href="<?php echo admin_url('/admin.php?page=wpcf7/'); ?>">Contact Form 7</a> form with the desired layout. Once imported, you may want to chane the To Email and Mail Body for the form.</p>
+		<div class="import-holder">
+			<?php $demos = array(
+				'basic-enquiry' => 'Basic Enquiry', 
+				'subscribe' => 'Subscribe',
+				'unsubscribe' => 	'Unsubscribe',
+			);
+			$output = '';
+			foreach($demos as $label=>$demo) {			
+				$output .='<div class="import-box">';
+					$output .='<img src="'.splite_plugin_url('/libs/js/img/'.$label.'.png').'" title="'.$demo.'">'; 
+					$output .='<div class="import-box-result" style="display:none;"></div>';
+					$output .='<div class="import-box-title">';
+						$output .='<span class="sp-label">'.$demo.' Popup</span>';
+						$output .='<span class="sp-import-handle">';
+							$output .='<span class="sp-loader" style="display:none;"></span>';						
+							$output .='<span class="sp-btn button-link sp-btn-importer" data-title="'.$demo.'">Import</span>';
+						$output .='</span>';
+					$output .='</div>';
+				$output .='</div>';
+			} 
+			echo $output; 
+			?>
+		</div>
+		<div class="import-result" id="import-result"></div>			
+	</div>
+
+<?php }
