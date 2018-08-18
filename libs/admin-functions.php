@@ -12,7 +12,7 @@ function splite_addmenu_page_in_admin() {
 
 	global $splite_hook; 	
 	$splite_hook = array();
-	$icon = SPLITE_PLUGIN_URL . '/libs/admin/img/menu_icon.png';
+	$icon = SPLITE_PLUGIN_URL . '/admin/img/menu_icon.png';
 	
 	$sppro_hook[] = add_submenu_page( 'slick-options', 'Import Demos', 'Import Demos', 'manage_options', 'import-demos', 'splite_import_demos' );
 	$hook = "load-".$sppro_hook[0];
@@ -31,6 +31,9 @@ function splite_addmenu_page_in_admin() {
  */
 function splite_import_demos() { ?>
 	<style>
+		p.notice {
+			padding: 10px;
+		}
 		.section {
 			overflow: hidden; 
 			margin-bottom: 30px; 
@@ -132,7 +135,7 @@ function splite_import_demos() { ?>
 	
 	<div class="wrap">
 		<h1>One-click Import for Contact Form 7</h1>
-		<p>Choose a form and click import button, this will create a <a href="<?php echo admin_url('/admin.php?page=wpcf7/'); ?>">Contact Form 7</a> form with the desired layout. Once imported, you may want to chane the To Email and Mail Body for the form.</p>
+		<p class="notice notice-success">Choose a form and click import button, this will create a <a href="<?php echo admin_url('/admin.php?page=wpcf7/'); ?>">Contact Form 7</a> form with the desired layout. Once imported, you may want to chane the To Email and Mail Body for the form.</p>
 		<div class="import-holder">
 			<?php $demos = array(
 				'basic-enquiry' => 'Basic Enquiry', 

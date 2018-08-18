@@ -5,12 +5,12 @@ Plugin URI:   http://www.omaksolutions.com
 Description:  A lightweight plugin that converts a Contact Form 7 form into a customizable pop-up form which is slick, beautiful and responsive to different screen-sizes.
 Author URI:   http://www.omaksolutions.com 
 Author:       Om Ak Solutions 
-Version:      1.4.4
+Version:      1.5.1
 Text Domain: sp-pro-txt-domain
 */
 
 
-define( 'SPLITE_VERSION', '1.4.4' );
+define( 'SPLITE_VERSION', '1.5.1' );
 
 define( 'SPLITE_REQUIRED_WP_VERSION', '3.0.1' );
 
@@ -29,7 +29,7 @@ define( 'SPLITE_PLUGIN_IMG_URL', SPLITE_PLUGIN_URL . '/libs/admin/img' );
 define ( 'SPLITE_DEBUG', FALSE );
 
 require_once( SPLITE_PLUGIN_DIR . '/libs/admin/codestar/cs-framework.php' );
-require_once( SPLITE_PLUGIN_DIR . '/libs/admin/admin-functions.php' );
+require_once( SPLITE_PLUGIN_DIR . '/libs/admin-functions.php' );
 require_once( SPLITE_PLUGIN_DIR . '/libs/extras.php' );
 require_once( SPLITE_PLUGIN_DIR . '/libs/classes/splite-importer.php' );
 
@@ -58,7 +58,7 @@ function splite_on_activate(){
 //add_action( 'redux/options/splite_opts/register', 'splite_update_db_check' );
 add_action( 'redux/loaded', 'splite_update_db_check' );
 function splite_update_db_check() {
-    if ( SPLITE_VERSION >= '1.3' ) {
+    if ( SPLITE_VERSION >= '1.4' ) {
         spplite_update_db(); 
     }
 }

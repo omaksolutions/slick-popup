@@ -63,7 +63,7 @@ function splite_import_cf7_demo($args=array()) {
 		case 'Basic Enquiry': 
 			$form = '		
 				<div class="col-md-6" style="overflow: hidden;">
-					<h2 style="text-align:center;line-height:1.5em;margin-bottom:20px;">Basic <strong>Equiry</strong></h2>
+					<h2 style="text-align:center;line-height:1.5em;margin-bottom:20px;">Basic <strong>Enquiry</strong></h2>
 					<p style="float: left;width: 100%; padding-right: 5px;">[text* your-name placeholder "Full name"]</p>
 					<p style="float: left;width: 50%; padding-right: 5px">[email* your-email placeholder "Email"]</p>
 					<p style="float: left;width: 50%; padding-left: 5px">[tel* your-phone placeholder "Phone"]</p>
@@ -110,8 +110,7 @@ function splite_import_cf7_demo($args=array()) {
 			$form = '
 				<div class="col-md-6" style="overflow: hidden;">
 					<h2 style="text-align:center;line-height:1.5em;margin-bottom:20px;"><strong>UNSUBSCRIBE</strong></h2>
-					<p style="float: left;width: 50%;padding-right: 5px">[text* first-name placeholder "First Name"]</p>
-					<p style="float: left;width: 50%;padding-left: 5px">[text* last-name placeholder "Last Name"]</p>
+					<p style="float: left;width: 100%;padding: 5px;">[select* unsubscribe-reason "Unsubscribe Reason" "Too many emails" "Content irrelevant" "Didn’t know you were subscribing " "Too much or too little content"]</p>
 					<p style="float: left;width: 100%;padding: 5px;">[email* your-email placeholder "Email"]</p>
 					<p style="clear: both;display: block;">[submit "UNSUBSCRIBE"]</p>
 				</div>';
@@ -119,9 +118,8 @@ function splite_import_cf7_demo($args=array()) {
 			$mail['body'] = 'Hello admin
 
 			A customer has unsubscribed to your updates.
-			<strong>Name:</strong> [first-name][last-name]
 			<strong>Email:</strong> [your-email]
-
+			<strong>Reason: </strong>[unsubscribe-reason]
 			The admin is advised to check the users profile.';
 
 			break;	
