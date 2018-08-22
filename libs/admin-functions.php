@@ -134,8 +134,14 @@ function splite_import_demos() { ?>
 	</style>
 	
 	<div class="wrap">
-		<h1>One-click Import for Contact Form 7</h1>
-		<p class="notice notice-success">Choose a form and click import button, this will create a <a href="<?php echo admin_url('/admin.php?page=wpcf7/'); ?>">Contact Form 7</a> form with the desired layout. Once imported, you may want to chane the To Email and Mail Body for the form.</p>
+		<h1 class="wp-heading-inline" style="margin-bottom: 10px;">One-click Import for Contact Form 7</h1>
+		<div class="notice-info settings-error notice">
+			<p>
+				<strong>
+					<span style="display: block; margin: 0.5em 0.5em 0 0; clear: both; font-weight: bold;">Choose a form and click import button, this will create a <em><a href="<?php echo admin_url('/admin.php?page=wpcf7/'); ?>">Contact Form 7</a></em> form with the desired layout. Once imported, you may want to change the To Email and Mail Body for the form.</span>
+				</strong>
+			</p>
+		</div>
 		<div class="import-holder">
 			<?php $demos = array(
 				'basic-enquiry' => 'Basic Enquiry', 
@@ -143,23 +149,29 @@ function splite_import_demos() { ?>
 				'unsubscribe' => 	'Unsubscribe',
 			);
 			$output = '';
-			foreach($demos as $label=>$demo) {			
-				$output .='<div class="import-box">';
-					$output .='<img src="'.splite_plugin_url('/libs/js/img/'.$label.'.png').'" title="'.$demo.'">'; 
-					$output .='<div class="import-box-result" style="display:none;"></div>';
-					$output .='<div class="import-box-title">';
-						$output .='<span class="sp-label">'.$demo.' Popup</span>';
-						$output .='<span class="sp-import-handle">';
-							$output .='<span class="sp-loader" style="display:none;"></span>';						
-							$output .='<span class="sp-btn button-link sp-btn-importer" data-title="'.$demo.'">Import</span>';
-						$output .='</span>';
-					$output .='</div>';
+				$output .= '<div id="welcome-panel" class="welcome-panel">';
+					foreach($demos as $label=>$demo) {			
+						$output .='<div class="import-box">';
+							$output .='<img src="'.splite_plugin_url('/libs/js/img/'.$label.'.png').'" title="'.$demo.'">'; 
+							$output .='<div class="import-box-result" style="display:none;"></div>';
+							$output .='<div class="import-box-title">';
+								$output .='<span class="sp-label">'.$demo.' Popup</span>';
+								$output .='<span class="sp-import-handle">';
+									$output .='<span class="sp-loader" style="display:none;"></span>';						
+									$output .='<span class="sp-btn button-link sp-btn-importer" data-title="'.$demo.'">Import</span>';
+								$output .='</span>';
+							$output .='</div>';
+						$output .='</div>';
+					} 
 				$output .='</div>';
-			} 
 			echo $output; 
 			?>
 		</div>
-		<div class="import-result" id="import-result"></div>			
+		<div class="notice-info settings-error notice is-dismissible"><!-- style="background: azure" -->
+			<p style="font-weight:bold;">For any kind of suppport please email us at: 
+				<em><a href="mailto:poke@slickpopup.com">poke@slickpopup.com</a></em>
+			</p>
+		</div>				
 	</div>
 
 <?php }
