@@ -3,7 +3,7 @@ Contributors: ak.singla,manish9034
 Tags: contact form 7, popup, cf7, popup form, wordPress popup plugin, contact form popup, popup contact form 7, submit form
 Requires at least: 3.0.1
 Tested up to: 4.9.8
-Stable tag: 1.5.1
+Stable tag: 1.5.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -107,6 +107,9 @@ For any doubts or queries, please read our F.A.Q section. If it doesn't come out
 4. Side button position on smaller screens. 
 
 == Changelog ==
+
+= 1.5.1 =
+* Bug fixes
 
 = 1.5.1 =
 * Bug fixes

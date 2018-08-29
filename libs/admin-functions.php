@@ -14,10 +14,10 @@ function splite_addmenu_page_in_admin() {
 	$splite_hook = array();
 	$icon = SPLITE_PLUGIN_URL . '/admin/img/menu_icon.png';
 	
-	$sppro_hook[] = add_submenu_page( 'slick-options', 'Import Demos', 'Import Demos', 'manage_options', 'import-demos', 'splite_import_demos' );
-	$hook = "load-".$sppro_hook[0];
+	$splite_hook[] = add_submenu_page( 'slick-options', 'Import Demos', 'Import Demos', 'manage_options', 'import-demos', 'splite_import_demos' );
+	//$hook = "load-".$splite_hook[0];
 	
-	add_action($hook, 'splite_load_admin');	
+	//add_action($hook, 'splite_load_admin');	
 }
 
 
@@ -66,7 +66,7 @@ function splite_import_demos() { ?>
 		}
 		.import-box {
 			float: left;
-			margin: 0 4% 4% 0;
+			margin: 0 30px 30px 0;
 			position: relative;
 			width: 30.6%;
 			border: 1px solid #ddd;
@@ -95,14 +95,6 @@ function splite_import_demos() { ?>
 		.sp-import-handle {
 			float: right; 
 		}
-		
-		.sp-loader:before {
-			font: 400 20px/1 dashicons;
-			color: #f56e28;
-			content: "\f463";
-			position: relative; 
-			left: -5px;
-		}
 		.import-box-result {
 			text-align: center;
 			padding: 3px 10px;
@@ -130,7 +122,6 @@ function splite_import_demos() { ?>
 				margin-right: 0; 
 			}
 		}
-	
 	</style>
 	
 	<div class="wrap">
@@ -144,20 +135,23 @@ function splite_import_demos() { ?>
 		</div>
 		<div class="import-holder">
 			<?php $demos = array(
-				'basic-enquiry' => 'Basic Enquiry', 
+				'Basic Enquiry' => 'Basic Enquiry', 
 				'subscribe' => 'Subscribe',
 				'unsubscribe' => 	'Unsubscribe',
+				'Get A Quote' => 'Get a Quote',
+				'Survey Form' => 'Survey Form',
+				'Booking Form' => 'Booking Form',
 			);
 			$output = '';
 				$output .= '<div id="welcome-panel" class="welcome-panel">';
 					foreach($demos as $label=>$demo) {			
 						$output .='<div class="import-box">';
-							$output .='<img src="'.splite_plugin_url('/libs/js/img/'.$label.'.png').'" title="'.$demo.'">'; 
+							$output .='<img src="'.splite_plugin_url('/libs/js/img/'.$label.'.jpg').'" title="'.$demo.'">'; 
 							$output .='<div class="import-box-result" style="display:none;"></div>';
 							$output .='<div class="import-box-title">';
 								$output .='<span class="sp-label">'.$demo.' Popup</span>';
 								$output .='<span class="sp-import-handle">';
-									$output .='<span class="sp-loader" style="display:none;"></span>';						
+									$output .='<span class="sp-loader" style="display:none"><i class="fa fa-refresh fa-spin" style="font-size:14px;color:#f56e28;position:relative;left:-8px;"></i></span>';						
 									$output .='<span class="sp-btn button-link sp-btn-importer" data-title="'.$demo.'">Import</span>';
 								$output .='</span>';
 							$output .='</div>';
@@ -171,7 +165,10 @@ function splite_import_demos() { ?>
 			<p style="font-weight:bold;">For any kind of suppport please email us at: 
 				<em><a href="mailto:poke@slickpopup.com">poke@slickpopup.com</a></em>
 			</p>
-		</div>				
+		</div>
+		<div class="notice-info settings-error notice is-dismissible"><!-- style="background: azure" -->
+			<p style="font-weight:bold;">Note: This will just import the cf7 forms, you will have to create and edit the popups.</p>
+		</div>		
 	</div>
 
 <?php }
