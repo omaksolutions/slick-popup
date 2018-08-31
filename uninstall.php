@@ -4,17 +4,16 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 	exit;
 }
 
+
 function splite_uninstall_plugin() { // Uninstallation actions here
 	
-	global $splite_opts; 
-	$option_name = 'splite_opts'; 	
-	$delete_data = $splite_opts['delete_data'];	
-	$send_test_email = true;
-	$site_url = site_url(); 	
-	//delete_option($option_name);
+	$delete_data = get_option('splite_delete_data') ? get_option('splite_delete_data') : 0; 
+	
+	if($delete_data) {
+		delete_option('splite_opts');
+		delete_option('splite_delete_data');
+		delete_option('splite_install_date');
+	}
 }
-
-// Do the action
-splite_uninstall_plugin();
 
 ?>

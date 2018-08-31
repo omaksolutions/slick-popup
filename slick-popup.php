@@ -48,17 +48,94 @@ require_once( SPLITE_PLUGIN_DIR . '/libs/classes/splite-importer.php' );
 register_activation_hook(__FILE__, 'splite_on_activate'); 
 function splite_on_activate(){
 	// Empty Activation Hook
+	update_option('splite_install_date', current_time('Y-m-d H:i:s')); 
+	update_option('splite_delete_data', 0); 	
+	set_transient( 'splite_activated', 1 );
 }
 
+/**
+ * This function runs when WordPress completes its upgrade process
+ * It iterates through each plugin updated to see if ours is included
+ * @param $upgrader_object Array
+ * @param $options Array
+ */
+function splite_upgrade_completed( $upgrader_object, $options ) {
+	// The path to our plugin's main file
+	$our_plugin = plugin_basename( __FILE__ );
+	// If an update has taken place and the updated type is plugins and the plugins element exists
+	if( $options['action'] == 'update' && $options['type'] == 'plugin' && isset( $options['plugins'] ) ) {
+		// Iterate through the plugins being updated and check if ours is there
+		foreach( $options['plugins'] as $plugin ) {
+			if( $plugin == $our_plugin ) {
+				// Set a transient to record that our plugin has just been updated
+				set_transient( 'splite_updated', 1 );
+			}
+		}
+	}
+}
+add_action( 'upgrader_process_complete', 'splite_upgrade_completed', 10, 2 );
+
+/**
+ * Show a notice to anyone who has just updated this plugin
+ * This notice shouldn't display to anyone who has just installed the plugin for the first time
+ */
+function splite_display_update_notice() {
+	// Check the transient to see if we've just updated the plugin
+	if( get_transient( 'splite_updated' ) ) {
+		echo '<div class="notice notice-success is-dismissible">
+			<h2 style="margin:0.5em 0;">Thanks for updating - <span style="color:blue;">Slick Popup Lite</span></h2>
+			<p>
+			'.__( 'One of the best WordPress Popup Plugin for Contact Form 7. ', 'sp-pro-txt-domain' ).'
+			<a href="'.admin_url('admin.php?page=slick-options').'">Go to Settings</a></p>
+		</div>';
+		
+		delete_transient( 'splite_updated' );
+	}
+}
+add_action( 'admin_notices', 'splite_display_update_notice' );
+
+/**
+ * Show a notice to anyone who has just installed the plugin for the first time
+ * This notice shouldn't display to anyone who has just updated this plugin
+ */
+function splite_display_install_notice() {
+	// Check the transient to see if we've just activated the plugin
+	if( get_transient( 'splite_activated' ) ) {
+		
+		echo '<div class="notice notice-success is-dismissible">
+			<h2 style="margin:0.5em 0;">Thanks for installing - <span style="color:blue;">Slick Popup Lite</span></h2>
+			<p>
+			'.__( 'One of the best WordPress Popup Plugin for Contact Form 7. ', 'sp-pro-txt-domain' ).'
+			<a href="'.admin_url('admin.php?page=slick-options').'">Go to Settings</a></p>
+		</div>';
+		
+		// Delete the transient so we don't keep displaying the activation message
+		delete_transient( 'splite_activated' );
+	}
+}
+add_action( 'admin_notices', 'splite_display_install_notice' );
+
+
+/*
+ * Save splite_delete_data option when redux settings are saved
+ * Used in uninstall.php file to delete the options
+*/
+add_action ('redux/options/splite_opts/saved', 'splite_redux_option_saved');
+function splite_redux_option_saved() {
+	global $splite_opts; 	
+	$delete_data = $splite_opts['delete_data'];	
+	update_option('splite_delete_data', $delete_data); 		
+}
 
 /////////////////////////////////////
 // Update Action using version compare
 /////////////////////////////////////
 //add_action( 'plugins_loaded', 'splite_update_db_check' );
 //add_action( 'redux/options/splite_opts/register', 'splite_update_db_check' );
-add_action( 'redux/loaded', 'splite_update_db_check' );
+//add_action( 'redux/loaded', 'splite_update_db_check' );
 function splite_update_db_check() {
-    if ( SPLITE_VERSION >= '1.4' ) {
+	global $splite_opts; 
+	if(version_compare(SPLITE_VERSION, '1.4') >= 0) {
         spplite_update_db(); 
     }
 }
@@ -403,6 +480,9 @@ function splite_option_css() {
 					box-shadow: none;   
 				}
 			<?php } ?>
+			#splite_form_container {
+				color: <?php echo $cta_typography['color'] ; ?>;
+			}
 			#splite_popup_title {
 				color: <?php echo $heading_typography['color']; ?>;
 				font-family: <?php echo $heading_typography['font-family']; ?>;

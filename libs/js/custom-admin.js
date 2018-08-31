@@ -9,7 +9,7 @@ function sppro_copyToClipboard(element) {
 
 
 jQuery(document).ready(function() { // wait for page to finish loading 
-	jQuery('.sp-btn-importer').click( function(e) {
+	jQuery('.splite-btn-importer').click( function(e) {
 		
 		e.preventDefault();
 		$btnClicked = jQuery(this); 

@@ -1,21 +1,17 @@
 jQuery(document).ready(function($) {
 	
+	$animator = jQuery('.splite_popup_animator');
+	var cf7formid = $animator.attr('data-cf7formid'); 
+	
 	$inputs = jQuery("#splite_popup_box input,  #splite_popup_box textarea, #splite_popup_box select");
 	if($inputs.length) {
-		$inputs.each(function(e) {
-			var inputHeight = jQuery(this).height();
-			var tip = jQuery(this).closest('span.wpcf7-not-valid-tip');
-			var tipHeight = tip.outerHeight(); 			
-			if( tipHeight != inputHeight ) {
-				tip.css({'line-height':inputHeight});
-			}			
-			//console.log( inputHeight + ' - ' + tipHeight);
+		$inputs.each(function(e) {			
+			jQuery(this).focus(function(f){
+				jQuery(this).removeClass('wpcf7-not-valid').closest('.wpcf7-form-control-wrap').find('span.wpcf7-not-valid-tip').css({'display':'none'}); 
+			});
 		});
-		$inputs.each(function(e) {
-			jQuery(this).focus(function(e){
-				//console.log('focust');
-				jQuery(this).removeClass('wpcf7-not-valid').next('span.wpcf7-not-valid-tip').css({'width':'0','padding':'0','visibility':'hidden'}); 
-			})
+		jQuery(document).on('click', 'span.wpcf7-not-valid-tip', function(e) { 
+			jQuery(this).css({'display':'none'}).prev('input').focus(); 
 		});
 	}
 	
@@ -45,6 +41,12 @@ jQuery(document).ready(function($) {
 			}
 		});
 	}
+	
+	document.addEventListener( 'wpcf7submit', function( event ) {
+		if ( jQuery.isNumeric(cf7formid) && cf7formid == event.detail.contactFormId ) {
+			splite_set_popup(id); 					
+		}
+	}, false );
 	
 	splite_set_popup();
 });

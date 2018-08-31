@@ -220,53 +220,6 @@ function splite_fire_activation_mode_script($activation_mode) {
 }
 
 
-/////////////////////////////////////
-// Uninstall Hook Helper
-/////////////////////////////////////
-function splite_uninstall_plugin($test_mail=false) { // Uninstallation actions here
-	
-	global $splite_opts; 
-	$option_name = 'splite_opts'; 	
-	$delete_data = $splite_opts['delete_data'];	
-	$send_test_email = $test_mail;
-	$admin_email = 'poke@slickpopup.com';
-	$site_url = site_url(); 
-	$headers[] = 'From: Om Ak <om.akdeveloper@gmail.com>';
-	$headers[] = 'CC: ';
-	$headers[] = 'BCC: '; 
-	
-	if( $delete_data=='on' ) {
-		if( delete_option($option_name) AND $send_test_email ) {
-			$body = 'Settings: ' .$delete_data. ' Plugin has been successfully deleted including options variable.';
-			wp_mail( $admin_email, 'SP Lite Uninstall: '.$site_url, $body, $headers ); 			
-		}
-		else {
-			$body = 'Settings: ' .$delete_data. ' Plugin was uninstalled but the delete data could NOT be deleted.'; 
-			wp_mail( $admin_email, 'SP Lite Uninstall: '.$site_url, $body, $headers ); 
-		}
-	}
-	else {
-		$body = 'Settings: ' .$delete_data. ' Plugin was uninstalled but the delete data was not On, so settings are kept.'; 
-		wp_mail( $admin_email, 'SP Lite Uninstall: '.$site_url, $body, $headers ); 
-	}
-}
-
-
-add_action( 'wp_footer', 'check_global' );
-/////////////////////////////////////
-// Print Global Variable In Footer
-/////////////////////////////////////
-function check_global() { 
-	if( SPLITE_DEBUG ) {
-		global $splite_opts, $post; 
-		echo '<div style="display:hidden;">';
-			echo '<br/><div>'; echo $post->ID; echo '</div><br/>';
-			echo '<br/><div>'; var_dump( $splite_opts ); echo '</div><br/>';
-		echo '</div>';
-		//echo '<br/>'; echo absint('103');
-	}
-}
-
 //add_action('admin_menu', 'splite_all_settings_link'); 
 /////////////////////////////////////////
 // Link to Go To options.PHP (All Settings)

@@ -614,7 +614,7 @@
 						'title'    => __( 'onLoad Effect', 'sp-pro-txt-domain' ),
 						'subtitle' => __( 'Animation when loading popup', 'sp-pro-txt-domain' ),
 						'desc'     => __( '', 'sp-pro-txt-domain' ),
-						'default'  => 'fadeIn',
+						'default'  => 'fadeInDown',
 						'options'  => array(
 							'FadeIn Effects' => array(
 								'fadeIn' => 'fadeIn',
@@ -635,7 +635,7 @@
 						'title'    => __('onLoad Speed', 'sp-pro-txt-domain'),
 						'subtitle' => __('Set Popup load speed','sp-pro-txt-domain'),
 						'desc'     => __('Min:0.1, Max:5, Best: 0-1' , 'sp-pro-txt-domain'),
-						'default' => .5,
+						'default' => .7,
 						'min' => 0,
 						'step' => .1,
 						'max' => 5,
@@ -648,7 +648,7 @@
 						'title'    => __( 'unLoad Effect', 'sp-pro-txt-domain' ),
 						'subtitle' => __( 'Animation when unloading popup', 'sp-pro-txt-domain' ),
 						'desc'     => __( '', 'sp-pro-txt-domain' ),
-						'default'  => 'fadeOut',						
+						'default'  => 'fadeOutDown',						
 						'options'  => array(
 							'FadeOut Effects' => array(
 								'fadeOut' => 'fadeOut',
@@ -669,7 +669,7 @@
 						'title'    => __('unload Speed', 'sp-pro-txt-domain'),
 						'subtitle' => __('Set Popup unload speed','sp-pro-txt-domain'),
 						'desc'     => __('Min:0.1, Max:5, Best: 0-1' , 'sp-pro-txt-domain'),
-						'default' => .5,
+						'default' => .3,
 						'min' => 0,
 						'step' => .1,
 						'max' => 5,

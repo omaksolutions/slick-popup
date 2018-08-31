@@ -152,7 +152,7 @@ function splite_import_demos() { ?>
 								$output .='<span class="sp-label">'.$demo.' Popup</span>';
 								$output .='<span class="sp-import-handle">';
 									$output .='<span class="sp-loader" style="display:none"><i class="fa fa-refresh fa-spin" style="font-size:14px;color:#f56e28;position:relative;left:-8px;"></i></span>';						
-									$output .='<span class="sp-btn button-link sp-btn-importer" data-title="'.$demo.'">Import</span>';
+									$output .='<span class="sp-btn button-link sp-btn-importer splite-btn-importer" data-title="'.$demo.'">Import</span>';
 								$output .='</span>';
 							$output .='</div>';
 						$output .='</div>';
