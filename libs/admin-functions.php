@@ -172,3 +172,26 @@ function splite_import_demos() { ?>
 	</div>
 
 <?php }
+
+
+add_action( 'admin_notices', 'splite_admin_notices' );
+function splite_admin_notices() {
+	$install_date = get_option('splite_install_date'); 
+	
+	$install_date_object = DateTime::createFromFormat('Y-m-d H:i:s', $install_date);
+	$today = DateTime::createFromFormat('U', current_time('U')); 
+	$diff = $today->diff($install_date_object); 
+	//print_r($diff); 
+	
+	if($diff->d >= -1) {
+		echo '<div class="notice notice-success is-dismissible">
+			<h2 style="margin:0.5em 0;">Hope you are enjoying - <span style="color:blue;">Slick Popup Lite</span></h2>
+			<p>
+			'.__( 'One of the best WordPress Popup Plugin for Contact Form 7. ', 'sp-pro-txt-domain' ).'
+			<br><br>
+			<a class="button-primary" href="'.admin_url('admin.php?page=slick-options').'">Leave a Review</a>
+			&nbsp;<a class="button-link" href="'.admin_url('admin.php?page=slick-options').'">Ask Later</a>
+			&nbsp;<a class="button-link" href="'.admin_url('admin.php?page=slick-options').'">Never Show Again</a></p>
+		</div>';		
+	}
+}
