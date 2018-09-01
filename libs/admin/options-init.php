@@ -425,13 +425,20 @@
 							),
 							array(
 								'id'       => 'custom-form-background-color',
-								'type'     => 'color',
+								'type'     => 'background',
 								'required' => array( 'choose-color-scheme', '=', 'custom_theme' ),
 								'output'   => array( '' ),
 								'title'    => __( 'Form Background', 'sp-lite-txt-domain' ),
 								'subtitle' => __( 'Pick a color for form background.', 'sp-lite-txt-domain' ),
 								'desc' => __( 'This color will be used as the popup form background.', 'sp-lite-txt-domain' ),
-								'default'  => '#EFEFEF',
+								'default'  => array(
+									'background-color' => '#EFEFEF',
+									'background-image' => '',
+									'background-size' => 'cover',
+									'background-position' => 'center center',
+									'background-attachment' => '',
+									'background-repeat' => 'no-repeat',
+								),
 							),							
 							array(
 								'id'       => 'custom-text-color',
@@ -468,7 +475,7 @@
 						),
 						array(
 							'id'       => 'popup-cta-text',
-							'type'     => 'textarea',
+							'type'     => 'editor',
 							'title'    => __( 'Call To Action', 'sp-lite-txt-domain' ),
 							'subtitle' => __( 'Main description that will actually make your visitor to fill up the form.', 'sp-lite-txt-domain' ),
 							'desc'     => __( '<b>Default:</b> We are glad that you preferred to contact us. Please fill our short form and one of our friendly team members will contact you back shortly.', 'sp-lite-txt-domain' ),

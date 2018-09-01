@@ -35,7 +35,13 @@ function splite_get_theme_colors_values($color_scheme, $custom_color_scheme="", 
 		case 'custom_theme' : 
 			$colors['main-color'] = $custom_color_scheme; 
 			$colors['main-text-color'] = $custom_text_color; 
-			$colors['main-background-color'] = $custom_form_background_color; 
+			$colors['main-background-color'] = $custom_form_background_color['background-color']; 
+			$colors['background-image'] = $custom_form_background_color['background-image']; 
+			$colors['background-repeat'] = $custom_form_background_color['background-repeat']; 
+			$colors['background-size'] = $custom_form_background_color['background-size']; 
+			$colors['background-position'] = $custom_form_background_color['background-position']; 
+			$colors['background-attachment'] = $custom_form_background_color['background-attachment'];  
+			$colors['background-media'] = $custom_form_background_color['background-media'];  
 			break; 
 		case 'light' :
 			$colors['main-color'] = '#BBB'; 

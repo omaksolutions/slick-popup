@@ -342,14 +342,18 @@ function splite_add_my_popup() {
 		// Check if overriding is desired		
 		$message = splite_check_form_id($cf7_id);
 		
+		$popup_box_style = ''; 
+		
 		?>
 		
 		<!-- SP Pro - Popup Box Curtain Arrangement -->
 		<div id="splite_curtain" onClick="splite_unloader();" style=""></div>
 		<div class="splite_popup_animator" data-loadspeed="<?php echo $popup_load_speed; ?>" data-loadeffect="<?php echo $popup_load_effect; ?>" data-unloadeffect="<?php echo $popup_unload_effect; ?>" data-unloadspeed="<?php echo $popup_unload_speed; ?>"></div>
 		<div id="splite_popup_box" class="<?php echo 'layout_'.$choose_layout; ?> manage">  			
-			<div id="splite_popup_title"><?php echo $popup_heading; ?></div>			
-			<div id="splite_form_container" class="">
+			<?php if($popup_heading!='') { ?>
+				<div id="splite_popup_title"><?php echo $popup_heading; ?></div>			
+			<?php } ?>
+			<div id="splite_form_container" class="">			
 				<p id="splite_popup_description"><?php echo $cta_text; ?></p>
 				<?php 
 					if( empty($message) ) { 
@@ -443,10 +447,21 @@ function splite_option_css() {
 	$submit_typo_font_weight = $submit_button_typography['font-weight'];
 	$submit_typo_line_height = $submit_button_typography['line-height'];
 	
+	$box_background_image = isset($theme_colors['background-image']) ? $theme_colors['background-image'] : ''; 
+	$box_background_position = isset($theme_colors['background-position']) ? $theme_colors['background-position'] : ''; 
+	$box_background_size = isset($theme_colors['background-size']) ? $theme_colors['background-size'] : ''; 
+	$box_background_repeat = isset($theme_colors['background-repeat']) ? $theme_colors['background-repeat'] : ''; 
+	$box_background_media = isset($theme_colors['background-media']) ? $theme_colors['background-media'] : ''; 
+	$box_background_color = isset($theme_colors['background-color']) ? $theme_colors['background-color'] : ''; 
+	$box_background_attachment = isset($theme_colors['background-attachment']) ? $theme_colors['background-attachment'] : ''; 
+	
+	$image_background = 'url("'.$box_background_image.'") '.$box_background_position.' '.$box_background_repeat.' '.$box_background_size; 
+	$box_background = empty($box_background_image) ? $theme_colors['main-background-color'] : $image_background; 
+	
 	if( !is_admin() ) { ?>
 			<style>
 			#splite_popup_box {
-				background: <?php echo $theme_colors['main-background-color']; ?>;
+				background: <?php echo $box_background; ?>;
 				border-bottom: 5px solid <?php echo $theme_colors['main-color']; ?>;
 				border-radius: <?php echo $popup_border['radius']; ?>;
 			}
