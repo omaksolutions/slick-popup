@@ -9,6 +9,33 @@ function sppro_copyToClipboard(element) {
 
 
 jQuery(document).ready(function() { // wait for page to finish loading 
+	
+	jQuery('.sp-dismissable').click( function(e) {
+		
+		e.preventDefault();
+		$btnClicked = jQuery(this); 
+		$parent = jQuery(this).parent(); 
+		$parentBox = jQuery(this).closest('.notice'); 
+		
+		//$parentBox.hide(); 
+		
+		jQuery.post(
+			ajaxurl,
+			{
+				action : 'splite_notice_dismissable',
+				dataBtn : $btnClicked.attr('data-btn'),
+			},
+			function( response ) {				
+				if( response.success === true ) {					
+					
+				}
+				else {
+					
+				}				
+			} 
+		);
+	});
+	
 	jQuery('.splite-btn-importer').click( function(e) {
 		
 		e.preventDefault();
@@ -45,4 +72,5 @@ jQuery(document).ready(function() { // wait for page to finish loading
 			} 
 		);
 	});
+	
 });

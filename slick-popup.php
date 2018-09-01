@@ -75,46 +75,6 @@ function splite_upgrade_completed( $upgrader_object, $options ) {
 }
 add_action( 'upgrader_process_complete', 'splite_upgrade_completed', 10, 2 );
 
-/**
- * Show a notice to anyone who has just updated this plugin
- * This notice shouldn't display to anyone who has just installed the plugin for the first time
- */
-function splite_display_update_notice() {
-	// Check the transient to see if we've just updated the plugin
-	if( get_transient( 'splite_updated' ) ) {
-		echo '<div class="notice notice-success is-dismissible">
-			<h2 style="margin:0.5em 0;">Thanks for updating - <span style="color:blue;">Slick Popup Lite</span></h2>
-			<p>
-			'.__( 'One of the best WordPress Popup Plugin for Contact Form 7. ', 'sp-pro-txt-domain' ).'
-			<a href="'.admin_url('admin.php?page=slick-options').'">Go to Settings</a></p>
-		</div>';
-		
-		delete_transient( 'splite_updated' );
-	}
-}
-add_action( 'admin_notices', 'splite_display_update_notice' );
-
-/**
- * Show a notice to anyone who has just installed the plugin for the first time
- * This notice shouldn't display to anyone who has just updated this plugin
- */
-function splite_display_install_notice() {
-	// Check the transient to see if we've just activated the plugin
-	if( get_transient( 'splite_activated' ) ) {
-		
-		echo '<div class="notice notice-success is-dismissible">
-			<h2 style="margin:0.5em 0;">Thanks for installing - <span style="color:blue;">Slick Popup Lite</span></h2>
-			<p>
-			'.__( 'One of the best WordPress Popup Plugin for Contact Form 7. ', 'sp-pro-txt-domain' ).'
-			<a href="'.admin_url('admin.php?page=slick-options').'">Go to Settings</a></p>
-		</div>';
-		
-		// Delete the transient so we don't keep displaying the activation message
-		delete_transient( 'splite_activated' );
-	}
-}
-add_action( 'admin_notices', 'splite_display_install_notice' );
-
 
 /*
  * Save splite_delete_data option when redux settings are saved
@@ -449,13 +409,13 @@ function splite_option_css() {
 	
 	$box_background_image = isset($theme_colors['background-image']) ? $theme_colors['background-image'] : ''; 
 	$box_background_position = isset($theme_colors['background-position']) ? $theme_colors['background-position'] : ''; 
-	$box_background_size = isset($theme_colors['background-size']) ? $theme_colors['background-size'] : ''; 
+	$box_background_size = isset($theme_colors['background-size']) ? $theme_colors['background-size'] : 'cover'; 
 	$box_background_repeat = isset($theme_colors['background-repeat']) ? $theme_colors['background-repeat'] : ''; 
 	$box_background_media = isset($theme_colors['background-media']) ? $theme_colors['background-media'] : ''; 
 	$box_background_color = isset($theme_colors['background-color']) ? $theme_colors['background-color'] : ''; 
 	$box_background_attachment = isset($theme_colors['background-attachment']) ? $theme_colors['background-attachment'] : ''; 
 	
-	$image_background = 'url("'.$box_background_image.'") '.$box_background_position.' '.$box_background_repeat.' '.$box_background_size; 
+	$image_background = $box_background_color.' url("'.$box_background_image.'") '.$box_background_repeat.' '.$box_background_position.' / '.$box_background_size; 
 	$box_background = empty($box_background_image) ? $theme_colors['main-background-color'] : $image_background; 
 	
 	if( !is_admin() ) { ?>

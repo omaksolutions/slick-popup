@@ -102,6 +102,7 @@ function splite_import_demos() { ?>
 			position: absolute;
 			width: 100%;
 			bottom: 30px;
+			line-height: 1.3em; 
 		}
 		.import-box-result a {
 			color: #efefef; 
@@ -152,7 +153,7 @@ function splite_import_demos() { ?>
 								$output .='<span class="sp-label">'.$demo.'</span>';
 								$output .='<span class="sp-import-handle">';
 									$output .='<span class="sp-loader" style="visibility:hidden"><i class="fa fa-refresh fa-spin" style="font-size:14px;color:#f56e28;position:relative;left:-8px;"></i></span>';						
-									$output .='<span class="sp-btn button-link sp-btn-importer splite-btn-importer" data-title="'.$demo.'"><strong>Import</strong></span>';
+									$output .='<span class="sp-btn button-link sp-btn-importer splite-btn-importer" data-title="'.$label.'"><strong>Import</strong></span>';
 								$output .='</span>';
 							$output .='</div>';
 						$output .='</div>';
@@ -178,20 +179,70 @@ add_action( 'admin_notices', 'splite_admin_notices' );
 function splite_admin_notices() {
 	$install_date = get_option('splite_install_date'); 
 	
+	// review_notice - numeric counter for multiplying 14 days
+	$review_notice = get_option('splite_review_notice') ? get_option('splite_review_notice') : 0; 
+	
 	$install_date_object = DateTime::createFromFormat('Y-m-d H:i:s', $install_date);
 	$today = DateTime::createFromFormat('U', current_time('U')); 
 	$diff = $today->diff($install_date_object); 
 	//print_r($diff); 
 	
-	if($diff->d >= -1) {
+	if($diff->d >= 14*$review_notice and $review_notice!=0) {
 		echo '<div class="notice notice-success is-dismissible">
 			<h2 style="margin:0.5em 0;">Hope you are enjoying - <span style="color:blue;">Slick Popup Lite</span></h2>
 			<p>
 			'.__( 'One of the best WordPress Popup Plugin for Contact Form 7. ', 'sp-pro-txt-domain' ).'
 			<br><br>
 			<a class="button-primary" href="'.admin_url('admin.php?page=slick-options').'">Leave a Review</a>
-			&nbsp;<a class="button-link" href="'.admin_url('admin.php?page=slick-options').'">Ask Later</a>
-			&nbsp;<a class="button-link" href="'.admin_url('admin.php?page=slick-options').'">Never Show Again</a></p>
+			&nbsp;<a class="button-link sp-dismissable" data-btn="ask-later" href="#">Ask Later</a>
+			&nbsp;<a class="button-link sp-dismissable" data-btn="ask-never" href="#">Never Show Again</a></p>
 		</div>';		
 	}
 }
+
+
+/**
+ * Show a notice to anyone who has just updated this plugin
+ * This notice shouldn't display to anyone who has just installed the plugin for the first time
+ */
+function splite_display_update_notice() {
+	// Check the transient to see if we've just updated the plugin
+	if( get_transient( 'splite_updated' ) ) {
+		echo '<div class="notice notice-success is-dismissible">
+			<h2 style="margin:0.5em 0;">Thanks for updating - <span style="color:blue;">Slick Popup Lite</span></h2>
+			<p>
+			'.__( 'One of the best WordPress Popup Plugin for Contact Form 7. ', 'sp-pro-txt-domain' ).'
+			<a href="'.admin_url('admin.php?page=slick-options').'">Go to Settings</a></p>
+			&nbsp<a href="'.admin_url('admin.php?page=import-demos').'">Go to Settings</a></p>
+		</div>';
+		
+		// Save splite_install_date for already existing users (before: 1.5.3)
+		if(!get_option('splite_install_date'))
+			update_option('splite_install_date', current_time('Y-m-d H:i:s')); 			
+		
+		delete_transient( 'splite_updated' );
+	}
+}
+add_action( 'admin_notices', 'splite_display_update_notice' );
+
+/**
+ * Show a notice to anyone who has just installed the plugin for the first time
+ * This notice shouldn't display to anyone who has just updated this plugin
+ */
+function splite_display_install_notice() {
+	// Check the transient to see if we've just activated the plugin
+	if( get_transient( 'splite_activated' ) ) {
+		
+		echo '<div class="notice notice-success is-dismissible">
+			<h2 style="margin:0.5em 0;">Thanks for installing - <span style="color:blue;">Slick Popup Lite</span></h2>
+			<p>
+			'.__( 'One of the best WordPress Popup Plugin for Contact Form 7. ', 'sp-pro-txt-domain' ).'
+			<a href="'.admin_url('admin.php?page=slick-options').'">Go to Settings</a></p>
+			&nbsp<a href="'.admin_url('admin.php?page=import-demos').'">Go to Settings</a></p>
+		</div>';
+		
+		// Delete the transient so we don't keep displaying the activation message
+		delete_transient( 'splite_activated' );
+	}
+}
+add_action( 'admin_notices', 'splite_display_install_notice' );

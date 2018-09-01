@@ -1,6 +1,35 @@
 <?php 
 
 /*
+* splite_notice_dismissable
+* Ajax action to do tasks on notice dismissable
+* Require class: sp-dismissable
+*/
+add_action( 'wp_ajax_splite_notice_dismissable', 'splite_notice_dismissable' );
+function splite_notice_dismissable() {
+	
+	$data_btn = isset($_POST['dataBtn']) ? $_POST['dataBtn'] : '';
+	
+	if(empty($data_btn)) return; 
+	
+	$today = DateTime::createFromFormat('U', current_time('U')); 
+	
+	switch($data_btn) {
+		case 'ask-later': 
+			$ask_later = get_option('splite_review_notice') ? get_option('splite_review_notice') : 0; 
+			update_option('splite_review_notice', ++$ask_later); 
+			break; 
+		case 'ask-never': 
+			update_option('splite_review_notice', 0); 
+			break; 
+	}
+		
+	wp_send_json_success(); 
+	wp_die(); 
+}
+
+
+/*
 * splite_action_importDemo
 * New import feature to setup individual Popups
 */
@@ -19,12 +48,14 @@ function splite_action_importDemo() {
 	$form = get_page_by_title($title, 'OBJECT', 'wpcf7_contact_form');
 	
 	if($formId) {
-		$ajaxy['reason'] = $title.' imported <a target="_blank" href="'.admin_url('/admin.php?page=wpcf7&post='.$form->ID.'&action=edit').'"><strong>Edit Form</strong></a>'; 		
+		$edit_link = '<a target="_blank" href="'.admin_url('/admin.php?page=wpcf7&post='.$form->ID.'&action=edit').'"><strong>Edit Form</strong></a>';
+		$global_options = '<a target="_blank" href="'.admin_url('/admin.php?page=slick-options').'"><strong>Set Popup</strong></a>';
+		$ajaxy['reason'] = 'Imported.<br>'.$edit_link. ' - '.$global_options; 		
 		wp_send_json_success($ajaxy); 
 		wp_die(); 
 	}
 	
-	$ajaxy['reason'] = $title . ' could not be imported.';
+	$ajaxy['reason'] = 'Could not be imported.';
 	wp_send_json_success($ajaxy); 
 	wp_die(); 
 }
@@ -38,14 +69,16 @@ function splite_import_cf7_demo($args=array()) {
 	while( get_page_by_title($title, 'OBJECT', 'wpcf7_contact_form') ) {		
 		$form = get_page_by_title($title, 'OBJECT', 'wpcf7_contact_form');
 		$ajaxy['form_id'] = $form->ID;			
-		$ajaxy['reason'] =  $title.' already exists <a target="_blank" href="'.admin_url('/admin.php?page=wpcf7&post='.$form->ID.'&action=edit').'"><strong>Edit Form</strong></a>';
+		$edit_link = '<a target="_blank" href="'.admin_url('/admin.php?page=wpcf7&post='.$form->ID.'&action=edit').'"><strong>Edit Form</strong></a>';
+		$global_options = '<a target="_blank" href="'.admin_url('/admin.php?page=slick-options').'"><strong>Set Popup</strong></a>';
+		$ajaxy['reason'] =  'Already exists.<br>'.$edit_link. ' - '.$global_options; 		
 		//wp_send_json_error($form); 
 		wp_send_json_error($ajaxy); 
 		wp_die(); 
 	}
 	
 	$contact_form = WPCF7_ContactForm::get_template( array(
-		'title' => $title,
+		'title' => ucwords(str_replace('-', ' ',$title))
 	));	
 	
 	$form = $contact_form->prop( 'form' );
@@ -274,6 +307,7 @@ function splite_import_cf7_demo($args=array()) {
 				</div>";
 	}
 	
+	//wp_die(print_r(array($title, $form, $mail), true)); 
 	$contact_form->set_properties( array( 'mail' => $mail, 'form' => $form, 'messages' => $messages ) );
 	
 	$formId = $contact_form->save();	

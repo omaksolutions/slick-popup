@@ -16,4 +16,6 @@ function splite_uninstall_plugin() { // Uninstallation actions here
 	}
 }
 
+splite_uninstall_plugin();
+
 ?>
