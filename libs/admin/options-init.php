@@ -342,6 +342,46 @@
 								'content'   => __('Currently two layouts available: <b>Full</b> and <b>Centered</b>. Full means full height popup in the center of the screen, and Centered has some space above and below the popup.', 'sp-lite-txt-domain' ),
 							),
 						),
+					array(
+							'id'       => 'custom-popup-layout',
+							'type'     => 'select',
+							'title'    => __( 'Height & Width', 'sp-pro-txt-domain' ),
+							'subtitle' => __( 'Use pre-defined layouts or set your own height and width.', 'sp-pro-txt-domain' ),
+							'desc'     => __( '', 'sp-pro-txt-domain' ),
+							//Must provide key => value pairs for select options
+							'options'  => array(
+								'predefined' => __( 'As Per Choosen Layout', 'sp-pro-txt-domain' ),
+								'change' => __( 'Set Your Own Height and Width', 'sp-pro-txt-domain' ),								
+							),
+							'default'  => 'predefined'
+						),	
+							array(
+								'id'       => 'popup-width',
+								'type'     => 'dimensions',
+								//'units'    => array('em','px','%'),							
+								'units'    => array('px','%'),
+								'required' => array( 'custom-popup-layout', '=', 'change' ),
+								'title'    => __('Popup Width', 'sp-pro-txt-domain'),
+								'subtitle' => __('Set width of the popup.', 'sp-pro-txt-domain'),
+								'desc'     => __('Demo forms have width: 600px', 'sp-pro-txt-domain'),
+								'height' 	=> false,
+								'default'  => array(
+									'width'  => '600'
+								),
+							),
+							array(
+								'id'       => 'popup-height',
+								'type'     => 'dimensions',
+								'units'    => array('%','px'),
+								'required' => array( 'custom-popup-layout', '=', 'change' ),
+								'title'    => __('Popup Height', 'sp-pro-txt-domain'),
+								'subtitle' => __('Set height of the popup.', 'sp-pro-txt-domain'),
+								'desc'     => __('It is suggested that you choose a percent based height.', 'sp-pro-txt-domain'),
+								'width' 	=> false,
+								'default'  => array(
+									'height'  => '76'
+								),
+							),	
 						array(
 							'id'       => 'popup-corners',
 							'type'     => 'select',
@@ -466,7 +506,7 @@
 							'type'     => 'text',
 							'title'    => __( 'Heading', 'sp-lite-txt-domain' ),
 							'subtitle' => __( 'Main heading on the popup.', 'sp-lite-txt-domain' ),
-							'desc'     => __( '<b>Default:</b> STILL NOT SURE WHAT TO DO?', 'sp-lite-txt-domain' ),
+							'desc'     => __( 'Leave empty if you do not want popup heading ', 'sp-lite-txt-domain' ),
 							'default'  => 'STILL NOT SURE WHAT TO DO?',
 							'hint'      => array(
 								'title'     => 'Popup Heading',

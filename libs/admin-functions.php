@@ -135,24 +135,24 @@ function splite_import_demos() { ?>
 		</div>
 		<div class="import-holder">
 			<?php $demos = array(
-				'Basic Enquiry' => 'Basic Enquiry', 
-				'subscribe' => 'Subscribe',
-				'unsubscribe' => 	'Unsubscribe',
-				'Get A Quote' => 'Get a Quote',
-				'Survey Form' => 'Survey Form',
-				'Booking Form' => 'Booking Form',
+				'basic-enquiry' => 'Basic Enquiry Form', 
+				'subscribe' => 'Subscribe Form',
+				'unsubscribe' => 	'Unsubscribe Form',
+				'get-a-quote' => 'Get a Quote Form',
+				'survey' => 'Survey Form',
+				'booking' => 'Booking Form',
 			);
 			$output = '';
 				$output .= '<div id="welcome-panel" class="welcome-panel">';
-					foreach($demos as $label=>$demo) {			
+					foreach($demos as $label => $demo) {			
 						$output .='<div class="import-box">';
 							$output .='<img src="'.splite_plugin_url('/libs/js/img/'.$label.'.jpg').'" title="'.$demo.'">'; 
 							$output .='<div class="import-box-result" style="display:none;"></div>';
 							$output .='<div class="import-box-title">';
-								$output .='<span class="sp-label">'.$demo.' Popup</span>';
+								$output .='<span class="sp-label">'.$demo.'</span>';
 								$output .='<span class="sp-import-handle">';
-									$output .='<span class="sp-loader" style="display:none"><i class="fa fa-refresh fa-spin" style="font-size:14px;color:#f56e28;position:relative;left:-8px;"></i></span>';						
-									$output .='<span class="sp-btn button-link sp-btn-importer splite-btn-importer" data-title="'.$demo.'">Import</span>';
+									$output .='<span class="sp-loader" style="visibility:hidden"><i class="fa fa-refresh fa-spin" style="font-size:14px;color:#f56e28;position:relative;left:-8px;"></i></span>';						
+									$output .='<span class="sp-btn button-link sp-btn-importer splite-btn-importer" data-title="'.$demo.'"><strong>Import</strong></span>';
 								$output .='</span>';
 							$output .='</div>';
 						$output .='</div>';

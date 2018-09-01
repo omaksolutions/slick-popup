@@ -19,8 +19,8 @@ jQuery(document).ready(function() { // wait for page to finish loading
 		$importResult = $parentBox.find('.import-box-result'); 
 		
 		//$btnClicked.addClass('animate'); 
-		$loader.slideDown(); 		
-		$importResult.removeClass('error success').slideUp(); 
+		$loader.css({'visibility':'visible'}); //slideDown(); 		
+		$importResult.html('').removeClass('error').removeClass('success').slideUp(); 
 		$btnClicked.addClass('disable');
 
 		jQuery.post(
@@ -41,7 +41,7 @@ jQuery(document).ready(function() { // wait for page to finish loading
 					}						
 				}
 				$importResult.slideDown();
-				$loader.slideUp(); 
+				$loader.css({'visibility':'hidden'}) //.slideUp(); 
 			} 
 		);
 	});

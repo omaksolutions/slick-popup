@@ -19,7 +19,7 @@ function splite_action_importDemo() {
 	$form = get_page_by_title($title, 'OBJECT', 'wpcf7_contact_form');
 	
 	if($formId) {
-		$ajaxy['reason'] = '<a target="_blank" href="'.admin_url('/admin.php?page=wpcf7&post='.$form->ID.'&action=edit').'">'.$title.'</a>' . ' form imported.'; 		
+		$ajaxy['reason'] = $title.' imported <a target="_blank" href="'.admin_url('/admin.php?page=wpcf7&post='.$form->ID.'&action=edit').'"><strong>Edit Form</strong></a>'; 		
 		wp_send_json_success($ajaxy); 
 		wp_die(); 
 	}
@@ -38,7 +38,7 @@ function splite_import_cf7_demo($args=array()) {
 	while( get_page_by_title($title, 'OBJECT', 'wpcf7_contact_form') ) {		
 		$form = get_page_by_title($title, 'OBJECT', 'wpcf7_contact_form');
 		$ajaxy['form_id'] = $form->ID;			
-		$ajaxy['reason'] = '<a target="_blank" href="'.admin_url('/admin.php?page=wpcf7&post='.$form->ID.'&action=edit').'">'.$title.'</a> already exists.';
+		$ajaxy['reason'] =  $title.' already exists <a target="_blank" href="'.admin_url('/admin.php?page=wpcf7&post='.$form->ID.'&action=edit').'"><strong>Edit Form</strong></a>';
 		//wp_send_json_error($form); 
 		wp_send_json_error($ajaxy); 
 		wp_die(); 
@@ -57,7 +57,7 @@ function splite_import_cf7_demo($args=array()) {
 	$messages['invalid_number'] = 'X'; 	
 	
 	switch($title) {
-		case 'Basic Enquiry': 
+		case 'basic-enquiry': 
 			$form = '		
 				<div class="col-md-6" style="overflow: hidden;">
 					<p class="spp-left-col">[text* your-name placeholder "Full name"]</p>
@@ -83,7 +83,7 @@ function splite_import_cf7_demo($args=array()) {
 				
 			break;
 		
-		case 'Subscribe':
+		case 'subscribe':
 			$form = '
 				<div class="col-md-6" style="overflow: hidden;">
 					<p class="spp-left-col">[text* first-name placeholder "First Name"]</p>
@@ -103,7 +103,7 @@ function splite_import_cf7_demo($args=array()) {
 
 			break; 
 
-		case 'Unsubscribe':
+		case 'unsubscribe':
 			$form = '
 				<div class="col-md-6" style="overflow: hidden;">
 					<p class="spp-full-col">[select* unsubscribe-reason "Unsubscribe Reason" "Too many emails" "Content irrelevant" "Didn’t know you were subscribing " "Too much or too little content"]</p>
@@ -120,7 +120,7 @@ function splite_import_cf7_demo($args=array()) {
 
 			break;	
 		
-		case 'Booking Form':
+		case 'booking':
 			$form = '
 				<div class="col-md-10" style="overflow: hidden;">
 					<p class="spp-left-col">[text* your-name placeholder "Name*"]</p>
@@ -168,7 +168,7 @@ function splite_import_cf7_demo($args=array()) {
 
 							break;	
 
-		case 'Get A Quote':
+		case 'get-a-quote':
 			$form = '
 				<div class="col-md-6" style="overflow: hidden;">
 					<p class="spp-left-col">[text* your-fname placeholder "First Name*"]</p>
@@ -208,7 +208,7 @@ function splite_import_cf7_demo($args=array()) {
 
 			break;
 
-		case 'Survey Form':
+		case 'survey':
 			$form = '
 				<div class="col-md-6" style="overflow: hidden;">
 					<strong style="font-style:italic">Please help us to serve you better by completing this survey. It should take around 5 minutes to complete.</strong>
