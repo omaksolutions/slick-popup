@@ -180,7 +180,7 @@ function splite_admin_notices() {
 	$install_date = get_option('splite_install_date'); 
 	
 	// review_notice - numeric counter for multiplying 14 days
-	$review_notice = get_option('splite_review_notice') ? get_option('splite_review_notice') : 0; 
+	$review_notice = get_option('splite_review_notice') ? get_option('splite_review_notice') : 1; 
 	
 	$install_date_object = DateTime::createFromFormat('Y-m-d H:i:s', $install_date);
 	$today = DateTime::createFromFormat('U', current_time('U')); 
@@ -191,7 +191,7 @@ function splite_admin_notices() {
 		echo '<div class="notice notice-success is-dismissible">
 			<h2 style="margin:0.5em 0;">Hope you are enjoying - <span style="color:blue;">Slick Popup Lite</span></h2>
 			<p>
-			'.__( 'One of the best WordPress Popup Plugin for Contact Form 7. ', 'sp-pro-txt-domain' ).'
+			'.__( 'Thanks for using one of the best WordPress Popup Plugin for Contact Form 7. We hope that it has been useful for you and would like you to leave review on WordPres.org website, it will help us improve the product features.', 'sp-pro-txt-domain' ).'
 			<br><br>
 			<a class="button-primary" href="'.admin_url('admin.php?page=slick-options').'">Leave a Review</a>
 			&nbsp;<a class="button-link sp-dismissable" data-btn="ask-later" href="#">Ask Later</a>

@@ -17,7 +17,7 @@ jQuery(document).ready(function() { // wait for page to finish loading
 		$parent = jQuery(this).parent(); 
 		$parentBox = jQuery(this).closest('.notice'); 
 		
-		//$parentBox.hide(); 
+		$parentBox.hide(); 
 		
 		jQuery.post(
 			ajaxurl,

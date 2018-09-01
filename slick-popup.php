@@ -353,7 +353,11 @@ function splite_option_css() {
 	
 	$popup_corners = $splite_opts['popup-corners'];
 	$custom_popup_corners = isset($splite_opts['custom-popup-corners']) ? $splite_opts['custom-popup-corners'] : '';
-			
+
+	$custom_popup_layout = $splite_opts['custom-popup-layout'];
+	$popup_height = $splite_opts['popup-height'];
+	$popup_width = $splite_opts['popup-width'];
+		
 	$heading_typography = $splite_opts['heading-typography'];  		
 	$cta_typography = $splite_opts['cta-typography'];
 		
@@ -418,12 +422,29 @@ function splite_option_css() {
 	$image_background = $box_background_color.' url("'.$box_background_image.'") '.$box_background_repeat.' '.$box_background_position.' / '.$box_background_size; 
 	$box_background = empty($box_background_image) ? $theme_colors['main-background-color'] : $image_background; 
 	
+	// Check if User wants to use Custom Height and Width
+	// And set $use_custom_width_height to true
+	$popup_height_width_styles = '';
+	if($custom_popup_layout=='change')
+		$use_custom_width_height = true; 
+	
+	// Create styles for Height and width if flag is true
+	if($use_custom_width_height) {
+		$popup_height_width_styles = '
+			height: '.$popup_height['height'].';
+			width: '.$popup_width['width'].';				
+			max-height: 90%;
+			max-width: 90%;
+		';
+	}
+	
 	if( !is_admin() ) { ?>
 			<style>
 			#splite_popup_box {
 				background: <?php echo $box_background; ?>;
 				border-bottom: 5px solid <?php echo $theme_colors['main-color']; ?>;
 				border-radius: <?php echo $popup_border['radius']; ?>;
+				<?php echo $popup_height_width_styles; ?>
 			}
 			#splite_popup_title,
 			#splite_popup_box div.wpcf7-response-output,
@@ -445,6 +466,14 @@ function splite_option_css() {
 				background: <?php echo $side_button['background-color']; ?>;				
 			}
 			
+			<?php if( $box_background_image != '' ) { ?>
+				#splite_popup_title  {
+					background: transparent;   
+				}
+				#splite_popup_box  {
+					border-bottom: 0; 
+				}
+			<?php } ?>
 			<?php if( $submit_button['background-color'] != '' ) { ?>
 				#splite_popup_box input.wpcf7-form-control.wpcf7-submit {
 					background: <?php echo $submit_button['background-color']; ?>;
