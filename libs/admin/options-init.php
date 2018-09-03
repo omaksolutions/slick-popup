@@ -227,41 +227,6 @@
 					'default'  => 1,
 					'on'       => __('Enable', 'sp-lite-txt-domain' ),
 					'off'      => __('Disable', 'sp-lite-txt-domain' ),
-				),
-				array(
-					'id'            => 'form-id',
-					'type'          => 'select',
-					'data' 			=> 'posts',
-                    'args' 			=> array('post_type' => array('wpcf7_contact_form'), 'posts_per_page' => -1),
-					'required' 		=> array( 'plugin_state', '=', '1' ),
-					'title'         => __( 'Form to use?', 'sp-lite-txt-domain' ),
-					'subtitle'      => __( '<span style="color:red;font-weight:bold;display:inline;">IMPORTANT!</span><br/>Choose the Contact Form 7 form to be used in the popup.', 'sp-lite-txt-domain' ),
-					'desc'          => __( '<a target="_blank" href="', 'sp-lite-txt-domain' ) .admin_url( '/admin.php?page=wpcf7' ). __( '">See all Contact Forms</a>', 'sp-lite-txt-domain' ),
-				),		
-				array(
-					'id'            => 'where_to_show',
-					'type'          => 'select',
-					'required' 		=> array( 'plugin_state', '=', '1' ),
-					'title'         => __( 'Where to show the form?', 'sp-lite-txt-domain' ),
-					'subtitle'      => __( 'Choose the display of the popup form.', 'sp-lite-txt-domain' ),
-					'desc'          => __( '', 'sp-lite-txt-domain' ),
-					'options'  => array(
-								'everywhere' => 'Everywhere',
-								'onselected' => 'Only Selected Pages',
-								'notonselected' => __('Not On Selected Pages', 'sp-lite-txt-domain' ),
-							),
-					'default'  => 'everywhere'
-				),
-				array(
-					'id'            => 'choose_pages',
-					'type'          => 'select',
-					'multi'          => true,
-					'data' 			=> 'pages',
-                    'args' 			=> array( 'posts_per_page' => -1),
-					'required' 		=> array( array('plugin_state', '=', '1'), array('where_to_show', '!=', 'everywhere') ),
-					'title'         => __( 'Choose Your Pages', 'sp-lite-txt-domain' ),
-					'subtitle'      => __( 'Select the pages to exclude or include for popup form display.', 'sp-lite-txt-domain' ),
-					'desc'          => __( '<a target="_blank" href="', 'sp-lite-txt-domain' ) .admin_url( '/edit.php?post_type=page' ). __( '">See all Pages</a>', 'sp-lite-txt-domain' ),
 				),				
 				array(
 					'id'       => 'plugin_state_on_mobile',
@@ -301,11 +266,56 @@
 	/////////////////////////////////////////////////
 	if ( 1 ) {
 		Redux::setSection( $opt_name, array(
-			'title' => __( 'Popup Styles', 'sp-lite-txt-domain' ),
+			'title' => __( 'Popup Settings', 'sp-lite-txt-domain' ),
 			'id'    => 'popup-styles',
 			'desc'  => __( '', 'sp-lite-txt-domain' ),
 			'icon'  => 'el el-comment',
 			'fields'     => array(
+				/////////////////////////////////////////////////
+				// Section: Layout & Color Scheme (layout)
+				////////////////////////////////////////////////
+					array(
+						'id'       => 'basic-config',
+						'type'     => 'section',				
+						'title'    => __( 'Basic Configuration', 'sp-lite-txt-domain' ),
+						'subtitle' => __( 'Choose contact form and where to show', 'sp-lite-txt-domain' ),
+						'indent'   => true, // Indent all options below until the next 'section' option is set.
+					),
+						array(
+							'id'            => 'form-id',
+							'type'          => 'select',
+							'data' 			=> 'posts',
+		                    'args' 			=> array('post_type' => array('wpcf7_contact_form'), 'posts_per_page' => -1),
+							'required' 		=> array( 'plugin_state', '=', '1' ),
+							'title'         => __( 'Form to use?', 'sp-lite-txt-domain' ),
+							'subtitle'      => __( '<span style="color:red;font-weight:bold;display:inline;">IMPORTANT!</span><br/>Choose the Contact Form 7 form to be used in the popup.', 'sp-lite-txt-domain' ),
+							'desc'          => __( '<a target="_blank" href="', 'sp-lite-txt-domain' ) .admin_url( '/admin.php?page=wpcf7' ). __( '">See all Contact Forms</a>', 'sp-lite-txt-domain' ),
+						),		
+						array(
+							'id'            => 'where_to_show',
+							'type'          => 'select',
+							'required' 		=> array( 'plugin_state', '=', '1' ),
+							'title'         => __( 'Where to show the form?', 'sp-lite-txt-domain' ),
+							'subtitle'      => __( 'Choose the display of the popup form.', 'sp-lite-txt-domain' ),
+							'desc'          => __( '', 'sp-lite-txt-domain' ),
+							'options'  => array(
+										'everywhere' => 'Everywhere',
+										'onselected' => 'Only Selected Pages',
+										'notonselected' => __('Not On Selected Pages', 'sp-lite-txt-domain' ),
+									),
+							'default'  => 'everywhere'
+						),
+						array(
+							'id'            => 'choose_pages',
+							'type'          => 'select',
+							'multi'          => true,
+							'data' 			=> 'pages',
+		                    'args' 			=> array( 'posts_per_page' => -1),
+							'required' 		=> array( array('plugin_state', '=', '1'), array('where_to_show', '!=', 'everywhere') ),
+							'title'         => __( 'Choose Your Pages', 'sp-lite-txt-domain' ),
+							'subtitle'      => __( 'Select the pages to exclude or include for popup form display.', 'sp-lite-txt-domain' ),
+							'desc'          => __( '<a target="_blank" href="', 'sp-lite-txt-domain' ) .admin_url( '/edit.php?post_type=page' ). __( '">See all Pages</a>', 'sp-lite-txt-domain' ),
+						),
 				/////////////////////////////////////////////////
 				// Section: Layout & Color Scheme (layout)
 				////////////////////////////////////////////////
@@ -372,14 +382,14 @@
 							array(
 								'id'       => 'popup-height',
 								'type'     => 'dimensions',
-								'units'    => array('%','px'),
+								'units'    => array('px','%'),
 								'required' => array( 'custom-popup-layout', '=', 'change' ),
 								'title'    => __('Popup Height', 'sp-pro-txt-domain'),
 								'subtitle' => __('Set height of the popup.', 'sp-pro-txt-domain'),
 								'desc'     => __('It is suggested that you choose a percent based height.', 'sp-pro-txt-domain'),
 								'width' 	=> false,
 								'default'  => array(
-									'height'  => '76'
+									'height'  => '450'
 								),
 							),	
 						array(

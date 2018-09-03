@@ -5,12 +5,12 @@ Plugin URI:   http://www.omaksolutions.com
 Description:  A lightweight plugin that converts a Contact Form 7 form into a customizable pop-up form which is slick, beautiful and responsive to different screen-sizes.
 Author URI:   http://www.omaksolutions.com 
 Author:       Om Ak Solutions 
-Version:      1.5.2
+Version:      1.6.0
 Text Domain: sp-pro-txt-domain
 */
 
 
-define( 'SPLITE_VERSION', '1.5.2' );
+define( 'SPLITE_VERSION', '1.6.0' );
 
 define( 'SPLITE_REQUIRED_WP_VERSION', '3.0.1' );
 
