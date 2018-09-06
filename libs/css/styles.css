@@ -145,6 +145,7 @@ a.splite_sideEnquiry:hover {
 
 #splite_popup_box .wpcf7-form-control-wrap {
 	display: block; 
+	position: relative; 
 }
 #splite_popup_box .wpcf7-form-control-wrap + .wpcf7-checkbox, 
 #splite_popup_box .wpcf7-form-control-wrap + .wpcf7-radio {

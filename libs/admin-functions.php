@@ -181,6 +181,11 @@ function splite_admin_notices() {
 	// review_notice - numeric counter for multiplying 14 days
 	$review_notice = get_option('splite_review_notice') ? get_option('splite_review_notice') : 1; 
 	
+	if(!isset($install_date)) {
+		update_option('splite_install_date', current_time('Y-m-d H:i:s')); 
+		return; 
+	}
+	
 	$install_date_object = DateTime::createFromFormat('Y-m-d H:i:s', $install_date);
 	$today = DateTime::createFromFormat('U', current_time('U')); 
 	$diff = $today->diff($install_date_object); 

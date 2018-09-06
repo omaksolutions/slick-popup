@@ -479,8 +479,8 @@
 								'required' => array( 'choose-color-scheme', '=', 'custom_theme' ),
 								'output'   => array( '' ),
 								'title'    => __( 'Form Background', 'sp-lite-txt-domain' ),
-								'subtitle' => __( 'Pick a color for form background.', 'sp-lite-txt-domain' ),
-								'desc' => __( 'This color will be used as the popup form background.', 'sp-lite-txt-domain' ),
+								'subtitle' => __( 'Please style the background for the form area in popup.', 'sp-lite-txt-domain' ),
+								'desc' => __( 'Note: If you choose an image background then the title area will be transparent.', 'sp-lite-txt-domain' ),
 								'default'  => array(
 									'background-color' => '#EFEFEF',
 									'background-image' => '',
