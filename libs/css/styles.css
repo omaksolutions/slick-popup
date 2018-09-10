@@ -36,15 +36,14 @@ div#splite_curtain {
 	cursor: pointer; 
 }
 #splite_popup_box {
-  bottom: 0;
-  
+  bottom: 0;  
   left: calc(50% - 300px);
   margin-left: 0px;
   position: fixed;
   top: 0;
   width: 600px;
   max-width: 90%; 
-  z-index: 100000;
+  z-index: 100000;  
   overflow: hidden; 
 }
 #splite_popup_box  a:hover {
@@ -247,7 +246,7 @@ a.splite_sideEnquiry:hover {
 	font-size: 0.85em;
     line-height: 1.3em;
     margin: 0;
-    padding: 5px 5px 0px;
+    padding: 5px 10px 0px 10px;
     border-radius: 0;
     border: 0;
     position: absolute;

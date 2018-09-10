@@ -641,7 +641,7 @@
 						'type'          => 'select',
 						'title'         => __( 'How to activate popup?', 'sp-lite-txt-domain' ),
 						'subtitle'      => __( 'Choose how the popup should activate.', 'sp-lite-txt-domain' ),
-						'desc'          => __( '4 modes: On-click, Auto Popup, On-scroll Popup, On-exit Popup', 'sp-lite-txt-domain' ),
+						'desc'          => __( '4 modes: On-click, Auto Popup, On-scroll Popup, Forced Popup', 'sp-lite-txt-domain' ),
 						'options'  => array(
 									'manually' => __('On-Click (Default)', 'sp-lite-txt-domain' ),
 								),
