@@ -6,7 +6,7 @@ Description:  A lightweight plugin that converts a Contact Form 7 form into a cu
 Author URI:   http://www.omaksolutions.com 
 Author:       Om Ak Solutions 
 Version:      1.6.0
-Text Domain: sp-pro-txt-domain
+Text Domain: slick-popup
 */
 
 

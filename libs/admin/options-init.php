@@ -49,7 +49,7 @@
         'page_slug' => 'slick-options',
         'page_title' => $plugin['Name'] . ' Options',
         'intro_text' => $plugin['Description'],
-        'footer_text' => __('We will continue to innovate new features, if you have a suggestion just let us know.', 'sp-lite-txt-domain' ),
+        'footer_text' => __('We will continue to innovate new features, if you have a suggestion just let us know.', 'slick-popup' ),
         'admin_bar' => false,
 		//'page_parent' => 'sp-lite',
         'menu_type' => 'menu',
@@ -110,36 +110,36 @@
 	$args['admin_bar_links'][] = array(
         'id'    => 'sp-demo',
         'href'  => 'http://www.slick-popup.omaksolutions.com/',
-        'title' => __( 'Demo', 'sp-lite-txt-domain' ),
+        'title' => __( 'Demo', 'slick-popup' ),
     );
 
     $args['admin_bar_links'][] = array(
         'id'    => 'sp-support',
         'href'  => 'https://wordpress.org/support/plugin/slick-popup',
-        'title' => __( 'Support', 'sp-lite-txt-domain' ),
+        'title' => __( 'Support', 'slick-popup' ),
     );
 
     $args['admin_bar_links'][] = array(
         'id'    => 'sp-docs',
         'href'  => 'http://www.slick-popup.omaksolutions.com/docs',
-        'title' => __( 'Documentation', 'sp-lite-txt-domain' ),
+        'title' => __( 'Documentation', 'slick-popup' ),
     );
 
     // SOCIAL ICONS -> Setup custom links in the footer for quick links in your panel footer icons.
     $args['share_icons'] = array(); 
     $args['share_icons'][] = array(
         'url'   => 'https://www.facebook.com/pages/OmAkSolutions',
-        'title' => __('Like us on Facebook', 'sp-lite-txt-domain' ),
+        'title' => __('Like us on Facebook', 'slick-popup' ),
         'icon'  => 'el el-facebook'
     );
     $args['share_icons'][] = array(
         'url'   => 'http://twitter.com/OmAkSolutions',
-        'title' => __('Follow us on Twitter', 'sp-lite-txt-domain' ),
+        'title' => __('Follow us on Twitter', 'slick-popup' ),
         'icon'  => 'el el-twitter'
     );
     $args['share_icons'][] = array(
         'url'   => 'http://www.linkedin.com/company/Om-Ak-Solutions',
-        'title' => __('Find us on LinkedIn', 'sp-lite-txt-domain' ),
+        'title' => __('Find us on LinkedIn', 'slick-popup' ),
         'icon'  => 'el el-linkedin'
     );
 
@@ -150,16 +150,16 @@
         } else {
             $v = str_replace( '-', '_', $args['opt_name'] );
         }
-        $args['intro_text'] = sprintf( __( '', 'sp-lite-txt-domain' ), $v );
+        $args['intro_text'] = sprintf( __( '', 'slick-popup' ), $v );
     } else {
-        $args['intro_text'] = __( '', 'sp-lite-txt-domain' );
+        $args['intro_text'] = __( '', 'slick-popup' );
     }
 	
 	// Intro Text Emptied
-	$args['intro_text'] = sprintf( __( '', 'sp-lite-txt-domain' ), $v );	
+	$args['intro_text'] = sprintf( __( '', 'slick-popup' ), $v );	
 	
     // Add content after the form.
-    $args['footer_text'] = __( '<p>We will continue to innovate new features, if you have a suggestion just let us know at <strong>poke@slickpopup.com</strong></p>', 'sp-lite-txt-domain' );
+    $args['footer_text'] = __( '<p>We will continue to innovate new features, if you have a suggestion just let us know at <strong>poke@slickpopup.com</strong></p>', 'slick-popup' );
 
     Redux::setArgs( $opt_name, $args );
 
@@ -174,20 +174,20 @@
     $tabs = array(
         array(
             'id'      => 'sp-pro-helptab-1',
-            'title'   => __( 'Support', 'sp-lite-txt-domain' ),
-            'content' => __( '<p>If you face any issues using the plugin, please shoot us an e-mail at: poke@slickpopup.com</p>', 'sp-lite-txt-domain' )
+            'title'   => __( 'Support', 'slick-popup' ),
+            'content' => __( '<p>If you face any issues using the plugin, please shoot us an e-mail at: poke@slickpopup.com</p>', 'slick-popup' )
         ),
 		array(
             'id'      => 'sp-pro-helptab-2',
-            'title'   => __( 'Support', 'sp-lite-txt-domain' ),
-            'content' => __( '<p>If you face any issues using the plugin, please shoot us an e-mail at: poke@slickpopup.com</p>', 'sp-lite-txt-domain' )
+            'title'   => __( 'Support', 'slick-popup' ),
+            'content' => __( '<p>If you face any issues using the plugin, please shoot us an e-mail at: poke@slickpopup.com</p>', 'slick-popup' )
         ),
     );
 	unset( $tabs[1] );
     Redux::setHelpTab( $opt_name, $tabs );
 
     // Set the help sidebar
-    $content = __( '<p><strong>We are mostly online at Skype: ak.singla47</strong></p>', 'sp-lite-txt-domain' );
+    $content = __( '<p><strong>We are mostly online at Skype: ak.singla47</strong></p>', 'slick-popup' );
     Redux::setHelpSidebar( $opt_name, $content );
 
 
@@ -214,30 +214,30 @@
 	/////////////////////////////////////////////////
 	if ( 1 ) {
     	Redux::setSection( $opt_name, array(
-			'title'  => __( 'Configuration', 'sp-lite-txt-domain' ),
+			'title'  => __( 'Configuration', 'slick-popup' ),
 			'id'     => 'configuration-settings',
-			'desc'   => __( '', 'sp-lite-txt-domain' ),
+			'desc'   => __( '', 'slick-popup' ),
 			'icon'   => 'el el-cog',
 			'fields' => array(						
 				array(
 					'id'       => 'plugin_state',
 					'type'     => 'switch',
-					'title'    => __( 'Plugin State', 'sp-lite-txt-domain' ),
-					'subtitle' => __( 'The power switch.', 'sp-lite-txt-domain' ),
+					'title'    => __( 'Plugin State', 'slick-popup' ),
+					'subtitle' => __( 'The power switch.', 'slick-popup' ),
 					'default'  => 1,
-					'on'       => __('Enable', 'sp-lite-txt-domain' ),
-					'off'      => __('Disable', 'sp-lite-txt-domain' ),
+					'on'       => __('Enable', 'slick-popup' ),
+					'off'      => __('Disable', 'slick-popup' ),
 				),				
 				array(
 					'id'       => 'plugin_state_on_mobile',
 					'type'     => 'switch',
 					'required' => array( 'plugin_state', '=', '1' ),
-					'title'    => __( 'Mobile State', 'sp-lite-txt-domain' ),
-					'subtitle' => __( 'Enable/Disable on Mobile View.', 'sp-lite-txt-domain' ),
-					'default' => __( '<b>Default:</b> Enable', 'sp-lite-txt-domain' ),
+					'title'    => __( 'Mobile State', 'slick-popup' ),
+					'subtitle' => __( 'Enable/Disable on Mobile View.', 'slick-popup' ),
+					'default' => __( '<b>Default:</b> Enable', 'slick-popup' ),
 					'default'  => 1,
-					'on'       => __('Enable', 'sp-lite-txt-domain' ),
-					'off'      => __('Disable', 'sp-lite-txt-domain' ),
+					'on'       => __('Enable', 'slick-popup' ),
+					'off'      => __('Disable', 'slick-popup' ),
 					'hint'     => array(
 						'title'     => 'Mobile State',
 						'content'   => 'Disable - will complete switch off all functionality of the plugin on the front-end.',
@@ -247,14 +247,14 @@
 					'id'       => 'delete_data',
 					'type'     => 'switch',
 					'required' => array( 'plugin_state', '=', '1' ),
-					'title'    => __( 'Keep Settings', 'sp-lite-txt-domain' ),
-					'subtitle' => __( 'Keep/Delete plugin settings after uninstallation.', 'sp-lite-txt-domain' ),
+					'title'    => __( 'Keep Settings', 'slick-popup' ),
+					'subtitle' => __( 'Keep/Delete plugin settings after uninstallation.', 'slick-popup' ),
 					'default'  => 0,
-					'on'       => __('Delete', 'sp-lite-txt-domain' ),
-					'off'      => __('Keep', 'sp-lite-txt-domain' ),
+					'on'       => __('Delete', 'slick-popup' ),
+					'off'      => __('Keep', 'slick-popup' ),
 					'hint'     => array(
-						'title'     => __('Keep Settings', 'sp-lite-txt-domain' ),
-						'content'   => __('Choose <b>Keep</b> if you do not plan to copmletely remove the plugin settings after uninstallation.', 'sp-lite-txt-domain' ),
+						'title'     => __('Keep Settings', 'slick-popup' ),
+						'content'   => __('Choose <b>Keep</b> if you do not plan to copmletely remove the plugin settings after uninstallation.', 'slick-popup' ),
 					),
 				),		
 			)
@@ -266,9 +266,9 @@
 	/////////////////////////////////////////////////
 	if ( 1 ) {
 		Redux::setSection( $opt_name, array(
-			'title' => __( 'Popup Settings', 'sp-lite-txt-domain' ),
+			'title' => __( 'Popup Settings', 'slick-popup' ),
 			'id'    => 'popup-styles',
-			'desc'  => __( '', 'sp-lite-txt-domain' ),
+			'desc'  => __( '', 'slick-popup' ),
 			'icon'  => 'el el-comment',
 			'fields'     => array(
 				/////////////////////////////////////////////////
@@ -277,8 +277,8 @@
 					array(
 						'id'       => 'basic-config',
 						'type'     => 'section',				
-						'title'    => __( 'Basic Configuration', 'sp-lite-txt-domain' ),
-						'subtitle' => __( 'Choose contact form and where to show', 'sp-lite-txt-domain' ),
+						'title'    => __( 'Basic Configuration', 'slick-popup' ),
+						'subtitle' => __( 'Choose contact form and where to show', 'slick-popup' ),
 						'indent'   => true, // Indent all options below until the next 'section' option is set.
 					),
 						array(
@@ -287,21 +287,21 @@
 							'data' 			=> 'posts',
 		                    'args' 			=> array('post_type' => array('wpcf7_contact_form'), 'posts_per_page' => -1),
 							'required' 		=> array( 'plugin_state', '=', '1' ),
-							'title'         => __( 'Form to use?', 'sp-lite-txt-domain' ),
-							'subtitle'      => __( '<span style="color:red;font-weight:bold;display:inline;">IMPORTANT!</span><br/>Choose the Contact Form 7 form to be used in the popup.', 'sp-lite-txt-domain' ),
-							'desc'          => __( '<a target="_blank" href="', 'sp-lite-txt-domain' ) .admin_url( '/admin.php?page=wpcf7' ). __( '">See all Contact Forms</a>', 'sp-lite-txt-domain' ),
+							'title'         => __( 'Form to use?', 'slick-popup' ),
+							'subtitle'      => __( '<span style="color:red;font-weight:bold;display:inline;">IMPORTANT!</span><br/>Choose the Contact Form 7 form to be used in the popup.', 'slick-popup' ),
+							'desc'          => __( '<a target="_blank" href="', 'slick-popup' ) .admin_url( '/admin.php?page=wpcf7' ). __( '">See all Contact Forms</a>', 'slick-popup' ),
 						),		
 						array(
 							'id'            => 'where_to_show',
 							'type'          => 'select',
 							'required' 		=> array( 'plugin_state', '=', '1' ),
-							'title'         => __( 'Where to show the form?', 'sp-lite-txt-domain' ),
-							'subtitle'      => __( 'Choose the display of the popup form.', 'sp-lite-txt-domain' ),
-							'desc'          => __( '', 'sp-lite-txt-domain' ),
+							'title'         => __( 'Where to show the form?', 'slick-popup' ),
+							'subtitle'      => __( 'Choose the display of the popup form.', 'slick-popup' ),
+							'desc'          => __( '', 'slick-popup' ),
 							'options'  => array(
 										'everywhere' => 'Everywhere',
 										'onselected' => 'Only Selected Pages',
-										'notonselected' => __('Not On Selected Pages', 'sp-lite-txt-domain' ),
+										'notonselected' => __('Not On Selected Pages', 'slick-popup' ),
 									),
 							'default'  => 'everywhere'
 						),
@@ -312,9 +312,9 @@
 							'data' 			=> 'pages',
 		                    'args' 			=> array( 'posts_per_page' => -1),
 							'required' 		=> array( array('plugin_state', '=', '1'), array('where_to_show', '!=', 'everywhere') ),
-							'title'         => __( 'Choose Your Pages', 'sp-lite-txt-domain' ),
-							'subtitle'      => __( 'Select the pages to exclude or include for popup form display.', 'sp-lite-txt-domain' ),
-							'desc'          => __( '<a target="_blank" href="', 'sp-lite-txt-domain' ) .admin_url( '/edit.php?post_type=page' ). __( '">See all Pages</a>', 'sp-lite-txt-domain' ),
+							'title'         => __( 'Choose Your Pages', 'slick-popup' ),
+							'subtitle'      => __( 'Select the pages to exclude or include for popup form display.', 'slick-popup' ),
+							'desc'          => __( '<a target="_blank" href="', 'slick-popup' ) .admin_url( '/edit.php?post_type=page' ). __( '">See all Pages</a>', 'slick-popup' ),
 						),
 				/////////////////////////////////////////////////
 				// Section: Layout & Color Scheme (layout)
@@ -322,34 +322,34 @@
 					array(
 						'id'       => 'section-layout',
 						'type'     => 'section',				
-						'title'    => __( 'Layout & Color Scheme', 'sp-lite-txt-domain' ),
-						'subtitle' => __( 'Choose your desired layout and color scheme.', 'sp-lite-txt-domain' ),
+						'title'    => __( 'Layout & Color Scheme', 'slick-popup' ),
+						'subtitle' => __( 'Choose your desired layout and color scheme.', 'slick-popup' ),
 						'indent'   => true, // Indent all options below until the next 'section' option is set.
 					),
 						array(
 							'id'       => 'choose-layout',
 							//'type'     => 'select',
 							'type'     => 'image_select',
-							'title'    => __( 'Choose Layout', 'sp-lite-txt-domain' ),
-							'subtitle' => __( 'Choose one of the three layouts available.', 'sp-lite-txt-domain' ),
-							'desc'     => __( '', 'sp-lite-txt-domain' ),
+							'title'    => __( 'Choose Layout', 'slick-popup' ),
+							'subtitle' => __( 'Choose one of the three layouts available.', 'slick-popup' ),
+							'desc'     => __( '', 'slick-popup' ),
 							//Must provide key => value pairs for select options
 							'options'  => array(								
 								'centered' => array(
-									'alt' => __('Centered Layout', 'sp-lite-txt-domain' ),
+									'alt' => __('Centered Layout', 'slick-popup' ),
 									'img' => SPLITE_PLUGIN_IMG_URL . '/layout-centered.png',
-									'title' => __('Centered', 'sp-lite-txt-domain' ),
+									'title' => __('Centered', 'slick-popup' ),
 								),
 								'full' => array(
-									'alt' => __('Full Height', 'sp-lite-txt-domain' ),
+									'alt' => __('Full Height', 'slick-popup' ),
 									'img' => SPLITE_PLUGIN_IMG_URL . '/layout-full.png',
-									'title' => __('Full Height', 'sp-lite-txt-domain' ),
+									'title' => __('Full Height', 'slick-popup' ),
 								),
 							),
 							'default'  => 'centered',
 							'hint'     => array(
-								'title'     => __('Choose Layout', 'sp-lite-txt-domain' ),
-								'content'   => __('Currently two layouts available: <b>Full</b> and <b>Centered</b>. Full means full height popup in the center of the screen, and Centered has some space above and below the popup.', 'sp-lite-txt-domain' ),
+								'title'     => __('Choose Layout', 'slick-popup' ),
+								'content'   => __('Currently two layouts available: <b>Full</b> and <b>Centered</b>. Full means full height popup in the center of the screen, and Centered has some space above and below the popup.', 'slick-popup' ),
 							),
 						),
 					array(
@@ -395,14 +395,14 @@
 						array(
 							'id'       => 'popup-corners',
 							'type'     => 'select',
-							'title'    => __( 'Popup Corners', 'sp-lite-txt-domain' ),
-							'subtitle' => __( 'Choose the radius of the popup border.', 'sp-lite-txt-domain' ),
-							'desc'     => __( '<b>Default:</b> Square (Zero roundness)', 'sp-lite-txt-domain' ),
+							'title'    => __( 'Popup Corners', 'slick-popup' ),
+							'subtitle' => __( 'Choose the radius of the popup border.', 'slick-popup' ),
+							'desc'     => __( '<b>Default:</b> Square (Zero roundness)', 'slick-popup' ),
 							//Must provide key => value pairs for select options
 							'options'  => array(
 								'square' => 'Square',					
 								'rounded' => 'Rounded',
-								'custom' => __('Set Your Own', 'sp-lite-txt-domain' ),
+								'custom' => __('Set Your Own', 'slick-popup' ),
 							),
 							'default'  => 'square'
 						),		
@@ -413,9 +413,9 @@
 								'output'   => array( '' ),
 								'units'          => array( 'px', '%' ),    // You can specify a unit value. Possible: px, em, %
 								'units_extended' => 'true',  // Allow users to select any type of unit
-								'title'          => __( 'Popup Border Radius', 'sp-lite-txt-domain' ),
-								'subtitle'       => __( 'Set a border radius property for the popup.', 'sp-lite-txt-domain' ),
-								'desc'           => __( 'Units: px or % (50% is max).', 'sp-lite-txt-domain' ),
+								'title'          => __( 'Popup Border Radius', 'slick-popup' ),
+								'subtitle'       => __( 'Set a border radius property for the popup.', 'slick-popup' ),
+								'desc'           => __( 'Units: px or % (50% is max).', 'slick-popup' ),
 								'height'         => false,
 								'default'        => array(
 									'width'  => 20,
@@ -425,39 +425,39 @@
 						array(
 							'id'       => 'choose-color-scheme',
 							'type'     => 'image_select',
-							'title'    => __( 'Color Scheme', 'sp-lite-txt-domain' ),
-							'subtitle' => __( 'Choose your desired cover scheme.', 'sp-lite-txt-domain' ),
-							'desc'     => __( '<span style="font-weight:bold;font-size:1.1em;">Choose one of our pre-defined color schemes or set your own. <a href="https://codecanyon.net/item/slick-popup-pro-/16115931?ref=OmAkSols">More in Pro</a></span>', 'sp-lite-txt-domain' ),
+							'title'    => __( 'Color Scheme', 'slick-popup' ),
+							'subtitle' => __( 'Choose your desired cover scheme.', 'slick-popup' ),
+							'desc'     => __( '<span style="font-weight:bold;font-size:1.1em;">Choose one of our pre-defined color schemes or set your own. <a href="https://codecanyon.net/item/slick-popup-pro-/16115931?ref=OmAkSols">More in Pro</a></span>', 'slick-popup' ),
 							'options'  => array(
 								'master_red' => array(
-									'alt' => __('Master Red', 'sp-lite-txt-domain' ),
+									'alt' => __('Master Red', 'slick-popup' ),
 									'img' => SPLITE_PLUGIN_IMG_URL . '/scheme-master-red.png',
-									'title' => __('Master Red', 'sp-lite-txt-domain' ),
+									'title' => __('Master Red', 'slick-popup' ),
 								),
 								'creamy_orange' => array(
-									'alt' => __('Creamy Orange', 'sp-lite-txt-domain' ),
+									'alt' => __('Creamy Orange', 'slick-popup' ),
 									'img' => SPLITE_PLUGIN_IMG_URL . '/scheme-creamy-orange.png',
-									'title' => __('Creamy Orange', 'sp-lite-txt-domain' ),
+									'title' => __('Creamy Orange', 'slick-popup' ),
 								),
 								'light_blue' => array(
-									'alt' => __('Light Blue', 'sp-lite-txt-domain' ),
+									'alt' => __('Light Blue', 'slick-popup' ),
 									'img' => SPLITE_PLUGIN_IMG_URL . '/scheme-light-blue.png',
-									'title' => __('Light Blue', 'sp-lite-txt-domain' ),
+									'title' => __('Light Blue', 'slick-popup' ),
 								),
 								'cool_green' => array(
-									'alt' => __('Cool Green', 'sp-lite-txt-domain' ),
+									'alt' => __('Cool Green', 'slick-popup' ),
 									'img' => SPLITE_PLUGIN_IMG_URL . '/scheme-cool-green.png',
-									'title' => __('Cool Green', 'sp-lite-txt-domain' ),
+									'title' => __('Cool Green', 'slick-popup' ),
 								),						
 								'dark' => array(
-									'alt' => __('Classic Grey', 'sp-lite-txt-domain' ),
+									'alt' => __('Classic Grey', 'slick-popup' ),
 									'img' => SPLITE_PLUGIN_IMG_URL . '/scheme-classic-grey.png',
-									'title' => __('Classic Grey', 'sp-lite-txt-domain' ),
+									'title' => __('Classic Grey', 'slick-popup' ),
 								),
 								'custom_theme' => array(
-									'alt' => __('Set Your Own', 'sp-lite-txt-domain' ),
+									'alt' => __('Set Your Own', 'slick-popup' ),
 									'img' => SPLITE_PLUGIN_IMG_URL . '/scheme-custom-theme.png',
-									'title' => __('Set Your Own', 'sp-lite-txt-domain' ),
+									'title' => __('Set Your Own', 'slick-popup' ),
 								),
 							),
 							'default'  => 'cool_green'
@@ -468,9 +468,9 @@
 								'type'     => 'color',
 								'required' => array( 'choose-color-scheme', '=', 'custom_theme' ),
 								'output'   => array( '' ),
-								'title'    => __( 'Your Theme Color', 'sp-lite-txt-domain' ),
-								'subtitle' => __( 'Pick a color for theme of your popup.', 'sp-lite-txt-domain' ),
-								'desc' => __( 'This color will be used to create theme of your popup.', 'sp-lite-txt-domain' ),
+								'title'    => __( 'Your Theme Color', 'slick-popup' ),
+								'subtitle' => __( 'Pick a color for theme of your popup.', 'slick-popup' ),
+								'desc' => __( 'This color will be used to create theme of your popup.', 'slick-popup' ),
 								'default'  => '#333',
 							),
 							array(
@@ -478,9 +478,9 @@
 								'type'     => 'background',
 								'required' => array( 'choose-color-scheme', '=', 'custom_theme' ),
 								'output'   => array( '' ),
-								'title'    => __( 'Form Background', 'sp-lite-txt-domain' ),
-								'subtitle' => __( 'Please style the background for the form area in popup.', 'sp-lite-txt-domain' ),
-								'desc' => __( 'Note: If you choose an image background then the title area will be transparent.', 'sp-lite-txt-domain' ),
+								'title'    => __( 'Form Background', 'slick-popup' ),
+								'subtitle' => __( 'Please style the background for the form area in popup.', 'slick-popup' ),
+								'desc' => __( 'Note: If you choose an image background then the title area will be transparent.', 'slick-popup' ),
 								'default'  => array(
 									'background-color' => '#EFEFEF',
 									'background-image' => '',
@@ -495,9 +495,9 @@
 								'type'     => 'color',
 								'required' => array( 'choose-color-scheme', '=', 'custom_theme' ),
 								'output'   => array( '' ),
-								'title'    => __( 'Your Text Color', 'sp-lite-txt-domain' ),
-								'subtitle' => __( 'Pick a color for any text element added in form.', 'sp-lite-txt-domain' ),
-								'desc' => __( 'This also applies to <strong>Close Icon "X"</strong> and <strong>form submission response.</strong>', 'sp-lite-txt-domain' ),
+								'title'    => __( 'Your Text Color', 'slick-popup' ),
+								'subtitle' => __( 'Pick a color for any text element added in form.', 'slick-popup' ),
+								'desc' => __( 'This also applies to <strong>Close Icon "X"</strong> and <strong>form submission response.</strong>', 'slick-popup' ),
 								'default'  => '#EFEFEF',
 							),
 					
@@ -507,16 +507,16 @@
 				array(
 						'id'       => 'section-heading-description',
 						'type'     => 'section',
-						'title'    => __( 'Heading & Description', 'sp-lite-txt-domain' ),
-						'subtitle' => __( 'Choose your desired heading and description settings.', 'sp-lite-txt-domain' ),
+						'title'    => __( 'Heading & Description', 'slick-popup' ),
+						'subtitle' => __( 'Choose your desired heading and description settings.', 'slick-popup' ),
 						'indent'   => true, // Indent all options below until the next 'section' option is set.
 					),
 						array(
 							'id'       => 'popup-heading',
 							'type'     => 'text',
-							'title'    => __( 'Heading', 'sp-lite-txt-domain' ),
-							'subtitle' => __( 'Main heading on the popup.', 'sp-lite-txt-domain' ),
-							'desc'     => __( 'Leave empty if you do not want popup heading ', 'sp-lite-txt-domain' ),
+							'title'    => __( 'Heading', 'slick-popup' ),
+							'subtitle' => __( 'Main heading on the popup.', 'slick-popup' ),
+							'desc'     => __( 'Leave empty if you do not want popup heading ', 'slick-popup' ),
 							'default'  => 'STILL NOT SURE WHAT TO DO?',
 							'hint'      => array(
 								'title'     => 'Popup Heading',
@@ -526,9 +526,9 @@
 						array(
 							'id'       => 'popup-cta-text',
 							'type'     => 'editor',
-							'title'    => __( 'Call To Action', 'sp-lite-txt-domain' ),
-							'subtitle' => __( 'Main description that will actually make your visitor to fill up the form.', 'sp-lite-txt-domain' ),
-							'desc'     => __( '<b>Default:</b> We are glad that you preferred to contact us. Please fill our short form and one of our friendly team members will contact you back shortly.', 'sp-lite-txt-domain' ),
+							'title'    => __( 'Call To Action', 'slick-popup' ),
+							'subtitle' => __( 'Main description that will actually make your visitor to fill up the form.', 'slick-popup' ),
+							'desc'     => __( '<b>Default:</b> We are glad that you preferred to contact us. Please fill our short form and one of our friendly team members will contact you back shortly.', 'slick-popup' ),
 							'default'  => 'We are glad that you preferred to contact us. Please fill our short form and one of our friendly team members will contact you back.',
 							'hint'      => array(
 								'title'     => 'Call To Action',
@@ -542,26 +542,26 @@
 				array(
 						'id'       => 'section-submit-button',
 						'type'     => 'section',
-						'title'    => __( 'Submit Button', 'sp-lite-txt-domain' ),
-						'subtitle' => __( 'Choose your desired settings for Submit Button.', 'sp-lite-txt-domain' ),
+						'title'    => __( 'Submit Button', 'slick-popup' ),
+						'subtitle' => __( 'Choose your desired settings for Submit Button.', 'slick-popup' ),
 						'indent'   => true, // Indent all options below until the next 'section' option is set.
 					),
 					array(
 						'id'       => 'choose-submit-button',
 						'type'     => 'select',
-						'title'    => __( 'Submit Button Styles', 'sp-lite-txt-domain' ),
-						'subtitle' => __( 'Choose appearance of the form <b>Submit</b> button.', 'sp-lite-txt-domain' ),
-						'desc'     => __( '<b>Default:</b> Inherit', 'sp-lite-txt-domain' ),
+						'title'    => __( 'Submit Button Styles', 'slick-popup' ),
+						'subtitle' => __( 'Choose appearance of the form <b>Submit</b> button.', 'slick-popup' ),
+						'desc'     => __( '<b>Default:</b> Inherit', 'slick-popup' ),
 						//Must provide key => value pairs for select options
 						'options'  => array(
-							'inherit_from_theme' => __('Use styles from theme', 'sp-lite-txt-domain' ),
-							'inherit_from_color_scheme' => __('Inherit from color scheme', 'sp-lite-txt-domain' ),
-							'custom' => __('Set your own colors', 'sp-lite-txt-domain' ),
+							'inherit_from_theme' => __('Use styles from theme', 'slick-popup' ),
+							'inherit_from_color_scheme' => __('Inherit from color scheme', 'slick-popup' ),
+							'custom' => __('Set your own colors', 'slick-popup' ),
 						),
 						'default'  => 'inherit_from_color_scheme',
 						'hint'      => array(
-							'title'     => __( 'Color Scheme', 'sp-lite-txt-domain' ),
-							'content'   =>  __( 'Choose one of the pre-packed color themes or create your own.', 'sp-lite-txt-domain' ),
+							'title'     => __( 'Color Scheme', 'slick-popup' ),
+							'content'   =>  __( 'Choose one of the pre-packed color themes or create your own.', 'slick-popup' ),
 						),
 					),	
 						// If choose-submit-button = custom
@@ -570,8 +570,8 @@
 							'type'     => 'background',
 							'required' => array( 'choose-submit-button', '=', 'custom' ),
 							'output'   => array( '' ),
-							'title'    => __( 'Button Background', 'sp-lite-txt-domain' ),
-							'subtitle' => __( 'Choose background color for the "Submit" button.', 'sp-lite-txt-domain' ),
+							'title'    => __( 'Button Background', 'slick-popup' ),
+							'subtitle' => __( 'Choose background color for the "Submit" button.', 'slick-popup' ),
 							'default'   => array( 
 								'background-color' => '#333333',
 							),
@@ -593,12 +593,12 @@
 							'id'       => 'submit-button-border',
 							'type'     => 'border',
 							'required' => array( 'choose-submit-button', '=', 'custom' ),
-							'title'    => __( 'Button Border', 'sp-lite-txt-domain' ),
-							'subtitle' => __( 'Set properties for the submit button border.', 'sp-lite-txt-domain' ),
+							'title'    => __( 'Button Border', 'slick-popup' ),
+							'subtitle' => __( 'Set properties for the submit button border.', 'slick-popup' ),
 							'output'   => array( '' ),
 							'all'      => false,
 							// An array of CSS selectors to apply this font style to
-							'desc'     => __( '', 'sp-lite-txt-domain' ),
+							'desc'     => __( '', 'slick-popup' ),
 							'default'  => array(
 								'border-color'  => '#f5f5f5',
 								'border-style'  => 'solid',
@@ -621,9 +621,9 @@
 	if ( 1 ) {
 		
 		Redux::setSection( $opt_name, array(
-			'title' => __( 'Popup Effects', 'sp-lite-txt-domain' ),
+			'title' => __( 'Popup Effects', 'slick-popup' ),
 			'id'    => 'loader-popup-effects',
-			'desc'  => __( 'Control the popup activation mode and animation effects.', 'sp-lite-txt-domain' ),
+			'desc'  => __( 'Control the popup activation mode and animation effects.', 'slick-popup' ),
 			'icon'  => 'el el-iphone-home',
 			'fields'     => array(
 				/////////////////////////////////////////////////
@@ -632,18 +632,18 @@
 				array(
 					'id'       => 'section-activation-mode',
 					'type'     => 'section',				
-					'title'    => __( 'Activation Mode', 'sp-lite-txt-domain' ),
-					'subtitle' => __( '', 'sp-lite-txt-domain' ),
+					'title'    => __( 'Activation Mode', 'slick-popup' ),
+					'subtitle' => __( '', 'slick-popup' ),
 					'indent'   => true, // Indent all options below until the next 'section' option is set.
 				),
 					array(
 						'id'            => 'activation_mode',
 						'type'          => 'select',
-						'title'         => __( 'How to activate popup?', 'sp-lite-txt-domain' ),
-						'subtitle'      => __( 'Choose how the popup should activate.', 'sp-lite-txt-domain' ),
-						'desc'          => __( '4 modes: On-click, Auto Popup, On-scroll Popup, Forced Popup', 'sp-lite-txt-domain' ),
+						'title'         => __( 'How to activate popup?', 'slick-popup' ),
+						'subtitle'      => __( 'Choose how the popup should activate.', 'slick-popup' ),
+						'desc'          => __( '4 modes: On-click, Auto Popup, On-scroll Popup, Forced Popup', 'slick-popup' ),
 						'options'  => array(
-									'manually' => __('On-Click (Default)', 'sp-lite-txt-domain' ),
+									'manually' => __('On-Click (Default)', 'slick-popup' ),
 								),
 						'default'  => 'manually'
 					),
@@ -652,7 +652,7 @@
 						'type'   => 'info',
 						'style'   => 'warning',
 						'notice' => false,
-						'desc'   => __( '<span style="font-weight:bold;font-size:1.1em;">More features in Slick Popup Pro. <a href="https://codecanyon.net/item/slick-popup-pro-/16115931?ref=OmAkSols">Buy Now</a></span>', 'sp-lite-txt-domain' )
+						'desc'   => __( '<span style="font-weight:bold;font-size:1.1em;">More features in Slick Popup Pro. <a href="https://codecanyon.net/item/slick-popup-pro-/16115931?ref=OmAkSols">Buy Now</a></span>', 'slick-popup' )
 					),						
 						
 				/////////////////////////////////////////////////
@@ -661,8 +661,8 @@
 				array(
 					'id'       => 'section-animations',
 					'type'     => 'section',				
-					'title'    => __( 'Animations settings', 'sp-lite-txt-domain' ),
-					'subtitle' => __( '', 'sp-lite-txt-domain' ),
+					'title'    => __( 'Animations settings', 'slick-popup' ),
+					'subtitle' => __( '', 'slick-popup' ),
 					'indent'   => true, // Indent all options below until the next 'section' option is set.
 				),
 					array(
@@ -744,43 +744,43 @@
 	if ( 1 ) {
 		
 		Redux::setSection( $opt_name, array(
-			'title' => __( 'Side Button', 'sp-lite-txt-domain' ),
+			'title' => __( 'Side Button', 'slick-popup' ),
 			'id'    => 'side-button-settings',
-			'desc'  => __( 'Options to change position and color scheme for the side button.', 'sp-lite-txt-domain' ),
+			'desc'  => __( 'Options to change position and color scheme for the side button.', 'slick-popup' ),
 			'icon'  => 'el el-iphone-home',
 			'fields'     => array(				
 				array(
 					'id'       => 'side-button-position',
 					'type'     => 'select',
-					'title'    => __( 'Choose Position', 'sp-lite-txt-domain' ),
-					'subtitle' => __( 'Choose the position of side button.', 'sp-lite-txt-domain' ),
-					'desc'     => __( '', 'sp-lite-txt-domain' ),
+					'title'    => __( 'Choose Position', 'slick-popup' ),
+					'subtitle' => __( 'Choose the position of side button.', 'slick-popup' ),
+					'desc'     => __( '', 'slick-popup' ),
 					//Must provide key => value pairs for select options
 					'options'  => array(
-						'pos_right' => __( 'Right', 'sp-lite-txt-domain' ),
-						'pos_left' => __( 'Left', 'sp-lite-txt-domain' ),
-						'pos_none' => __( 'None (Hide)', 'sp-lite-txt-domain' ),
+						'pos_right' => __( 'Right', 'slick-popup' ),
+						'pos_left' => __( 'Left', 'slick-popup' ),
+						'pos_none' => __( 'None (Hide)', 'slick-popup' ),
 					),
 					'default'  => 'pos_right'
 				),				
 				array(
 					'id'       => 'side-button-text',
 					'type'     => 'text',
-					'title'    => __( 'Button Text', 'sp-lite-txt-domain' ),
-					'subtitle'     => __( 'What should your button say?', 'sp-lite-txt-domain' ),
-					'desc' => __( '<b>Suggestions:</b> "Need Help?" "Subscribe" "Get a quote!" "Have a query?"<br/><b>Default:</b> Contact Us', 'sp-lite-txt-domain' ),
+					'title'    => __( 'Button Text', 'slick-popup' ),
+					'subtitle'     => __( 'What should your button say?', 'slick-popup' ),
+					'desc' => __( '<b>Suggestions:</b> "Need Help?" "Subscribe" "Get a quote!" "Have a query?"<br/><b>Default:</b> Contact Us', 'slick-popup' ),
 					'default'  => 'CONTACT US',
 				),	
 				array(
 					'id'       => 'choose-side-button',
 					'type'     => 'select',
-					'title'    => __( 'Side Button Scheme', 'sp-lite-txt-domain' ),
-					'subtitle' => __( 'Choose styles and appearance.', 'sp-lite-txt-domain' ),
-					'desc'     => __( '<b>Default:</b> Inherit From Color Scheme', 'sp-lite-txt-domain' ),
+					'title'    => __( 'Side Button Scheme', 'slick-popup' ),
+					'subtitle' => __( 'Choose styles and appearance.', 'slick-popup' ),
+					'desc'     => __( '<b>Default:</b> Inherit From Color Scheme', 'slick-popup' ),
 					//Must provide key => value pairs for select options
 					'options'  => array(
-						'inherit' => __('Inherit From Color Scheme', 'sp-lite-txt-domain' ),
-						'custom' => __('Set Your Own', 'sp-lite-txt-domain' ),
+						'inherit' => __('Inherit From Color Scheme', 'slick-popup' ),
+						'custom' => __('Set Your Own', 'slick-popup' ),
 					),
 					'default'  => 'inherit'
 				),			
@@ -789,8 +789,8 @@
 					'type'     => 'background',
 					'required' => array( 'choose-side-button', '=', 'custom' ),
 					'output'   => array( '' ),
-					'title'    => __( 'Button Background', 'sp-lite-txt-domain' ),
-					'subtitle' => __( 'Button background with image, color, etc.', 'sp-lite-txt-domain' ),
+					'title'    => __( 'Button Background', 'slick-popup' ),
+					'subtitle' => __( 'Button background with image, color, etc.', 'slick-popup' ),
 					'default'   => array( 
 							'background-color' => '#333333',
 						),
@@ -818,9 +818,9 @@
 	if ( 1 ) {
 		
 		Redux::setSection( $opt_name, array(
-			'title' => __( 'Typography', 'sp-lite-txt-domain' ),
+			'title' => __( 'Typography', 'slick-popup' ),
 			'id'    => 'typography-settings',
-			'desc'  => __( 'Choose your desired font styles.', 'sp-lite-txt-domain' ),
+			'desc'  => __( 'Choose your desired font styles.', 'slick-popup' ),
 			'icon'  => 'el el-iphone-home',
 			'fields'     => array(
 				/////////////////////////////////////////////////
@@ -830,9 +830,9 @@
 					'id'       => 'heading-typography',
 					'type'     => 'typography',
 					//'required' => array( 'use_heading_font', '=', 1 ),
-					'title'    => __( 'Heading Font', 'sp-lite-txt-domain' ),
-					'subtitle' => __( 'Specify the heading font properties.', 'sp-lite-txt-domain' ),
-					'desc'		=> __('Font Color is important to look good with your choosen color scheme.', 'sp-lite-txt-domain' ),
+					'title'    => __( 'Heading Font', 'slick-popup' ),
+					'subtitle' => __( 'Specify the heading font properties.', 'slick-popup' ),
+					'desc'		=> __('Font Color is important to look good with your choosen color scheme.', 'slick-popup' ),
 					'google'   => true,
 					'default'  => array(
 						'color'       => 	'#F1F1F1',
@@ -849,8 +849,8 @@
 					'id'       => 'cta-typography',
 					'type'     => 'typography',
 					//'required' => array( 'use_cta_font', '=', 1 ),
-					'title'    => __( 'Call To Action Font', 'sp-lite-txt-domain' ),
-					'subtitle' => __( 'Specify these font properties.', 'sp-lite-txt-domain' ),
+					'title'    => __( 'Call To Action Font', 'slick-popup' ),
+					'subtitle' => __( 'Specify these font properties.', 'slick-popup' ),
 					'google'   => true,
 					'default'  => array(
 						'color'       => '#484848',
@@ -867,8 +867,8 @@
 					'id'       => 'submit-button-typography',
 					'type'     => 'typography',
 					//'required' => array( 'use_submit_button_font', '=', 1 ),
-					'title'    => __( 'Submit Button Font', 'sp-lite-txt-domain' ),
-					'subtitle' => __( 'Specify the submit button font properties.', 'sp-lite-txt-domain' ),
+					'title'    => __( 'Submit Button Font', 'slick-popup' ),
+					'subtitle' => __( 'Specify the submit button font properties.', 'slick-popup' ),
 					'google'   => true,
 					'default'  => array(						
 						'font-family' 	=> 'Open Sans',
@@ -885,8 +885,8 @@
 					'id'       => 'side-button-typography',
 					'type'     => 'typography',
 					//'required' => array( 'use_side_button_font', '=', 1 ),
-					'title'    => __( 'Side Button Font', 'sp-lite-txt-domain' ),
-					'subtitle' => __( 'Typography and Font properties.', 'sp-lite-txt-domain' ),
+					'title'    => __( 'Side Button Font', 'slick-popup' ),
+					'subtitle' => __( 'Typography and Font properties.', 'slick-popup' ),
 					'google'   => true,
 					'default'  => array(
 						'font-family' 	=> 'Open Sans',
@@ -909,9 +909,9 @@
 	if ( 1 ) {
 		
 		Redux::setSection( $opt_name, array(
-			'title' => __( 'Custom CSS', 'sp-lite-txt-domain' ),
+			'title' => __( 'Custom CSS', 'slick-popup' ),
 			'id'    => 'advance-settings-settings',
-			'desc'  => __( 'Custom CSS code to style your popup.', 'sp-lite-txt-domain' ),
+			'desc'  => __( 'Custom CSS code to style your popup.', 'slick-popup' ),
 			'icon'  => 'el el-cog',
 			'fields'     => array(
 				/////////////////////////////////////////////////
@@ -920,8 +920,8 @@
 				array(
 					'id'       => 'custom-css-code',
 					'type'     => 'ace_editor',
-					'title'    => __( 'CSS Code', 'sp-lite-txt-domain' ),
-					'subtitle' => __( 'Paste your CSS code here.', 'sp-lite-txt-domain' ),
+					'title'    => __( 'CSS Code', 'slick-popup' ),
+					'subtitle' => __( 'Paste your CSS code here.', 'slick-popup' ),
 					'mode'     => 'css',
 					'theme'    => 'monokai',
 					'desc'     => '<br/>Contact our support for help: poke@slickpopup.com',
