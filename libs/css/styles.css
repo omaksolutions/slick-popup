@@ -80,6 +80,7 @@ div#splite_curtain {
 ****************************************************************/
 a.splite_sideEnquiry {
   cursor: pointer;
+  height: auto;
   padding: 5px 10px;
   position: fixed;
   text-align: center;
@@ -89,6 +90,7 @@ a.splite_sideEnquiry {
 a.splite_sideEnquiry.pos_right {  
   right: -52px;
   top: 47.5%;
+  height: auto;
   transform: rotate(-90deg);
   -webkit-transform: rotate(-90deg);
   -moz-transform: rotate(-90deg);
@@ -98,6 +100,7 @@ a.splite_sideEnquiry.pos_right {
 a.splite_sideEnquiry.pos_left {  
   left: -50px;
   top: 45%;
+  height: auto;
   transform: rotate(90deg);
   -webkit-transform: rotate(90deg);
   -moz-transform: rotate(90deg);
