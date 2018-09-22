@@ -208,18 +208,15 @@ function splite_fire_activation_mode_script($activation_mode) {
 			}
 			break; 
 		case 'onexit':
-			echo '<script>
-					jQuery(window).addEventListener("beforeunload", function (e) {
-						//e.preventDefault();
-						e.returnValue = "Would you like to fill up our form?";
-						setTimeout(function () { // Timeout to wait for user response
-						setTimeout(function () { // Timeout to wait onunload, if not fired then this will be executed
-							//console.log("User stayed on the page.");
-							splite_loader();					
-						}, 50)}, 50);
-						return "Would you like to fill up our form?";
-					});
-				</script>';
+			if(activationmode=='onexit') {
+				//console.log(event.pageY==0 || event.pageY==1 || event.pageY < jQuery(document).scrollTop());
+				jQuery( "body" ).on( "mouseout", function( event ) {
+				  	if (event.pageY==0 || event.pageY==1 || event.pageY < jQuery(document).scrollTop() ) {
+				  		sppro_loader(id);
+				  	}
+				});
+				//sppro_loader(id);						
+			}
 			break; 
 		default: break; 
 	}
