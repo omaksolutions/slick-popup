@@ -308,20 +308,26 @@ a.splite_sideEnquiry:hover {
 /****************************************************************
 	Column Classes
 ****************************************************************/
+.spp-row {
+  overflow: hidden;
+}
 .spp-left-col {
 	float: left;
-    width: 50%;
-    padding-right: 5px;
+  width: 50%;
+  padding-right: 5px;
+  padding-bottom: 10px;
 }
 .spp-right-col {
-	float: left;
-    width: 50%;
-    padding-left: 5px;
+  float: left;
+  width: 50%;
+  padding-left: 5px;
+  padding-bottom: 10px;
 }
 .spp-full-col {
 	float: none; 
 	width: 100%; 
-	display: block; 
+	display: block;
+  padding-bottom: 10px;
 }
 .spp-clear {
 	clear: both;

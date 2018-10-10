@@ -208,16 +208,16 @@ function splite_fire_activation_mode_script($activation_mode) {
 			}
 			break; 
 		case 'onexit':
-			if(activationmode=='onexit') {
-				//console.log(event.pageY==0 || event.pageY==1 || event.pageY < jQuery(document).scrollTop());
-				jQuery( "body" ).on( "mouseout", function( event ) {
-				  	if (event.pageY==0 || event.pageY==1 || event.pageY < jQuery(document).scrollTop() ) {
-				  		sppro_loader(id);
-				  	}
-				});
-				//sppro_loader(id);						
-			}
-			break; 
+			echo '<script>
+					//console.log(event.pageY==0 || event.pageY==1 || event.pageY < jQuery(document).scrollTop());
+					jQuery( "body" ).on( "mouseout", function( event ) {
+					  	if (event.pageY==0 || event.pageY==1 || event.pageY < jQuery(document).scrollTop() ) {
+					  		sppro_loader(id);
+					  	}
+					});
+					//sppro_loader(id);
+				</script>';						
+			break;
 		default: break; 
 	}
 }
