@@ -103,7 +103,7 @@ function splite_import_cf7_demo($args=array()) {
 </div>';
 			$mail['subject'] = "There is an enquiry from [your-name], [your-email].";
 
-			$mail['from'] = "[your-name] <[your-email]>";
+			$mail['sender'] = "[your-name] <[your-email]>";
 
 			$mail['body'] = "
 Hello admin, 
@@ -130,10 +130,10 @@ The admin is advised to go through the customer's enquiry and revert him soon.";
 	<div class="spp-clear"></div>
 	[submit "SUBSCRIBE"]
 </div>'; 
+		
+			$mail['subject'] = "[last-name], [first-name] has subscribed to your newsletter.";
 
-		$mail['subject'] = "[last-name], [first-name] has subscribed to your newsletter.";
-
-		$mail['from'] = "[first-name] <[your-email]>";
+			$mail['sender'] = "[first-name] <[your-email]>";
 
 			$mail['body'] = '
 Hello admin
@@ -156,7 +156,7 @@ The admin is advised to check the users profile.';
 
 			$mail['subject'] = "You have been unsubscribed from [your-email].";
 
-			$mail['from'] = "<[your-email]>";
+			$mail['sender'] = "<[your-email]>";
 		
 			$mail['body'] = '
 Hello admin
@@ -196,7 +196,7 @@ The admin is advised to check the users profile.';
 
 			$mail['subject'] = "There has been a booking from [your-name], [your-email].";
 
-			$mail['from'] = "[your-name] <[your-email]>";
+			$mail['sender'] = "[your-name] <[your-email]>";
 		
 			$mail['body'] = '
 Hello admin
@@ -243,7 +243,7 @@ The admin is advised to check the following details.';
 
 			$mail['subject'] = "There has been a Quote request from [your-fname], [your-email].";
 
-			$mail['from'] = "[your-fname] <[your-email]>";
+			$mail['sender'] = "[your-fname] <[your-email]>";
 		
 			$mail['body'] = '
 Hello admin, 
@@ -288,7 +288,7 @@ The admin is advised to go through the customers request and revert him back soo
 
 			$mail['subject'] = "[your-name] has filled out the survey form for you.";
 
-			$mail['from'] = "[your-name] <[your-email]>";
+			$mail['sender'] = "[your-name] <[your-email]>";
 
 			$mail['body'] = '
 Hello admin, 
@@ -324,7 +324,7 @@ A customer Submit survey. Here are the details and content of the request.
 
 			$mail['subject'] = "You have recieved a message from [your-name], [your-email].";
 
-			$mail['from'] = "[your-name] <[your-email]>";
+			$mail['sender'] = "<[your-email]>";
 
 			$mail['body'] = "
 Hello admin, 
