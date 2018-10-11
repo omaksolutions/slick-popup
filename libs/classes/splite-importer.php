@@ -103,6 +103,7 @@ function splite_import_cf7_demo($args=array()) {
 </div>';
 			$mail['subject'] = "There is an enquiry from [your-name], [your-email].";
 
+			$mail['from'] = "[your-name] <[your-email]>";
 
 			$mail['body'] = "
 Hello admin, 
@@ -132,6 +133,8 @@ The admin is advised to go through the customer's enquiry and revert him soon.";
 
 		$mail['subject'] = "[last-name], [first-name] has subscribed to your newsletter.";
 
+		$mail['from'] = "[first-name] <[your-email]>";
+
 			$mail['body'] = '
 Hello admin
 
@@ -152,6 +155,8 @@ The admin is advised to check the users profile.';
 </div>';
 
 			$mail['subject'] = "You have been unsubscribed from [your-email].";
+
+			$mail['from'] = "<[your-email]>";
 		
 			$mail['body'] = '
 Hello admin
@@ -185,17 +190,19 @@ The admin is advised to check the users profile.';
 	<div class="spp-left-col">No. of Nights<br />[select*  your-nights include_blank "1" "2" "3" "4" "5" "6" "7" "8" "9" "10"]</div>
 	<div class="spp-right-col">No. of Rooms<br />[select* your-rooms include_blank "1" "2" "3" "4" "5" "6" "7" "8" "9" "10"]</div>
 	<div class="spp-clear"></div>
-	<div style="display:block;">[textarea* your-additionalInfo placeholder "Additional Info"]</div>
+	<div style="display:block;">[textarea your-additionalInfo placeholder "Additional Info"]</div>
 	[submit "BOOK NOW"]
 </div>';
 
-			$mail['subject'] = "There has beem a booking from [your-name], [your-email].";
+			$mail['subject'] = "There has been a booking from [your-name], [your-email].";
+
+			$mail['from'] = "[your-name] <[your-email]>";
 		
 			$mail['body'] = '
 Hello admin
 
 A customer has put a booking request.<br>
-<strong>Name:</strong> [your-fname]
+<strong>Name:</strong> [your-name]
 <strong>Email:</strong> [your-email]
 <strong>Phone:</strong> [your-phone]
 <strong>Street:</strong> [your-street]
@@ -207,7 +214,7 @@ A customer has put a booking request.<br>
 <strong>No. of Occupents:</strong> [your-occupents]
 <strong>No. of Nights:</strong> [your-nights]
 <strong>No. of Rooms:</strong> [your-rooms]
-<strong>Additional Info:</strong> [your-additionalinfo]
+<strong>Additional Info:</strong> [your-additionalInfo]
 
 The admin is advised to check the following details.';
 
@@ -235,6 +242,8 @@ The admin is advised to check the following details.';
 </div>';
 
 			$mail['subject'] = "There has been a Quote request from [your-fname], [your-email].";
+
+			$mail['from'] = "[your-fname] <[your-email]>";
 		
 			$mail['body'] = '
 Hello admin, 
@@ -279,6 +288,8 @@ The admin is advised to go through the customers request and revert him back soo
 
 			$mail['subject'] = "[your-name] has filled out the survey form for you.";
 
+			$mail['from'] = "[your-name] <[your-email]>";
+
 			$mail['body'] = '
 Hello admin, 
 
@@ -312,6 +323,8 @@ A customer Submit survey. Here are the details and content of the request.
 </div>';
 
 			$mail['subject'] = "You have recieved a message from [your-name], [your-email].";
+
+			$mail['from'] = "[your-name] <[your-email]>";
 
 			$mail['body'] = "
 Hello admin, 
