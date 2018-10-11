@@ -20,6 +20,17 @@ function splite_addmenu_page_in_admin() {
 	//add_action($hook, 'splite_load_admin');	
 }
 
+add_action( 'admin_enqueue_scripts', 'splite_admin_enqueue_scripts' );
+function splite_admin_enqueue_scripts( $hook_suffix ) {
+	if ( false === strpos( $hook_suffix, 'slick' ) ) {
+		return;
+	}
+
+	wp_enqueue_style( 'bootstrap-min-css', 'https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css' );
+	wp_enqueue_script( 'bootstrap-min-js', 'https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js' );
+	wp_enqueue_script( 'jquery-tab', 'https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js' );
+}
+
 
 /**
  * Import Demos Features
@@ -66,7 +77,7 @@ function splite_import_demos() { ?>
 		}
 		.import-box {
 			float: left;
-			margin: 0 30px 30px 0;
+			margin: 0 29px 30px 0;
 			position: relative;
 			width: 30.6%;
 			border: 1px solid #ddd;
@@ -126,49 +137,53 @@ function splite_import_demos() { ?>
 	</style>
 	
 	<div class="wrap">
-		<h1 class="wp-heading-inline" style="margin-bottom: 10px;">One-click Import for Contact Form 7</h1>
-		<div class="notice-info settings-error notice">
-			<p>
-				<span style="">Choose a form and click import button, this will create a <em><a href="<?php echo admin_url('/admin.php?page=wpcf7/'); ?>">Contact Form 7</a></em> form with the desired layout. Once imported, you may want to change the <strong>To Email</strong> and <strong>Mail Body</strong> for the form.</span>
-			</p>			
-			<p>For any kind of suppport please email us at: <em><a href="mailto:poke@slickpopup.com">poke@slickpopup.com</a></em></p>
+		<div class="card col-md-12">
+			<span class="card-title m-2 display-4">Slick Popup</span>
+			<h2 class="card-subtitle text-secondary m-2"><?php echo esc_html( __( "Import CF7 Demo Forms", 'slick-popup' ) ); ?></h2>
+			<div class="card-body m-2">
+				<h4 class="text-info"><?php echo esc_html( __( "Choose a form and click import button, this will create a", 'slick-popup' ) ); ?><strong><em><a href="<?php echo admin_url('/admin.php?page=wpcf7/'); ?>"> Contact Form 7 </a></em></strong><?php echo esc_html( __( "form with the desired layout. Once imported, you may want to change the To Email and Mail Body for the form.", 'slick-popup' ) ); ?></h4>
+				<h4 class="text-info"><?php echo esc_html( __( "For any kind of suppport please email us at: ", 'slick-popup' ) ); ?><strong><em><a href="mailto:poke@slickpopup.com">poke@slickpopup.com</a></em></strong></h4>
+			</div>
 		</div>
-		<div class="import-holder">
-			<?php $demos = array(
-				'basic-enquiry' => 'Basic Enquiry Form', 
-				'get-a-quote' => 'Get a Quote Form',
-				'survey' => 'Survey Form',
-				'booking' => 'Booking Form',
-				'subscribe' => 'Subscribe Form',
-				'unsubscribe' => 	'Unsubscribe Form',				
-			);
-			$output = '';
-				$output .= '<div id="welcome-panel" class="welcome-panel">';
-					foreach($demos as $label => $demo) {			
-						$output .='<div class="import-box">';
-							$output .='<img src="'.splite_plugin_url('/libs/js/img/'.$label.'.jpg').'" title="'.$demo.'">'; 
-							$output .='<div class="import-box-result" style="display:none;"></div>';
-							$output .='<div class="import-box-title">';
-								$output .='<span class="sp-label">'.$demo.'</span>';
-								$output .='<span class="sp-import-handle">';
-									$output .='<span class="sp-loader" style="visibility:hidden"><i class="fa fa-refresh fa-spin" style="font-size:14px;color:#f56e28;position:relative;left:-8px;"></i></span>';						
-									$output .='<span class="sp-btn button-link sp-btn-importer splite-btn-importer" data-title="'.$label.'"><strong>Import</strong></span>';
-								$output .='</span>';
+		<div class="card col-md-12">
+			<h2 class="card-subtitle text-secondary m-2"><?php echo esc_html( __( "One-click Import for Contact Form 7", 'slick-popup' ) ); ?></h2>
+			<div class="import-holder">
+				<?php $demos = array(
+					'basic-enquiry' => 'Basic Enquiry Form', 
+					'subscribe' => 'Subscribe Form',
+					'unsubscribe' => 	'Unsubscribe Form',				
+					'get-a-quote' => 'Get a Quote Form',
+					'survey' => 'Survey Form',
+					'booking' => 'Booking Form',
+				);
+				$output = '';
+					$output .= '<div id="welcome-panel" class="welcome-panel">';
+						foreach($demos as $label => $demo) {			
+							$output .='<div class="import-box">';
+								$output .='<img src="'.splite_plugin_url('/libs/js/img/'.$label.'.jpg').'" title="'.$demo.'">'; 
+								$output .='<div class="import-box-result" style="display:none;"></div>';
+								$output .='<div class="import-box-title">';
+									$output .='<span class="sp-label">'.$demo.'</span>';
+									$output .='<span class="sp-import-handle">';
+										$output .='<span class="sp-loader" style="visibility:hidden"><i class="fa fa-refresh fa-spin" style="font-size:14px;color:#f56e28;position:relative;left:-8px;"></i></span>';						
+										$output .='<span class="sp-btn button-link sp-btn-importer splite-btn-importer" data-title="'.$label.'"><strong>Import</strong></span>';
+									$output .='</span>';
+								$output .='</div>';
 							$output .='</div>';
-						$output .='</div>';
-					} 
-				$output .='</div>';
-			echo $output; 
-			?>
+						} 
+					$output .='</div>';
+				echo $output; 
+				?>
+			</div>
 		</div>
-		<div class="notice-info settings-error notice is-dismissible"><!-- style="background: azure" -->
-			<p style="font-weight:bold;">For any kind of suppport please email us at: 
+		<div class="notice-info settings-error notice is-dismissible">
+			<p style="font-weight:bold;"><?php echo esc_html( __( "For any kind of suppport please email us at:", 'slick-popup' ) ); ?> 
 				<em><a href="mailto:poke@slickpopup.com">poke@slickpopup.com</a></em>
 			</p>
 		</div>
-		<div class="notice-info settings-error notice is-dismissible"><!-- style="background: azure" -->
-			<p style="font-weight:bold;">Note: This will just import the cf7 forms, you will have to create and edit the popups.</p>
-		</div>		
+		<div class="notice-info settings-error notice is-dismissible">
+			<p style="font-weight:bold;"><?php echo esc_html( __( "Note: This will just import the cf7 forms, you will have to create and edit the popups.", 'slick-popup' ) ); ?></p>
+		</div>
 	</div>
 
 <?php }
@@ -195,7 +210,7 @@ function splite_admin_notices() {
 		echo '<div class="notice notice-success">
 			<h2 style="margin:0.5em 0;">Hope you are enjoying - <span style="color:#0073aa;">Slick Popup Lite</span></h2>
 			<p>
-			'.__( 'Thanks for using one of the best WordPress Popup Plugin for Contact Form 7. We hope that it has been useful for you and would like you to leave review on WordPres.org website, it will help us improve the product features.', 'sp-pro-txt-domain' ).'
+			'.__( 'Thanks for using one of the best WordPress Popup Plugin for Contact Form 7. We hope that it has been useful for you and would like you to leave review on WordPres.org website, it will help us improve the product features.', 'slick-popup' ).'
 			<br><br>
 			<a class="button-primary" href="'.admin_url('admin.php?page=slick-options').'">Leave a Review</a>
 			&nbsp;<a class="button-link sp-dismissable" data-btn="ask-later" href="#">Ask Later</a> |
@@ -215,7 +230,7 @@ function splite_display_update_notice() {
 		echo '<div class="notice notice-success is-dismissible">
 			<h2 style="margin:0.5em 0;">Thanks for updating - <span style="color:#0073aa;">Slick Popup Lite</span></h2>
 			<p>
-			'.__( 'One of the best WordPress Popup Plugin for Contact Form 7. ', 'sp-pro-txt-domain' ).'
+			'.__( 'One of the best WordPress Popup Plugin for Contact Form 7. ', 'slick-popup' ).'
 			<span style="display: block; margin: 0.5em 0.5em 0 0; clear: both; font-weight: bold;"><a href="'.admin_url('admin.php?page=slick-options').'">Go to Settings</a> | <a href="'.admin_url('admin.php?page=import-demos').'">Import Demo Forms</a> </span>
 			</p>
 		</div>';
@@ -240,7 +255,7 @@ function splite_display_install_notice() {
 		echo '<div class="notice notice-success is-dismissible">
 			<h2 style="margin:0.5em 0;">Thanks for installing - <span style="color:#0073aa;">Slick Popup Lite</span></h2>
 			<p>
-			'.__( 'One of the best WordPress Popup Plugin for Contact Form 7. ', 'sp-pro-txt-domain' ).'
+			'.__( 'One of the best WordPress Popup Plugin for Contact Form 7. ', 'slick-popup' ).'
 			<span style="display: block; margin: 0.5em 0.5em 0 0; clear: both; font-weight: bold;"><a href="'.admin_url('admin.php?page=slick-options').'">Go to Settings</a> | <a href="'.admin_url('admin.php?page=import-demos').'">Import Demo Forms</a> </span>
 			</p>
 		</div>';

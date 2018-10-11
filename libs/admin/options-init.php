@@ -355,13 +355,13 @@
 					array(
 							'id'       => 'custom-popup-layout',
 							'type'     => 'select',
-							'title'    => __( 'Height & Width', 'sp-pro-txt-domain' ),
-							'subtitle' => __( 'Use pre-defined layouts or set your own height and width.', 'sp-pro-txt-domain' ),
-							'desc'     => __( '', 'sp-pro-txt-domain' ),
+							'title'    => __( 'Height & Width', 'slick-popup' ),
+							'subtitle' => __( 'Use pre-defined layouts or set your own height and width.', 'slick-popup' ),
+							'desc'     => __( '', 'slick-popup' ),
 							//Must provide key => value pairs for select options
 							'options'  => array(
-								'predefined' => __( 'As Per Choosen Layout', 'sp-pro-txt-domain' ),
-								'change' => __( 'Set Your Own Height and Width', 'sp-pro-txt-domain' ),								
+								'predefined' => __( 'As Per Choosen Layout', 'slick-popup' ),
+								'change' => __( 'Set Your Own Height and Width', 'slick-popup' ),								
 							),
 							'default'  => 'predefined'
 						),	
@@ -371,9 +371,9 @@
 								//'units'    => array('em','px','%'),							
 								'units'    => array('px','%'),
 								'required' => array( 'custom-popup-layout', '=', 'change' ),
-								'title'    => __('Popup Width', 'sp-pro-txt-domain'),
-								'subtitle' => __('Set width of the popup.', 'sp-pro-txt-domain'),
-								'desc'     => __('Demo forms have width: 600px', 'sp-pro-txt-domain'),
+								'title'    => __('Popup Width', 'slick-popup'),
+								'subtitle' => __('Set width of the popup.', 'slick-popup'),
+								'desc'     => __('Demo forms have width: 600px', 'slick-popup'),
 								'height' 	=> false,
 								'default'  => array(
 									'width'  => '600'
@@ -384,9 +384,9 @@
 								'type'     => 'dimensions',
 								'units'    => array('px','%'),
 								'required' => array( 'custom-popup-layout', '=', 'change' ),
-								'title'    => __('Popup Height', 'sp-pro-txt-domain'),
-								'subtitle' => __('Set height of the popup.', 'sp-pro-txt-domain'),
-								'desc'     => __('It is suggested that you choose a percent based height.', 'sp-pro-txt-domain'),
+								'title'    => __('Popup Height', 'slick-popup'),
+								'subtitle' => __('Set height of the popup.', 'slick-popup'),
+								'desc'     => __('It is suggested that you choose a percent based height.', 'slick-popup'),
 								'width' 	=> false,
 								'default'  => array(
 									'height'  => '450'
@@ -668,9 +668,9 @@
 					array(
 						'id'       => 'loader-animation',
 						'type'     => 'select',
-						'title'    => __( 'onLoad Effect', 'sp-pro-txt-domain' ),
-						'subtitle' => __( 'Animation when loading popup', 'sp-pro-txt-domain' ),
-						'desc'     => __( '', 'sp-pro-txt-domain' ),
+						'title'    => __( 'onLoad Effect', 'slick-popup' ),
+						'subtitle' => __( 'Animation when loading popup', 'slick-popup' ),
+						'desc'     => __( '', 'slick-popup' ),
 						'default'  => 'fadeInDown',
 						'options'  => array(
 							'FadeIn Effects' => array(
@@ -689,9 +689,9 @@
 					array(
 						'id'       => 'loader-speed',
 						'type'     => 'slider', 
-						'title'    => __('onLoad Speed', 'sp-pro-txt-domain'),
-						'subtitle' => __('Set Popup load speed','sp-pro-txt-domain'),
-						'desc'     => __('Min:0.1, Max:5, Best: 0-1' , 'sp-pro-txt-domain'),
+						'title'    => __('onLoad Speed', 'slick-popup'),
+						'subtitle' => __('Set Popup load speed','slick-popup'),
+						'desc'     => __('Min:0.1, Max:5, Best: 0-1' , 'slick-popup'),
 						'default' => .7,
 						'min' => 0,
 						'step' => .1,
@@ -702,9 +702,9 @@
 					array(
 						'id'       => 'unloader-animation',
 						'type'     => 'select',
-						'title'    => __( 'unLoad Effect', 'sp-pro-txt-domain' ),
-						'subtitle' => __( 'Animation when unloading popup', 'sp-pro-txt-domain' ),
-						'desc'     => __( '', 'sp-pro-txt-domain' ),
+						'title'    => __( 'unLoad Effect', 'slick-popup' ),
+						'subtitle' => __( 'Animation when unloading popup', 'slick-popup' ),
+						'desc'     => __( '', 'slick-popup' ),
 						'default'  => 'fadeOutDown',						
 						'options'  => array(
 							'FadeOut Effects' => array(
@@ -723,9 +723,9 @@
 					array(
 						'id'       => 'unloader-speed',
 						'type'     => 'slider', 
-						'title'    => __('unload Speed', 'sp-pro-txt-domain'),
-						'subtitle' => __('Set Popup unload speed','sp-pro-txt-domain'),
-						'desc'     => __('Min:0.1, Max:5, Best: 0-1' , 'sp-pro-txt-domain'),
+						'title'    => __('unload Speed', 'slick-popup'),
+						'subtitle' => __('Set Popup unload speed','slick-popup'),
+						'desc'     => __('Min:0.1, Max:5, Best: 0-1' , 'slick-popup'),
 						'default' => .3,
 						'min' => 0,
 						'step' => .1,
