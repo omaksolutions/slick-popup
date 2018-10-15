@@ -93,13 +93,12 @@ function splite_import_cf7_demo($args=array()) {
 		case 'basic-enquiry': 
 			$form = '
 <div class="spp-row">
-	<div class="spp-left-col">[text* your-name placeholder "Full name"]</div>
-	<div class="spp-right-col">[tel* your-phone placeholder "Phone"]</div>
+	<div class="spp-left-col"><label>Full Name [text* your-name placeholder "Full name"]</label></div>
+	<div class="spp-right-col"><label>Phone [tel* your-phone placeholder "Phone"]</label></div>
 	<div class="spp-clear"></div>
-	<div class="spp-full-col">[email* your-email placeholder "Email"]</div>
-	<div class="spp-full-col">[textarea your-message placeholder "Message"]</div>
-	<div class="spp-clear"></div>
-	[submit "SUBMIT"]
+	<div class="spp-full-col"><label>Email [email* your-email placeholder "Email"]</label></div>
+	<div class="spp-full-col"><label>Message [textarea your-message placeholder "Message"]</label></div>
+	<div class="spp-full-col">[submit "SUBMIT"]</div>
 </div>';
 			$mail['subject'] = "There is an enquiry from [your-name], [your-email].";
 
@@ -123,12 +122,11 @@ The admin is advised to go through the customer's enquiry and revert him soon.";
 		case 'subscribe':
 			$form = '
 <div class="spp-row">
-	<div class="spp-left-col">[text* first-name placeholder "First Name"]</div>
-	<div class="spp-right-col">[text* last-name placeholder "Last Name"]</div>
+	<div class="spp-left-col"><label>First Name [text* first-name placeholder "First Name"]</label></div>
+	<div class="spp-right-col"><label>Last Name [text* last-name placeholder "Last Name"]</label></div>
 	<div class="spp-clear"></div>
-	<div class="spp-full-col">[email* your-email placeholder "Email"]</div>
-	<div class="spp-clear"></div>
-	[submit "SUBSCRIBE"]
+	<div class="spp-full-col"><label>Email [email* your-email placeholder "Email"]</label></div>
+	<div class="spp-full-col">[submit "SUBSCRIBE"]</div>
 </div>'; 
 		
 			$mail['subject'] = "[last-name], [first-name] has subscribed to your newsletter.";
@@ -148,10 +146,9 @@ The admin is advised to check the users profile.';
 		case 'unsubscribe':
 			$form = '
 <div class="spp-row">
-	<div class="spp-full-col">[select* unsubscribe-reason "Unsubscribe Reason" "Too many emails" "Content irrelevant" "Didn’t know you were subscribing " "Too much or too little content"]</div>
-	<div class="spp-full-col">[email* your-email placeholder "Email"]</div>
-	<div class="spp-clear"></div>
-	[submit "UNSUBSCRIBE"]
+	<div class="spp-full-col"><label> [select* unsubscribe-reason "Unsubscribe Reason" "Too many emails" "Content irrelevant" "Didn’t know you were subscribing " "Too much or too little content"] </label></div>
+	<div class="spp-full-col"><label> [email* your-email placeholder "Email"] </label></div>
+	<div class="spp-full-col">[submit "UNSUBSCRIBE"]</div>
 </div>';
 
 			$mail['subject'] = "You have been unsubscribed from [your-email].";
@@ -172,26 +169,26 @@ The admin is advised to check the users profile.';
 		case 'booking':
 			$form = '
 <div class="spp-row">
-	<div class="spp-left-col">[text* your-name placeholder "Name*"]</div>
-	<div class="spp-right-col">[email* your-email placeholder "Email*"]</div>
+	<div class="spp-left-col"><label>Name [text* your-name placeholder "Name*"]</label></div>
+	<div class="spp-right-col"><label>Email [email* your-email placeholder "Email*"]</label></div>
 	<div class="spp-clear"></div>
-	<div class="spp-left-col">[tel* your-phone placeholder "Phone*"]</div>
-	<div class="spp-right-col">[text* your-street placeholder "Street*"]</div>
+	<div class="spp-left-col"><label>Phone [tel* your-phone placeholder "Phone*"]</label></div>
+	<div class="spp-right-col"><label>Street [text* your-street placeholder "Street*"]</label></div>
 	<div class="spp-clear"></div>
-	<div class="spp-left-col">[text* your-city placeholder "City*"]</div>
-	<div class="spp-right-col">[text* your-state placeholder "State*"]</div>
+	<div class="spp-left-col"><label>City [text* your-city placeholder "City*"]</label></div>
+	<div class="spp-right-col"><label>State [text* your-state placeholder "State*"]</label></div>
 	<div class="spp-clear"></div>
-	<div class="spp-left-col">[text* your-country placeholder "Country*"]</div>
-	<div class="spp-right-col">[text* your-postalcode placeholder "Postal Code*"]</div>
+	<div class="spp-left-col"><label>Country [text* your-country placeholder "Country*"]</label></div>
+	<div class="spp-right-col"><label>Postal Code [text* your-postalcode placeholder "Postal Code*"]</label></div>
 	<div class="spp-clear"></div>
-	<div class="spp-left-col">Date of Arrival<br />[date* your-arrive placeholder "Arrive Date"]</div>
-	<div class="spp-right-col">Occupants*<br />[select* your-occupents include_blank "1" "2" "3" "4" "5" "6" "7" "8" "9" "10"]</div>
+	<div class="spp-left-col"><label>Date of Arrival [date* your-arrive placeholder "Arrive Date"]</label></div>
+	<div class="spp-right-col"><label>Occupants* [select* your-occupents include_blank "1" "2" "3" "4" "5" "6" "7" "8" "9" "10"]</label></div>
 	<div class="spp-clear"></div>
-	<div class="spp-left-col">No. of Nights<br />[select*  your-nights include_blank "1" "2" "3" "4" "5" "6" "7" "8" "9" "10"]</div>
-	<div class="spp-right-col">No. of Rooms<br />[select* your-rooms include_blank "1" "2" "3" "4" "5" "6" "7" "8" "9" "10"]</div>
+	<div class="spp-left-col"><label>No. of Nights [select*  your-nights include_blank "1" "2" "3" "4" "5" "6" "7" "8" "9" "10"]</label></div>
+	<div class="spp-right-col"><label>No. of Rooms [select* your-rooms include_blank "1" "2" "3" "4" "5" "6" "7" "8" "9" "10"]</label></div>
 	<div class="spp-clear"></div>
-	<div style="display:block;">[textarea your-additionalInfo placeholder "Additional Info"]</div>
-	[submit "BOOK NOW"]
+	<div class="spp-full-col"><label>Additional Information: [textarea your-additionalInfo placeholder "Additional Info"]</label></div>
+	<div class="spp-full-col">[submit "BOOK NOW"]</div>
 </div>';
 
 			$mail['subject'] = "There has been a booking from [your-name], [your-email].";
@@ -223,22 +220,22 @@ The admin is advised to check the following details.';
 		case 'get-a-quote':
 			$form = '
 <div class="spp-row">
-	<div class="spp-left-col">[text* your-fname placeholder "First Name*"]</div>
-	<div class="spp-right-col">[text* your-lname placeholder "Last Name*"]</div>
+	<div class="spp-left-col"><label>First Name [text* your-fname placeholder "First Name*"]</label></div>
+	<div class="spp-right-col"><label>Last Name [text* your-lname placeholder "Last Name*"]</label></div>
 	<div class="spp-clear"></div>
-	<div class="spp-left-col">[email* your-email placeholder "Email*"]</div>
-	<div class="spp-right-col">[text* your-city placeholder "City*"]</div>
+	<div class="spp-left-col"><label>Email [email* your-email placeholder "Email*"]</label></div>
+	<div class="spp-right-col"><label>City [text* your-city placeholder "City*"]</label></div>
 	<div class="spp-clear"></div>
-	<div class="spp-left-col">[text* your-state placeholder "State*"]</div>
-	<div class="spp-right-col">[text* your-country placeholder "Country*"]</div>
+	<div class="spp-left-col"><label>State [text* your-state placeholder "State*"]</label></div>
+	<div class="spp-right-col"><label>Country [text* your-country placeholder "Country*"]</label></div>
 	<div class="spp-clear"></div>
-	<div class="spp-left-col">Select estimated project due date<br />[date* your-estimate]</div>
-	<div class="spp-right-col">Indicate urgency of your request*<br />[select* your-request include_blank "Low" "Normal" "High"]</div>
+	<div class="spp-left-col"><label>Select estimated project due date [date* your-estimate]</label></div>
+	<div class="spp-right-col"><label>Indicate urgency of your request* [select* your-request include_blank "Low" "Normal" "High"]</label></div>
 	<div class="spp-clear"></div>
-	<div class="spp-full-col">Send me a price quotation for the following service:<br />[checkbox checkbox label_first "Installation‎"][checkbox checkbox label_first "Maintenance‎"]</div>
+	<div class="spp-full-col"><label>Send me a price quotation for the following service: [checkbox checkbox label_first "Installation‎"][checkbox checkbox label_first "Maintenance‎"]</label></div>
 	<div class="spp-clear"></div>
-	<div class="spp-full-col">Provide us any further information you think may be important:[textarea* your-Info]</div>
-	[submit "Submit"]
+	<div class="spp-full-col"><label>Provide us any further information you think may be important: [textarea* your-Info]</label></div>
+	<div class="spp-full-col">[submit "Submit"]</div>
 </div>';
 
 			$mail['subject'] = "There has been a Quote request from [your-fname], [your-email].";
@@ -268,22 +265,22 @@ The admin is advised to go through the customers request and revert him back soo
 		case 'survey':
 			$form = '
 <div class="spp-row">
-	<strong style="font-style:italic">Please help us to serve you better by completing this survey. It should take around 5 minutes to complete.</strong>
-	<div class="spp-left-col">[text* your-name placeholder "Full Name"]</div>
-	<div class="spp-right-col">[email* your-email placeholder "Email"]</div>
+	<strong style="font-style:italic;display:block"><label>Please help us to serve you better by completing this survey. It should take around 5 minutes to complete.</label></strong>
+	<div class="spp-left-col"><label>Full Name [text* your-name placeholder "Full Name"]</label></div>
+	<div class="spp-right-col"><label>Email [email* your-email placeholder "Email"]</label></div>
 	<div class="spp-clear"></div>
 	<ol class="survey" type="I">
-		<li> Overall, how satisfied are you with our product / service?<br /> [radio survey-satisfied "Very Satisfied" "Satisfied" "Neutral" "Unsatisfied" "Very Unsatisfied"] </li>
-		<li> Would you recommend our product / service to others? <br />[radio survey-recommend "Definitely" "Probably" "Not Sure" "Probably Not" "Definitely Not"] </li>
-		<li> How long have you used our product / service?<br /> [radio survey-timeofusage "Less than a month" "1-6 months" "1-3 years" "Over 3 Years" "Never used"] </li>
-		<li> How often do you use our product / service? <br />[radio survey-useourproduct "Once a week" "2 to 3 times a month" "Once a month" "Less than once a month"] </li>
-		<li> What aspect of the product / service were you most satisfied by?<br /> [radio survey-aspectoftheproduct "Quality" "Price" "Purchase Experience" "Usage Experience" "Customer Service"] </li>
-		<li> Overall, the product / service met my expectations? <br />[radio survey-Overallofproduct "Strongly Agree" "Agree" "Neutral" "Disagree" "Strongly Disagree" "Dont Know"] </li>
-		<li> Thinking of similar products / services offered by others, how would you compare the product / service offered by us? <br />[radio survey-similarproduct "Much Better" "Somewhat Better" "About the Same" "Somewhat Worse" "Much Worse" "Dont Know"] </li>
+		<li> <label>Overall, how satisfied are you with our product / service? [radio survey-satisfied "Very Satisfied" "Satisfied" "Neutral" "Unsatisfied" "Very Unsatisfied"]</label> </li>
+		<li> <label>Would you recommend our product / service to others? [radio survey-recommend "Definitely" "Probably" "Not Sure" "Probably Not" "Definitely Not"]</label> </li>
+		<li> <label>How long have you used our product / service? [radio survey-timeofusage "Less than a month" "1-6 months" "1-3 years" "Over 3 Years" "Never used"]</label> </li>
+		<li> <label>How often do you use our product / service? [radio survey-useourproduct "Once a week" "2 to 3 times a month" "Once a month" "Less than once a month"]</label> </li>
+		<li> <label> What aspect of the product / service were you most satisfied by? [radio survey-aspectoftheproduct "Quality" "Price" "Purchase Experience" "Usage Experience" "Customer Service"] </label> </li>
+		<li> <label> Overall, the product / service met my expectations? [radio survey-Overallofproduct "Strongly Agree" "Agree" "Neutral" "Disagree" "Strongly Disagree" "Dont Know"]</label> </li>
+		<li> <label>Thinking of similar products / services offered by others, how would you compare the product / service offered by us? <br />[radio survey-similarproduct "Much Better" "Somewhat Better" "About the Same" "Somewhat Worse" "Much Worse" "Dont Know"]</label> </li>
 	</ol>
 	<div class="spp-clear"></div>
-	<div class="spp-full-col">What do you like about the product / service?[textarea survey-aboutproduct]</div>
-	[submit "SUBMIT"]
+	<div class="spp-full-col"><label>What do you like about the product / service? [textarea survey-aboutproduct]</label></div>
+	<div class="spp-full-col">[submit "SUBMIT"]</div>
 </div>';
 
 			$mail['subject'] = "[your-name] has filled out the survey form for you.";
@@ -318,8 +315,7 @@ A customer Submit survey. Here are the details and content of the request.
 	<div class="spp-left-col">[text* your-name placeholder "Name"]</div>
 	<div class="spp-right-col">[email* your-email placeholder "Email"]</div>
 	<div class="spp-full-col">[textarea your-message placeholder "Message"]</div>
-	<div class="spp-clear"></div>
-	[submit "SUBMIT"]
+	<div class="spp-full-col">[submit "SUBMIT"]</div>
 </div>';
 
 			$mail['subject'] = "You have recieved a message from [your-name], [your-email].";
