@@ -273,6 +273,8 @@ function splite_add_my_popup() {
 		$activation_mode['onscroll_type'] = isset($splite_opts['onscroll-type']) ? $splite_opts['onscroll-type'] : 'pixels';
 		$activation_mode['onscroll_pixels'] = isset($splite_opts['onscroll-pixels']) ? $splite_opts['onscroll-pixels'] : 300;	
 		$activation_mode['onscroll_percentage'] = isset($splite_opts['onscroll-percentage']) ? $splite_opts['onscroll-percentage'] : 20;
+		$activation_mode['onexit'] = isset($splite_opts['onexit']) ? $splite_opts['onexit'] : 'onexit';
+
 		
 		$popup_load_effect = isset($splite_opts['loader-animation']) ? $splite_opts['loader-animation'] : 'fadeIn';
 		$popup_load_speed = isset($splite_opts['loader-speed']) ? $splite_opts['loader-speed'] : .75;
@@ -312,7 +314,7 @@ function splite_add_my_popup() {
 		
 		<!-- SP Pro - Popup Box Curtain Arrangement -->
 		<div id="splite_curtain" onClick="splite_unloader();" style=""></div>
-		<div class="splite_popup_animator" data-loadspeed="<?php echo $popup_load_speed; ?>" data-loadeffect="<?php echo $popup_load_effect; ?>" data-unloadeffect="<?php echo $popup_unload_effect; ?>" data-unloadspeed="<?php echo $popup_unload_speed; ?>" data-external_selectors="<?php echo $external_selector; ?>"></div>
+		<div class="splite_popup_animator" data-loadspeed="<?php echo $popup_load_speed; ?>" data-loadeffect="<?php echo $popup_load_effect; ?>" data-unloadeffect="<?php echo $popup_unload_effect; ?>" data-activationmode="<?php echo $activation_mode['mode']; ?>" data-unloadspeed="<?php echo $popup_unload_speed; ?>" data-external_selectors="<?php echo $external_selector; ?>"></div>
 		<div id="splite_popup_box" class="<?php echo 'layout_'.$choose_layout; ?> manage">  			
 			<?php if($popup_heading!='') { ?>
 				<div id="splite_popup_title"><?php echo $popup_heading; ?></div>			

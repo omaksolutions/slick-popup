@@ -47,6 +47,7 @@ jQuery(document).ready(function($) {
 	var external_selectors = {};
 	$animators = jQuery('.splite_popup_animator');
 	if($animators.length) {
+		i = 0; 
 		$animators.each(function() {
 			if (!! jQuery(this).attr('data-external_selectors')) {
 				$selectors_added = jQuery(this).attr('data-external_selectors');
@@ -57,13 +58,14 @@ jQuery(document).ready(function($) {
 					 selector_parts.push(jQuery.trim(value));
 				});
 				
-				external_selectors[] = selector_parts.join(','); 
+				external_selectors[i] = selector_parts.join(','); 
+				i++; 
 			}
 			
 		});
 	}
 	
-	console.log(external_selectors);	
+	//console.log(external_selectors);	
 	// Add a click function for all externa_selectors
 	jQuery.each(external_selectors, function(index, value) {
 		loaderButton = jQuery(value); 
@@ -74,51 +76,26 @@ jQuery(document).ready(function($) {
 		
 	});
 	
-	// Setup External Loader - used heavily with multiple popups
-	var external_loader = jQuery( '.splite-showpopup' ); 
-	if( external_loader.length ) {		
-		external_loader.click( function(e) {
-			e.preventDefault(); 		
-			loaderButton = jQuery(this); 
-			loaderID = ''; 
-			
-			if(loaderButton.hasClass('menu-item')) {				
-				loaderID = loaderButton.children('a').attr('href'); 
-				if(loaderID.indexOf('#') > -1) {
-					loaderID = loaderID.replace('#', '');	
-				}
-				
-			}
-			else if (!! jQuery(this).attr('id')) {
-				loaderID = jQuery(this).attr('id');
-				if(loaderID.indexOf('sp-') > -1) {
-					loaderID = loaderID.replace('sp-', '');	
-				}
-			}
-			else {			
-				if(!! jQuery(this).attr('data-formid')) {
-					loaderID = jQuery(this).dataAttr('formid', '-');				
-				}
-			}
-			
-			if( external_loader.tagName().toUpperCase() == 'A' ) {
-				e.preventDefault(); 
-			}
-			
-			// Prepare ID with slick popup prefix
-			id = splite_validateBoxID(loaderID);
-			splite_loader(id);
-			
-			return false; 
-		});
-	}
-	
 	document.addEventListener( 'wpcf7submit', function( event ) {
 		if ( jQuery.isNumeric(cf7formid) && cf7formid == event.detail.contactFormId ) {
 			splite_set_popup(id); 					
 		}
 	}, false );
-	
+
+	$popupBox = jQuery('#splite_popup_box');
+	if ($popupBox.length) {
+		var activationmode = jQuery(this).attr('data-activationmode');
+		if(activationmode=='onexit') {
+			//console.log(event.pageY==0 || event.pageY==1 || event.pageY < jQuery(document).scrollTop());
+			jQuery( "body" ).on( "mouseout", function( event ) {
+			  	if (event.pageY==0 || event.pageY==1 || event.pageY < jQuery(document).scrollTop() ) {
+			  		splite_loader();
+			  	}
+			});
+			//splite_loader();						
+		}
+	}
+
 	splite_set_popup();
 });
 

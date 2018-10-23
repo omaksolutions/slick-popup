@@ -212,10 +212,10 @@ function splite_fire_activation_mode_script($activation_mode) {
 					//console.log(event.pageY==0 || event.pageY==1 || event.pageY < jQuery(document).scrollTop());
 					jQuery( "body" ).on( "mouseout", function( event ) {
 					  	if (event.pageY==0 || event.pageY==1 || event.pageY < jQuery(document).scrollTop() ) {
-					  		sppro_loader(id);
+					  		splite_loader();
 					  	}
 					});
-					//sppro_loader(id);
+					//splite_loader();
 				</script>';						
 			break;
 		default: break; 

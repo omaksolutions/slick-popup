@@ -440,6 +440,7 @@
 						'desc'          => __( '4 modes: On-click, Auto Popup, On-scroll Popup, Forced Popup', 'slick-popup' ),
 						'options'  => array(
 									'manually' => __('On-Click (Default)', 'slick-popup' ),
+									'onexit'  => __('On-Exit Intent', 'slick-popup'),	
 								),
 						'default'  => 'manually'
 					),
