@@ -5,12 +5,12 @@ Plugin URI:   http://www.omaksolutions.com
 Description:  A lightweight plugin that converts a Contact Form 7 form into a customizable pop-up form which is slick, beautiful and responsive to different screen-sizes.
 Author URI:   http://www.omaksolutions.com 
 Author:       Om Ak Solutions 
-Version:      1.6.1
+Version:      1.6.2
 Text Domain: slick-popup
 */
 
 
-define( 'SPLITE_VERSION', '1.6.1' );
+define( 'SPLITE_VERSION', '1.6.2' );
 
 define( 'SPLITE_REQUIRED_WP_VERSION', '3.0.1' );
 
@@ -249,6 +249,8 @@ function splite_add_my_popup() {
 				$user_is_admin = true;
 			}			
 		}
+
+		$splite_opts = apply_filters('splite_options', $splite_opts);
 		
 		$choose_layout = $splite_opts['choose-layout'];		
 		$color_scheme = $splite_opts['choose-color-scheme'];
@@ -276,6 +278,8 @@ function splite_add_my_popup() {
 		$popup_load_speed = isset($splite_opts['loader-speed']) ? $splite_opts['loader-speed'] : .75;
 		$popup_unload_effect = isset($splite_opts['unloader-animation']) ? $splite_opts['unloader-animation'] : 'fadeOut';
 		$popup_unload_speed = isset($splite_opts['unloader-speed']) ? $splite_opts['unloader-speed'] : .50;
+
+		$external_selector = isset($splite_opts['external-selector']) ? $splite_opts['external-selector'] : '';
 		
 		$cf7_id = isset($splite_opts['form-id'])? $splite_opts['form-id'] : '';
 
@@ -308,7 +312,7 @@ function splite_add_my_popup() {
 		
 		<!-- SP Pro - Popup Box Curtain Arrangement -->
 		<div id="splite_curtain" onClick="splite_unloader();" style=""></div>
-		<div class="splite_popup_animator" data-loadspeed="<?php echo $popup_load_speed; ?>" data-loadeffect="<?php echo $popup_load_effect; ?>" data-unloadeffect="<?php echo $popup_unload_effect; ?>" data-unloadspeed="<?php echo $popup_unload_speed; ?>"></div>
+		<div class="splite_popup_animator" data-loadspeed="<?php echo $popup_load_speed; ?>" data-loadeffect="<?php echo $popup_load_effect; ?>" data-unloadeffect="<?php echo $popup_unload_effect; ?>" data-unloadspeed="<?php echo $popup_unload_speed; ?>" data-external_selectors="<?php echo $external_selector; ?>"></div>
 		<div id="splite_popup_box" class="<?php echo 'layout_'.$choose_layout; ?> manage">  			
 			<?php if($popup_heading!='') { ?>
 				<div id="splite_popup_title"><?php echo $popup_heading; ?></div>			
@@ -346,6 +350,9 @@ function splite_add_my_popup() {
 function splite_option_css() {
 	
 	global $splite_opts;
+
+	$splite_opts = apply_filters('splite_options', $splite_opts);
+	
 	$color_scheme = $splite_opts['choose-color-scheme'];
 	$custom_color_scheme = $splite_opts['custom-theme-color'];	
 	$custom_text_color = $splite_opts['custom-text-color'];	

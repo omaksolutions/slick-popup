@@ -1,5 +1,7 @@
 jQuery(document).ready(function($) {
-	
+
+	jQuery('#splite_form_container').on('click' ,function() { splite_set_popup(); });
+
 	$animator = jQuery('.splite_popup_animator');
 	var cf7formid = $animator.attr('data-cf7formid'); 
 	
@@ -29,7 +31,7 @@ jQuery(document).ready(function($) {
 		});
 	}
 	
-	var external_loader = jQuery( '.splite-showpopup' ); 
+	/* var external_loader = jQuery( '.splite-showpopup' ); 
 	if( external_loader.length ) {
 		external_loader.click( function(e) {
 			if( external_loader.tagName() == 'A' ) {
@@ -39,6 +41,75 @@ jQuery(document).ready(function($) {
 			else {
 				splite_loader();
 			}
+		});
+	} */
+
+	var external_selectors = {};
+	$animators = jQuery('.splite_popup_animator');
+	if($animators.length) {
+		$animators.each(function() {
+			if (!! jQuery(this).attr('data-external_selectors')) {
+				$selectors_added = jQuery(this).attr('data-external_selectors');
+				var $selectors_added = $selectors_added.split(','); 
+				
+				var selector_parts = [];
+				jQuery.each($selectors_added, function(index, value) {
+					 selector_parts.push(jQuery.trim(value));
+				});
+				
+				external_selectors[] = selector_parts.join(','); 
+			}
+			
+		});
+	}
+	
+	console.log(external_selectors);	
+	// Add a click function for all externa_selectors
+	jQuery.each(external_selectors, function(index, value) {
+		loaderButton = jQuery(value); 
+		loaderButton.click(function() {
+			splite_loader();			
+			return false; 
+		});
+		
+	});
+	
+	// Setup External Loader - used heavily with multiple popups
+	var external_loader = jQuery( '.splite-showpopup' ); 
+	if( external_loader.length ) {		
+		external_loader.click( function(e) {
+			e.preventDefault(); 		
+			loaderButton = jQuery(this); 
+			loaderID = ''; 
+			
+			if(loaderButton.hasClass('menu-item')) {				
+				loaderID = loaderButton.children('a').attr('href'); 
+				if(loaderID.indexOf('#') > -1) {
+					loaderID = loaderID.replace('#', '');	
+				}
+				
+			}
+			else if (!! jQuery(this).attr('id')) {
+				loaderID = jQuery(this).attr('id');
+				if(loaderID.indexOf('sp-') > -1) {
+					loaderID = loaderID.replace('sp-', '');	
+				}
+			}
+			else {			
+				if(!! jQuery(this).attr('data-formid')) {
+					loaderID = jQuery(this).dataAttr('formid', '-');				
+				}
+			}
+			
+			if( external_loader.tagName().toUpperCase() == 'A' ) {
+				e.preventDefault(); 
+			}
+			
+			// Prepare ID with slick popup prefix
+			id = splite_validateBoxID(loaderID);
+			splite_loader(id);
+			
+			return false; 
 		});
 	}
 	
@@ -176,7 +247,11 @@ function splite_set_popup() {
 	splite_set_side_button();
 }
 
-
+jQuery('.nikhil').on('click' ,function() {
+	alert("Hello")
+	//splite_set_popup();
+});
+ 
 /**
 * Function: set_side_button
 * Sets the side button position

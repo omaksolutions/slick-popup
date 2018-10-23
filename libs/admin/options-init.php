@@ -262,7 +262,7 @@
 	} // endif 1
 
 	/////////////////////////////////////////////////
-	// SECTION: Popup Styles
+	// SECTION: Popup Settings
 	/////////////////////////////////////////////////
 	if ( 1 ) {
 		Redux::setSection( $opt_name, array(
@@ -319,7 +319,7 @@
 				/////////////////////////////////////////////////
 				// Section: Layout & Color Scheme (layout)
 				////////////////////////////////////////////////
-					array(
+					array (
 						'id'       => 'section-layout',
 						'type'     => 'section',				
 						'title'    => __( 'Layout & Color Scheme', 'slick-popup' ),
@@ -422,213 +422,9 @@
 									'height' => 100,
 								)
 							),	
-						array(
-							'id'       => 'choose-color-scheme',
-							'type'     => 'image_select',
-							'title'    => __( 'Color Scheme', 'slick-popup' ),
-							'subtitle' => __( 'Choose your desired cover scheme.', 'slick-popup' ),
-							'desc'     => __( '<span style="font-weight:bold;font-size:1.1em;">Choose one of our pre-defined color schemes or set your own. <a href="https://codecanyon.net/item/slick-popup-pro-/16115931?ref=OmAkSols">More in Pro</a></span>', 'slick-popup' ),
-							'options'  => array(
-								'master_red' => array(
-									'alt' => __('Master Red', 'slick-popup' ),
-									'img' => SPLITE_PLUGIN_IMG_URL . '/scheme-master-red.png',
-									'title' => __('Master Red', 'slick-popup' ),
-								),
-								'creamy_orange' => array(
-									'alt' => __('Creamy Orange', 'slick-popup' ),
-									'img' => SPLITE_PLUGIN_IMG_URL . '/scheme-creamy-orange.png',
-									'title' => __('Creamy Orange', 'slick-popup' ),
-								),
-								'light_blue' => array(
-									'alt' => __('Light Blue', 'slick-popup' ),
-									'img' => SPLITE_PLUGIN_IMG_URL . '/scheme-light-blue.png',
-									'title' => __('Light Blue', 'slick-popup' ),
-								),
-								'cool_green' => array(
-									'alt' => __('Cool Green', 'slick-popup' ),
-									'img' => SPLITE_PLUGIN_IMG_URL . '/scheme-cool-green.png',
-									'title' => __('Cool Green', 'slick-popup' ),
-								),						
-								'dark' => array(
-									'alt' => __('Classic Grey', 'slick-popup' ),
-									'img' => SPLITE_PLUGIN_IMG_URL . '/scheme-classic-grey.png',
-									'title' => __('Classic Grey', 'slick-popup' ),
-								),
-								'custom_theme' => array(
-									'alt' => __('Set Your Own', 'slick-popup' ),
-									'img' => SPLITE_PLUGIN_IMG_URL . '/scheme-custom-theme.png',
-									'title' => __('Set Your Own', 'slick-popup' ),
-								),
-							),
-							'default'  => 'cool_green'
-						),
-							// If Color Scheme = custom_theme
-							array(
-								'id'       => 'custom-theme-color',
-								'type'     => 'color',
-								'required' => array( 'choose-color-scheme', '=', 'custom_theme' ),
-								'output'   => array( '' ),
-								'title'    => __( 'Your Theme Color', 'slick-popup' ),
-								'subtitle' => __( 'Pick a color for theme of your popup.', 'slick-popup' ),
-								'desc' => __( 'This color will be used to create theme of your popup.', 'slick-popup' ),
-								'default'  => '#333',
-							),
-							array(
-								'id'       => 'custom-form-background-color',
-								'type'     => 'background',
-								'required' => array( 'choose-color-scheme', '=', 'custom_theme' ),
-								'output'   => array( '' ),
-								'title'    => __( 'Form Background', 'slick-popup' ),
-								'subtitle' => __( 'Please style the background for the form area in popup.', 'slick-popup' ),
-								'desc' => __( 'Note: If you choose an image background then the title area will be transparent.', 'slick-popup' ),
-								'default'  => array(
-									'background-color' => '#EFEFEF',
-									'background-image' => '',
-									'background-size' => 'cover',
-									'background-position' => 'center center',
-									'background-attachment' => '',
-									'background-repeat' => 'no-repeat',
-								),
-							),							
-							array(
-								'id'       => 'custom-text-color',
-								'type'     => 'color',
-								'required' => array( 'choose-color-scheme', '=', 'custom_theme' ),
-								'output'   => array( '' ),
-								'title'    => __( 'Your Text Color', 'slick-popup' ),
-								'subtitle' => __( 'Pick a color for any text element added in form.', 'slick-popup' ),
-								'desc' => __( 'This also applies to <strong>Close Icon "X"</strong> and <strong>form submission response.</strong>', 'slick-popup' ),
-								'default'  => '#EFEFEF',
-							),
-					
-				/////////////////////////////////////////////////
-				// Section: Heading & Description 
-				////////////////////////////////////////////////
-				array(
-						'id'       => 'section-heading-description',
-						'type'     => 'section',
-						'title'    => __( 'Heading & Description', 'slick-popup' ),
-						'subtitle' => __( 'Choose your desired heading and description settings.', 'slick-popup' ),
-						'indent'   => true, // Indent all options below until the next 'section' option is set.
-					),
-						array(
-							'id'       => 'popup-heading',
-							'type'     => 'text',
-							'title'    => __( 'Heading', 'slick-popup' ),
-							'subtitle' => __( 'Main heading on the popup.', 'slick-popup' ),
-							'desc'     => __( 'Leave empty if you do not want popup heading ', 'slick-popup' ),
-							'default'  => 'STILL NOT SURE WHAT TO DO?',
-							'hint'      => array(
-								'title'     => 'Popup Heading',
-								'content'   => 'Main heading of the popup.',
-							),
-						),
-						array(
-							'id'       => 'popup-cta-text',
-							'type'     => 'editor',
-							'title'    => __( 'Call To Action', 'slick-popup' ),
-							'subtitle' => __( 'Main description that will actually make your visitor to fill up the form.', 'slick-popup' ),
-							'desc'     => __( '<b>Default:</b> We are glad that you preferred to contact us. Please fill our short form and one of our friendly team members will contact you back shortly.', 'slick-popup' ),
-							'default'  => 'We are glad that you preferred to contact us. Please fill our short form and one of our friendly team members will contact you back.',
-							'hint'      => array(
-								'title'     => 'Call To Action',
-								'content'   => 'This text will appear above the form. Choose something that encourages user to fill up the form.',
-							),
-						),
-					
-				////////////////////////////////////
-				// Section: Submit Button
-				////////////////////////////////////
-				array(
-						'id'       => 'section-submit-button',
-						'type'     => 'section',
-						'title'    => __( 'Submit Button', 'slick-popup' ),
-						'subtitle' => __( 'Choose your desired settings for Submit Button.', 'slick-popup' ),
-						'indent'   => true, // Indent all options below until the next 'section' option is set.
-					),
-					array(
-						'id'       => 'choose-submit-button',
-						'type'     => 'select',
-						'title'    => __( 'Submit Button Styles', 'slick-popup' ),
-						'subtitle' => __( 'Choose appearance of the form <b>Submit</b> button.', 'slick-popup' ),
-						'desc'     => __( '<b>Default:</b> Inherit', 'slick-popup' ),
-						//Must provide key => value pairs for select options
-						'options'  => array(
-							'inherit_from_theme' => __('Use styles from theme', 'slick-popup' ),
-							'inherit_from_color_scheme' => __('Inherit from color scheme', 'slick-popup' ),
-							'custom' => __('Set your own colors', 'slick-popup' ),
-						),
-						'default'  => 'inherit_from_color_scheme',
-						'hint'      => array(
-							'title'     => __( 'Color Scheme', 'slick-popup' ),
-							'content'   =>  __( 'Choose one of the pre-packed color themes or create your own.', 'slick-popup' ),
-						),
-					),	
-						// If choose-submit-button = custom
-						array(
-							'id'       => 'submit-button-background',
-							'type'     => 'background',
-							'required' => array( 'choose-submit-button', '=', 'custom' ),
-							'output'   => array( '' ),
-							'title'    => __( 'Button Background', 'slick-popup' ),
-							'subtitle' => __( 'Choose background color for the "Submit" button.', 'slick-popup' ),
-							'default'   => array( 
-								'background-color' => '#333333',
-							),
-							'background-color'			=> true,
-							'background-repeat'			=> false,
-							'background-attachment'		=> false,
-							'background-position'		=> false,
-							'background-image'			=> false,
-							'background-clip'			=> false,
-							'background-origin'			=> false,
-							'background-size'			=> false,
-							'preview_media'				=> false,
-							'preview'					=> false,
-							'preview_height'			=> false,
-							'transparent'				=> false,
-						),			
-						/* Hidden since 1.4.0 - was not being used
-						array(
-							'id'       => 'submit-button-border',
-							'type'     => 'border',
-							'required' => array( 'choose-submit-button', '=', 'custom' ),
-							'title'    => __( 'Button Border', 'slick-popup' ),
-							'subtitle' => __( 'Set properties for the submit button border.', 'slick-popup' ),
-							'output'   => array( '' ),
-							'all'      => false,
-							// An array of CSS selectors to apply this font style to
-							'desc'     => __( '', 'slick-popup' ),
-							'default'  => array(
-								'border-color'  => '#f5f5f5',
-								'border-style'  => 'solid',
-								'border-top'    => '2px',
-								'border-right'  => '2px',
-								'border-bottom' => '2px',
-								'border-left'   => '2px'
-							)
-						),
-						*/
-				) // end fields array
-			)
-		);
-	}
-	
-	
-	/////////////////////////////////////////////////
-	// SECTION: Popup Animations
-	/////////////////////////////////////////////////
-	if ( 1 ) {
-		
-		Redux::setSection( $opt_name, array(
-			'title' => __( 'Popup Effects', 'slick-popup' ),
-			'id'    => 'loader-popup-effects',
-			'desc'  => __( 'Control the popup activation mode and animation effects.', 'slick-popup' ),
-			'icon'  => 'el el-iphone-home',
-			'fields'     => array(
 				/////////////////////////////////////////////////
 				// Section: Activation Mode
-				////////////////////////////////////////////////				
+				////////////////////////////////////////////////
 				array(
 					'id'       => 'section-activation-mode',
 					'type'     => 'section',				
@@ -732,8 +528,220 @@
 						'max' => 5,
 						'resolution' => 0.01,
 						'display_value' => 'text'
-					),	
-				// End Animations
+					),		
+				) // end fields array
+			)
+		);
+	}
+	
+	/////////////////////////////////////////////////
+	// SECTION: Popup Heading
+	/////////////////////////////////////////////////
+	if ( 1 ) {
+		
+		Redux::setSection( $opt_name, array(
+			'title' => __( 'Popup Heading', 'slick-popup' ),
+			'id'    => 'edit-popup-heading',
+			'desc'  => __( 'Edit Popup Heading Text and Styles', 'slick-popup' ),
+			'icon'  => 'el el-iphone-home',
+			'fields'     => array(
+				/////////////////////////////////////////////////
+				// Section: Popup Heading Text
+				////////////////////////////////////////////////				
+						array(
+							'id'       => 'heading-text',
+							'type'     => 'section',				
+							'title'    => __( 'Popup Heading Text', 'slick-popup' ),
+							'indent'   => true, // Indent all options below until the next 'section' option is set.
+						),
+							array(
+								'id'       => 'popup-heading',
+								'type'     => 'text',
+								'title'    => __( 'Heading', 'slick-popup' ),
+								'subtitle' => __( 'Main heading on the popup.', 'slick-popup' ),
+								'desc'     => __( 'Leave empty if you do not want popup heading ', 'slick-popup' ),
+								'default'  => 'STILL NOT SURE WHAT TO DO?',
+								'hint'      => array(
+									'title'     => 'Popup Heading',
+									'content'   => 'Main heading of the popup.',
+								),
+							),	
+				/////////////////////////////////////////////////
+				// Section: Popup Heading Typograpghy
+				////////////////////////////////////////////////			
+						array(
+							'id'       => 'heading-typography',
+							'type'     => 'section',				
+							'title'    => __( 'Popup Heading Typography', 'slick-popup' ),
+							'indent'   => true, // Indent all options below until the next 'section' option is set.
+						),	
+							array(
+								'id'       => 'heading-typography',
+								'type'     => 'typography',
+								//'required' => array( 'use_heading_font', '=', 1 ),
+								'title'    => __( 'Heading Font', 'slick-popup' ),
+								'subtitle' => __( 'Specify the heading font properties.', 'slick-popup' ),
+								'desc'		=> __('Font Color is important to look good with your choosen color scheme.', 'slick-popup' ),
+								'google'   => true,
+								'default'  => array(
+									'color'       => 	'#F1F1F1',
+									'font-size'   => 	'28px',
+									'line-height' =>	'32px',
+									'font-family' => 	'Open Sans',
+									'font-weight' => 	'900',
+								),
+								'text-align'	=> false,
+								'font-subsets'	=> false,
+							),	
+							array(
+									'id'       => 'custom-text-color',
+									'type'     => 'color',
+									//'required' => array( 'choose-color-scheme', '=', 'custom_theme' ),
+									'output'   => array( '' ),
+									'title'    => __( 'Close button Color', 'slick-popup' ),
+									'subtitle' => __( 'Pick a color for close button.', 'slick-popup' ),
+									'desc' => __( 'This also applies to <strong>Close Icon "X"</strong> and <strong>form submission response.</strong>', 'slick-popup' ),
+									'default'  => '#EFEFEF',
+								),		
+			)
+		) );
+	}
+
+	/////////////////////////////////////////////////
+	// SECTION: Popup Body
+	/////////////////////////////////////////////////
+	if ( 1 ) {
+		
+		Redux::setSection( $opt_name, array(
+			'title' => __( 'Popup Body', 'slick-popup' ),
+			'id'    => 'ledit-popup-body',
+			'desc'  => __( 'Edit Popup Body Text and Styles', 'slick-popup' ),
+			'icon'  => 'el el-iphone-home',
+			'fields'     => array(
+				/////////////////////////////////////////////////
+				// Section: Popup Body Text
+				////////////////////////////////////////////////				
+						array(
+							'id'       => 'body-text',
+							'type'     => 'section',				
+							'title'    => __( 'Popup Body Text', 'slick-popup' ),
+							'indent'   => true, // Indent all options below until the next 'section' option is set.
+						),	
+							array(
+								'id'       => 'popup-cta-text',
+								'type'     => 'editor',
+								'title'    => __( 'Call To Action', 'slick-popup' ),
+								'subtitle' => __( 'Main description that will actually make your visitor to fill up the form.', 'slick-popup' ),
+								'desc'     => __( '<b>Default:</b> We are glad that you preferred to contact us. Please fill our short form and one of our friendly team members will contact you back shortly.', 'slick-popup' ),
+								'default'  => 'We are glad that you preferred to contact us. Please fill our short form and one of our friendly team members will contact you back.',
+								'hint'      => array(
+									'title'     => 'Call To Action',
+									'content'   => 'This text will appear above the form. Choose something that encourages user to fill up the form.',
+								),
+							),
+				/////////////////////////////////////////////////
+				// Section: Popup Body Typography
+				////////////////////////////////////////////////			
+						array(
+							'id'       => 'body-typography',
+							'type'     => 'section',				
+							'title'    => __( 'Popup Body Typography', 'slick-popup' ),
+							'indent'   => true, // Indent all options below until the next 'section' option is set.
+						),	
+							array(
+								'id'       => 'cta-typography',
+								'type'     => 'typography',
+								//'required' => array( 'use_cta_font', '=', 1 ),
+								'title'    => __( 'Call To Action Font', 'slick-popup' ),
+								'subtitle' => __( 'Specify these font properties.', 'slick-popup' ),
+								'google'   => true,
+								'default'  => array(
+									'color'       => '#484848',
+									'font-size'   => '13px',
+									'line-height'   => '21px',
+									'font-family' => 'Noto Sans',
+									'font-weight' => 	'normal',
+									'text-align' => 	'center',
+								),
+								'font-subsets'	=> false,
+							),	
+				/////////////////////////////////////////////////
+				// Section: Popup Body Colors
+				////////////////////////////////////////////////			
+						array(
+							'id'       => 'body-color',
+							'type'     => 'section',				
+							'title'    => __( 'Popup Body Colors', 'slick-popup' ),
+							'indent'   => true, // Indent all options below until the next 'section' option is set.
+						),	
+							array(
+								'id'       => 'choose-color-scheme',
+								'type'     => 'image_select',
+								'title'    => __( 'Color Scheme', 'slick-popup' ),
+								'subtitle' => __( 'Choose your desired cover scheme.', 'slick-popup' ),
+								'desc'     => __( '<span style="font-weight:bold;font-size:1.1em;">Choose one of our pre-defined color schemes or set your own. <a href="https://codecanyon.net/item/slick-popup-pro-/16115931?ref=OmAkSols">More in Pro</a></span>', 'slick-popup' ),
+								'options'  => array(
+									'master_red' => array(
+										'alt' => __('Master Red', 'slick-popup' ),
+										'img' => SPLITE_PLUGIN_IMG_URL . '/scheme-master-red.png',
+										'title' => __('Master Red', 'slick-popup' ),
+									),
+									'creamy_orange' => array(
+										'alt' => __('Creamy Orange', 'slick-popup' ),
+										'img' => SPLITE_PLUGIN_IMG_URL . '/scheme-creamy-orange.png',
+										'title' => __('Creamy Orange', 'slick-popup' ),
+									),
+									'light_blue' => array(
+										'alt' => __('Light Blue', 'slick-popup' ),
+										'img' => SPLITE_PLUGIN_IMG_URL . '/scheme-light-blue.png',
+										'title' => __('Light Blue', 'slick-popup' ),
+									),
+									'cool_green' => array(
+										'alt' => __('Cool Green', 'slick-popup' ),
+										'img' => SPLITE_PLUGIN_IMG_URL . '/scheme-cool-green.png',
+										'title' => __('Cool Green', 'slick-popup' ),
+									),						
+									'dark' => array(
+										'alt' => __('Classic Grey', 'slick-popup' ),
+										'img' => SPLITE_PLUGIN_IMG_URL . '/scheme-classic-grey.png',
+										'title' => __('Classic Grey', 'slick-popup' ),
+									),
+									'custom_theme' => array(
+										'alt' => __('Set Your Own', 'slick-popup' ),
+										'img' => SPLITE_PLUGIN_IMG_URL . '/scheme-custom-theme.png',
+										'title' => __('Set Your Own', 'slick-popup' ),
+									),
+								),
+								'default'  => 'cool_green'
+							),
+								// If Color Scheme = custom_theme
+								array(
+									'id'       => 'custom-theme-color',
+									'type'     => 'color',
+									'required' => array( 'choose-color-scheme', '=', 'custom_theme' ),
+									'output'   => array( '' ),
+									'title'    => __( 'Heading Color', 'slick-popup' ),
+									'subtitle' => __( 'Pick a color for theme of your popup.', 'slick-popup' ),
+									'desc' => __( 'This color will be used to create theme of your popup.', 'slick-popup' ),
+									'default'  => '#333',
+								),
+								array(
+									'id'       => 'custom-form-background-color',
+									'type'     => 'background',
+									'required' => array( 'choose-color-scheme', '=', 'custom_theme' ),
+									'output'   => array( '' ),
+									'title'    => __( 'Popup Background', 'slick-popup' ),
+									'subtitle' => __( 'Please style the background for the form area in popup.', 'slick-popup' ),
+									'desc' => __( 'Note: If you choose an image background then the title area will be transparent.', 'slick-popup' ),
+									'default'  => array(
+										'background-color' => '#EFEFEF',
+										'background-image' => '',
+										'background-size' => 'cover',
+										'background-position' => 'center center',
+										'background-attachment' => '',
+										'background-repeat' => 'no-repeat',
+									),
+								),							
 			)
 		) );
 	}
@@ -771,6 +779,23 @@
 					'desc' => __( '<b>Suggestions:</b> "Need Help?" "Subscribe" "Get a quote!" "Have a query?"<br/><b>Default:</b> Contact Us', 'slick-popup' ),
 					'default'  => 'CONTACT US',
 				),	
+				array(
+					'id'       => 'side-button-typography',
+					'type'     => 'typography',
+					//'required' => array( 'use_side_button_font', '=', 1 ),
+					'title'    => __( 'Side Button Font', 'slick-popup' ),
+					'subtitle' => __( 'Typography and Font properties.', 'slick-popup' ),
+					'google'   => true,
+					'default'  => array(
+						'font-family' 	=> 'Open Sans',
+						'color'       => '#F1F1F1',
+						'font-size'   => '14px',
+						'line-height'   => '18px',
+						'font-weight' 	=> '700',
+					),				
+					'text-align'	=> false,
+					'font-subsets'	=> false,
+				),
 				array(
 					'id'       => 'choose-side-button',
 					'type'     => 'select',
@@ -810,59 +835,18 @@
 			)
 		) );
 	}
-	
-	
+
 	/////////////////////////////////////////////////
-	// SECTION: Typography
+	// SECTION: Submit Button
 	/////////////////////////////////////////////////
 	if ( 1 ) {
 		
 		Redux::setSection( $opt_name, array(
-			'title' => __( 'Typography', 'slick-popup' ),
-			'id'    => 'typography-settings',
-			'desc'  => __( 'Choose your desired font styles.', 'slick-popup' ),
+			'title' => __( 'Submit Button', 'slick-popup' ),
+			'id'    => 'submit-button-settings',
+			'desc'  => __( 'Options to change position and color scheme for the submit button.', 'slick-popup' ),
 			'icon'  => 'el el-iphone-home',
-			'fields'     => array(
-				/////////////////////////////////////////////////
-				// Section: Heading & Description (typography)
-				////////////////////////////////////////////////				
-				array(
-					'id'       => 'heading-typography',
-					'type'     => 'typography',
-					//'required' => array( 'use_heading_font', '=', 1 ),
-					'title'    => __( 'Heading Font', 'slick-popup' ),
-					'subtitle' => __( 'Specify the heading font properties.', 'slick-popup' ),
-					'desc'		=> __('Font Color is important to look good with your choosen color scheme.', 'slick-popup' ),
-					'google'   => true,
-					'default'  => array(
-						'color'       => 	'#F1F1F1',
-						'font-size'   => 	'28px',
-						'line-height' =>	'32px',
-						'font-family' => 	'Open Sans',
-						'font-weight' => 	'900',
-					),
-					'text-align'	=> false,
-					'font-subsets'	=> false,
-				),
-				
-				array(
-					'id'       => 'cta-typography',
-					'type'     => 'typography',
-					//'required' => array( 'use_cta_font', '=', 1 ),
-					'title'    => __( 'Call To Action Font', 'slick-popup' ),
-					'subtitle' => __( 'Specify these font properties.', 'slick-popup' ),
-					'google'   => true,
-					'default'  => array(
-						'color'       => '#484848',
-						'font-size'   => '13px',
-						'line-height'   => '21px',
-						'font-family' => 'Noto Sans',
-						'font-weight' => 	'normal',
-						'text-align' => 	'center',
-					),
-					'font-subsets'	=> false,
-				),	
-				
+			'fields'     => array(								
 				array(
 					'id'       => 'submit-button-typography',
 					'type'     => 'typography',
@@ -880,38 +864,61 @@
 					'text-align'	=> false,
 					'font-subsets'	=> false,
 				),	
-						
 				array(
-					'id'       => 'side-button-typography',
-					'type'     => 'typography',
-					//'required' => array( 'use_side_button_font', '=', 1 ),
-					'title'    => __( 'Side Button Font', 'slick-popup' ),
-					'subtitle' => __( 'Typography and Font properties.', 'slick-popup' ),
-					'google'   => true,
-					'default'  => array(
-						'font-family' 	=> 'Open Sans',
-						'color'       => '#F1F1F1',
-						'font-size'   => '14px',
-						'line-height'   => '18px',
-						'font-weight' 	=> '700',
-					),				
-					'text-align'	=> false,
-					'font-subsets'	=> false,
-				),
+						'id'       => 'choose-submit-button',
+						'type'     => 'select',
+						'title'    => __( 'Submit Button Styles', 'slick-popup' ),
+						'subtitle' => __( 'Choose appearance of the form <b>Submit</b> button.', 'slick-popup' ),
+						'desc'     => __( '<b>Default:</b> Inherit', 'slick-popup' ),
+						//Must provide key => value pairs for select options
+						'options'  => array(
+							'inherit_from_theme' => __('Use styles from theme', 'slick-popup' ),
+							'inherit_from_color_scheme' => __('Inherit from color scheme', 'slick-popup' ),
+							'custom' => __('Set your own colors', 'slick-popup' ),
+						),
+						'default'  => 'inherit_from_color_scheme',
+						'hint'      => array(
+							'title'     => __( 'Color Scheme', 'slick-popup' ),
+							'content'   =>  __( 'Choose one of the pre-packed color themes or create your own.', 'slick-popup' ),
+						),
+					),	
+						// If choose-submit-button = custom
+						array(
+							'id'       => 'submit-button-background',
+							'type'     => 'background',
+							'required' => array( 'choose-submit-button', '=', 'custom' ),
+							'output'   => array( '' ),
+							'title'    => __( 'Button Background', 'slick-popup' ),
+							'subtitle' => __( 'Choose background color for the "Submit" button.', 'slick-popup' ),
+							'default'   => array( 
+								'background-color' => '#333333',
+							),
+							'background-color'			=> true,
+							'background-repeat'			=> false,
+							'background-attachment'		=> false,
+							'background-position'		=> false,
+							'background-image'			=> false,
+							'background-clip'			=> false,
+							'background-origin'			=> false,
+							'background-size'			=> false,
+							'preview_media'				=> false,
+							'preview'					=> false,
+							'preview_height'			=> false,
+							'transparent'				=> false,
+						),	
 			)
 		) );
 	}
-	//Typography Settings Ends Here	
-	
+
 	/////////////////////////////////////////////////
 	// SECTION: Advanced Settings
 	/////////////////////////////////////////////////
 	if ( 1 ) {
 		
 		Redux::setSection( $opt_name, array(
-			'title' => __( 'Custom CSS', 'slick-popup' ),
+			'title' => __( 'Advanced Settings', 'slick-popup' ),
 			'id'    => 'advance-settings-settings',
-			'desc'  => __( 'Custom CSS code to style your popup.', 'slick-popup' ),
+			'desc'  => __( 'Advanced Settings for your Popup', 'slick-popup' ),
 			'icon'  => 'el el-cog',
 			'fields'     => array(
 				/////////////////////////////////////////////////
@@ -926,6 +933,18 @@
 					'theme'    => 'monokai',
 					'desc'     => '<br/>Contact our support for help: poke@slickpopup.com',
 					'default'  => "#splite_popup_box span.wpcf7-not-valid-tip{\n\t\t\t\t   \n\t\t\t}"
+				),
+
+				array(
+					'id'		=> 'external-selector',
+					'type'		=> 'text',
+					'title'		=> __( 'External Selector', 'slick-popup' ),
+					'subtitle'	=> __( 'Enter class or id of External Selector', 'slick-popup' ),
+					'default'	=> '',
+					'hint'      => array(
+							'title'     => __( 'External Selector', 'slick-popup' ),
+							'content'   =>  __( 'Put the class or id from which you want the popup to appear', 'slick-popup' ),
+						),
 				),
 			)
 		) );

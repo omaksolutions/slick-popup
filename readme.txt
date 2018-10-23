@@ -1,9 +1,9 @@
 === Slick Popup Lite ===
-Contributors: ak.singla,manish9034
+Contributors: ak.singla,manish9034,nikhilomak
 Tags: contact form 7, popup, cf7, popup form, wordPress popup plugin, contact form popup, popup contact form 7, submit form
 Requires at least: 3.0.1
 Tested up to: 4.9.8
-Stable tag: 1.6.1
+Stable tag: 1.6.2	
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -108,6 +108,13 @@ For any doubts or queries, please read our F.A.Q section. If it doesn't come out
 
 == Changelog ==
 
+
+= 1.6.2 =
+* Improved: Slick Popup Menu 
+* Minor bug fixes
+
+= 1.6.1 =
+* Minor bug fixes
 
 = 1.6.0 =
 * Improved: Uninstall popup 

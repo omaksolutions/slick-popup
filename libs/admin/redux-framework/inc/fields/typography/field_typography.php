@@ -37,6 +37,7 @@ if ( ! class_exists( 'ReduxFramework_typography' ) ) {
             "'Times New Roman', Times,serif"                       => "'Times New Roman', Times, serif",
             "'Trebuchet MS', Helvetica, sans-serif"                => "'Trebuchet MS', Helvetica, sans-serif",
             "Verdana, Geneva, sans-serif"                          => "Verdana, Geneva, sans-serif",
+            "Assistant-Regular"                                    => "Assistant-Regular",
         );
 
         private $user_fonts = true;
@@ -51,7 +52,7 @@ if ( ! class_exists( 'ReduxFramework_typography' ) ) {
             $this->parent = $parent;
             $this->field  = $field;
             $this->value  = $value;
-
+            $this->field['ext-font-css'] = get_template_directory_uri() .'/fonts/fonts.css';
             // Shim out old arg to new
             if ( isset( $this->field['all_styles'] ) && ! empty( $this->field['all_styles'] ) ) {
                 $this->field['all-styles'] = $this->field['all_styles'];
