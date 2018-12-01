@@ -3,7 +3,7 @@ Contributors: ak.singla,manish9034,nikhilomak
 Tags: contact form 7, popup, cf7, popup form, wordPress popup plugin, contact form popup, popup contact form 7, submit form
 Requires at least: 3.0.1
 Tested up to: 4.9.8
-Stable tag: 1.6.2	
+Stable tag: 1.6.3	
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -105,9 +105,15 @@ For any doubts or queries, please read our F.A.Q section. If it doesn't come out
 2. Change Popup form layout available on all pages. 
 3. Popup Effects. 
 4. Side button position on smaller screens. 
+5. Import CF7 Demo Forms page
+6. Image Popup
+7. Background Image Popup
 
 == Changelog ==
 
+= 1.6.3 =
+* Added: External Selector
+* Minor bug fixes
 
 = 1.6.2 =
 * Improved: Slick Popup Menu 
