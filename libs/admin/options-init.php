@@ -741,6 +741,7 @@
 										'background-position' => 'center center',
 										'background-attachment' => '',
 										'background-repeat' => 'no-repeat',
+										'background-media' => '',
 									),
 								),							
 			)

@@ -353,6 +353,7 @@ function splite_option_css() {
 	
 	global $splite_opts;
 
+	$use_custom_width_height = false; // flag to use custom height width
 	$splite_opts = apply_filters('splite_options', $splite_opts);
 	
 	$color_scheme = $splite_opts['choose-color-scheme'];
@@ -434,8 +435,9 @@ function splite_option_css() {
 	// Check if User wants to use Custom Height and Width
 	// And set $use_custom_width_height to true
 	$popup_height_width_styles = '';
-	if($custom_popup_layout=='change')
+	if($custom_popup_layout=='change') {
 		$use_custom_width_height = true; 
+	}
 	
 	// Create styles for Height and width if flag is true
 	if($use_custom_width_height) {

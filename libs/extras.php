@@ -41,7 +41,7 @@ function splite_get_theme_colors_values($color_scheme, $custom_color_scheme="", 
 			$colors['background-size'] = $custom_form_background_color['background-size']; 
 			$colors['background-position'] = $custom_form_background_color['background-position']; 
 			$colors['background-attachment'] = $custom_form_background_color['background-attachment'];  
-			$colors['background-media'] = $custom_form_background_color['background-media'];  
+			$colors['background-media'] = isset($custom_form_background_color['background-media']) ? $custom_form_background_color['background-media'] : '';  
 			break; 
 		case 'light' :
 			$colors['main-color'] = '#BBB'; 
