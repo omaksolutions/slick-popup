@@ -5,12 +5,12 @@ Plugin URI:   http://www.omaksolutions.com
 Description:  A lightweight plugin that converts a Contact Form 7 form into a customizable pop-up form which is slick, beautiful and responsive to different screen-sizes.
 Author URI:   http://www.omaksolutions.com 
 Author:       Om Ak Solutions 
-Version:      1.6.3
+Version:      1.6.5
 Text Domain: slick-popup
 */
 
 
-define( 'SPLITE_VERSION', '1.6.3' );
+define( 'SPLITE_VERSION', '1.6.5' );
 
 define( 'SPLITE_REQUIRED_WP_VERSION', '3.0.1' );
 
@@ -283,6 +283,12 @@ function splite_add_my_popup() {
 
 		$external_selector = isset($splite_opts['external-selector']) ? $splite_opts['external-selector'] : '';
 		
+		$autoclose = isset($splite_opts['autoclose']) ? $splite_opts['autoclose'] : '';
+		$autoclose_time = isset($splite_opts['autoclose_time']) ? $splite_opts['autoclose_time'] : '';
+		
+		$redirect = isset($splite_opts['redirect']) ? $splite_opts['redirect'] : '';
+		$redirect_url = isset($splite_opts['redirect_url']) ? $splite_opts['redirect_url'] : '';
+		
 		$cf7_id = isset($splite_opts['form-id'])? $splite_opts['form-id'] : '';
 
 		global $post; 	
@@ -314,7 +320,7 @@ function splite_add_my_popup() {
 		
 		<!-- SP Pro - Popup Box Curtain Arrangement -->
 		<div id="splite_curtain" onClick="splite_unloader();" style=""></div>
-		<div class="splite_popup_animator" data-loadspeed="<?php echo $popup_load_speed; ?>" data-loadeffect="<?php echo $popup_load_effect; ?>" data-unloadeffect="<?php echo $popup_unload_effect; ?>" data-activationmode="<?php echo $activation_mode['mode']; ?>" data-unloadspeed="<?php echo $popup_unload_speed; ?>" data-external_selectors="<?php echo $external_selector; ?>"></div>
+		<div class="splite_popup_animator" data-loadspeed="<?php echo $popup_load_speed; ?>" data-loadeffect="<?php echo $popup_load_effect; ?>" data-unloadeffect="<?php echo $popup_unload_effect; ?>" data-activationmode="<?php echo $activation_mode['mode']; ?>" data-unloadspeed="<?php echo $popup_unload_speed; ?>" data-external_selectors="<?php echo $external_selector; ?>" data-cf7-formID="<?php echo $cf7_id; ?>" data-autoclose="<?php echo $autoclose; ?>" data-autoclose_time="<?php echo $autoclose_time; ?>" data-redirect="<?php echo $redirect; ?>" data-redirect_url="<?php echo $redirect_url; ?>"></div>
 		<div id="splite_popup_box" class="<?php echo 'layout_'.$choose_layout; ?> manage">  			
 			<?php if($popup_heading!='') { ?>
 				<div id="splite_popup_title"><?php echo $popup_heading; ?></div>			
@@ -568,11 +574,11 @@ function splite_enqueue_popup_scripts() {
 		wp_enqueue_style( 'splite-css' ); 
 		wp_register_style( 'splite-animate', splite_plugin_url( '/libs/css/animate.css' ) );
 		wp_enqueue_style( 'splite-animate' ); 
-		wp_register_script( 'nicescroll-js', splite_plugin_url( '/libs/js/jquery.nicescroll.min.js' ) );
+		wp_register_script( 'nicescroll-js', splite_plugin_url( '/libs/js/jquery.nicescroll.min.js', array('jquery'), null, true  ) );
 		wp_enqueue_script( 'nicescroll-js' ); 
 		
-		wp_register_script( 'splite-js', splite_plugin_url( '/libs/js/custom.js' ) );
-		wp_enqueue_script( 'splite-js' ); 
+		wp_register_script( 'splite-js', splite_plugin_url( '/libs/js/custom.js', array('jquery'), null, true  ) );
+		wp_enqueue_script( 'splite-js' );
 	}
 }
 
@@ -585,7 +591,7 @@ function splite_enqueue_popup_scripts() {
 add_action('admin_enqueue_scripts', 'splite_enqueue_admin_popup_scripts');
 function splite_enqueue_admin_popup_scripts() {
 	if ( is_admin() ) {
-		wp_register_script( 'splite-admin-js', splite_plugin_url( '/libs/js/custom-admin.js' ) );
+		wp_register_script( 'splite-admin-js', splite_plugin_url( '/libs/js/custom-admin.js', array('jquery'), null, true  ) );
 		wp_enqueue_script( 'splite-admin-js' ); 
 	}	
 }
@@ -603,18 +609,43 @@ function splite_check_form_id($cf7_id) {
 	
 	$message = '';
 	if( empty($cf7_id)) {
-		if( isset($user_is_admin) ) { $message = __('No form choosen. Please select a form from <a target="_blank" href="'.admin_url('admin.php?page=sppro_options').'">plugin options</a>.'); }
+		if( isset($user_is_admin) ) { $message = __('No form choosen. Please select a form from <a target="_blank" href="'.admin_url('admin.php?page=slick-options').'">plugin options</a>.'); }
 		else { $message = __('Form is not available. Please visit our contact page.'); }		
 	}
 	else {
 		$post_type = get_post_type($cf7_id);
 		if( !absint($cf7_id) OR ($post_type != 'wpcf7_contact_form') OR !is_plugin_active('contact-form-7/wp-contact-form-7.php') ) {
-			if( isset($user_is_admin) ) { $message = __('Invalid Form ID. Please select a form from <a target="_blank" href="'.admin_url('admin.php?page=sppro_options').'">plugin options</a>.'); }
+			if( isset($user_is_admin) ) { $message = __('Invalid Form ID. Please select a form from <a target="_blank" href="'.admin_url('admin.php?page=slick-options').'">plugin options</a>.'); }
 			else { $message = __('Form is temporarily not available. Please visit our contact page.'); }
 		}
 	}
 	
 	return $message;
+}
+
+
+add_action('redux/page/splite_opts/menu/after', 'splite_redux_after_menu');	
+function splite_redux_after_menu($redux_object) {
+	$output = ''; 
+	
+	$output .= '<div class="redux-info redux-info-field redux-field-info" style="margin: 5px; padding: 0 10px">';
+		$output .= '<center><h3>There is so much you can do with Slick Popup and a ton of stuff more you can do with Slick Popup Pro.</h3></center>
+						<p><ol>
+							<li>More than one Popup on a Single Page</li>
+							<li>Premium Support</li>
+							<li>Access to new Features</li>
+							<li>Unlimited Popups</li>
+							<li>Import Demo Popups</li>
+							<li>Exit Popup</li>
+							<li>Entry Popup</li>
+							<li>On-scroll Popup</li>
+							<li>Insights for your Popups</li>
+							<li>Login/Logout Feature</li>
+							<li>and many more.....</li>
+						</ol></p>';
+	$output .= '</div>';
+	
+	echo $output; 
 }
 
 ?>

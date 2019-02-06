@@ -40,6 +40,7 @@
     $args = array(
         'opt_name' => 'splite_opts',
         'dev_mode' => false,
+        'show_options_object' => false,
 		'ajax_save' => true,
 		'allow_tracking' => false,
 		'tour' => false,  
@@ -290,6 +291,10 @@
 							'title'         => __( 'Form to use?', 'slick-popup' ),
 							'subtitle'      => __( '<span style="color:red;font-weight:bold;display:inline;">IMPORTANT!</span><br/>Choose the Contact Form 7 form to be used in the popup.', 'slick-popup' ),
 							'desc'          => __( '<a target="_blank" href="', 'slick-popup' ) .admin_url( '/admin.php?page=wpcf7' ). __( '">See all Contact Forms</a>', 'slick-popup' ),
+							'hint'     => array(
+								'title'     => 'Contact Form 7 Selection',
+								'content'   => 'Choose the Contact Form 7 of your choice that you want to display in your Popup Form.',
+							),
 						),		
 						array(
 							'id'            => 'where_to_show',
@@ -303,6 +308,10 @@
 										'onselected' => 'Only Selected Pages',
 										'notonselected' => __('Not On Selected Pages', 'slick-popup' ),
 									),
+							'hint'     => array(
+								'title'     => 'Where do you want the Popup to be displayed?',
+								'content'   => 'Either it can be on specific pages or on all pages.',
+							),
 							'default'  => 'everywhere'
 						),
 						array(
@@ -315,6 +324,10 @@
 							'title'         => __( 'Choose Your Pages', 'slick-popup' ),
 							'subtitle'      => __( 'Select the pages to exclude or include for popup form display.', 'slick-popup' ),
 							'desc'          => __( '<a target="_blank" href="', 'slick-popup' ) .admin_url( '/edit.php?post_type=page' ). __( '">See all Pages</a>', 'slick-popup' ),
+							'hint'     => array(
+								'title'     => 'Select your pages',
+								'content'   => 'Choose the pages where you want to display/not show the popup.',
+							),
 						),
 				/////////////////////////////////////////////////
 				// Section: Layout & Color Scheme (layout)
@@ -363,6 +376,10 @@
 								'predefined' => __( 'As Per Choosen Layout', 'slick-popup' ),
 								'change' => __( 'Set Your Own Height and Width', 'slick-popup' ),								
 							),
+							'hint'     => array(
+								'title'     => 'Adjust the height and width of your popup',
+								'content'   => 'Enter the values in px for an exact representation of your popup.',
+							),
 							'default'  => 'predefined'
 						),	
 							array(
@@ -403,6 +420,10 @@
 								'square' => 'Square',					
 								'rounded' => 'Rounded',
 								'custom' => __('Set Your Own', 'slick-popup' ),
+							),
+							'hint'     => array(
+								'title'     => 'Border Radius of the popup',
+								'content'   => 'You can either choose rounded or can set a custom it is not adviced that you choose a value which is greater than 20px.',
 							),
 							'default'  => 'square'
 						),		
@@ -469,6 +490,10 @@
 						'subtitle' => __( 'Animation when loading popup', 'slick-popup' ),
 						'desc'     => __( '', 'slick-popup' ),
 						'default'  => 'fadeInDown',
+						'hint'     => array(
+							'title'     => 'How popup will load when the button is clicked.',
+							'content'   => 'This is the animation as the popup appears when you click on the button.',
+						),
 						'options'  => array(
 							'FadeIn Effects' => array(
 								'fadeIn' => 'fadeIn',
@@ -494,7 +519,11 @@
 						'step' => .1,
 						'max' => 5,
 						'resolution' => 0.01,
-						'display_value' => 'text'
+						'display_value' => 'text',
+						'hint'     => array(
+							'title'     => 'Loading Time.',
+							'content'   => 'This gives time to the Loading animation.',
+						),
 					),	
 					array(
 						'id'       => 'unloader-animation',
@@ -502,7 +531,11 @@
 						'title'    => __( 'unLoad Effect', 'slick-popup' ),
 						'subtitle' => __( 'Animation when unloading popup', 'slick-popup' ),
 						'desc'     => __( '', 'slick-popup' ),
-						'default'  => 'fadeOutDown',						
+						'default'  => 'fadeOutDown',	
+						'hint'     => array(
+							'title'     => 'How popup will unload when the popup is closed.',
+							'content'   => 'This animation occurs when you close the popup.',
+						),					
 						'options'  => array(
 							'FadeOut Effects' => array(
 								'fadeOut' => 'fadeOut',
@@ -528,7 +561,11 @@
 						'step' => .1,
 						'max' => 5,
 						'resolution' => 0.01,
-						'display_value' => 'text'
+						'display_value' => 'text',
+						'hint'     => array(
+							'title'     => 'Unloading Time.',
+							'content'   => 'This gives time to the Unloading animation.',
+						),
 					),		
 				) // end fields array
 			)
@@ -564,46 +601,50 @@
 								'default'  => 'STILL NOT SURE WHAT TO DO?',
 								'hint'      => array(
 									'title'     => 'Popup Heading',
-									'content'   => 'Main heading of the popup.',
+									'content'   => 'Main heading of the popup. If you leave you heading field blank please do save the settings and check whether the popup looks nice or not.',
 								),
 							),	
 				/////////////////////////////////////////////////
 				// Section: Popup Heading Typograpghy
 				////////////////////////////////////////////////			
-						array(
+						array (
 							'id'       => 'heading-typography',
 							'type'     => 'section',				
 							'title'    => __( 'Popup Heading Typography', 'slick-popup' ),
 							'indent'   => true, // Indent all options below until the next 'section' option is set.
 						),	
-							array(
-								'id'       => 'heading-typography',
-								'type'     => 'typography',
-								//'required' => array( 'use_heading_font', '=', 1 ),
-								'title'    => __( 'Heading Font', 'slick-popup' ),
-								'subtitle' => __( 'Specify the heading font properties.', 'slick-popup' ),
-								'desc'		=> __('Font Color is important to look good with your choosen color scheme.', 'slick-popup' ),
-								'google'   => true,
-								'default'  => array(
-									'color'       => 	'#F1F1F1',
-									'font-size'   => 	'28px',
-									'line-height' =>	'32px',
-									'font-family' => 	'Open Sans',
-									'font-weight' => 	'900',
-								),
-								'text-align'	=> false,
-								'font-subsets'	=> false,
-							),	
-							array(
-									'id'       => 'custom-text-color',
-									'type'     => 'color',
-									//'required' => array( 'choose-color-scheme', '=', 'custom_theme' ),
-									'output'   => array( '' ),
-									'title'    => __( 'Close button Color', 'slick-popup' ),
-									'subtitle' => __( 'Pick a color for close button.', 'slick-popup' ),
-									'desc' => __( 'This also applies to <strong>Close Icon "X"</strong> and <strong>form submission response.</strong>', 'slick-popup' ),
-									'default'  => '#EFEFEF',
-								),		
+						array (
+							'id'       => 'heading-typography',
+							'type'     => 'typography',
+							//'required' => array( 'use_heading_font', '=', 1 ),
+							'title'    => __( 'Heading Font', 'slick-popup' ),
+							'subtitle' => __( 'Specify the heading font properties.', 'slick-popup' ),
+							'desc'		=> __('Font Color is important to look good with your choosen color scheme.', 'slick-popup' ),
+							'google'   => true,
+							'default'  => array(
+								'color'       => 	'#F1F1F1',
+								'font-size'   => 	'28px',
+								'line-height' =>	'32px',
+								'font-family' => 	'Open Sans',
+								'font-weight' => 	'900',
+							),
+							'text-align'	=> false,
+							'font-subsets'	=> false,
+						),	
+						array (
+							'id'       => 'custom-text-color',
+							'type'     => 'color',
+							//'required' => array( 'choose-color-scheme', '=', 'custom_theme' ),
+							'output'   => array( '' ),
+							'title'    => __( 'Close button Color', 'slick-popup' ),
+							'subtitle' => __( 'Pick a color for close button.', 'slick-popup' ),
+							'desc' => __( 'This also applies to <strong>Close Icon "X"</strong> and <strong>form submission response.</strong>', 'slick-popup' ),
+							'hint'     => array(
+								'title'     => 'How your Close button will look.',
+								'content'   => "The 'X' button will appear on the top right corner you can change the color of the popup.",
+							),
+							'default'  => '#EFEFEF',
+						),		
 			)
 		) );
 	}
@@ -637,7 +678,7 @@
 								'default'  => 'We are glad that you preferred to contact us. Please fill our short form and one of our friendly team members will contact you back.',
 								'hint'      => array(
 									'title'     => 'Call To Action',
-									'content'   => 'This text will appear above the form. Choose something that encourages user to fill up the form.',
+									'content'   => 'This text will appear above the form. Choose something that encourages user to fill up the form. You can add text,image or video it your choice.',
 								),
 							),
 				/////////////////////////////////////////////////
@@ -681,6 +722,10 @@
 								'title'    => __( 'Color Scheme', 'slick-popup' ),
 								'subtitle' => __( 'Choose your desired cover scheme.', 'slick-popup' ),
 								'desc'     => __( '<span style="font-weight:bold;font-size:1.1em;">Choose one of our pre-defined color schemes or set your own. <a href="https://codecanyon.net/item/slick-popup-pro-/16115931?ref=OmAkSols">More in Pro</a></span>', 'slick-popup' ),
+								'hint'     => array(
+									'title'     => 'Color Scheme of the Popup',
+									'content'   => 'You can set a different color for Popup header and body or you can choose the same. The predefined color schemes have different colors for header and body. If you want the same color for header and body then choose set your own option. Which also has the option to set image as the background.',
+								),
 								'options'  => array(
 									'master_red' => array(
 										'alt' => __('Master Red', 'slick-popup' ),
@@ -724,6 +769,10 @@
 									'title'    => __( 'Heading Color', 'slick-popup' ),
 									'subtitle' => __( 'Pick a color for theme of your popup.', 'slick-popup' ),
 									'desc' => __( 'This color will be used to create theme of your popup.', 'slick-popup' ),
+									'hint'     => array(
+										'title'     => 'Header background color.',
+										'content'   => 'The color choosen will be in the background of the popup.',
+									),
 									'default'  => '#333',
 								),
 								array(
@@ -733,6 +782,10 @@
 									'output'   => array( '' ),
 									'title'    => __( 'Popup Background', 'slick-popup' ),
 									'subtitle' => __( 'Please style the background for the form area in popup.', 'slick-popup' ),
+									'hint'     => array(
+										'title'     => 'Body Background Color.',
+										'content'   => 'You can either choose a color or an image.',
+									),
 									'desc' => __( 'Note: If you choose an image background then the title area will be transparent.', 'slick-popup' ),
 									'default'  => array(
 										'background-color' => '#EFEFEF',
@@ -743,7 +796,14 @@
 										'background-repeat' => 'no-repeat',
 										'background-media' => '',
 									),
-								),							
+								),
+								array(
+									'id'     => 'notice-splite-cover',
+									'type'   => 'info',
+									'style'  => 'normal',
+									'notice' => false,
+									'desc'   => __( 'The Options for the Curtain (i.e., Background of the popup which is slightly transparent) is available in Slick Popup Pro. You can overwrite the options by using Custom CSS (div#splite_curtain {Your CSS Code})', 'slick-popup' ),
+								),								
 			)
 		) );
 	}
@@ -764,7 +824,10 @@
 					'type'     => 'select',
 					'title'    => __( 'Choose Position', 'slick-popup' ),
 					'subtitle' => __( 'Choose the position of side button.', 'slick-popup' ),
-					'desc'     => __( '', 'slick-popup' ),
+					'hint'     => array(
+						'title'     => 'Position of the Side Button.',
+						'content'   => 'You can choose either Left or Right. You choose none if you are setting your popup on the click of a specific button.',
+					),
 					//Must provide key => value pairs for select options
 					'options'  => array(
 						'pos_right' => __( 'Right', 'slick-popup' ),
@@ -778,6 +841,10 @@
 					'type'     => 'text',
 					'title'    => __( 'Button Text', 'slick-popup' ),
 					'subtitle'     => __( 'What should your button say?', 'slick-popup' ),
+					'hint'     => array(
+						'title'     => 'Side Button Text.',
+						'content'   => 'The text of the side button usually describes the header of the popup in a 1-2 words.',
+					),
 					'desc' => __( '<b>Suggestions:</b> "Need Help?" "Subscribe" "Get a quote!" "Have a query?"<br/><b>Default:</b> Contact Us', 'slick-popup' ),
 					'default'  => 'CONTACT US',
 				),	
@@ -803,6 +870,10 @@
 					'type'     => 'select',
 					'title'    => __( 'Side Button Scheme', 'slick-popup' ),
 					'subtitle' => __( 'Choose styles and appearance.', 'slick-popup' ),
+					'hint'     => array(
+						'title'     => 'Side button Color.',
+						'content'   => 'You can either leave it as it is it will pick up the existing colors from the popup and choose a color or you can choose your on in set your own.',
+					),
 					'desc'     => __( '<b>Default:</b> Inherit From Color Scheme', 'slick-popup' ),
 					//Must provide key => value pairs for select options
 					'options'  => array(
@@ -933,8 +1004,6 @@
 					'subtitle' => __( 'Paste your CSS code here.', 'slick-popup' ),
 					'mode'     => 'css',
 					'theme'    => 'monokai',
-					'desc'     => '<br/>Contact our support for help: poke@slickpopup.com',
-					'default'  => "#splite_popup_box span.wpcf7-not-valid-tip{\n\t\t\t\t   \n\t\t\t}"
 				),
 
 				array(
@@ -948,6 +1017,51 @@
 							'content'   =>  __( 'Put the class or id from which you want the popup to appear', 'slick-popup' ),
 						),
 				),
+
+				array(
+					'id'		=> 'autoclose',
+					'type'		=> 'switch',
+					'title'		=> 'Close after Submission',
+					'default'	=> 0,
+					'on'       => __('Enable', 'slick-popup' ),
+					'off'      => __('Disable', 'slick-popup' ),
+					'hint'     => array(
+						'title'     => 'Autoclose Popup',
+						'content'   => 'This option will autoclose Popup after X seconds',
+					), 
+				),
+
+				array(
+					'id'		=> 'autoclose_time',
+					'type'		=> 'text',
+					'title'		=> 'Close after seconds',
+					'desc'		=> 'Auto close after X seconds',
+					'required'   => array( 'autoclose', '=', 1 ),
+					'default'	=> 5, 
+				),
+
+				array(
+					'id'		=> 'redirect',
+					'type'		=> 'switch',
+					'title'		=> 'Redirect after submission',
+					'default'	=> 0,
+					'on'       => __('Enable', 'slick-popup' ),
+					'off'      => __('Disable', 'slick-popup' ),
+					'hint'     => array(
+						'title'     => 'Redirect Popup',
+						'content'   => 'This will redirect the Popup to a url after submission',
+					), 
+				),
+
+				array(
+					'id'		=> 'redirect_url',
+					'type'		=> 'text',
+					'title'		=> 'Redirect URL',
+					'desc'		=> __('With https:// or http://', 'slick-popup'),
+					'subtitle'	=> 'Enter redirect URL',
+					'required'	=> array( 'redirect', '=', 1 ),
+					'default'	=> '', 
+				),	
 			)
 		) );
 	}

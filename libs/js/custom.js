@@ -82,6 +82,27 @@ jQuery(document).ready(function($) {
 		}
 	}, false );
 
+	document.addEventListener( 'wpcf7mailsent', function( event ) {
+		getSubmittedForm = jQuery('.splite_popup_animator[data-cf7-formID='+event.detail.contactFormId+']');
+		if(getSubmittedForm.length) {
+
+			autoclose = jQuery('.splite_popup_animator').attr('data-autoclose');
+			autoclose_time = jQuery('.splite_popup_animator').attr('data-autoclose_time'); 
+			redirect = jQuery('.splite_popup_animator').attr('data-redirect'); 
+			redirect_url = jQuery('.splite_popup_animator').attr('data-redirect_url');
+
+			if(redirect=="1" && redirect_url!='') {
+				location.replace(redirect_url); 
+			}
+			else if(autoclose=="1" && autoclose_time!='') {
+				setTimeout(function() {
+					splite_unloader(); 
+				}, parseInt(autoclose_time) * 1000);
+			}
+		}	 
+	}, false );
+
+
 	$popupBox = jQuery('#splite_popup_box');
 	if ($popupBox.length) {
 		var activationmode = jQuery(this).attr('data-activationmode');

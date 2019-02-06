@@ -2,7 +2,7 @@
 	Enquiry Popup Form Styles 
 ****************************************************************/
 div#splite_curtain {
-  background: none repeat scroll 0 0 rgba(0, 0, 0, 0.85);
+  background: none repeat scroll 0 0 rgba(0, 0, 0, 0.75);
   border-radius: 0;
   bottom: 0;
   display: none;
@@ -332,6 +332,14 @@ a.splite_sideEnquiry:hover {
 .spp-clear {
 	clear: both;
 	display: block; 
+}
+
+#sppro-ad {
+  margin: 5px !important;
+}
+
+.redux-info-field {
+  padding: 5px !important;
 }
 
 @media (max-width: 767px) {
