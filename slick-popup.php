@@ -30,6 +30,7 @@ define ( 'SPLITE_DEBUG', FALSE );
 
 require_once( SPLITE_PLUGIN_DIR . '/libs/admin/codestar/cs-framework.php' );
 require_once( SPLITE_PLUGIN_DIR . '/libs/admin-functions.php' );
+require_once( SPLITE_PLUGIN_DIR . '/libs/admin-pages.php' );
 require_once( SPLITE_PLUGIN_DIR . '/libs/extras.php' );
 require_once( SPLITE_PLUGIN_DIR . '/libs/classes/splite-importer.php' );
 
