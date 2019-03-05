@@ -293,16 +293,18 @@ function splite_add_my_popup() {
 		$cf7_id = isset($splite_opts['form-id'])? $splite_opts['form-id'] : '';
 
 		global $post; 	
-		$custom =  get_post_meta( $post->ID, '_splite_page_options', true); 	
-		if( isset($custom['_splite_meta_override']) AND $custom['_splite_meta_override'] ) {
-			if( isset($custom['_splite_meta_form_id']) AND !empty($custom['_splite_meta_form_id']) )
-				$cf7_id = $custom['_splite_meta_form_id'];
-			if( isset($custom['_splite_meta_side_button']) AND !empty($custom['_splite_meta_side_button']) )
-				$side_button_text = $custom['_splite_meta_side_button'];
-			if( isset($custom['_splite_meta_popup_heading']) AND !empty($custom['_splite_meta_popup_heading']) )
-				$popup_heading = $custom['_splite_meta_popup_heading'];			
-			if( isset($custom['_splite_meta_cta']) AND !empty($custom['_splite_meta_cta']) )
-				$cta_text = $custom['_splite_meta_cta'];			
+		if(isset($post) && isset($post->ID)) {
+			$custom =  get_post_meta( $post->ID, '_splite_page_options', true); 	
+			if( isset($custom['_splite_meta_override']) AND $custom['_splite_meta_override'] ) {
+				if( isset($custom['_splite_meta_form_id']) AND !empty($custom['_splite_meta_form_id']) )
+					$cf7_id = $custom['_splite_meta_form_id'];
+				if( isset($custom['_splite_meta_side_button']) AND !empty($custom['_splite_meta_side_button']) )
+					$side_button_text = $custom['_splite_meta_side_button'];
+				if( isset($custom['_splite_meta_popup_heading']) AND !empty($custom['_splite_meta_popup_heading']) )
+					$popup_heading = $custom['_splite_meta_popup_heading'];			
+				if( isset($custom['_splite_meta_cta']) AND !empty($custom['_splite_meta_cta']) )
+					$cta_text = $custom['_splite_meta_cta'];			
+			}
 		}
 		
 		$cf7_id = apply_filters( 'splite_dollar_cf7_id', $cf7_id );

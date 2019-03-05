@@ -3,7 +3,7 @@ Contributors: ak.singla,manish9034,nikhilomak
 Tags: contact form 7, popup, cf7, popup form, wordPress popup plugin, contact form popup, popup contact form 7, submit form
 Requires at least: 3.0.1
 Tested up to: 5.0.3
-Stable tag: 1.6.5	
+Stable tag: 1.6.6	
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -110,6 +110,13 @@ For any doubts or queries, please read our F.A.Q section. If it doesn't come out
 7. Background Image Popup
 
 == Changelog ==
+
+= 1.6.6 =
+* Improved: Menu by adding hints.
+* Added: Help and Support Page.
+* Tested and Working with WordPress 5.1
+* Minor bug fixes
+
 
 = 1.6.5 =
 * Improved: Menu by adding hints.

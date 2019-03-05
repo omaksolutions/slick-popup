@@ -1,35 +1,6 @@
 <?php 
 
 /*
-* splite_notice_dismissable
-* Ajax action to do tasks on notice dismissable
-* Require class: sp-dismissable
-*/
-add_action( 'wp_ajax_splite_notice_dismissable', 'splite_notice_dismissable' );
-function splite_notice_dismissable() {
-	
-	$data_btn = isset($_POST['dataBtn']) ? $_POST['dataBtn'] : '';
-	
-	if(empty($data_btn)) return; 
-	
-	$today = DateTime::createFromFormat('U', current_time('U')); 
-	
-	switch($data_btn) {
-		case 'ask-later': 
-			$ask_later = get_option('splite_review_notice') ? get_option('splite_review_notice') : 0; 
-			update_option('splite_review_notice', ++$ask_later); 
-			break; 
-		case 'ask-never': 
-			update_option('splite_review_notice', 0); 
-			break; 
-	}
-		
-	wp_send_json_success(); 
-	wp_die(); 
-}
-
-
-/*
 * splite_action_importDemo
 * New import feature to setup individual Popups
 */

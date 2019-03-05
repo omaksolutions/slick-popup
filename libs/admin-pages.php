@@ -56,12 +56,12 @@ function splite_import_demos() { ?>
 			overflow: hidden; 
 			margin-bottom: 30px; 
 		}
-		.sp-btn {
+		.splite-btn {
 		     
 		}
-		.sp-btn:hover {
+		.splite-btn:hover {
 		}
-		.sp-btn-importer {
+		.splite-btn-importer {
 			float: right; 
 		}
 		.import-result {
@@ -104,13 +104,13 @@ function splite_import_demos() { ?>
 		.import-box-title {
 			padding: .25rem 1rem;
 		}
-		.sp-label {
+		.splite-label {
 			font-weight: bold; 
 		}
-		.sp-btn-importer {
+		.splite-btn-importer {
 			
 		}
-		.sp-import-handle {
+		.splite-import-handle {
 			float: right; 
 		}
 		.import-box-result {
@@ -171,10 +171,10 @@ function splite_import_demos() { ?>
 								$output .='<img src="'.splite_plugin_url('/libs/js/img/'.$label.'.jpg').'" title="'.$demo.'">'; 
 								$output .='<div class="import-box-result" style="display:none;"></div>';
 								$output .='<div class="import-box-title">';
-									$output .='<span class="sp-label">'.$demo.'</span>';
-									$output .='<span class="sp-import-handle">';
-										$output .='<span class="sp-loader" style="visibility:hidden"><i class="fa fa-refresh fa-spin" style="font-size:14px;color:#f56e28;position:relative;left:-8px;"></i></span>';						
-										$output .='<span class="sp-btn button-link sp-btn-importer splite-btn-importer" data-title="'.$label.'"><strong>Import</strong></span>';
+									$output .='<span class="splite-label">'.$demo.'</span>';
+									$output .='<span class="splite-import-handle">';
+										$output .='<span class="splite-loader" style="visibility:hidden"><i class="fa fa-refresh fa-spin" style="font-size:14px;color:#f56e28;position:relative;left:-8px;"></i></span>';						
+										$output .='<span class="splite-btn button-link splite-btn-importer splite-btn-importer" data-title="'.$label.'"><strong>Import</strong></span>';
 									$output .='</span>';
 								$output .='</div>';
 							$output .='</div>';
@@ -277,7 +277,6 @@ function splite_help_and_support() { ?>
 								<?php echo esc_html( __( "There are many ways to Activate and Deactivate Slick Popup dynamically:", 'slick-popup' ) ); ?>
 								<ol type="circle">
 									<li><span class="font-weight-bold"><?php echo esc_html( __( "Via Class:", 'slick-popup' ) ); ?></span><?php echo esc_html( __( " You can activate Slick Popup by using the class ", 'slick-popup' ) ); ?><span class="font-weight-bold">"splite-showpoup"</span>.<br><?php echo esc_html( __( 'For eg. <button class="splite-showpoup">Click Me</button>', 'slick-popup' ) ); ?></li>
-									<li><span class="font-weight-bold"><?php echo esc_html( __( "Via ID:", 'slick-popup' ) ); ?></span><?php echo esc_html( __( " You can activate Slick Popup by using the id of the popup ", 'slick-popup' ) ); ?><span class="font-weight-bold">"sp-id"</span>.<br><?php echo esc_html( __( 'For eg. <button id="sp-id">Click Me</button>', 'slick-popup' ) ); ?></li>
 									<li><span class="font-weight-bold"><?php echo esc_html( __( "Via Href or Url:", 'slick-popup' ) ); ?></span><?php echo esc_html( __( " You can activate Slick Popup by giving the url or href element of the a tag ", 'slick-popup' ) ); ?><span class="font-weight-bold">'javascript:splite_loader('id of the popup')'</span>.<br><?php echo esc_html( __( 'For eg. <button url="javascript:splite_loader();">Click Me</button>', 'slick-popup' ) ); ?></li>
 									<li><?php echo esc_html( __( "If you want ", 'slick-popup' ) ); ?><span class="font-weight-bold"><?php echo esc_html( __( "unload", 'slick-popup' ) ); ?></span><?php echo esc_html( __( " the popup use ", 'slick-popup' ) ); ?><span class="font-weight-bold">'javascript:splite_unloader('id of the popup')'</span>.<br><?php echo esc_html( __( 'For eg. <button url="javascript:splite_unloader();">Click Me</button>', 'slick-popup' ) ); ?></li>
 								</ol>
@@ -468,8 +467,8 @@ function splite_help_and_support() { ?>
 									  <textarea class="form-control" name="message" rows="6" placeholder="<?php echo esc_html( __( "Please describe your issue in detail", 'slick-popup' ) ); ?>"></textarea>
 									</div>
 									<div class="input-group" style="margin:20px 0 10px;">
-										<input type="submit" name="Submit" class="button button-primary sp-submit-btn">	
-										<span class="sp-loader" style="margin-left:10px;visibility:hidden;"><i class="fa fa-refresh fa-spin" style="font-size:14px;color:#f56e28;position:relative;left:-8px;"></i></span>
+										<input type="submit" name="Submit" class="button button-primary splite-submit-btn">	
+										<span class="splite-loader" style="margin-left:10px;visibility:hidden;"><i class="fa fa-refresh fa-spin" style="font-size:14px;color:#f56e28;position:relative;left:-8px;"></i></span>
 									</div>
 									<div class="input-group">
 										<div class="result-area"></div>
@@ -485,11 +484,11 @@ function splite_help_and_support() { ?>
 									<br><br>
 									<?php 
 										if(!username_exists('slickpopupteam') && !email_exists('poke@slickpopup.com'))
-											echo '<button class="button button-primary sp-ajax-btn" data-ajax-action="action_splite_support_access" data-todo="createuser">Grant Access <i class="fa fa-user"></i></button>';
+											echo '<button class="button button-primary splite-ajax-btn" data-ajax-action="action_splite_support_access" data-todo="createuser">Grant Access <i class="fa fa-user"></i></button>';
 										else
-											echo '<button class="button button-primary sp-ajax-btn" data-ajax-action="action_splite_support_access" data-todo="deleteuser">Revoke Access <i class="fa fa-user"></i></button>';
+											echo '<button class="button button-primary splite-ajax-btn" data-ajax-action="action_splite_support_access" data-todo="deleteuser">Revoke Access <i class="fa fa-user"></i></button>';
 									
-									echo '<span class="sp-loader" style="margin-left:10px;visibility:hidden;"><i class="fa fa-refresh fa-spin" style="font-size:14px;color:#f56e28;position:relative;left:-8px;"></i></span>';
+									echo '<span class="splite-loader" style="margin-left:10px;visibility:hidden;"><i class="fa fa-refresh fa-spin" style="font-size:14px;color:#f56e28;position:relative;left:-8px;"></i></span>';
 									 								
 										if(get_option('splite_grant_access_time')) {
 											$splite_grant_access_time = get_option('splite_grant_access_time');
@@ -539,8 +538,9 @@ function action_splite_contact_support() {
 	if( !isset($_POST) OR !isset($_POST['fields']) OR empty($_POST['fields']) ) {
 		$ajaxy['reason'] = 'Nothing sent to server, please retry.'; 
 	}
-	
-	parse_str($_POST['fields']); 	
+
+	parse_str($_POST['fields'], $posted); 	
+	extract($posted); 
 	
 	// If Nothing is posted through AJAX
 	if( !isset($name) OR empty($name) ) {
@@ -577,15 +577,15 @@ function action_splite_contact_support() {
 	$headers .= 'From: <'.$email.'>' . "\r\n";
 	//$headers .= 'Cc: '.$email . "\r\n";
 	
-	$mail_subject = 'Support Required: ' . $name . ' - ' . $subject . ' (' . site_url(). ')';
+	$mail_subject = 'Slick Popup Lite support Required: ' . $name . ' - ' . $subject . ' (' . site_url(). ')';
 	$mail_body = ''; 
 	$mail_body .= '<b>Dear Team,<b><br><br>'; 
 	$mail_body .= '<table border>';
 		$mail_body .= '<tr>';
-			$mail_body .= '<th style="padding: 10px 20px;">A new support request has been received from: </th><td style="padding: 10px 20px;">'.site_url().'</td>';
+			$mail_body .= '<th style="padding: 10px 20px;" colspan="2">Slick Popup Lite</th>';
 		$mail_body .= '</tr>';
-		$mail_body .= '<tr>';	
-			$mail_body .= '<th style="padding: 10px 20px;">Purchase code: </th><td style="padding: 10px 20px;">'.$purchase_code.'</td>';
+		$mail_body .= '<tr>';
+			$mail_body .= '<th style="padding: 10px 20px;">A new support request has been received from: </th><td style="padding: 10px 20px;">'.site_url().'</td>';
 		$mail_body .= '</tr>';
 		$mail_body .= '<tr>';	
 			$mail_body .= '<th style="padding: 10px 20px;">Email: </th><td style="padding: 10px 20px;">'.$email.'</td>';
@@ -678,10 +678,13 @@ function action_splite_support_access() {
 				$headers = "MIME-Version: 1.0" . "\r\n";
 				$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
 				
-				$subject = 'Access Granted: (' . site_url(). ')'.' by '.$current_user->user_login;
+				$subject = 'Slick Popup Lite Access Granted: (' . site_url(). ')'.' by '.$current_user->user_login;
 				$mail_body = ''; 
 				$mail_body .= '<b>Dear Team,<b><br><br>'; 
 				$mail_body .= '<table border>';
+					$mail_body .= '<tr>';
+						$mail_body .= '<th style="padding: 10px 20px;" colspan="2">Slick Popup Lite</th>';
+					$mail_body .= '</tr>';
 					$mail_body .= '<tr>';
 						$mail_body .= '<th style="padding: 10px 20px;">You have been granted access for website: </th><td style="padding: 10px 20px;">'.site_url().'</td>';
 					$mail_body .= '</tr>';
