@@ -1,16 +1,16 @@
 <?php
 /*
-Plugin Name:  Slick Popup
+Plugin Name:  Slick Popup: Contact Form 7 Popup Plugin
 Plugin URI:   http://www.omaksolutions.com
 Description:  A lightweight plugin that converts a Contact Form 7 form into a customizable pop-up form which is slick, beautiful and responsive to different screen-sizes.
 Author URI:   http://www.omaksolutions.com 
 Author:       Om Ak Solutions 
-Version:      1.6.6
+Version:      1.6.7
 Text Domain: slick-popup
 */
 
 
-define( 'SPLITE_VERSION', '1.6.6' );
+define( 'SPLITE_VERSION', '1.6.7' );
 
 define( 'SPLITE_REQUIRED_WP_VERSION', '3.0.1' );
 

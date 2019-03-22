@@ -1,55 +1,56 @@
-=== Slick Popup Lite ===
-Contributors: ak.singla,manish9034,nikhilomak
+=== Slick Popup: Contact Form 7 Popup Plugin ===
+Contributors: ak.singla, nikhilomak, saviomak28
+Donate link: https://www.omaksolutions.com
 Tags: contact form 7, popup, cf7, popup form, wordPress popup plugin, contact form popup, popup contact form 7, submit form
-Requires at least: 3.0.1
 Tested up to: 5.0.3
-Stable tag: 1.6.6	
+Requires at least: 3.5
+Requires PHP: 5.3
+Stable tag: trunk	
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-A lightweight plugin that converts a Contact Form 7 form into a customizable pop-up form which is slick, beautiful and responsive to different screen-sizes.
+A lightweight plugin that converts a Contact Form 7 form into a customizable pop-up form which is slick, beautiful and responsive to different screen sizes.
 
 == Description ==
 
-Best WordPress Popup plugin for Contact Form 7
+Best WordPress Popup plugin for **Contact Form 7**
 
-Our WordPress Popup Plugin helps you create a beautiful and responsive popup with any Contact Form 7 form. Easy customization to style with your theme. 
+Our WordPress Popup Plugin helps you create a **beautiful and responsive popup** with any **Contact Form 7** form. *Easy customization to style with your theme*. 
 
-Perfect for any website with a single product or service. Place a form on all pages of your website and get ready to get more leads.
+*Perfect for **any website** with a single product or service*. Place a form on all pages of your website and get ready to get more leads.
 
 [[Check out the Demo](https://www.slickpopup.com/slick-popup-wordpress-popup-plugin-free-version/?utm_source=splite&utm_medium=wporg&utm_campaign=OmAkSols&utm_term=litedemolink)] [[Pro Version Demo](https://www.slickpopup.com/?utm_source=splite&utm_medium=wporg&utm_campaign=OmAkSols&utm_term=prodemolink)]
 
-*Note:* Contact Form 7 plugin must be installed and setup to use Slick Popup Lite. 
+**Note:** *Contact Form 7 plugin must be installed and set up to use Slick Popup Lite.*
 
-**Features of the plugin:**
+== Features of the plugin: ==
 
-* Create popup for any Contact Form 7 form
+* Create popup for any **Contact Form 7** form
 * Use different popups for different pages
-* 5 pre-built color schemes for popup
-* One-click import for demo forms
-* 2 pre-built Contact Form 7 forms
-* Options to style the side button
-* Options to style the submit button 
+* *5 pre-built color schemes* for popup
+* **One-click import** for demo forms
+* Options to *style the side button*
+* Options to *style the submit button* 
 
-**Other advantages:**
+== Other advantages: ==
 
-* Slick and Beautiful : The overall appeal of the popup is quite slick and beautiful.
-* Multiple color schemes : 6 in-built color schemes for easy choice 
-* 100% Responsive : The popup is perfectly responsive on all screen sizes and works well on all devices.
-* Lightweight and Fast : The code quality is awesome which makes it very lightweight and lightning fast.
-* Easy to Configure : Easy to configure options makes it your last choice once you try it.
-* User Friendly : When it loads, a user finds it very easy to fill-up the form and enquiries increase.
-* Browser Compatible : Thoroughly tested with all major browsers and their widely used versions.
+* **Slick and Beautiful**: The overall appeal of the popup is quite *slick and beautiful*.
+* **Multiple color schemes**: *6 in-built color schemes* for an easy choice 
+* **100% Responsive**: The popup is *perfectly responsive on all screen sizes* and works well on all devices.
+* **Lightweight and Fast**: The code quality is awesome which makes it *very lightweight and lightning fast*.
+* **Easy to Configure**: *Easy to configure options* makes it your last choice once you try it.
+* **User Friendly**: When it loads, a user finds it *very easy to fill up the form* and **enquiries increase**.
+* **Browser Compatible**: *Thoroughly tested with all **major browsers** * and their widely used versions.
 
-If you have custom user roles, posts or pages - it is a treat for you. We have provided a robust set of filters which can practically help you change all settings of the plugin on the go. 
+If you have **custom user roles, posts or pages** - *it is a treat for you*. We have provided a **robust set of filters** which can practically help you change all settings of the plugin on the go. 
 
-**What's more?:**
-The premium version - Slick Popup Pro has additional features:
+== What's more?: ==
+The premium version - **Slick Popup Pro** has additional features:
 
-* Multiple Activation Modes - Auto popup, On-scroll Popup, Exit Popup)
+* Multiple Activation Modes - **Auto popup, On-scroll Popup, Entry Popup**
 * 25+ Animations Effects
 * 5 pre-defined layouts
-* Multiple Popups on one page
+* **Multiple Popups** on one page
 
 [View on CodeCanyon](https://codecanyon.net/item/slick-popup-pro-/16115931?ref=OmAkSols)
  
@@ -61,9 +62,9 @@ The quickest method for installing the Slick Popup Lite plugin is:
 1. Visit Plugins -> Add New in the WordPress dashboard
 2. Search for "Slick Popup"
 3. Click "Install Now"
-4. Finally click "Activate Plugin"
+4. Finally, click "Activate Plugin"
 
-If you are WordPress fan and prefer to do things manually then follow these instructions:
+If you are a WordPress fan and prefer to do things manually then follow these instructions:
 
 1. Upload the `slick-popup` folder to the `/wp-content/plugins/` directory
 2. Activate the plugin through the 'Plugins' menu in WordPress
@@ -71,13 +72,13 @@ If you are WordPress fan and prefer to do things manually then follow these inst
 
 == Frequently Asked Questions ==
 
-= How to show popup with a button or link? =
+= How to show the popup with a button or link? =
 
-Use class='splite-showpopup' on element to make it the handle for showing the popup.
+Use class='splite-showpopup' on an element to make it the handle for showing the popup.
 
 = Can I create multiple popups on one page? =
 
-No the free version does not have this features. Please see the pro version demo for this feature. 
+No, the free version does not have these features. Please see the pro version demo for this feature. 
 
 = Do popup look the same in every theme? =
 
@@ -85,7 +86,7 @@ We tried to prepare HTML / CSS code to work regardless of the theme, but if you 
 
 = What version of WordPress I need? =
 
-Plugin will work in WP 3.2+. However, we recommend using the latest version.
+The plugin will work in WP 3.2+. However, we recommend using the latest version.
 
 = How can I modify the appearance of popup? =
 
@@ -97,7 +98,7 @@ Yes, you can do it in Plugin settings, just check for the "Where to show" option
 
 = I have a doubt, what should I do? =
 
-For any doubts or queries, please read our F.A.Q section. If it doesn't come out to be helpful, you can contact support at: poke@slickpopup.com
+For any doubts or queries, please read our F.A.Q section. If it doesn't come out to be helpful, you can contact support at poke@slickpopup.com
 
 == Screenshots ==
 
@@ -110,6 +111,10 @@ For any doubts or queries, please read our F.A.Q section. If it doesn't come out
 7. Background Image Popup
 
 == Changelog ==
+
+= 1.6.7 =
+* Minor Bugs Fixed
+* Changes in Readme File
 
 = 1.6.6 =
 * Improved: Menu by adding hints.

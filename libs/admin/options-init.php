@@ -1011,7 +1011,7 @@
 					'type'		=> 'text',
 					'title'		=> __( 'External Selector', 'slick-popup' ),
 					'subtitle'	=> __( 'Enter class or id of External Selector', 'slick-popup' ),
-					'default'	=> '',
+					'default'	=> '.splite-showpopup',
 					'hint'      => array(
 							'title'     => __( 'External Selector', 'slick-popup' ),
 							'content'   =>  __( 'Put the class or id from which you want the popup to appear', 'slick-popup' ),
