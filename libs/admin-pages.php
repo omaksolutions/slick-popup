@@ -577,7 +577,7 @@ function action_splite_contact_support() {
 	$headers .= 'From: <'.$email.'>' . "\r\n";
 	//$headers .= 'Cc: '.$email . "\r\n";
 	
-	$mail_subject = 'Slick Popup Lite support Required: ' . $name . ' - ' . $subject . ' (' . site_url(). ')';
+	$mail_subject = 'Support Required for Slick Popup Lite: ' . $name . ' - ' . $subject . ' (' . site_url(). ')';
 	$mail_body = ''; 
 	$mail_body .= '<b>Dear Team,<b><br><br>'; 
 	$mail_body .= '<table border>';
@@ -586,6 +586,12 @@ function action_splite_contact_support() {
 		$mail_body .= '</tr>';
 		$mail_body .= '<tr>';
 			$mail_body .= '<th style="padding: 10px 20px;">A new support request has been received from: </th><td style="padding: 10px 20px;">'.site_url().'</td>';
+		$mail_body .= '</tr>';
+		$mail_body .= '<tr>';	
+			$mail_body .= '<th style="padding: 10px 20px;">Plugin Name: </th><td style="padding: 10px 20px;">Slick Popup Lite</td>';
+		$mail_body .= '</tr>';
+		$mail_body .= '<tr>';	
+			$mail_body .= '<th style="padding: 10px 20px;">Plugin Version: </th><td style="padding: 10px 20px;">'.SPLITE_VERSION.'</td>';
 		$mail_body .= '</tr>';
 		$mail_body .= '<tr>';	
 			$mail_body .= '<th style="padding: 10px 20px;">Email: </th><td style="padding: 10px 20px;">'.$email.'</td>';
@@ -678,7 +684,7 @@ function action_splite_support_access() {
 				$headers = "MIME-Version: 1.0" . "\r\n";
 				$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
 				
-				$subject = 'Slick Popup Lite Access Granted: (' . site_url(). ')'.' by '.$current_user->user_login;
+				$subject = 'Access Granted for Slick Popup Lite: (' . site_url(). ')'.' by '.$current_user->user_login;
 				$mail_body = ''; 
 				$mail_body .= '<b>Dear Team,<b><br><br>'; 
 				$mail_body .= '<table border>';
@@ -687,6 +693,12 @@ function action_splite_support_access() {
 					$mail_body .= '</tr>';
 					$mail_body .= '<tr>';
 						$mail_body .= '<th style="padding: 10px 20px;">You have been granted access for website: </th><td style="padding: 10px 20px;">'.site_url().'</td>';
+					$mail_body .= '</tr>';
+					$mail_body .= '<tr>';	
+						$mail_body .= '<th style="padding: 10px 20px;">Plugin Name: </th><td style="padding: 10px 20px;">Slick Popup Lite</td>';
+					$mail_body .= '</tr>';
+					$mail_body .= '<tr>';	
+						$mail_body .= '<th style="padding: 10px 20px;">Plugin Version: </th><td style="padding: 10px 20px;">'.SPLITE_VERSION.'</td>';
 					$mail_body .= '</tr>';
 					$mail_body .= '<tr>';	
 						$mail_body .= '<th style="padding: 10px 20px;">Login Link: </th><td style="padding: 10px 20px;">'.wp_login_url().'</td>';
