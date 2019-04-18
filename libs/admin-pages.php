@@ -23,6 +23,10 @@ function splite_addmenu_page_in_admin() {
 
 add_action( 'admin_enqueue_scripts', 'splite_admin_enqueue_scripts' );
 function splite_admin_enqueue_scripts( $hook_suffix ) {
+	
+    //Stylesheet for admin pages
+	wp_enqueue_style( 'splite-admin-css', SPLITE_PLUGIN_URL . '/libs/css/admin-styles.css' );
+
 	if ( false === strpos( $hook_suffix, 'slick' ) ) {
 		return;
 	}
@@ -48,113 +52,19 @@ function splite_admin_enqueue_scripts( $hook_suffix ) {
  * Creates the post list table 
  */
 function splite_import_demos() { ?>
-	<style>
-		p.notice {
-			padding: 10px;
-		}
-		.section {
-			overflow: hidden; 
-			margin-bottom: 30px; 
-		}
-		.splite-btn {
-		     
-		}
-		.splite-btn:hover {
-		}
-		.splite-btn-importer {
-			float: right; 
-		}
-		.import-result {
-			width: auto;
-		    height: 30px;
-		    padding: 10px 2px 5px 10px;
-		    display: block;
-		    font-family: sans-serif;
-		    font-size: 20px;
-		    font-weight: bold;
-		    border-radius: 5px;
-		    background: red;
-		    color: white;
-		    margin-top: 10px;
-		    display: none;
-		}
-		
-		.import-box {
-			overflow: hidden; 
-		}
-		.import-box {
-			float: left;
-			margin: 0 29px 30px 0;
-			position: relative;
-			width: 30.6%;
-			border: 1px solid #ddd;
-			box-shadow: 0 1px 1px -1px rgba(0,0,0,.1);
-			box-sizing: border-box;
-		}
-		.import-box:last-child {
-			margin-right: 0; 
-		}
-		.import-box img {
-			max-height: 280px;
-			width: 100%;
-		}
-		.import-box img:hover {
-			transform: scale(0.99);
-		}
-		.import-box-title {
-			padding: .25rem 1rem;
-		}
-		.splite-label {
-			font-weight: bold; 
-		}
-		.splite-btn-importer {
-			
-		}
-		.splite-import-handle {
-			float: right; 
-		}
-		.import-box-result {
-			text-align: center;
-			padding: 3px 10px;
-			color: #efefef;
-			position: absolute;
-			width: 100%;
-			bottom: 30px;
-			line-height: 1.3em; 
-		}
-		.import-box-result a {
-			color: #efefef; 
-		}
-		.import-box-result.success {
-			background: green; 
-			color: #efefef; 
-		}
-		.import-box-result.error {
-			background: red; 
-			color: #efefef; 
-			margin: 0 !important; 
-		}
-		@media only screen and (max-width: 769px) {
-			.section-inline {
-				display: block;
-				width: auto; 
-				margin-right: 0; 
-			}
-		}
-	</style>
 	
 	<div class="wrap">
 		<div class="card col-md-12">
-			<span class="card-title text-center m-2 display-4"><?php echo esc_html( __( "Import CF7 Demo Forms", 'slick-popup' ) ); ?></span>
+			<span class="card-title text-center m-2 display-4"><?php echo esc_html__("Import CF7 Demo Forms", 'slick-popup'); ?></span>
 			<div class="card-body m-2">
-				<span style="font-size: 1.15rem;" class="text-info"><?php echo esc_html( __( "Choose a form and click import button, this will create a ", 'slick-popup' ) ); ?><strong><em><a href="<?php echo admin_url('/admin.php?page=wpcf7/'); ?>">Contact Form 7</a></em></strong><?php echo esc_html( __( " form with the desired layout. Once imported, you may want to change the To Email and Mail Body for the form.", 'slick-popup' ) ); ?><br><?php echo esc_html( __( "For any kind of suppport please email us at: ", 'slick-popup' ) ); ?><strong><em><a href="mailto:poke@slickpopup.com">poke@slickpopup.com</a></em></strong></span>
+				<span class="fs-115 text-info"><?php echo esc_html__("Choose a form and click import button, this will create a ", 'slick-popup'); ?><strong><em><a class="td-none" href="<?php echo admin_url('/admin.php?page=wpcf7/'); ?>">Contact Form 7</a></em></strong><?php echo esc_html__(" form with the desired layout. Once imported, you may want to change the To Email and Mail Body for the form.", 'slick-popup'); ?><br><?php echo esc_html__("For any kind of suppport please email us at: ", 'slick-popup'); ?><strong><em><a href="mailto:poke@slickpopup.com" class="td-none">poke@slickpopup.com</a></em></strong></span>
 			</div>
 		</div>
 		<div class="notice-info settings-error notice is-dismissible mb-2 mt-3">
-			<p style="font-weight:bold;" class="text-danger"><?php echo esc_html( __( "Note: This will just import the cf7 forms, you will have to create and edit the popups.", 'slick-popup' ) ); ?></p>
+			<p class="font-weight-bold text-danger"><?php echo esc_html__("Note: This will just import the cf7 forms, you will have to create and edit the popups.", 'slick-popup'); ?></p>
 		</div>
 		<div class="card col-md-12">
-			<span class="card-subtitle text-secondary font-weight-normal m-2" style="font-size: 2rem;	"><?php echo esc_html( __( "One-click Import for Contact Form 7", 'slick-popup' ) ); ?></span>
+			<span class="card-subtitle text-secondary font-weight-normal m-2 fs-2"><?php echo esc_html__("One-click Import for Contact Form 7", 'slick-popup'); ?></span>
 			<div class="import-holder">
 				<?php $demos = array(
 					'basic-enquiry' => 'Basic Enquiry Form', 
@@ -169,12 +79,13 @@ function splite_import_demos() { ?>
 						foreach($demos as $label => $demo) {			
 							$output .='<div class="import-box">';
 								$output .='<img src="'.splite_plugin_url('/libs/js/img/'.$label.'.jpg').'" title="'.$demo.'">'; 
-								$output .='<div class="import-box-result" style="display:none;"></div>';
+								// please do not change this class as this will effect the working of the plugin.
+								$output .='<div class="import-box-result display-none"></div>';
 								$output .='<div class="import-box-title">';
 									$output .='<span class="splite-label">'.$demo.'</span>';
 									$output .='<span class="splite-import-handle">';
-										$output .='<span class="splite-loader" style="visibility:hidden"><i class="fa fa-refresh fa-spin" style="font-size:14px;color:#f56e28;position:relative;left:-8px;"></i></span>';						
-										$output .='<span class="splite-btn button-link splite-btn-importer splite-btn-importer" data-title="'.$label.'"><strong>Import</strong></span>';
+										$output .='<span class="splite-loader v-hidden"><i class="fa fa-refresh fa-spin loader-fa-styles"></i></span>';						
+										$output .='<span class="splite-btn button-link splite-btn-importer splite-btn-importer" data-title="'.$label.'"><strong>'.esc_html__('Import','slick-popup').'</strong></span>';
 									$output .='</span>';
 								$output .='</div>';
 							$output .='</div>';
@@ -185,8 +96,8 @@ function splite_import_demos() { ?>
 			</div>
 		</div>
 		<div class="notice-info settings-error notice is-dismissible">
-			<p style="font-weight:bold;"><?php echo esc_html( __( "For any kind of suppport please email us at:", 'slick-popup' ) ); ?> 
-				<em><a href="mailto:poke@slickpopup.com">poke@slickpopup.com</a></em>
+			<p class="font-weight-bold"><?php echo esc_html( __( "For any kind of suppport please email us at:", 'slick-popup' ) ); ?> 
+				<em><a href="mailto:poke@slickpopup.com" class="td-none">poke@slickpopup.com</a></em>
 			</p>
 		</div>
 	</div>
@@ -202,15 +113,6 @@ function splite_import_demos() { ?>
  * Creates the post list table 
  */
 function splite_help_and_support() { ?>
-	<style type="text/css">
-		.wp-admin select {
-			height: 38px;
-		}
-		.result-area {
-			line-height: 1.5em;
-			padding: 10px 15px;
-		}
-	</style>
 	
 	<?php 
 		global $splite_opts; 
@@ -218,53 +120,54 @@ function splite_help_and_support() { ?>
 		$username = isset($current_user->user_display_name) ? $current_user->user_display_name : (isset($current_user->user_firstname) and !empty($current_user->user_firstname)) ? $current_user->user_firstname : $current_user->user_login;
 		$useremail = $current_user->user_email; 
 	?>
+
 	<div class="wrap">
 		<div class="card col-md-12">
-			<span class="card-title text-center m-2 display-4"><?php echo esc_html( __( "Help and Support", 'slick-popup' ) ); ?></span>
+			<span class="card-title text-center m-2 display-4"><?php echo esc_html__("Help and Support", 'slick-popup'); ?></span>
 			<div class="card-body m-2">
 				<ul class="nav nav-tabs nav-justified lead font-weight-bold" role="tablist">
 					<li class="nav-item">
-						<a class="nav-link active menu-links text-dark" data-toggle="tab" href="#menu1"><?php echo esc_html( __( "Basics", 'slick-popup' ) ); ?></a>
+						<a class="nav-link active menu-links text-dark" data-toggle="tab" href="#menu1"><?php echo esc_html__("Basics", 'slick-popup'); ?></a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link menu-links text-dark" data-toggle="tab" href="#menu2"><?php echo esc_html( __( "Documentation", 'slick-popup' ) ); ?></a>
+						<a class="nav-link menu-links text-dark" data-toggle="tab" href="#menu2"><?php echo esc_html__("Documentation", 'slick-popup'); ?></a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link menu-links text-dark" data-toggle="tab" href="#menu3"><?php echo esc_html( __( "Premium Features", 'slick-popup' ) ); ?></a>
+						<a class="nav-link menu-links text-dark" data-toggle="tab" href="#menu3"><?php echo esc_html__("Premium Features", 'slick-popup'); ?></a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link menu-links text-dark" data-toggle="tab" href="#menu4"><?php echo esc_html( __( "Support", 'slick-popup' ) ); ?></a>
+						<a class="nav-link menu-links text-dark" data-toggle="tab" href="#menu4"><?php echo esc_html__("Support", 'slick-popup'); ?></a>
 					</li>
 				</ul>
 				<div class="tab-content">
 					<div id="menu1" class="container tab-pane active"><br>
 						<div class="row">
 							<div class="col-md-6">
-								<span style="font-size: 1.75rem; display:block;" class="text-info font-weight-bold"><?php echo esc_html( __( "How to create a Popup?", 'slick-popup' ) ); ?></span>
+								<span class="fs-175 d-block text-info font-weight-bold"><?php echo esc_html__("How to create a Popup?", 'slick-popup'); ?></span>
 								<div class="text-body font-weight-normal">
-									<?php echo esc_html( __( "Creating a Popup Form is very easy with Slick Popup.", 'slick-popup' ) ); ?>
+									<?php echo esc_html__("Creating a Popup Form is very easy with Slick Popup.", 'slick-popup'); ?>
 									<ol type="1">
-										<li><?php echo esc_html( __( "Create a Form via Contact Form 7", 'slick-popup' ) ); ?></li>
-										<li><?php echo esc_html( __( "Go to Global Form Options", 'slick-popup' ) ); ?></li>
-										<li><?php echo esc_html( __( "Select your Contact Form", 'slick-popup' ) ); ?></li>
-										<li><?php echo esc_html( __( "Choose on which pages you want to show your Popup", 'slick-popup' ) ); ?></li>
-										<li><?php echo esc_html( __( "Add the Popup Styles", 'slick-popup' ) ); ?></li>
-										<li><?php echo esc_html( __( "Click on Save Changes and Checkout your Smart, Slick and Beautiful Popup Form", 'slick-popup' ) ); ?></li>
+										<li><?php echo esc_html__("Create a Form via Contact Form 7", 'slick-popup'); ?></li>
+										<li><?php echo esc_html__("Go to Global Form Options", 'slick-popup'); ?></li>
+										<li><?php echo esc_html__("Select your Contact Form", 'slick-popup'); ?></li>
+										<li><?php echo esc_html__("Choose on which pages you want to show your Popup", 'slick-popup'); ?></li>
+										<li><?php echo esc_html__("Add the Popup Styles", 'slick-popup'); ?></li>
+										<li><?php echo esc_html__("Click on Save Changes and Checkout your Smart, Slick and Beautiful Popup Form", 'slick-popup'); ?></li>
 									</ol>
 								</div>
 							</div>
 							<div class="col-md-6">
-								<span style="font-size: 1.75rem; display:block;" class="text-info font-weight-bold"><?php echo esc_html( __( "How to Import the Demo Forms?", 'slick-popup' ) ); ?></span>
+								<span class="fs-175 d-block text-info font-weight-bold"><?php echo esc_html__("How to Import the Demo Forms?", 'slick-popup'); ?></span>
 								<div class="text-body font-weight-normal">
-									<?php echo esc_html( __( "To Import the Demo forms follow the following steps:", 'slick-popup' ) ); ?>
+									<?php echo esc_html__("To Import the Demo forms follow the following steps:", 'slick-popup'); ?>
 									<ol type="4">
-										<li><?php echo esc_html( __( "Go to Import Demos", 'slick-popup' ) ); ?></li>
-										<li><?php echo esc_html( __( "Choose the desirable Popup Form", 'slick-popup' ) ); ?></li>
-										<li><?php echo esc_html( __( "Click on Import", 'slick-popup' ) ); ?></li>
-										<li><span class="text-danger font-weight-bold"><?php echo esc_html( __( "Note: It is recommended that you go through the default setting of the imported Forms:", 'slick-popup' ) ); ?></span>
+										<li><?php echo esc_html__("Go to Import Demos", 'slick-popup'); ?></li>
+										<li><?php echo esc_html__( "Choose the desirable Popup Form", 'slick-popup'); ?></li>
+										<li><?php echo esc_html__("Click on Import", 'slick-popup'); ?></li>
+										<li><span class="text-danger font-weight-bold"><?php echo esc_html__("Note: It is recommended that you go through the default setting of the imported Forms:", 'slick-popup'); ?></span>
 											<ol type="I" class="text-body font-weight-normal">
-												<li><?php echo esc_html( __( "Click on ", 'slick-popup' ) ); ?><span class="font-weight-bold"><?php echo esc_html( __( "Edit Form", 'slick-popup' ) ); ?></span><?php echo esc_html( __( " to edit the Contact Form 7 and make changes in the mail tab", 'slick-popup' ) ); ?></li>
-												<li><?php echo esc_html( __( "Click on ", 'slick-popup' ) ); ?><span class="font-weight-bold"><?php echo esc_html( __( "Set Popup", 'slick-popup' ) ); ?></span> <?php echo esc_html( __( "to add that form to your popup.", 'slick-popup' ) ); ?></li>
+												<li><?php echo esc_html__("Click on ", 'slick-popup'); ?><span class="font-weight-bold"><?php echo esc_html__("Edit Form", 'slick-popup'); ?></span><?php echo esc_html__(" to edit the Contact Form 7 and make changes in the mail tab", 'slick-popup'); ?></li>
+												<li><?php echo esc_html__("Click on ", 'slick-popup'); ?><span class="font-weight-bold"><?php echo esc_html__("Set Popup", 'slick-popup'); ?></span> <?php echo esc_html__("to add that form to your popup.", 'slick-popup'); ?></li>
 											</ol>
 										</li>
 									</ol>
@@ -273,23 +176,23 @@ function splite_help_and_support() { ?>
 						</div>
 						<div class="row">
 							<div class="col-md-6">
-								<span style="font-size: 1.75rem; display:block;" class="text-info font-weight-bold"><?php echo esc_html( __( "How to Activate and Deactivate Slick Popup dynamically?", 'slick-popup' ) ); ?></span>
-								<?php echo esc_html( __( "There are many ways to Activate and Deactivate Slick Popup dynamically:", 'slick-popup' ) ); ?>
+								<span class="fs-175 d-block text-info font-weight-bold"><?php echo esc_html__("How to Activate and Deactivate Slick Popup dynamically?", 'slick-popup'); ?></span>
+								<?php echo esc_html__("There are many ways to Activate and Deactivate Slick Popup dynamically:", 'slick-popup'); ?>
 								<ol type="circle">
-									<li><span class="font-weight-bold"><?php echo esc_html( __( "Via Class:", 'slick-popup' ) ); ?></span><?php echo esc_html( __( " You can activate Slick Popup by using the class ", 'slick-popup' ) ); ?><span class="font-weight-bold">"splite-showpoup"</span>.<br><?php echo esc_html( __( 'For eg. <button class="splite-showpoup">Click Me</button>', 'slick-popup' ) ); ?></li>
-									<li><span class="font-weight-bold"><?php echo esc_html( __( "Via Href or Url:", 'slick-popup' ) ); ?></span><?php echo esc_html( __( " You can activate Slick Popup by giving the url or href element of the a tag ", 'slick-popup' ) ); ?><span class="font-weight-bold">'javascript:splite_loader('id of the popup')'</span>.<br><?php echo esc_html( __( 'For eg. <button url="javascript:splite_loader();">Click Me</button>', 'slick-popup' ) ); ?></li>
-									<li><?php echo esc_html( __( "If you want ", 'slick-popup' ) ); ?><span class="font-weight-bold"><?php echo esc_html( __( "unload", 'slick-popup' ) ); ?></span><?php echo esc_html( __( " the popup use ", 'slick-popup' ) ); ?><span class="font-weight-bold">'javascript:splite_unloader('id of the popup')'</span>.<br><?php echo esc_html( __( 'For eg. <button url="javascript:splite_unloader();">Click Me</button>', 'slick-popup' ) ); ?></li>
+									<li><span class="font-weight-bold"><?php echo esc_html__("Via Class:", 'slick-popup'); ?></span><?php echo esc_html__(" You can activate Slick Popup by using the class ", 'slick-popup'); ?><span class="font-weight-bold">"splite-showpoup"</span>.<br><?php echo esc_html__('For eg. <button class="splite-showpoup">Click Me</button>', 'slick-popup'); ?></li>
+									<li><span class="font-weight-bold"><?php echo esc_html__("Via Href or Url:", 'slick-popup'); ?></span><?php echo esc_html__(" You can activate Slick Popup by giving the url or href element of the a tag ", 'slick-popup'); ?><span class="font-weight-bold">'javascript:splite_loader('id of the popup')'</span>.<br><?php echo esc_html__( 'For eg. <button url="javascript:splite_loader();">Click Me</button>', 'slick-popup' ); ?></li>
+									<li><?php echo esc_html__("If you want ", 'slick-popup'); ?><span class="font-weight-bold"><?php echo esc_html__("unload", 'slick-popup'); ?></span><?php echo esc_html__(" the popup use ", 'slick-popup'); ?><span class="font-weight-bold">'javascript:splite_unloader('id of the popup')'</span>.<br><?php echo esc_html__( 'For eg. <button url="javascript:splite_unloader();">Click Me</button>', 'slick-popup' ); ?></li>
 								</ol>
 							</div>
 							<div class="col-md-6">
-								<span style="font-size: 1.75rem; display:block;padding-bottom: 40px" class="text-info font-weight-bold" style="margin-bottom: 40px"><?php echo esc_html( __( "Are there any filters available?", 'slick-popup' ) ); ?></span>
-								<?php echo esc_html( __( "There are alot of filters available for Slick Popup Pro some of them are listed below:", 'slick-popup' ) ); ?>
+								<span class="fs-175 d-block mb-40 text-info font-weight-bold"><?php echo esc_html( __( "Are there any filters available?", 'slick-popup' ) ); ?></span>
+								<?php echo esc_html__( "There are alot of filters available for Slick Popup Pro some of them are listed below:", 'slick-popup'); ?>
 								<ol type="circle">
-									<li><span class="font-weight-bold">splite_dollar_cf7_id:</span><?php echo esc_html( __( " You can choose which CF7 form to show on the popup", 'slick-popup' ) ); ?></li>
-									<li><span class="font-weight-bold">splite_dollar_side_button_text:</span><?php echo esc_html( __( " You can add custom side button text", 'slick-popup' ) ); ?></li>
-									<li><span class="font-weight-bold">splite_dollar_choose_layout:</span><?php echo esc_html( __( " You can add custom layout to the popup", 'slick-popup' ) ); ?></li>
-									<li><span class="font-weight-bold">splite_dollar_popup_load_effect:</span><?php echo esc_html( __( " You can add custom load effect to the popup", 'slick-popup' ) ); ?></li>
-									<li><span class="font-weight-bold">splite_dollar_popup_unload_effect:</span><?php echo esc_html( __( " You can add custom unload effect to the popup", 'slick-popup' ) ); ?></li>
+									<li><span class="font-weight-bold">splite_dollar_cf7_id:</span><?php echo esc_html__( " You can choose which CF7 form to show on the popup", 'slick-popup'); ?></li>
+									<li><span class="font-weight-bold">splite_dollar_side_button_text:</span><?php echo esc_html__( " You can add custom side button text", 'slick-popup' ); ?></li>
+									<li><span class="font-weight-bold">splite_dollar_choose_layout:</span><?php echo esc_html__( " You can add custom layout to the popup", 'slick-popup' ); ?></li>
+									<li><span class="font-weight-bold">splite_dollar_popup_load_effect:</span><?php echo esc_html__( " You can add custom load effect to the popup", 'slick-popup' ); ?></li>
+									<li><span class="font-weight-bold">splite_dollar_popup_unload_effect:</span><?php echo esc_html__( " You can add custom unload effect to the popup", 'slick-popup' ); ?></li>
 								</ol>
 							</div>
 						</div>
@@ -297,104 +200,104 @@ function splite_help_and_support() { ?>
 					<div id="menu2" class="container tab-pane fade"><br>
 						<div class="row">
 							<div class="col-md-6">
-								<span style="font-size: 1.75rem; display:block;" class="text-info font-weight-bold"><?php echo esc_html( __( "Color Schemes", 'slick-popup' ) ); ?></span>
+								<span class="fs-175 d-block text-info font-weight-bold"><?php echo esc_html__( "Color Schemes", 'slick-popup' ); ?></span>
 								<div class="text-body font-weight-normal">
-									<?php echo esc_html( __( "There are 5 built-in Color Schemes and you can always customise it according to your own requirements", 'slick-popup' ) ); ?>
+									<?php echo esc_html__( "There are 5 built-in Color Schemes and you can always customise it according to your own requirements", 'slick-popup' ); ?>
 									<ol type="1">
-										<li><span class="font-weight-bold"><?php echo esc_html( __( "Master Red:-", 'slick-popup' ) ); ?></span> <div style="background:#ED1C24; height:20px; width:100px; display: inline-block;"></div></li>
-										<li><span class="font-weight-bold"><?php echo esc_html( __( "Creamy Orange:-", 'slick-popup' ) ); ?></span> <div style="background:#EE5921; height:20px; width:100px; display: inline-block;"></div></li>
-										<li><span class="font-weight-bold"><?php echo esc_html( __( "Light Blue:-", 'slick-popup' ) ); ?></span> <div style="background:#08ADDC; height:20px; width:100px; display: inline-block;"></div></li>
-										<li><span class="font-weight-bold"><?php echo esc_html( __( "Cool Green:-", 'slick-popup' ) ); ?></span> <div style="background:#00A560; height:20px; width:100px; display: inline-block;"></div></li>
-										<li><span class="font-weight-bold"><?php echo esc_html( __( "Classic Grey:-", 'slick-popup' ) ); ?></span> <div style="background:#484848; height:20px; width:100px; display: inline-block;"></div></li>
-										<li><span class="font-weight-bold"><?php echo esc_html( __( "Custom Color:-", 'slick-popup' ) ); ?></span> <div style="background:#1e73be; height:20px; width:100px; display: inline-block;"></div></li>
+										<li><span class="font-weight-bold"><?php echo esc_html__( "Master Red:-", 'slick-popup' ); ?></span> <div class="master-red"></div></li>
+										<li><span class="font-weight-bold"><?php echo esc_html__( "Creamy Orange:-", 'slick-popup' ); ?></span> <div class="creamy-orange"></div></li>
+										<li><span class="font-weight-bold"><?php echo esc_html__( "Light Blue:-", 'slick-popup' ); ?></span> <div class="light-blue" ></div></li>
+										<li><span class="font-weight-bold"><?php echo esc_html__( "Cool Green:-", 'slick-popup' ); ?></span> <div class="cool-green"></div></li>
+										<li><span class="font-weight-bold"><?php echo esc_html__( "Classic Grey:-", 'slick-popup' ); ?></span> <div class="classic-grey"></div></li>
+										<li><span class="font-weight-bold"><?php echo esc_html__( "Custom Color:-", 'slick-popup' ); ?></span> <div class="custom-color"></div></li>
 									</ol>
 								</div>
 							</div>
 							<div class="col-md-6">
-								<span style="font-size: 1.75rem; display:block;" class="text-info font-weight-bold"><?php echo esc_html( __( "Animations", 'slick-popup' ) ); ?></span>
+								<span class="fs-175 d-block text-info font-weight-bold"><?php echo esc_html__( "Animations", 'slick-popup' ); ?></span>
 								<div class="text-body font-weight-normal">
-									<?php echo esc_html( __( "There are more than 14 Loading Animations", 'slick-popup' ) ); ?>
+									<?php echo esc_html__( "There are more than 14 Loading Animations", 'slick-popup' ); ?>
 									<ol>
 										<div class="row">
 											<div class="col-md-6">
-												<li><?php echo esc_html( __( "Fade", 'slick-popup' ) ); ?></li>
-												<li><?php echo esc_html( __( "Zoom", 'slick-popup' ) ); ?></li>
-												<li><?php echo esc_html( __( "Rotate", 'slick-popup' ) ); ?></li>
-												<li><?php echo esc_html( __( "Flip in X", 'slick-popup' ) ); ?>&nbsp;<span class="badge badge-success">Premium</span></li>
+												<li><?php echo esc_html__( "Fade", 'slick-popup' ); ?></li>
+												<li><?php echo esc_html__( "Zoom", 'slick-popup' ); ?></li>
+												<li><?php echo esc_html__( "Rotate", 'slick-popup' ); ?></li>
+												<li><?php echo esc_html__( "Flip in X", 'slick-popup' ); ?>&nbsp;<span class="badge badge-success">Premium</span></li>
 											</div>
 											<div class="col-md-6">
-												<li><?php echo esc_html( __( "Pulse", 'slick-popup' ) ); ?>&nbsp;<span class="badge badge-success">Premium</span></li>
-												<li><?php echo esc_html( __( "Rubber Band", 'slick-popup' ) ); ?>&nbsp;<span class="badge badge-success">Premium</span></li>
-												<li><?php echo esc_html( __( "Shake", 'slick-popup' ) ); ?>&nbsp;<span class="badge badge-success">Premium</span></li>
-												<li><?php echo esc_html( __( "Swing", 'slick-popup' ) ); ?>&nbsp;<span class="badge badge-success">Premium</span></li>
+												<li><?php echo esc_html__( "Pulse", 'slick-popup' ); ?>&nbsp;<span class="badge badge-success">Premium</span></li>
+												<li><?php echo esc_html__( "Rubber Band", 'slick-popup' ); ?>&nbsp;<span class="badge badge-success">Premium</span></li>
+												<li><?php echo esc_html__( "Shake", 'slick-popup' ); ?>&nbsp;<span class="badge badge-success">Premium</span></li>
+												<li><?php echo esc_html__( "Swing", 'slick-popup' ); ?>&nbsp;<span class="badge badge-success">Premium</span></li>
 											</div>
 										</div>
 									</ol>
 								</div>
 							</div>
 							<div class="col-md-6">
-								<span style="font-size: 1.75rem; display:block;" class="text-info font-weight-bold"><?php echo esc_html( __( "Activation Modes", 'slick-popup' ) ); ?></span>
+								<span class="d-block fs-175 text-info font-weight-bold"><?php echo esc_html__( "Activation Modes", 'slick-popup' ); ?></span>
 								<div class="text-body font-weight-normal">
-									<?php echo esc_html( __( "There are 5 Activation Modes:", 'slick-popup' ) ); ?>
+									<?php echo esc_html__( "There are 5 Activation Modes:", 'slick-popup' ); ?>
 									<ol type="1">
-										<li><span class="font-weight-bold"><?php echo esc_html( __( "On-Click: ", 'slick-popup' ) ); ?></span> <?php echo esc_html( __( "Default is set to On-Click, The Popup will activate on the click of a Button or a HTML Element", 'slick-popup' ) ); ?></li>
-										<li><span class="font-weight-bold"><?php echo esc_html( __( "On-Exit Popup: ", 'slick-popup' ) ); ?></span> <?php echo esc_html( __( "This will be activated whenever a user tries to Exit the page.", 'slick-popup' ) ); ?></li>
-										<li><span class="font-weight-bold"><?php echo esc_html( __( "Auto Popup: ", 'slick-popup' ) ); ?></span> <?php echo esc_html( __( "This is the entry popup this is activated when the page is loaded.", 'slick-popup' ) ); ?>&nbsp;<span class="badge badge-success">Premium</span></li>
-										<li><span class="font-weight-bold"><?php echo esc_html( __( "Forced Popup: ", 'slick-popup' ) ); ?></span> <?php echo esc_html( __( "This will not close until the user fills the complete form successfully", 'slick-popup' ) ); ?>&nbsp;<span class="badge badge-success">Premium</span></li>
-										<li><span class="font-weight-bold"><?php echo esc_html( __( "On-Scroll Popup: ", 'slick-popup' ) ); ?></span> <?php echo esc_html( __( "This popup is activated when you scroll a certain amount of the page.", 'slick-popup' ) ); ?>&nbsp;<span class="badge badge-success">Premium</span></li>
+										<li><span class="font-weight-bold"><?php echo esc_html__( "On-Click: ", 'slick-popup' ); ?></span> <?php echo esc_html__( "Default is set to On-Click, The Popup will activate on the click of a Button or a HTML Element", 'slick-popup' ); ?></li>
+										<li><span class="font-weight-bold"><?php echo esc_html__( "On-Exit Popup: ", 'slick-popup' ); ?></span> <?php echo esc_html__( "This will be activated whenever a user tries to Exit the page.", 'slick-popup' ); ?></li>
+										<li><span class="font-weight-bold"><?php echo esc_html__( "Auto Popup: ", 'slick-popup' ); ?></span> <?php echo esc_html__( "This is the entry popup this is activated when the page is loaded.", 'slick-popup' ); ?>&nbsp;<span class="badge badge-success">Premium</span></li>
+										<li><span class="font-weight-bold"><?php echo esc_html__( "Forced Popup: ", 'slick-popup' ); ?></span> <?php echo esc_html__( "This will not close until the user fills the complete form successfully", 'slick-popup' ); ?>&nbsp;<span class="badge badge-success">Premium</span></li>
+										<li><span class="font-weight-bold"><?php echo esc_html__( "On-Scroll Popup: ", 'slick-popup' ); ?></span> <?php echo esc_html__( "This popup is activated when you scroll a certain amount of the page.", 'slick-popup' ); ?>&nbsp;<span class="badge badge-success">Premium</span></li>
 									</ol>
 								</div>
 							</div>
 							<div class="col-md-6">
-								<span style="font-size: 1.75rem; display:block;" class="text-info font-weight-bold"><?php echo esc_html( __( "Typography", 'slick-popup' ) ); ?></span>
+								<span class="fs-175 d-block text-info font-weight-bold"><?php echo esc_html__( "Typography", 'slick-popup' ); ?></span>
 								<div class="text-body font-weight-normal">
-									<?php echo esc_html( __( "There is a lot you can customise with typography in Slick Popup Pro", 'slick-popup' ) ); ?>
+									<?php echo esc_html__( "There is a lot you can customise with typography in Slick Popup Pro", 'slick-popup' ); ?>
 									<ol type="1">
-										<li><span class="font-weight-bold"><?php echo esc_html( __( "CTA text:", 'slick-popup' ) ); ?></span><?php echo esc_html( __( " You have full control over the typography of the CTA text which is found over the top of the contact form", 'slick-popup' ) ); ?></li>
-										<li><span class="font-weight-bold"><?php echo esc_html( __( "Label text:", 'slick-popup' ) ); ?></span><?php echo esc_html( __( " You can change the typography of the label text as well.", 'slick-popup' ) ); ?></li>
-										<li><span class="font-weight-bold"><?php echo esc_html( __( "Side Button text:", 'slick-popup' ) ); ?></span><?php echo esc_html( __( " You can full customize the typography of the side button text.", 'slick-popup' ) ); ?></li>
+										<li><span class="font-weight-bold"><?php echo esc_html__( "CTA text:", 'slick-popup' ); ?></span><?php echo esc_html__( " You have full control over the typography of the CTA text which is found over the top of the contact form", 'slick-popup' ); ?></li>
+										<li><span class="font-weight-bold"><?php echo esc_html__( "Label text:", 'slick-popup' ); ?></span><?php echo esc_html__( " You can change the typography of the label text as well.", 'slick-popup' ); ?></li>
+										<li><span class="font-weight-bold"><?php echo esc_html__( "Side Button text:", 'slick-popup' ); ?></span><?php echo esc_html__( " You can full customize the typography of the side button text.", 'slick-popup' ); ?></li>
 									</ol>
 								</div>
 							</div>
 							<div class="col-md-6">
-								<span style="font-size: 1.75rem; display:block;" class="text-info font-weight-bold"><?php echo esc_html( __( "Side Buttons", 'slick-popup' ) ); ?></span>
+								<span class="fs-175 d-block text-info font-weight-bold"><?php echo esc_html__( "Side Buttons", 'slick-popup' ); ?></span>
 								<div class="text-body font-weight-normal">
-									<?php echo esc_html( __( "There are 8 pre-built Side Buttons:", 'slick-popup' ) ); ?>
+									<?php echo esc_html__( "There are 8 pre-built Side Buttons:", 'slick-popup' ); ?>
 									<ol>
 										<div class="row">
 											<div class="col-md-6">
-												<li><?php echo esc_html( __( "Right", 'slick-popup' ) ); ?></li>
-												<li><?php echo esc_html( __( "Left", 'slick-popup' ) ); ?></li>
-												<li><?php echo esc_html( __( "Top Left", 'slick-popup' ) ); ?>&nbsp;<span class="badge badge-success">Premium</span></li>
-												<li><?php echo esc_html( __( "Top Center", 'slick-popup' ) ); ?>&nbsp;<span class="badge badge-success">Premium</span></li>
+												<li><?php echo esc_html__( "Right", 'slick-popup' ); ?></li>
+												<li><?php echo esc_html__( "Left", 'slick-popup' ); ?></li>
+												<li><?php echo esc_html__( "Top Left", 'slick-popup' ); ?>&nbsp;<span class="badge badge-success">Premium</span></li>
+												<li><?php echo esc_html__( "Top Center", 'slick-popup' ); ?>&nbsp;<span class="badge badge-success">Premium</span></li>
 											</div>
 											<div class="col-md-6">
-												<li><?php echo esc_html( __( "Top Right", 'slick-popup' ) ); ?>&nbsp;<span class="badge badge-success">Premium</span></li>
-												<li><?php echo esc_html( __( "Bottom Left", 'slick-popup' ) ); ?>&nbsp;<span class="badge badge-success">Premium</span></li>
-												<li><?php echo esc_html( __( "Bottom Center", 'slick-popup' ) ); ?>&nbsp;<span class="badge badge-success">Premium</span></li>
-												<li><?php echo esc_html( __( "Bottom Right", 'slick-popup' ) ); ?>&nbsp;<span class="badge badge-success">Premium</span></li>
+												<li><?php echo esc_html__( "Top Right", 'slick-popup' ); ?>&nbsp;<span class="badge badge-success">Premium</span></li>
+												<li><?php echo esc_html__( "Bottom Left", 'slick-popup' ); ?>&nbsp;<span class="badge badge-success">Premium</span></li>
+												<li><?php echo esc_html__( "Bottom Center", 'slick-popup' ); ?>&nbsp;<span class="badge badge-success">Premium</span></li>
+												<li><?php echo esc_html__( "Bottom Right", 'slick-popup' ); ?>&nbsp;<span class="badge badge-success">Premium</span></li>
 											</div>
 										</div>
 									</ol>
 								</div>
 							</div>
 							<div class="col-md-6">
-								<span style="font-size: 1.75rem; display:block;" class="text-info font-weight-bold"><?php echo esc_html( __( "Layouts", 'slick-popup' ) ); ?></span>
+								<span class="fs-175 d-block text-info font-weight-bold"><?php echo esc_html__( "Layouts", 'slick-popup' ); ?></span>
 								<div class="text-body font-weight-normal">
-									<?php echo esc_html( __( "There are more than 8 pre-built Side Buttons:", 'slick-popup' ) ); ?>
+									<?php echo esc_html__( "There are more than 8 pre-built Side Buttons:", 'slick-popup' ); ?>
 									<ol>
 										<div class="row">
 											<div class="col-md-6">
-												<li><?php echo esc_html( __( "Centered", 'slick-popup' ) ); ?></li>
-												<li><?php echo esc_html( __( "Full Height", 'slick-popup' ) ); ?></li>
-												<li><?php echo esc_html( __( "Top Left", 'slick-popup' ) ); ?>&nbsp;<span class="badge badge-success">Premium</span></li>
-												<li><?php echo esc_html( __( "Top Center", 'slick-popup' ) ); ?>&nbsp;<span class="badge badge-success">Premium</span></li>
+												<li><?php echo esc_html__( "Centered", 'slick-popup' ); ?></li>
+												<li><?php echo esc_html__( "Full Height", 'slick-popup' ); ?></li>
+												<li><?php echo esc_html__( "Top Left", 'slick-popup' ); ?>&nbsp;<span class="badge badge-success">Premium</span></li>
+												<li><?php echo esc_html__( "Top Center", 'slick-popup' ); ?>&nbsp;<span class="badge badge-success">Premium</span></li>
 											</div>
 											<div class="col-md-6">
-												<li><?php echo esc_html( __( "Top Right", 'slick-popup' ) ); ?>&nbsp;<span class="badge badge-success">Premium</span></li>
-												<li><?php echo esc_html( __( "Bottom Center", 'slick-popup' ) ); ?>&nbsp;<span class="badge badge-success">Premium</span></li>
-												<li><?php echo esc_html( __( "Bottom Right", 'slick-popup' ) ); ?>&nbsp;<span class="badge badge-success">Premium</span></li>
-												<li><?php echo esc_html( __( "Full Page", 'slick-popup' ) ); ?>&nbsp;<span class="badge badge-success">Premium</span></li>
+												<li><?php echo esc_html__( "Top Right", 'slick-popup' ); ?>&nbsp;<span class="badge badge-success">Premium</span></li>
+												<li><?php echo esc_html__( "Bottom Center", 'slick-popup' ); ?>&nbsp;<span class="badge badge-success">Premium</span></li>
+												<li><?php echo esc_html__( "Bottom Right", 'slick-popup' ); ?>&nbsp;<span class="badge badge-success">Premium</span></li>
+												<li><?php echo esc_html__( "Full Page", 'slick-popup' ); ?>&nbsp;<span class="badge badge-success">Premium</span></li>
 											</div>
 										</div>
 									</ol>
@@ -405,10 +308,10 @@ function splite_help_and_support() { ?>
 					<div id="menu3" class="container tab-pane fade"><br>
 						<div class="row">
 							<div class="col-md-12">
-								<span style="font-size: 2rem; display:block;" class="text-info text-center font-weight-bold mb-3"><?php echo esc_html( __( "Slick Popup Pro", 'slick-popup' ) ); ?></span>
+								<span class="fs-2 d-block text-info text-center font-weight-bold mb-3"><?php echo esc_html__( "Slick Popup Pro", 'slick-popup' ); ?></span>
 								<div class="text-body font-weight-normal">
-									<p style="font-size: 20px;"><?php echo esc_html( __( "Here are a few features that will be available in Slick Popup Pro.", 'slick-popup' ) ); ?></p>
-									<ol style="font-size: 17px">
+									<p class="font-weight-bold lead"><?php echo esc_html__( "Here are a few features that will be available in Slick Popup Pro.", 'slick-popup' ); ?></p>
+									<ol class="fs-115">
 										<li class="text-secondary font-weight-bold"><?php echo esc_html( __( "Premium and Priority Support", 'slick-popup' ) ); ?></li>
 										<li class="text-secondary font-weight-bold"><?php echo esc_html( __( "20+ animation effects to choose from", 'slick-popup' ) ); ?></li>
 										<li class="text-secondary font-weight-bold"><?php echo esc_html( __( "Different popup for each woocommerce product", 'slick-popup' ) ); ?></li>
@@ -429,29 +332,29 @@ function splite_help_and_support() { ?>
 					<div id="menu4" class="container tab-pane fade"><br>
 						<div class="row">
 							<div class="col-md-6">
-								<span style="font-size: 1.75rem; display:block;" class="text-info text-center font-weight-bold pb-2"><?php echo esc_html( __( "Contact Slick Popup Support", 'slick-popup' ) ); ?></span>
+								<span class="fs-175 d-block text-info text-center font-weight-bold pb-2"><?php echo esc_html__( "Contact Slick Popup Support", 'slick-popup' ); ?></span>
 								<form method="post" class="splite-contact-support" action="">
 									<div class="input-group mb-3">
 									    <div class="input-group-prepend">
-									      <span class="input-group-text"><?php echo esc_html( __( "Name", 'slick-popup' ) ); ?></span>
+									      <span class="input-group-text"><?php echo esc_html__( "Name", 'slick-popup' ); ?></span>
 									    </div>
-									    <input type="text" class="form-control" name="name" placeholder="<?php echo esc_html( __( "Enter your Name", 'slick-popup' ) ); ?>" value="<?php echo $username; ?>" >
+									    <input type="text" class="form-control" name="name" placeholder="<?php echo esc_html__( "Enter your Name", 'slick-popup' ); ?>" value="<?php echo $username; ?>" >
 									</div>
 									<div class="input-group mb-3">
 									    <div class="input-group-prepend">
-									      <span class="input-group-text"><?php echo esc_html( __( "Email", 'slick-popup' ) ); ?></span>
+									      <span class="input-group-text"><?php echo esc_html__( "Email", 'slick-popup' ); ?></span>
 									    </div>
-									    <input type="text" class="form-control" name="email" placeholder="<?php echo esc_html( __( "Enter your Email", 'slick-popup' ) ); ?>" value="<?php echo $useremail; ?>" >
+									    <input type="text" class="form-control" name="email" placeholder="<?php echo esc_html__( "Enter your Email", 'slick-popup' ); ?>" value="<?php echo $useremail; ?>" >
 									</div>
 									<div class="input-group mb-3">
 									    <div class="input-group-prepend">
-									      <span class="input-group-text"><?php echo esc_html( __( "Issue Subject", 'slick-popup' ) ); ?></span>
+									      <span class="input-group-text"><?php echo esc_html__( "Issue Subject", 'slick-popup' ); ?></span>
 									    </div>
-									    <input type="text" class="form-control" name="subject" placeholder="<?php echo esc_html( __( "Enter your Issue Subject", 'slick-popup' ) ); ?>">
+									    <input type="text" class="form-control" name="subject" placeholder="<?php echo esc_html__( "Enter your Issue Subject", 'slick-popup' ); ?>">
 									</div>
 									<div class="input-group mb-3">
 									    <div class="input-group-prepend">
-									      <span class="input-group-text"><?php echo esc_html( __( "Page URL", 'slick-popup' ) ); ?></span>
+									      <span class="input-group-text"><?php echo esc_html__( "Page URL", 'slick-popup' ); ?></span>
 									    </div>
 									    	<?php 
 												$args = array(
@@ -463,12 +366,12 @@ function splite_help_and_support() { ?>
 											?>
 									</div>
 									<div class="form-group mb-3">
-									  <label for="message" class="font-weight-bold"><?php echo esc_html( __( "Issue Details:", 'slick-popup' ) ); ?></label>
-									  <textarea class="form-control" name="message" rows="6" placeholder="<?php echo esc_html( __( "Please describe your issue in detail", 'slick-popup' ) ); ?>"></textarea>
+									  <label for="message" class="font-weight-bold"><?php echo esc_html__( "Issue Details:", 'slick-popup' ); ?></label>
+									  <textarea class="form-control" name="message" rows="6" placeholder="<?php echo esc_html__( "Please describe your issue in detail", 'slick-popup' ); ?>"></textarea>
 									</div>
-									<div class="input-group" style="margin:20px 0 10px;">
-										<input type="submit" name="Submit" class="button button-primary splite-submit-btn">	
-										<span class="splite-loader" style="margin-left:10px;visibility:hidden;"><i class="fa fa-refresh fa-spin" style="font-size:14px;color:#f56e28;position:relative;left:-8px;"></i></span>
+									<div class="input-group mb-1 mt-2">
+										<input type="submit" name="Submit" class="btn btn-outline-info splite-submit-btn">	
+										<span class="splite-loader ml-1 splite-loader-styles"><i class="fa fa-refresh fa-spin splite-loader-fa-styles"></i></span>
 									</div>
 									<div class="input-group">
 										<div class="result-area"></div>
@@ -476,19 +379,19 @@ function splite_help_and_support() { ?>
 								</form>
 							</div>
 							<div class="col-md-6">
-								<span style="font-size: 1.75rem; display:block;" class="text-info font-weight-bold text-center pb-"><?php echo esc_html( __( "One Step to Create an Admin User for Support", 'slick-popup' ) ); ?></span>
+								<span class="fs-175 d-block text-info font-weight-bold text-center pb-1"><?php echo esc_html__( "One Step to Create an Admin User for Support", 'slick-popup' ); ?></span>
 								<div class="text-body font-weight-normal">
-									<p><?php echo esc_html( __( "In the past, many of our users were having problem to grant us access to the website so we can set the popup as they desired, that is the reason we have built this ", 'slick-popup' ) ); ?><strong><?php echo esc_html( __( "'Easy Grant Access'", 'slick-popup' ) ); ?></strong><?php echo esc_html( __( " feature.", 'slick-popup' ) ); ?></p>
+									<p><?php echo esc_html__( "In the past, many of our users were having problem to grant us access to the website so we can set the popup as they desired, that is the reason we have built this ", 'slick-popup' ); ?><strong><?php echo esc_html__( "'Easy Grant Access'", 'slick-popup' ); ?></strong><?php echo esc_html__( " feature.", 'slick-popup' ); ?></p>
 									<p>
-										<strong><?php echo esc_html( __( "It will create a new admin user for our email ", 'slick-popup' ) ); ?><em>poke@slickpopup.com</em> <?php echo esc_html( __( " with one click, making it easier for you to grant and revoke access.", 'slick-popup' ) ); ?></strong>
+										<strong><?php echo esc_html__( "It will create a new admin user for our email ", 'slick-popup' ); ?><em>poke@slickpopup.com</em> <?php echo esc_html__( " with one click, making it easier for you to grant and revoke access.", 'slick-popup' ); ?></strong>
 									<br><br>
 									<?php 
 										if(!username_exists('slickpopupteam') && !email_exists('poke@slickpopup.com'))
-											echo '<button class="button button-primary splite-ajax-btn" data-ajax-action="action_splite_support_access" data-todo="createuser">Grant Access <i class="fa fa-user"></i></button>';
+											echo '<button class="btn btn-outline-primary splite-ajax-btn" data-ajax-action="action_splite_support_access" data-todo="createuser">Grant Temporary Access <i class="fa fa-user"></i></button>';
 										else
-											echo '<button class="button button-primary splite-ajax-btn" data-ajax-action="action_splite_support_access" data-todo="deleteuser">Revoke Access <i class="fa fa-user"></i></button>';
+											echo '<button class="btn btn-outline-success splite-ajax-btn" data-ajax-action="action_splite_support_access" data-todo="deleteuser">Revoke Access <i class="fa fa-user"></i></button>';
 									
-									echo '<span class="splite-loader" style="margin-left:10px;visibility:hidden;"><i class="fa fa-refresh fa-spin" style="font-size:14px;color:#f56e28;position:relative;left:-8px;"></i></span>';
+									echo '<span class="splite-loader splite-loader-styles"><i class="fa fa-refresh fa-spin splite-loader-fa-styles"></i></span>';
 									 								
 										if(get_option('splite_grant_access_time')) {
 											$splite_grant_access_time = get_option('splite_grant_access_time');
@@ -503,7 +406,7 @@ function splite_help_and_support() { ?>
 									?>
 									</p>	
 								</div>
-								<div class=""><div class="result-area"></div></div>
+								<div class="result-area"></div>
 							</div>
 						</div>
 					</div>
@@ -580,27 +483,27 @@ function action_splite_contact_support() {
 	$mail_subject = 'Support Required for Slick Popup Lite: ' . $name . ' - ' . $subject . ' (' . site_url(). ')';
 	$mail_body = ''; 
 	$mail_body .= '<b>Dear Team,<b><br><br>'; 
-	$mail_body .= '<table border>';
+	$mail_body .= '<table border cellpadding="10">';
 		$mail_body .= '<tr>';
-			$mail_body .= '<th style="padding: 10px 20px;" colspan="2">Slick Popup Lite</th>';
+			$mail_body .= '<th colspan="2">Slick Popup Lite</th>';
 		$mail_body .= '</tr>';
 		$mail_body .= '<tr>';
-			$mail_body .= '<th style="padding: 10px 20px;">A new support request has been received from: </th><td style="padding: 10px 20px;">'.site_url().'</td>';
+			$mail_body .= '<th>A new support request has been received from: </th><td>'.site_url().'</td>';
 		$mail_body .= '</tr>';
 		$mail_body .= '<tr>';	
-			$mail_body .= '<th style="padding: 10px 20px;">Plugin Name: </th><td style="padding: 10px 20px;">Slick Popup Lite</td>';
+			$mail_body .= '<th>Plugin Name: </th><td>Slick Popup Lite</td>';
 		$mail_body .= '</tr>';
 		$mail_body .= '<tr>';	
-			$mail_body .= '<th style="padding: 10px 20px;">Plugin Version: </th><td style="padding: 10px 20px;">'.SPLITE_VERSION.'</td>';
+			$mail_body .= '<th>Plugin Version: </th><td>'.SPLITE_VERSION.'</td>';
 		$mail_body .= '</tr>';
 		$mail_body .= '<tr>';	
-			$mail_body .= '<th style="padding: 10px 20px;">Email: </th><td style="padding: 10px 20px;">'.$email.'</td>';
+			$mail_body .= '<th>Email: </th><td>'.$email.'</td>';
 		$mail_body .= '</tr>';
 		$mail_body .= '<tr>';	
-			$mail_body .= '<th style="padding: 10px 20px;">Message: </th><td style="padding: 10px 20px;">'.$message.'</td>';
+			$mail_body .= '<th>Message: </th><td>'.$message.'</td>';
 		$mail_body .= '</tr>';
 		$mail_body .= '<tr>';	
-			$mail_body .= '<th style="padding: 10px 20px;">Page: </th><td style="padding: 10px 20px;">'.$pages.'</td>';
+			$mail_body .= '<th>Page: </th><td>'.$pages.'</td>';
 		$mail_body .= '</tr>';
 	$mail_body .= '</table>';
 	
@@ -650,8 +553,8 @@ function action_splite_support_access() {
 	// ----------------------------------
 	// Put this file in your Wordpress root directory and run it from your browser.
 	// Delete it when you're done.
-	require_once(ABSPATH . 'wp-blog-header.php');
-	require_once(ABSPATH . 'wp-includes/registration.php');
+	//require_once(ABSPATH . 'wp-blog-header.php');
+	//require_once(ABSPATH . 'wp-includes/registration.php');
 	// ----------------------------------------------------
 	// CONFIG VARIABLES
 	// Make sure that you set these before running the file.
@@ -687,24 +590,24 @@ function action_splite_support_access() {
 				$subject = 'Access Granted for Slick Popup Lite: (' . site_url(). ')'.' by '.$current_user->user_login;
 				$mail_body = ''; 
 				$mail_body .= '<b>Dear Team,<b><br><br>'; 
-				$mail_body .= '<table border>';
+				$mail_body .= '<table border cellpadding="10">';
 					$mail_body .= '<tr>';
-						$mail_body .= '<th style="padding: 10px 20px;" colspan="2">Slick Popup Lite</th>';
+						$mail_body .= '<th colspan="2">Slick Popup Lite</th>';
 					$mail_body .= '</tr>';
 					$mail_body .= '<tr>';
-						$mail_body .= '<th style="padding: 10px 20px;">You have been granted access for website: </th><td style="padding: 10px 20px;">'.site_url().'</td>';
+						$mail_body .= '<th>You have been granted access for website: </th><td>'.site_url().'</td>';
 					$mail_body .= '</tr>';
 					$mail_body .= '<tr>';	
-						$mail_body .= '<th style="padding: 10px 20px;">Plugin Name: </th><td style="padding: 10px 20px;">Slick Popup Lite</td>';
+						$mail_body .= '<th>Plugin Name: </th><td>Slick Popup Lite</td>';
 					$mail_body .= '</tr>';
 					$mail_body .= '<tr>';	
-						$mail_body .= '<th style="padding: 10px 20px;">Plugin Version: </th><td style="padding: 10px 20px;">'.SPLITE_VERSION.'</td>';
+						$mail_body .= '<th>Plugin Version: </th><td>'.SPLITE_VERSION.'</td>';
 					$mail_body .= '</tr>';
 					$mail_body .= '<tr>';	
-						$mail_body .= '<th style="padding: 10px 20px;">Login Link: </th><td style="padding: 10px 20px;">'.wp_login_url().'</td>';
+						$mail_body .= '<th>Login Link: </th><td>'.wp_login_url().'</td>';
 					$mail_body .= '</tr>';
 					$mail_body .= '<tr>';	
-						$mail_body .= '<th style="padding: 10px 20px;">Access Granted by:  </th><td style="padding: 10px 20px;">'.$current_user->user_email.' ('.$current_user->user_login.')</td>';
+						$mail_body .= '<th>Access Granted by:  </th><td>'.$current_user->user_email.' ('.$current_user->user_login.')</td>';
 					$mail_body .= '</tr>';
 				$mail_body .= '</table>';
 				

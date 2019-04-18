@@ -19,7 +19,7 @@ function splite_action_importDemo() {
 	$form = get_page_by_title($title, 'OBJECT', 'wpcf7_contact_form');
 	
 	if($formId) {
-		$edit_link = '<a target="_blank" href="'.admin_url('/admin.php?page=wpcf7&post='.$form->ID.'&action=edit').'"><strong>Edit Form</strong></a>';
+		$edit_link = '<a target="_blank" href="'.admin_url('/admin.php?page=wpcf7&post='.$formId.'&action=edit').'"><strong>Edit Form</strong></a>';
 		$global_options = '<a target="_blank" href="'.admin_url('/admin.php?page=slick-options').'"><strong>Set Popup</strong></a>';
 		$ajaxy['reason'] = 'Imported.<br>'.$edit_link. ' - '.$global_options; 		
 		wp_send_json_success($ajaxy); 
