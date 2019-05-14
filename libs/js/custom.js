@@ -110,7 +110,9 @@ jQuery(document).ready(function($) {
 			//console.log(event.pageY==0 || event.pageY==1 || event.pageY < jQuery(document).scrollTop());
 			jQuery( "body" ).on( "mouseout", function( event ) {
 			  	if (event.pageY==0 || event.pageY==1 || event.pageY < jQuery(document).scrollTop() ) {
-			  		splite_loader();
+			  		if(jQuery("#splite_popup_box").hasClass("manage")){
+			  			splite_loader();
+			  		}
 			  	}
 			});
 			//splite_loader();						
