@@ -8,7 +8,8 @@
 add_action( 'wp_ajax_splite_notice_dismissable', 'splite_notice_dismissable' );
 function splite_notice_dismissable() {
 	
-	$data_btn = isset($_POST['dataBtn']) ? $_POST['dataBtn'] : '';
+	// Sanitize string for added security
+	$data_btn = isset($_POST['dataBtn']) ? sanitize_text_field($_POST['dataBtn']) : '';
 	
 	if(empty($data_btn)) return; 
 	

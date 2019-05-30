@@ -113,6 +113,10 @@ For any doubts or queries, please read our F.A.Q section. If it doesn't come out
 == Changelog ==
 
 = 1.7.1 =
+* Removed: Grant access feature for security reasons
+* Other minor imrovements
+
+= 1.7.1 =
 * Tested and Working with WordPress 5.2
 * Fixed minor issues with exit intent
 * Minor Bugs Fixed

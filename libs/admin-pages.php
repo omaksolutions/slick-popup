@@ -331,7 +331,7 @@ function splite_help_and_support() { ?>
 					</div>
 					<div id="menu4" class="container tab-pane fade"><br>
 						<div class="row">
-							<div class="col-md-6">
+							<div class="offset-md-3 col-md-6">
 								<span class="fs-175 d-block text-info text-center font-weight-bold pb-2"><?php echo esc_html__( "Contact Slick Popup Support", 'slick-popup' ); ?></span>
 								<form method="post" class="splite-contact-support" action="">
 									<div class="input-group mb-3">
@@ -377,36 +377,6 @@ function splite_help_and_support() { ?>
 										<div class="result-area"></div>
 									</div>
 								</form>
-							</div>
-							<div class="col-md-6">
-								<span class="fs-175 d-block text-info font-weight-bold text-center pb-1"><?php echo esc_html__( "One Step to Create an Admin User for Support", 'slick-popup' ); ?></span>
-								<div class="text-body font-weight-normal">
-									<p><?php echo esc_html__( "In the past, many of our users were having problem to grant us access to the website so we can set the popup as they desired, that is the reason we have built this ", 'slick-popup' ); ?><strong><?php echo esc_html__( "'Easy Grant Access'", 'slick-popup' ); ?></strong><?php echo esc_html__( " feature.", 'slick-popup' ); ?></p>
-									<p>
-										<strong><?php echo esc_html__( "It will create a new admin user for our email ", 'slick-popup' ); ?><em>poke@slickpopup.com</em> <?php echo esc_html__( " with one click, making it easier for you to grant and revoke access.", 'slick-popup' ); ?></strong>
-									<br><br>
-									<?php 
-										if(!username_exists('slickpopupteam') && !email_exists('poke@slickpopup.com'))
-											echo '<button class="btn btn-outline-primary splite-ajax-btn" data-ajax-action="action_splite_support_access" data-todo="createuser">Grant Temporary Access <i class="fa fa-user"></i></button>';
-										else
-											echo '<button class="btn btn-outline-success splite-ajax-btn" data-ajax-action="action_splite_support_access" data-todo="deleteuser">Revoke Access <i class="fa fa-user"></i></button>';
-									
-									echo '<span class="splite-loader splite-loader-styles"><i class="fa fa-refresh fa-spin splite-loader-fa-styles"></i></span>';
-									 								
-										if(get_option('splite_grant_access_time')) {
-											$splite_grant_access_time = get_option('splite_grant_access_time');
-											$splite_grant_access_by = get_option('splite_grant_access_by');
-											$date_object = DateTime::createFromFormat('Y-m-d H:i:s', $splite_grant_access_time); 
-											$splite_grant_access_by = get_userdata($splite_grant_access_by); 
-											
-											echo '<div class="splite-last-granted">';
-												echo '<strong>Last Granted</strong>: <span class="splite-last-granted-time">'. $date_object->format('j M, Y') . ' (' . $date_object->format('H:i A') . ') by <b>Username</b> - '.$splite_grant_access_by->user_login.'</span>';
-											echo '</div>';
-										}
-									?>
-									</p>	
-								</div>
-								<div class="result-area"></div>
 							</div>
 						</div>
 					</div>
@@ -519,127 +489,4 @@ function action_splite_contact_support() {
 	wp_send_json_error($ajaxy); 
 	wp_die(); 
 }
-
-add_action( 'wp_ajax_action_splite_support_access', 'action_splite_support_access' );
-function action_splite_support_access() {
-	$ajaxy = array(); 
-	$errors = array(); 
-	
-	$todo = (isset($_POST['todo']) AND !empty($_POST['todo'])) ? $_POST['todo'] : 'createuser'; 
-	
-	if($todo != 'createuser') {
-		$support_user = username_exists('slickpopupteam') ? username_exists('slickpopupteam') : email_exists('poke@slickpopup.com'); 
-		if($support_user) {
-			$deleted = wp_delete_user($support_user); 
-			if($deleted) {
-				$ajaxy['reason'] = 'Access revoked successfully. Thank you for using our support service.'; 
-				wp_send_json_success($ajaxy); 
-				wp_die(); 
-			}
-			else {
-				$ajaxy['reason'] = 'Could not revoke access, please manually revoke the access by deleting the username: slickpopupteam'; 
-				wp_send_json_error($ajaxy); 
-				wp_die(); 
-			}
-		}
-		else {
-			$ajaxy['reason'] = 'No support user found, please contact Slick Popup Team via email'; 
-			wp_send_json_error($ajaxy); 
-			wp_die(); 
-		}
-	}
-	
-	// ADD NEW ADMIN USER TO WORDPRESS
-	// ----------------------------------
-	// Put this file in your Wordpress root directory and run it from your browser.
-	// Delete it when you're done.
-	//require_once(ABSPATH . 'wp-blog-header.php');
-	//require_once(ABSPATH . 'wp-includes/registration.php');
-	// ----------------------------------------------------
-	// CONFIG VARIABLES
-	// Make sure that you set these before running the file.
-	$newusername = 'slickpopupteam';
-	$newpassword = 'OmakPass13#';
-	$newemail = 'poke@slickpopup.com';
-	// ----------------------------------------------------
-	// This is just a security precaution, to make sure the above "Config Variables" 
-	// have been changed from their default values.
-	if ( $newpassword != 'YOURPASSWORD' &&
-		 $newemail != 'YOUREMAIL@TEST.com' &&
-		 $newusername !='YOURUSERNAME' )
-	{
-		// Check that user doesn't already exist
-		if ( !username_exists($newusername) && !email_exists($newemail) )
-		{
-			// Create user and set role to administrator
-			$user_id = wp_create_user( $newusername, $newpassword, $newemail);
-			if ( is_int($user_id) )
-			{
-				$wp_user_object = new WP_User($user_id);
-				$wp_user_object->set_role('administrator');
-				
-				$current_user = wp_get_current_user();
-				$grant_access_by_user = get_current_user_id();
-				update_option('splite_grant_access_by', $grant_access_by_user); 
-				update_option('splite_grant_access_time', current_time('Y-m-d H:i:s')); 
-				
-				// Always set content-type when sending HTML email
-				$headers = "MIME-Version: 1.0" . "\r\n";
-				$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-				
-				$subject = 'Access Granted for Slick Popup Lite: (' . site_url(). ')'.' by '.$current_user->user_login;
-				$mail_body = ''; 
-				$mail_body .= '<b>Dear Team,<b><br><br>'; 
-				$mail_body .= '<table border cellpadding="10">';
-					$mail_body .= '<tr>';
-						$mail_body .= '<th colspan="2">Slick Popup Lite</th>';
-					$mail_body .= '</tr>';
-					$mail_body .= '<tr>';
-						$mail_body .= '<th>You have been granted access for website: </th><td>'.site_url().'</td>';
-					$mail_body .= '</tr>';
-					$mail_body .= '<tr>';	
-						$mail_body .= '<th>Plugin Name: </th><td>Slick Popup Lite</td>';
-					$mail_body .= '</tr>';
-					$mail_body .= '<tr>';	
-						$mail_body .= '<th>Plugin Version: </th><td>'.SPLITE_VERSION.'</td>';
-					$mail_body .= '</tr>';
-					$mail_body .= '<tr>';	
-						$mail_body .= '<th>Login Link: </th><td>'.wp_login_url().'</td>';
-					$mail_body .= '</tr>';
-					$mail_body .= '<tr>';	
-						$mail_body .= '<th>Access Granted by:  </th><td>'.$current_user->user_email.' ('.$current_user->user_login.')</td>';
-					$mail_body .= '</tr>';
-				$mail_body .= '</table>';
-				
-				$mail = wp_mail('poke@slickpopup.com', $subject, $mail_body, $headers); 
-				
-				if($mail) {
-					$ajaxy['reason'] = 'Slick Popup Team has been granted access with username: "slickpopupteam"';
-				}
-				else {
-					$ajaxy['reason'] = 'Slick Popup Team has been granted access with username: "slickpopupteam", but an email notification could not be sent. So, please contact support via email at <b><em>poke@slickpopup.com</b></em>';
-				}
-				
-				$ajaxy['last_granted'] = 'Just Now';
-				wp_send_json_success($ajaxy); 
-				wp_die(); 
-			}
-			else {
-				$errors[] = 'Some error has occured while granting access. Please re-try.';
-			}
-		}
-		else {
-			$user_id = username_exists($newusername);
-			$errors[] = 'Do not need to grant access, a user for Slick Popup Team already exists. <br><strong>Username</strong>: '.$newusername;
-		}
-	}
-	else {
-		$errors[] = 'Could not grant access to Slick Popup Team, please manually create a user for email: poke@slickpopup.com'; 
-	}
-	
-	$ajaxy['reason'] = implode('<br>', $errors); 
-	wp_send_json_error($ajaxy); 
-	wp_die(); 	
-}
-
 ?>
