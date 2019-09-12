@@ -6,22 +6,25 @@ jQuery(document).ready(function() { // wait for page to finish loading
 		$btnClicked = jQuery(this); 
 		$parent = jQuery(this).parent(); 
 		$parentBox = jQuery(this).closest('.notice'); 
+		$parentSpinner = $parentBox.find('.spinner'); 
 		
-		$parentBox.hide(); 
+		$parentSpinner.addClass('is-active'); 
 		
 		jQuery.post(
 			ajaxurl,
 			{
 				action : 'splite_notice_dismissable',
 				dataBtn : $btnClicked.attr('data-btn'),
+				security : $btnClicked.attr('data-nonce'),
 			},
 			function( response ) {				
+				$parentSpinner.removeClass('is-active'); 
 				if( response.success === true ) {					
-					
+					$parentBox.slideUp(); 
 				}
 				else {
-					
-				}				
+					alert(response.data); 
+				}								
 			} 
 		);
 	});
@@ -45,6 +48,7 @@ jQuery(document).ready(function() { // wait for page to finish loading
 			{
 				action : 'splite_action_importDemo',
 				title : $btnClicked.attr('data-title'),
+				security : $btnClicked.attr('data-nonce'),
 			},
 			function( response ) {				
 				if( response.success === true ) {					

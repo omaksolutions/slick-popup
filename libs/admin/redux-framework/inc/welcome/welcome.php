@@ -47,8 +47,6 @@
                 $this->check_version();
             }
             update_option( 'redux_version_upgraded_from', ReduxFramework::$_version );
-            set_transient( '_redux_activation_redirect', true, 30 );
-
         }
 
 
@@ -121,6 +119,7 @@
             if ( $newHash == $data['check'] ) {
                 unset( $generate_hash );
             }
+
             $post_data = array(
                 'hash'          => md5( network_site_url() . '-' . $_SERVER['REMOTE_ADDR'] ),
                 'site'          => esc_url( home_url( '/' ) ),
@@ -131,6 +130,7 @@
             $post_data = serialize( $post_data );
 
             if ( isset( $generate_hash ) && $generate_hash ) {
+                
                 $data['check']      = $newHash;
                 $data['identifier'] = "";
                 $response           = wp_remote_post( 'http://support.redux.io/v1/', array(
@@ -303,24 +303,24 @@
                 type='text/css' media='all'/>
             <style type="text/css">
                 .redux-badge:before {
-                <?php echo esc_js(is_rtl() ? 'right' : 'left'); ?> : 0;
+                <?php echo is_rtl() ? 'right' : 'left'; ?> : 0;
                 }
 
                 .about-wrap .redux-badge {
-                <?php echo esc_js(is_rtl() ? 'left' : 'right'); ?> : 0;
+                <?php echo is_rtl() ? 'left' : 'right'; ?> : 0;
                 }
 
                 .about-wrap .feature-rest div {
-                    padding- <?php echo esc_js(is_rtl() ? 'left' : 'right'); ?>: 100px;
+                    padding- <?php echo is_rtl() ? 'left' : 'right'; ?>: 100px;
                 }
 
                 .about-wrap .feature-rest div.last-feature {
-                    padding- <?php echo esc_js(is_rtl() ? 'right' : 'left'); ?>: 100px;
-                    padding- <?php echo esc_js(is_rtl() ? 'left' : 'right'); ?>: 0;
+                    padding- <?php echo is_rtl() ? 'right' : 'left'; ?>: 100px;
+                    padding- <?php echo is_rtl() ? 'left' : 'right'; ?>: 0;
                 }
 
                 .about-wrap .feature-rest div.icon:before {
-                    margin: <?php echo esc_js(is_rtl() ? '0 -100px 0 0' : '0 0 0 -100px'); ?>;
+                    margin: <?php echo is_rtl() ? '0 -100px 0 0' : '0 0 0 -100px'; ?>;
                 }
             </style>
             <?php
@@ -334,7 +334,7 @@
          * @return void
          */
         public function tabs() {
-            $selected = isset ( $_GET['page'] ) ? $_GET['page'] : 'redux-about';
+            $selected = isset ( $_GET['page'] ) ? esc_attr( $_GET['page'] ) : 'redux-about';
             $nonce    = wp_create_nonce( 'redux-support-hash' );
             ?>
             <input type="hidden" id="redux_support_nonce" value="<?php echo esc_attr( $nonce ); ?>"/>
@@ -480,7 +480,7 @@
                 <a href="http://docs.reduxframework.com/" class="docs button button-primary">Docs</a>
                 <a href="http://wordpress.org/plugins/redux-framework/" class="review-us button button-primary"
                     target="_blank">Review Us</a>
-                <a href="https://www.paypal.com/cgi-bin/webscr?cmd=admin-folder-xclick&hosted_button_id=MMFMHWUPKHKPW"
+                <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=MMFMHWUPKHKPW"
                     class="review-us button button-primary" target="_blank">Donate</a>
                 <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://reduxframework.com"
                     data-text="Reduce your dev time! Redux is the most powerful option framework for WordPress on the web"

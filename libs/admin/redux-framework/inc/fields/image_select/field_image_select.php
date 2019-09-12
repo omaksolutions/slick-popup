@@ -107,11 +107,12 @@ if ( ! class_exists( 'ReduxFramework_image_select' ) ) {
                     }
 
                     $theValue = $k;
+                    
+                    $selected = ( checked( $this->value, $theValue, false ) != '' ) ? ' redux-image-select-selected' : '';
+                    
                     if ( ! empty( $this->field['tiles'] ) && $this->field['tiles'] == true ) {
                         $theValue = $v['img'];
                     }
-
-                    $selected = ( checked( $this->value, $theValue, false ) != '' ) ? ' redux-image-select-selected' : '';
 
                     $presets   = '';
                     $is_preset = false;
@@ -143,8 +144,8 @@ if ( ! class_exists( 'ReduxFramework_image_select' ) ) {
                                         $selected = false;
                                     } else if ( ! empty( $pv ) && ! isset( $this->parent->options[ $pk ] ) ) {
                                         $selected = false;
-                                    } else if ( isset( $this->parent->options[ $pk ] ) && $this->parent->options[ $pk ] != $pv ) {
-                                        $selected = false;
+                                    //} else if ( isset( $this->parent->options[ $pk ] ) && $this->parent->options[ $pk ] != $pv ) {
+                                    //    $selected = false;
                                     }
 
                                     if ( ! $selected ) { // We're still not using the same preset. Let's unset that shall we?
@@ -178,7 +179,7 @@ if ( ! class_exists( 'ReduxFramework_image_select' ) ) {
                     if ( ! empty( $this->field['tiles'] ) && $this->field['tiles'] == true ) {
                         echo '<span class="tiles ' . $v['class'] . '" style="background-image: url(' . $v['img'] . ');" rel="' . $v['img'] . '"">&nbsp;</span>';
                     } else {
-                        echo '<img src="' . $v['img'] . '" alt="' . $v['alt'] . '" class="' . $v['class'] . '" style="' . $style . '"' . $presets . $merge . ' />';
+                        echo '<img src="' . $v['img'] . '" title="'. $v['alt'] . '" alt="' . $v['alt'] . '" class="' . $v['class'] . '" style="' . $style . '"' . $presets . $merge . ' />';
                     }
 
                     if ( $v['title'] != '' ) {

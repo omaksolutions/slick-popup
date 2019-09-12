@@ -81,8 +81,8 @@
                 }
 
                 if ( empty( $this->_extension_dir ) ) {
-                    $this->_extension_dir = trailingslashit( str_replace( '\\', '/', dirname( __FILE__ ) ) );
-                    $this->_extension_url = site_url( str_replace( trailingslashit( str_replace( '\\', '/', ABSPATH ) ), '', $this->_extension_dir ) );
+                    $this->_extension_dir = apply_filters( "redux/extension/customizer/dir", trailingslashit( str_replace( '\\', '/', dirname( __FILE__ ) ) ) );
+                    $this->_extension_url = apply_filters( "redux/extension/customizer/url", site_url( str_replace( trailingslashit( str_replace( '\\', '/', ABSPATH ) ), '', $this->_extension_dir ) ) );
                 }
 
                 self::get_post_values();
@@ -549,13 +549,17 @@
                         }
 
                         $wp_customize->add_control( new $class_name( $wp_customize, $option['id'], array(
-                            'label'          => $option['title'],
-                            'section'        => $section['id'],
-                            'settings'       => $option['id'],
-                            'type'           => 'redux-' . $option['type'],
-                            'field'          => $option,
-                            'ReduxFramework' => $this->parent,
-                            'priority'       => $option['priority'],
+                            'label'           => $option['title'],
+                            'section'         => $section['id'],
+                            'settings'        => $option['id'],
+                            'type'            => 'redux-' . $option['type'],
+                            'field'           => $option,
+                            'ReduxFramework'  => $this->parent,
+                            'active_callback' => ( isset( $option['required'] ) && class_exists( 'Redux_Customizer_Active_Callback' ) ) ? array(
+                                'Redux_Customizer_Active_Callback',
+                                'evaluate'
+                            ) : '__return_true',
+                            'priority'        => $option['priority'],
                         ) ) );
 
                         $section['fields'][ $skey ]['name'] = $option['id'];

@@ -8,10 +8,19 @@
 add_action( 'wp_ajax_splite_notice_dismissable', 'splite_notice_dismissable' );
 function splite_notice_dismissable() {
 	
+	if(!isset($_POST['security']) || !isset($_POST['dataBtn'])) {
+		wp_send_json_error('Security check failed, please refresh and try again'); 
+		wp_die(); 
+	}
+	
 	// Sanitize string for added security
 	$data_btn = isset($_POST['dataBtn']) ? sanitize_text_field($_POST['dataBtn']) : '';
+	$nonce = ($data_btn=='ask-later') ? 'splite_ask_later' : 'splite_ask_never'; 
 	
-	if(empty($data_btn)) return; 
+	if(!wp_verify_nonce($_POST['security'], $nonce) || !current_user_can('manage_options')) {
+		wp_send_json_error('Security check failed, please refresh and try again'); 
+		wp_die(); 
+	}
 	
 	$today = DateTime::createFromFormat('U', current_time('U')); 
 	
@@ -41,11 +50,11 @@ function splite_admin_notices() {
 	// review_notice - numeric counter for multiplying 14 days
 	$review_notice = get_option('splite_review_notice') ? get_option('splite_review_notice') : 1; 
 	
-	if($install_date OR ! is_a($install_date_object, 'DATEIME')) {
+	if(! $install_date OR ! is_a($install_date_object, 'DATETIME')) {
 		update_option('splite_install_date', current_time('Y-m-d H:i:s')); 
 		return; 
 	}
-		
+	
 	$today = DateTime::createFromFormat('U', current_time('U')); 
 	$diff = $today->diff($install_date_object); 
 	//print_r($diff); 
@@ -58,8 +67,10 @@ function splite_admin_notices() {
 					<div class="splite-notice-right">
 						<p>'.esc_html__( 'Thanks for using one of the best WordPress Popup Plugin for Contact Form 7. We hope that it has been useful for you and would like you to leave review on WordPres.org website, it will help us improve the product features.', 'slick-popup' ).'</p>
 						<p><a class="button-primary" href="https://wordpress.org/support/plugin/slick-popup/reviews/">Leave a Review</a>
-						&nbsp;<a class="button-link splite-dismissable" data-btn="ask-later" href="#">Ask Later</a> |
-						<a class="button-link splite-dismissable" data-btn="ask-never" href="#">Never Show Again</a></p>
+						&nbsp;<a class="button-link splite-dismissable" data-nonce="'.wp_create_nonce("splite_ask_later").'" data-btn="ask-later" href="#">Ask Later</a> |
+						<a class="button-link splite-dismissable" data-nonce="'.wp_create_nonce("splite_ask_never").'" data-btn="ask-never" href="#">Never Show Again</a>
+						<span class="spinner"></span>
+						</p>						
 					</div>
 				</div>
 		</div>';		

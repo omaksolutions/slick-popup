@@ -9,13 +9,26 @@ function splite_action_importDemo() {
 	
 	$ajaxy = array(); 
 	// If Nothing is posted through AJAX
-	if( !isset($_POST) OR !isset($_POST['title']) ) 
-		wp_send_json_error( 'Try again. Nothing Sent to server.' ); 
+	if( !isset($_POST) OR !isset($_POST['title']) ) {
+		$ajaxy['reason'] = 'Try again. Nothing Sent to server.'; 		
+	}
 	
-	$title = $_POST['title'];
+	if(!isset($_POST['security'])) {
+		$ajaxy['reason'] = 'Security check failed, please refresh and try again.'; 
+	}
 	
+	if(!wp_verify_nonce($_POST['security'], 'import_demo_'.$_POST['title']) || !current_user_can('manage_options')) {
+		$ajaxy['reason'] = 'Security check failed, please refresh and try again.'; 
+	}
+	
+	// If error reason is send, the return error
+	if(isset($ajaxy['reason'])) {
+		wp_send_json_error($ajaxy); 
+		wp_die(); 
+	}
+	
+	$title = $_POST['title'];	
 	$formId = splite_import_cf7_demo(array('title'=>$title));
-
 	$form = get_page_by_title($title, 'OBJECT', 'wpcf7_contact_form');
 	
 	if($formId) {

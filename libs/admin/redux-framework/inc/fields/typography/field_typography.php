@@ -37,7 +37,6 @@ if ( ! class_exists( 'ReduxFramework_typography' ) ) {
             "'Times New Roman', Times,serif"                       => "'Times New Roman', Times, serif",
             "'Trebuchet MS', Helvetica, sans-serif"                => "'Trebuchet MS', Helvetica, sans-serif",
             "Verdana, Geneva, sans-serif"                          => "Verdana, Geneva, sans-serif",
-            "Assistant-Regular"                                    => "Assistant-Regular",
         );
 
         private $user_fonts = true;
@@ -52,7 +51,7 @@ if ( ! class_exists( 'ReduxFramework_typography' ) ) {
             $this->parent = $parent;
             $this->field  = $field;
             $this->value  = $value;
-            $this->field['ext-font-css'] = get_template_directory_uri() .'/fonts/fonts.css';
+
             // Shim out old arg to new
             if ( isset( $this->field['all_styles'] ) && ! empty( $this->field['all_styles'] ) ) {
                 $this->field['all-styles'] = $this->field['all_styles'];
@@ -281,7 +280,7 @@ if ( ! class_exists( 'ReduxFramework_typography' ) ) {
                 $multi = ( isset( $this->field['multi']['weight'] ) && $this->field['multi']['weight'] ) ? ' multiple="multiple"' : "";
                 echo '<select' . $multi . ' data-placeholder="' . __( 'Style', 'redux-framework' ) . '" class="redux-typography redux-typography-style select ' . $this->field['class'] . '" original-title="' . __( 'Font style', 'redux-framework' ) . '" id="' . $this->field['id'] . '_style" data-id="' . $this->field['id'] . '" data-value="' . $style . '">';
 
-                if ( empty( $this->value['subset'] ) || empty( $this->value['font-weight'] ) ) {
+                if ( empty( $this->value['subsets'] ) || empty( $this->value['font-weight'] ) ) {
                     echo '<option value=""></option>';
                 }
 
@@ -294,11 +293,11 @@ if ( ! class_exists( 'ReduxFramework_typography' ) ) {
 
                 if ( isset( $gfonts[ $this->value['font-family'] ] ) ) {
                     foreach ( $gfonts[ $this->value['font-family'] ]['variants'] as $v ) {
-                        echo '<option value="' . $v['id'] . '" ' . selected( $this->value['subset'], $v['id'], false ) . '>' . $v['name'] . '</option>';
+                        echo '<option value="' . $v['id'] . '" ' . selected( $this->value['subsets'], $v['id'], false ) . '>' . $v['name'] . '</option>';
                     }
                 } else {
-                    if ( ! isset( $this->value['font-weight'] ) && isset( $this->value['subset'] ) ) {
-                        $this->value['font-weight'] = $this->value['subset'];
+                    if ( ! isset( $this->value['font-weight'] ) && isset( $this->value['subsets'] ) ) {
+                        $this->value['font-weight'] = $this->value['subsets'];
                     }
 
                     foreach ( $nonGStyles as $i => $style ) {
@@ -306,8 +305,8 @@ if ( ! class_exists( 'ReduxFramework_typography' ) ) {
                             $this->value['font-weight'] = false;
                         }
 
-                        if ( ! isset( $this->value['subset'] ) ) {
-                            $this->value['subset'] = false;
+                        if ( ! isset( $this->value['subsets'] ) ) {
+                            $this->value['subsets'] = false;
                         }
 
                         echo '<option value="' . $i . '" ' . selected( $this->value['font-weight'], $i, false ) . '>' . $style . '</option>';
@@ -331,7 +330,7 @@ if ( ! class_exists( 'ReduxFramework_typography' ) ) {
 
                 if ( isset( $gfonts[ $this->value['font-family'] ] ) ) {
                     foreach ( $gfonts[ $this->value['font-family'] ]['subsets'] as $v ) {
-                        echo '<option value="' . $v['id'] . '" ' . selected( $this->value['subset'], $v['id'], false ) . '>' . $v['name'] . '</option>';
+                        echo '<option value="' . $v['id'] . '" ' . selected( $this->value['subsets'], $v['id'], false ) . '>' . $v['name'] . '</option>';
                     }
                 }
 
@@ -498,7 +497,7 @@ if ( ! class_exists( 'ReduxFramework_typography' ) ) {
                         if ( $isGoogleFont == true ) {
                             $this->parent->typography_preview[ $fontFamily[0] ] = array(
                                 'font-style' => array( $this->value['font-weight'] . $this->value['font-style'] ),
-                                'subset'     => array( $this->value['subset'] )
+                                'subset'     => array( $this->value['subsets'] )
                             );
 
                             $protocol = ( ! empty( $_SERVER['HTTPS'] ) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443 ) ? "https:" : "http:";
@@ -551,7 +550,7 @@ if ( ! class_exists( 'ReduxFramework_typography' ) ) {
                     true
                 );
             }
-            
+
             wp_localize_script(
                 'redux-field-typography-js',
                 'redux_ajax_script',
@@ -610,7 +609,7 @@ if ( ! class_exists( 'ReduxFramework_typography' ) ) {
             }
 
             if ( ! empty( $subsets ) ) {
-                $link .= "&amp;subset=" . implode( ',', $subsets );
+                $link .= "&subset=" . implode( ',', $subsets );
             }
 
 
@@ -652,7 +651,7 @@ if ( ! class_exists( 'ReduxFramework_typography' ) ) {
             }
 
             if ( ! empty( $subsets ) ) {
-                $link .= "&amp;subset=" . implode( ',', $subsets );
+                $link .= "&subset=" . implode( ',', $subsets );
             }
 
             return "'" . $link . "'";
@@ -748,15 +747,27 @@ if ( ! class_exists( 'ReduxFramework_typography' ) ) {
                 if ( ! empty( $this->field['output'] ) && is_array( $this->field['output'] ) ) {
                     $keys = implode( ",", $this->field['output'] );
                     $this->parent->outputCSS .= $keys . "{" . $style . '}';
+                    
                     if ( isset( $this->parent->args['async_typography'] ) && $this->parent->args['async_typography'] ) {
                         $key_string    = "";
                         $key_string_ie = "";
+                        
                         foreach ( $this->field['output'] as $value ) {
-                            $key_string .= ".wf-loading " . $value . ',';
-                            $key_string_ie .= ".ie.wf-loading " . $value . ',';
+                            if (strpos($value,',') !== false) {
+                                $arr = explode(',', $value);
+                                
+                                foreach ($arr as $subvalue) {
+                                    $key_string .= ".wf-loading " . $subvalue . ',';
+                                    $key_string_ie .= ".ie.wf-loading " . $subvalue . ',';
+                                }
+                            } else {
+                                $key_string .= ".wf-loading " . $value . ',';
+                                $key_string_ie .= ".ie.wf-loading " . $value . ',';
+                            }
                         }
-                        $this->parent->outputCSS .= $key_string . "{opacity: 0;}";
-                        $this->parent->outputCSS .= $key_string_ie . "{visibility: hidden;}";
+                        
+                        $this->parent->outputCSS .= rtrim( $key_string, ',' ) . "{opacity: 0;}";
+                        $this->parent->outputCSS .= rtrim( $key_string_ie, ',' ) . "{visibility: hidden;}";
                     }
                 }
 
@@ -766,12 +777,23 @@ if ( ! class_exists( 'ReduxFramework_typography' ) ) {
                     if ( isset( $this->parent->args['async_typography'] ) && $this->parent->args['async_typography'] ) {
                         $key_string    = "";
                         $key_string_ie = "";
+                        
                         foreach ( $this->field['compiler'] as $value ) {
-                            $key_string .= ".wf-loading " . $value . ',';
-                            $key_string_ie .= ".ie.wf-loading " . $value . ',';
+                            if (strpos($value,',') !== false) {
+                                $arr = explode(',', $value);
+                                
+                                foreach ($arr as $subvalue) {
+                                    $key_string .= ".wf-loading " . $subvalue . ',';
+                                    $key_string_ie .= ".ie.wf-loading " . $subvalue . ',';
+                                }
+                            } else {
+                                $key_string .= ".wf-loading " . $value . ',';
+                                $key_string_ie .= ".ie.wf-loading " . $value . ',';
+                            }                        
                         }
-                        $this->parent->compilerCSS .= $key_string . "{opacity: 0;}";
-                        $this->parent->compilerCSS .= $key_string_ie . "{visibility: hidden;}";
+
+                        $this->parent->compilerCSS .= rtrim( $key_string, ',' ) . "{opacity: 0;}";
+                        $this->parent->compilerCSS .= rtrim( $key_string_ie, ',' ) . "{visibility: hidden;}";
                     }
                 }
             }

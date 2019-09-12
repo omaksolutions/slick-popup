@@ -37,9 +37,8 @@ function splite_admin_enqueue_scripts( $hook_suffix ) {
 	);
 
 	if (isset($_GET['page']) AND in_array($_GET['page'], $bootstrap_4_pages)) {
-		wp_enqueue_style( 'bootstrap-min-css', 'https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css' );
-		wp_enqueue_script( 'bootstrap-min-js', 'https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js' );
-		wp_enqueue_script( 'jquery-tab', 'https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js' );
+		wp_enqueue_style( 'bootstrap-min-css', splite_plugin_url( '/libs/css/bootstrap.min.css' ) );
+		wp_enqueue_script( 'bootstrap-min-js', splite_plugin_url( '/libs/js/bootstrap.min.js' ) );
 	}
 }
 
@@ -85,7 +84,7 @@ function splite_import_demos() { ?>
 									$output .='<span class="splite-label">'.$demo.'</span>';
 									$output .='<span class="splite-import-handle">';
 										$output .='<span class="splite-loader v-hidden"><i class="fa fa-refresh fa-spin loader-fa-styles"></i></span>';						
-										$output .='<span class="splite-btn button-link splite-btn-importer splite-btn-importer" data-title="'.$label.'"><strong>'.esc_html__('Import','slick-popup').'</strong></span>';
+										$output .='<span class="splite-btn button-link splite-btn-importer splite-btn-importer" data-nonce="'.wp_create_nonce("import_demo_" . $label).'" data-title="'.$label.'"><strong>'.esc_html__('Import','slick-popup').'</strong></span>';
 									$output .='</span>';
 								$output .='</div>';
 							$output .='</div>';
@@ -371,6 +370,7 @@ function splite_help_and_support() { ?>
 									</div>
 									<div class="input-group mb-1 mt-2">
 										<input type="submit" name="Submit" class="btn btn-outline-info splite-submit-btn">	
+										<input type="hidden" name="wp_nonce" value="<?php echo wp_create_nonce("splite_contact_support_nonce"); ?>">	
 										<span class="splite-loader ml-1 splite-loader-styles"><i class="fa fa-refresh fa-spin splite-loader-fa-styles"></i></span>
 									</div>
 									<div class="input-group">
@@ -384,6 +384,28 @@ function splite_help_and_support() { ?>
 			</div>
 		</div>
 	</div>
+
+	<script>
+		jQuery(document).ready(function() {
+			jQuery('.nav-link').click(function(e) {
+				$btnClicked = jQuery(this); 
+				toggle = $btnClicked.attr('data-toggle'); 
+				if(toggle="tab") {
+					href= $btnClicked.attr('href'); 
+					tabs = jQuery('.tab-content .container'); 
+					links = jQuery('.nav-tabs .nav-link'); 
+					tabs.each(function(index) {
+						jQuery(this).removeClass('active show'); 
+					});
+					links.each(function(index) {
+						jQuery(this).removeClass('active show'); 
+					});
+					jQuery(href).addClass('active show'); 
+					$btnClicked.addClass('active show'); 
+				}
+			});
+		});
+	</script>
 <?php }
 
 /**
@@ -404,17 +426,30 @@ function splite_current_action() {
 
 add_action( 'wp_ajax_action_splite_contact_support', 'action_splite_contact_support' );
 function action_splite_contact_support() {
-	//print_r( $_POST['fields'] ); 
 	$ajaxy = array(); 
 	$errors = array(); 
 	
 	if( !isset($_POST) OR !isset($_POST['fields']) OR empty($_POST['fields']) ) {
 		$ajaxy['reason'] = 'Nothing sent to server, please retry.'; 
 	}
-
+	
 	parse_str($_POST['fields'], $posted); 	
 	extract($posted); 
 	
+	if(!wp_verify_nonce($wp_nonce, 'splite_contact_support_nonce')) {
+		$ajaxy['reason'] = 'Security check failed, please refresh and try again.'; 
+	}
+	
+	if(!current_user_can('manage_options')) {
+		$ajaxy['reason'] = 'You do not have sufficient permissions.'; 
+	}
+	
+	// If error reason is send, the return error
+	if(isset($ajaxy['reason'])) {
+		wp_send_json_error($ajaxy); 
+		wp_die(); 
+	}
+
 	// If Nothing is posted through AJAX
 	if( !isset($name) OR empty($name) ) {
 		$errors[] = 'Please enter your name'; 
@@ -435,11 +470,10 @@ function action_splite_contact_support() {
 	}
 	
 	if(sizeof($errors)) {
-		//$ajaxy['reason'] = '<ul>';
-			//foreach($errors as $error) { $ajaxy['reason'] .= '<li>'.$error.'</li>'; }
-		//$ajaxy['reason'] .= '</ul>';
+		$ajaxy['reason'] = '<ol class="p-0">';
+			foreach($errors as $error) { $ajaxy['reason'] .= '<li class="m-0">'.$error.'</li>'; }
+		$ajaxy['reason'] .= '</ol>';
 		
-		$ajaxy['reason'] = implode('<br>', $errors); 		
 		wp_send_json_error($ajaxy); 
 		wp_die(); 
 	}
