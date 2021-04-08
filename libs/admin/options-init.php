@@ -458,11 +458,11 @@
 						'type'          => 'select',
 						'title'         => __( 'How to activate popup?', 'slick-popup' ),
 						'subtitle'      => __( 'Choose how the popup should activate.', 'slick-popup' ),
-						'desc'          => __( '4 modes: On-click, Auto Popup, On-scroll Popup, Forced Popup', 'slick-popup' ),
+						'desc'          => __( 'Premium: Auto Popup, On-scroll Popup, Forced Popup', 'slick-popup' ),
 						'options'  => array(
-									'manually' => __('On-Click (Default)', 'slick-popup' ),
-									'onexit'  => __('On-Exit Intent', 'slick-popup'),	
-								),
+							'manually' => __('On-Click (Default)', 'slick-popup' ),
+							'onexit'  => __('On-Exit Intent', 'slick-popup'),	
+						),
 						'default'  => 'manually'
 					),
 					array(
