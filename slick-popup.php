@@ -5,12 +5,12 @@ Plugin URI:   http://www.omaksolutions.com
 Description:  A lightweight plugin that converts a Contact Form 7 form into a customizable pop-up form which is slick, beautiful and responsive to different screen-sizes.
 Author URI:   http://www.omaksolutions.com 
 Author:       Om Ak Solutions 
-Version:      1.7.4
+Version:      1.7.5
 Text Domain: slick-popup
 */
 
 
-define( 'SPLITE_VERSION', '1.7.4' );
+define( 'SPLITE_VERSION', '1.7.5' );
 
 define( 'SPLITE_REQUIRED_WP_VERSION', '3.0.1' );
 
@@ -28,7 +28,6 @@ define( 'SPLITE_PLUGIN_IMG_URL', SPLITE_PLUGIN_URL . '/libs/admin/img' );
 
 define ( 'SPLITE_DEBUG', FALSE );
 
-require_once( SPLITE_PLUGIN_DIR . '/libs/admin/codestar/cs-framework.php' );
 require_once( SPLITE_PLUGIN_DIR . '/libs/admin-functions.php' );
 require_once( SPLITE_PLUGIN_DIR . '/libs/admin-pages.php' );
 require_once( SPLITE_PLUGIN_DIR . '/libs/extras.php' );
@@ -292,21 +291,6 @@ function splite_add_my_popup() {
 		
 		$cf7_id = isset($splite_opts['form-id'])? $splite_opts['form-id'] : '';
 
-		global $post; 	
-		if(isset($post) && isset($post->ID)) {
-			$custom =  get_post_meta( $post->ID, '_splite_page_options', true); 	
-			if( isset($custom['_splite_meta_override']) AND $custom['_splite_meta_override'] ) {
-				if( isset($custom['_splite_meta_form_id']) AND !empty($custom['_splite_meta_form_id']) )
-					$cf7_id = $custom['_splite_meta_form_id'];
-				if( isset($custom['_splite_meta_side_button']) AND !empty($custom['_splite_meta_side_button']) )
-					$side_button_text = $custom['_splite_meta_side_button'];
-				if( isset($custom['_splite_meta_popup_heading']) AND !empty($custom['_splite_meta_popup_heading']) )
-					$popup_heading = $custom['_splite_meta_popup_heading'];			
-				if( isset($custom['_splite_meta_cta']) AND !empty($custom['_splite_meta_cta']) )
-					$cta_text = $custom['_splite_meta_cta'];			
-			}
-		}
-		
 		$cf7_id = apply_filters( 'splite_dollar_cf7_id', $cf7_id );
 		$side_button_text = apply_filters( 'splite_dollar_side_button_text', $side_button_text );
 		$popup_heading = apply_filters( 'splite_dollar_popup_heading', $popup_heading );

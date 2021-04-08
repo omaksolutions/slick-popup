@@ -112,6 +112,9 @@ For any doubts or queries, please read our F.A.Q section. If it doesn't come out
 
 == Changelog ==
 
+= 1.7.4 =
+* Removed Codestar framework due to compatibility issues
+
 = 1.7.3 =
 * Added: Bootstrap JS and CSS in plugin assets
 * Added: jQuery jQuery v3.3.1 in plugin assets (required for tabs on support page)
