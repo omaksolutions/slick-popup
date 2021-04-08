@@ -1,8 +1,8 @@
 === Slick Popup: Contact Form 7 Popup Plugin ===
-Contributors: ak.singla, nikhilomak, saviomak28
+Contributors: ak.singla, nikhilomak, saviomak28, tjomak
 Donate link: https://www.omaksolutions.com
 Tags: contact form 7, popup, cf7, popup form, wordPress popup plugin, contact form popup, popup contact form 7, submit form
-Tested up to: 5.2
+Tested up to: 5.7
 Requires at least: 3.5
 Requires PHP: 5.3
 Stable tag: trunk	
