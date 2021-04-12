@@ -557,11 +557,17 @@ function splite_addAndOverridePanelCSS() {
 /////////////////////////////////////////
 function splite_enqueue_popup_scripts() {
 	if ( !is_admin() ) {
-		wp_enqueue_script('jquery');
-		wp_register_style( 'splite-css', splite_plugin_url( '/libs/css/styles.css' ) );
-		wp_enqueue_style( 'splite-css' ); 
+		
+		if(!wp_script_is('jquery', 'enqueued')) {			
+			wp_enqueue_script('jquery');
+		}
+		
 		wp_register_style( 'splite-animate', splite_plugin_url( '/libs/css/animate.css' ) );
 		wp_enqueue_style( 'splite-animate' ); 
+		
+		wp_register_style( 'splite-css', splite_plugin_url( '/libs/css/styles.css' ) );
+		wp_enqueue_style( 'splite-css' ); 
+		
 		wp_register_script( 'nicescroll-js', splite_plugin_url( '/libs/js/jquery.nicescroll.min.js', array('jquery'), null, true  ) );
 		wp_enqueue_script( 'nicescroll-js' ); 
 		
