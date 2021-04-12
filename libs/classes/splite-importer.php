@@ -8,6 +8,11 @@ add_action( 'wp_ajax_splite_action_importDemo', 'splite_action_importDemo' );
 function splite_action_importDemo() {
 	
 	$ajaxy = array(); 
+	
+	if(!current_user_can('manage_options')) {
+		$ajaxy['reason'] = __('You do not have sufficient permissions to perform this action.', 'slick-popup'); 
+	}
+	
 	// If Nothing is posted through AJAX
 	if( !isset($_POST) OR !isset($_POST['title']) ) {
 		$ajaxy['reason'] = 'Try again. Nothing Sent to server.'; 		
@@ -27,7 +32,7 @@ function splite_action_importDemo() {
 		wp_die(); 
 	}
 	
-	$title = $_POST['title'];	
+	$title = sanitize_text_field($_POST['title']);
 	$formId = splite_import_cf7_demo(array('title'=>$title));
 	$form = get_page_by_title($title, 'OBJECT', 'wpcf7_contact_form');
 	

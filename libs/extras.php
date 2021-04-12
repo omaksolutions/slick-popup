@@ -233,4 +233,36 @@ function splite_all_settings_link() {
 	add_options_page(__('All Settings'), __('All Settings'), 'administrator', 'options.php');
 }
 
+function splite_sanitize_array($arr){
+    if(is_array($arr)){
+        foreach ( array_keys( $arr ) as $field ) {
+            $arr[ $field ] = sanitize_text_field( $field );
+        }
+    }
+    return $arr;
+}
+
+/**
+ * Recursive sanitation for text or array
+ *
+ * @param $args (array|string)
+ * @return mixed
+ */
+function splite_sanitize_arr_str($args) {
+    if( is_string($args) ){
+        $args = sanitize_text_field($args);
+    }elseif( is_array($args) ){
+        foreach ( $args as $key => &$value ) {
+            if ( is_array( $value ) ) {
+                $value = splite_sanitize_arr_str($value);
+            }
+            else {
+                $value = sanitize_text_field( $value );
+            }
+        }
+    }
+    return $args;
+}
+
+
 ?>

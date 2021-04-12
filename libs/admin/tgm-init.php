@@ -22,7 +22,7 @@
  */
 //require_once dirname( __FILE__ ) . '/class-tgm-plugin-activation.php';
 
-add_action( 'tgmpa_register', 'splite_required_plugins' );
+add_action( 'tgmpa_register', 'splite_required_plugins', 99 );
 /**
  * Register the required plugins for Slick Popup Pro.
  *

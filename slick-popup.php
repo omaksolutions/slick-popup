@@ -5,12 +5,12 @@ Plugin URI:   http://www.omaksolutions.com
 Description:  A lightweight plugin that converts a Contact Form 7 form into a customizable pop-up form which is slick, beautiful and responsive to different screen-sizes.
 Author URI:   http://www.omaksolutions.com 
 Author:       Om Ak Solutions 
-Version:      1.7.6
+Version:      1.7.7
 Text Domain: slick-popup
 */
 
 
-define( 'SPLITE_VERSION', '1.7.6' );
+define( 'SPLITE_VERSION', '1.7.7' );
 
 define( 'SPLITE_REQUIRED_WP_VERSION', '3.0.1' );
 
@@ -34,8 +34,8 @@ require_once( SPLITE_PLUGIN_DIR . '/libs/extras.php' );
 require_once( SPLITE_PLUGIN_DIR . '/libs/classes/splite-importer.php' );
 
 	//require_once(ABSPATH.'wp-admin/includes/plugin.php');	
-	if ( !class_exists( 'ReduxFramework' ) && file_exists( dirname( __FILE__ ) . '/libs/admin/redux-framework/framework.php' ) ) {
-		require_once( dirname( __FILE__ ) . '/libs/admin/redux-framework/framework.php' );
+	if ( !class_exists( 'ReduxFramework' ) && file_exists( dirname( __FILE__ ) . '/libs/admin/redux-framework/redux-framework.php' ) ) {
+		require_once( dirname( __FILE__ ) . '/libs/admin/redux-framework/redux-framework.php' );
 	}
 
 	if ( !isset( $redux_demo ) && file_exists( dirname( __FILE__ ) . '/libs/admin/admin-init.php' ) ) {
@@ -557,6 +557,7 @@ function splite_addAndOverridePanelCSS() {
 /////////////////////////////////////////
 function splite_enqueue_popup_scripts() {
 	if ( !is_admin() ) {
+		wp_enqueue_script('jquery');
 		wp_register_style( 'splite-css', splite_plugin_url( '/libs/css/styles.css' ) );
 		wp_enqueue_style( 'splite-css' ); 
 		wp_register_style( 'splite-animate', splite_plugin_url( '/libs/css/animate.css' ) );

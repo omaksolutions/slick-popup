@@ -51,7 +51,7 @@ function splite_admin_enqueue_scripts( $hook_suffix ) {
  * Creates the post list table 
  */
 function splite_import_demos() { ?>
-	
+
 	<div class="wrap">
 		<div class="card col-md-12">
 			<span class="card-title text-center m-2 display-4"><?php echo esc_html__("Import CF7 Demo Forms", 'slick-popup'); ?></span>
@@ -414,11 +414,11 @@ function splite_help_and_support() { ?>
 function splite_current_action() {
 	//return 'copy'; 
 	if ( isset( $_REQUEST['action'] ) && -1 != $_REQUEST['action'] ) {
-		return $_REQUEST['action'];
+		return sanitize_text_field($_REQUEST['action']);
 	}
 
 	if ( isset( $_REQUEST['action2'] ) && -1 != $_REQUEST['action2'] ) {
-		return $_REQUEST['action2'];
+		return sanitize_text_field($_REQUEST['action2']);
 	}
 
 	return false;
@@ -429,11 +429,21 @@ function action_splite_contact_support() {
 	$ajaxy = array(); 
 	$errors = array(); 
 	
+	if(!current_user_can('manage_options')) {
+		$ajaxy['reason'] = __('You do not have sufficient permissions to perform this action.', 'slick-popup'); 
+	}
+	
 	if( !isset($_POST) OR !isset($_POST['fields']) OR empty($_POST['fields']) ) {
 		$ajaxy['reason'] = 'Nothing sent to server, please retry.'; 
 	}
 	
-	parse_str($_POST['fields'], $posted); 	
+	// Sanitize fields value postd as string
+	$fields = sanitize_text_field($_POST['fields']); 	
+	parse_str($fields, $posted);
+	
+	// Sanitize individual array value again
+	$posted = splite_sanitize_arr_str($posted);	
+
 	extract($posted); 
 	
 	if(!wp_verify_nonce($wp_nonce, 'splite_contact_support_nonce')) {

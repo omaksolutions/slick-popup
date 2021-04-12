@@ -5,7 +5,7 @@ Tags: contact form 7, popup, cf7, popup form, wordPress popup plugin, contact fo
 Tested up to: 5.7
 Requires at least: 3.5
 Requires PHP: 5.3
-Stable tag: trunk	
+Stable tag: 1.7.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
