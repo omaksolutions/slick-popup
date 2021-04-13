@@ -5,7 +5,7 @@ Tags: contact form 7, popup, cf7, popup form, wordPress popup plugin, contact fo
 Tested up to: 5.7
 Requires at least: 3.5
 Requires PHP: 5.3
-Stable tag: 1.7.7
+Stable tag: 1.7.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -111,6 +111,9 @@ For any doubts or queries, please read our F.A.Q section. If it doesn't come out
 7. Background Image Popup
 
 == Changelog ==
+
+= 1.7.7 = 
+* Updated Redux Framework 
 
 = 1.7.4 =
 * Removed Codestar framework due to compatibility issues
