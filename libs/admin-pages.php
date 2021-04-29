@@ -116,7 +116,7 @@ function splite_help_and_support() { ?>
 	<?php 
 		global $splite_opts; 
 		$current_user =  wp_get_current_user();
-		$username = isset($current_user->user_display_name) ? $current_user->user_display_name : (isset($current_user->user_firstname) and !empty($current_user->user_firstname)) ? $current_user->user_firstname : $current_user->user_login;
+		$username = isset($current_user->user_display_name) ? $current_user->user_display_name : ((isset($current_user->user_firstname) and !empty($current_user->user_firstname)) ? $current_user->user_firstname : $current_user->user_login);
 		$useremail = $current_user->user_email; 
 	?>
 
