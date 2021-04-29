@@ -153,6 +153,9 @@ function splite_unloader() {
 		"opacity": "1" 
 	});
 	//jQuery(this).addClass('manage');
+	
+	jQuery('body').enableScroll();
+	
 	return false;	
 }   
 
@@ -242,6 +245,8 @@ function splite_set_popup() {
 		
 		$popup.css( 'left', popLeft+'px' );
 		$popup.css( 'top', popTop+'px' );
+		
+		jQuery('body').disableScroll();
 	}
 	
 	splite_set_side_button();
@@ -251,6 +256,27 @@ jQuery('.nikhil').on('click' ,function() {
 	alert("Hello")
 	//splite_set_popup();
 });
+
+/**
+* Function: enableScroll
+* stackoverflow: /8701754/just-disable-scroll-not-hide-it
+**/ 
+jQuery.fn.enableScroll = function() {
+    jQuery(window).off('scroll.scrolldisabler');
+};
+
+/**
+* Function: disableScroll
+* stackoverflow: /8701754/just-disable-scroll-not-hide-it
+**/ 
+jQuery.fn.disableScroll = function() {
+    window.oldScrollPos = jQuery(window).scrollTop();
+
+    jQuery(window).on('scroll.scrolldisabler',function ( event ) {
+       jQuery(window).scrollTop( window.oldScrollPos );
+       event.preventDefault();
+    });
+};
  
 /**
 * Function: set_side_button

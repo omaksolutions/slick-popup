@@ -5,7 +5,7 @@ Tags: contact form 7, popup, cf7, popup form, wordPress popup plugin, contact fo
 Tested up to: 5.7
 Requires at least: 3.5
 Requires PHP: 5.3
-Stable tag: 1.7.9
+Stable tag: 1.7.10
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -112,6 +112,9 @@ For any doubts or queries, please read our F.A.Q section. If it doesn't come out
 
 == Changelog ==
 
+= 1.7.10 = 
+* Fixed: Body scroll issue
+* Fixed: Calculated width for input
 
 = 1.7.9 = 
 * Remove V3 files of Redux-Framework and updated to V4
