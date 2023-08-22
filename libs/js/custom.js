@@ -73,12 +73,11 @@ jQuery(document).ready(function($) {
 			splite_loader();			
 			return false; 
 		});
-		
 	});
 	
 	document.addEventListener( 'wpcf7submit', function( event ) {
 		if ( jQuery.isNumeric(cf7formid) && cf7formid == event.detail.contactFormId ) {
-			splite_set_popup(id); 					
+			splite_set_popup(id);
 		}
 	}, false );
 
