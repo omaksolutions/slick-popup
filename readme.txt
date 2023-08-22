@@ -112,7 +112,7 @@ For any doubts or queries, please read our F.A.Q section. If it doesn't come out
 
 == Changelog ==
 = 1.7.13 = 
-* Tested and Working with WordPress 6.0
+* Tested upto WordPress 6.3
 * Fixed: Minor Fixes
 * Improved: CSS
 
