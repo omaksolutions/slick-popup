@@ -53,6 +53,8 @@
         'footer_text' => __('We will continue to innovate new features, if you have a suggestion just let us know.', 'slick-popup' ),
         'admin_bar' => false,
 		//'page_parent' => 'sp-lite',
+		'page_priority' => '80',
+        'menu_type' => 'menu',
         'menu_type' => 'menu',
         'menu_icon' => plugins_url( 'img/menu_icon.png', __FILE__ ),
         'menu_title' => 'Slick Popup Lite',
