@@ -2,12 +2,12 @@
  * Field Color Gradient
  */
 
-/*global jQuery, redux, colorValidate */
+/*global jQuery, redux, colorValidate, redux_change */
 
 ( function( $ ) {
 	'use strict';
 
-	var proLoaded = true;
+	var filtersLoaded = false;
 
 	redux.field_objects                = redux.field_objects || {};
 	redux.field_objects.color_gradient = redux.field_objects.color_gradient || {};
@@ -34,8 +34,11 @@
 					return;
 				}
 
-				if ( undefined === redux.field_objects.pro ) {
-					proLoaded = false;
+				if ( undefined === redux.field_objects.pro && undefined !== redux.field_objects.gradient_filters ) {
+					filtersLoaded = true;
+
+					redux.field_objects.gradient_filters.sliderInit( el, 'color_gradient' );
+					redux.field_objects.gradient_filters.selectChange( el, 'color_gradient' );
 				}
 
 				el.find( '.redux-color-init' ).wpColorPicker(
@@ -43,16 +46,16 @@
 						change: function( e, ui ) {
 							$( this ).val( ui.color.toString() );
 
-							if ( proLoaded ) {
-								redux.field_objects.pro.gradient_filters.changeValue( $( this ), true, 'color_gradient' );
+							if ( filtersLoaded ) {
+								redux.field_objects.gradient_filters.changeValue( $( this ), true, 'color_gradient' );
 							}
 
-							el.find( '#' + e.target.getAttribute( 'data-id' ) + '-transparency' ).removeAttr( 'checked' );
+							el.find( '#' + e.target.getAttribute( 'data-id' ) + '-transparency' ).prop( 'checked', false );
 						}, clear: function() {
 							$( this ).val( '' );
 
-							if ( proLoaded ) {
-								redux.field_objects.pro.gradient_filters.changeValue( $( this ).parent().find( '.redux-color-init' ), true, 'color_gradient' );
+							if ( filtersLoaded ) {
+								redux.field_objects.gradient_filters.changeValue( $( this ).parent().find( '.redux-color-init' ), true, 'color_gradient' );
 							}
 						}
 					}
@@ -68,9 +71,9 @@
 						if ( 'transparent' === value ) {
 							$( this ).parent().parent().find( '.wp-color-result' ).css( 'background-color', 'transparent' );
 
-							el.find( id + '-transparency' ).attr( 'checked', 'checked' );
+							el.find( id + '-transparency' ).prop( 'checked', true );
 						} else {
-							el.find( id + '-transparency' ).removeAttr( 'checked' );
+							el.find( id + '-transparency' ).prop( 'checked', false );
 
 							if ( color && color !== $( this ).val() ) {
 								$( this ).val( color );
@@ -97,7 +100,7 @@
 								}
 							}
 
-							el.find( id + '-transparency' ).removeAttr( 'checked' );
+							el.find( id + '-transparency' ).prop( 'checked', false );
 						}
 					}
 				);
@@ -121,7 +124,7 @@
 							el.find( '#' + $( this ).data( 'id' ) ).val( 'transparent' );
 							el.find( '#' + $( this ).data( 'id' ) ).parents( '.colorGradient' ).find( '.wp-color-result' ).css( 'background-color', 'transparent' );
 						} else {
-							prevColor =  $( this ).parents( '.colorGradient' ).find( '.redux-saved-color' ).val();
+							prevColor = $( this ).parents( '.colorGradient' ).find( '.redux-saved-color' ).val();
 							if ( '' === prevColor ) {
 								prevColor = $( '#' + $( this ).data( 'id' ) ).data( 'default-color' );
 							}
@@ -129,8 +132,8 @@
 							el.find( '#' + $( this ).data( 'id' ) ).val( prevColor );
 						}
 
-						if ( proLoaded ) {
-							redux.field_objects.pro.gradient_filters.changeValue( $( this ), true, 'color_gradient' );
+						if ( filtersLoaded ) {
+							redux.field_objects.gradient_filters.changeValue( $( this ), true, 'color_gradient' );
 						}
 
 						redux_change( $( this ) );

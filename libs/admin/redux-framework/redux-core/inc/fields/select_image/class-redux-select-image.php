@@ -18,6 +18,18 @@ if ( ! class_exists( 'Redux_Select_Image', false ) ) {
 	class Redux_Select_Image extends Redux_Field {
 
 		/**
+		 * Set field defaults.
+		 */
+		public function set_defaults() {
+			$defaults = array(
+				'options'     => array(),
+				'placeholder' => esc_html__( 'Select an item', 'redux-framework' ),
+			);
+
+			$this->field = wp_parse_args( $this->field, $defaults );
+		}
+
+		/**
 		 * Field Render Function.
 		 * Takes the vars and outputs the HTML for the field in the settings
 		 *
@@ -39,7 +51,7 @@ if ( ! class_exists( 'Redux_Select_Image', false ) ) {
 				}
 
 				// Process placeholder.
-				$placeholder = ( isset( $this->field['placeholder'] ) ) ? esc_attr( $this->field['placeholder'] ) : esc_html__( 'Select an item', 'redux-framework' );
+				$placeholder = esc_attr( $this->field['placeholder'] );
 
 				$this->select2_config['allowClear'] = true;
 
@@ -54,17 +66,17 @@ if ( ! class_exists( 'Redux_Select_Image', false ) ) {
 				$select2_data = Redux_Functions::create_data_string( $this->field['select2'] );
 
 				// Begin the <select> tag.
-				echo '<select 
-						data-id="' . esc_attr( $this->field['id'] ) . '" 
-						data-placeholder="' . esc_attr( $placeholder ) . '" 
-						name="' . esc_attr( $this->field['name'] . $this->field['name_suffix'] ) . '" 
+				echo '<select
+						data-id="' . esc_attr( $this->field['id'] ) . '"
+						data-placeholder="' . esc_attr( $placeholder ) . '"
+						name="' . esc_attr( $this->field['name'] . $this->field['name_suffix'] ) . '"
 						class="redux-select-item redux-select-images ' . esc_attr( $this->field['class'] ) . '"' .
 						$width . ' rows="6"' . esc_attr( $select2_data ) . '>';  // phpcs:ignore WordPress.Security.EscapeOutput
 
 				echo '<option></option>';
 
 				// Enum through the options array.
-				foreach ( $this->field['options'] as $k => $v ) {
+				foreach ( $this->field['options'] as $v ) {
 
 					// No array?  No problem!
 					if ( ! is_array( $v ) ) {
@@ -144,7 +156,7 @@ if ( ! class_exists( 'Redux_Select_Image', false ) ) {
 			wp_enqueue_style( 'select2-css' );
 
 			wp_enqueue_script(
-				'redux-field-select-image-js',
+				'redux-field-select-image',
 				Redux_Core::$url . 'inc/fields/select_image/redux-select-image' . Redux_Functions::is_min() . '.js',
 				array( 'jquery', 'select2-js', 'redux-js' ),
 				$this->timestamp,
@@ -153,11 +165,10 @@ if ( ! class_exists( 'Redux_Select_Image', false ) ) {
 
 			if ( $this->parent->args['dev_mode'] ) {
 				wp_enqueue_style(
-					'redux-field-select-image-css',
+					'redux-field-select-image',
 					Redux_Core::$url . 'inc/fields/select_image/redux-select-image.css',
 					array(),
-					$this->timestamp,
-					'all'
+					$this->timestamp
 				);
 			}
 		}

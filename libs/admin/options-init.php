@@ -10,7 +10,7 @@
         return;
     }
 	if ( ! class_exists( 'Redux' ) ) {
-	  // Delete tgmpa dissmiss flag
+	  // Delete tgmpa dismiss flag
 	  delete_user_meta( get_current_user_id(), 'tgmpa_dismissed_notice_myarcadetheme' );
 	  return;
 	}
@@ -25,7 +25,7 @@
 	$GLOBALS['redux_notice_check'] = 0;
 
     // This is your option name where all the Redux data is stored.
-    $opt_name = "splite_opts";
+    $opt_name = SPLITE_REDUX_OPTION_NAME;
 
     /**
      * ---> SET ARGUMENTS
@@ -162,7 +162,7 @@
     // Add content after the form.
     $args['footer_text'] = __( '<p>We will continue to innovate new features, if you have a suggestion just let us know at <strong>poke@slickpopup.com</strong></p>', 'slick-popup' );
 
-    Redux::setArgs( $opt_name, $args );
+    Redux::set_args( $opt_name, $args );
 
     /*
      * ---> END ARGUMENTS
@@ -185,11 +185,11 @@
         ),
     );
 	unset( $tabs[1] );
-    Redux::setHelpTab( $opt_name, $tabs );
+    Redux::set_help_tab( $opt_name, $tabs );
 
     // Set the help sidebar
     $content = __( '<p><strong>We are mostly online at Skype: ak.singla47</strong></p>', 'slick-popup' );
-    Redux::setHelpSidebar( $opt_name, $content );
+    Redux::set_help_sidebar( $opt_name, $content );
 
 
     /*
@@ -373,7 +373,7 @@
 							'desc'     => __( '', 'slick-popup' ),
 							//Must provide key => value pairs for select options
 							'options'  => array(
-								'predefined' => __( 'As Per Choosen Layout', 'slick-popup' ),
+								'predefined' => __( 'As Per chosen Layout', 'slick-popup' ),
 								'change' => __( 'Set Your Own Height and Width', 'slick-popup' ),								
 							),
 							'hint'     => array(
@@ -619,7 +619,7 @@
 							//'required' => array( 'use_heading_font', '=', 1 ),
 							'title'    => __( 'Heading Font', 'slick-popup' ),
 							'subtitle' => __( 'Specify the heading font properties.', 'slick-popup' ),
-							'desc'		=> __('Font Color is important to look good with your choosen color scheme.', 'slick-popup' ),
+							'desc'		=> __('Font Color is important to look good with your chosen color scheme.', 'slick-popup' ),
 							'google'   => true,
 							'default'  => array(
 								'color'       => 	'#F1F1F1',
@@ -771,7 +771,7 @@
 									'desc' => __( 'This color will be used to create theme of your popup.', 'slick-popup' ),
 									'hint'     => array(
 										'title'     => 'Header background color.',
-										'content'   => 'The color choosen will be in the background of the popup.',
+										'content'   => 'The color chosen will be in the background of the popup.',
 									),
 									'default'  => '#333',
 								),

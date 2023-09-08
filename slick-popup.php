@@ -9,11 +9,11 @@ Version:      1.7.13
 Text Domain: slick-popup
 */
 
-define( 'SPLITE_VERSION', '1.7.13' );
+const SPLITE_VERSION = '1.7.13';
 
-define( 'SPLITE_REQUIRED_WP_VERSION', '3.0.1' );
+const SPLITE_REQUIRED_WP_VERSION = '3.0.1';
 
-define( 'SPLITE_PLUGIN', __FILE__ );
+const SPLITE_PLUGIN = __FILE__;
 
 define( 'SPLITE_PLUGIN_BASENAME', plugin_basename( SPLITE_PLUGIN ) );
 
@@ -23,9 +23,11 @@ define( 'SPLITE_PLUGIN_DIR', untrailingslashit( dirname( SPLITE_PLUGIN ) ) );
 
 define( 'SPLITE_PLUGIN_URL', plugins_url( '' , __FILE__ ) );
 
-define( 'SPLITE_PLUGIN_IMG_URL', SPLITE_PLUGIN_URL . '/libs/admin/img' );
+const SPLITE_PLUGIN_IMG_URL = SPLITE_PLUGIN_URL . '/libs/admin/img';
 
-define ( 'SPLITE_DEBUG', FALSE );
+const SPLITE_DEBUG = FALSE;
+
+const SPLITE_REDUX_OPTION_NAME = "splite_opts";
 
 require_once( SPLITE_PLUGIN_DIR . '/libs/admin-functions.php' );
 require_once( SPLITE_PLUGIN_DIR . '/libs/admin-pages.php' );
@@ -589,7 +591,7 @@ function splite_check_form_id($cf7_id) {
 	
 	$message = '';
 	if( empty($cf7_id)) {
-		if( isset($user_is_admin) ) { $message = __('No form choosen. Please select a form from <a target="_blank" href="'.admin_url('admin.php?page=slick-options').'">plugin options</a>.'); }
+		if( isset($user_is_admin) ) { $message = __('No form chosen. Please select a form from <a target="_blank" href="'.admin_url('admin.php?page=slick-options').'">plugin options</a>.'); }
 		else { $message = __('Form is not available. Please visit our contact page.'); }		
 	}
 	else {

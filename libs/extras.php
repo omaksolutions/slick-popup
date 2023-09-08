@@ -6,11 +6,11 @@
 /**
  * Get Color Scheme Options  
  * Since Version 1.0
- * @param string $color_scheme (choosen color scheme)
- * @param string $custom_color_scheme (choosen color when custom scheme)
- * @param string $custom_text_color (choosen text color when custom scheme)
+ * @param string $color_scheme (chosen color scheme)
+ * @param string $custom_color_scheme (chosen color when custom scheme)
+ * @param string $custom_text_color (chosen text color when custom scheme)
  * Since Version 1.4.0
- * @param string $custom_form_background_color (choosen form background color when custom scheme)
+ * @param string $custom_form_background_color (chosen form background color when custom scheme)
  
  * @return array() $colors (keys: main-text-color, main-color, main-background-color)
  * Called in splite_option_css() to generate custom CSS
@@ -61,7 +61,7 @@ function splite_get_theme_colors_values($color_scheme, $custom_color_scheme="", 
 /**
  * Get Popup Border Options
  * Since Version 1.0
- * @param string $popup_corners (choosen popup border radius)
+ * @param string $popup_corners (chosen popup border radius)
  
  * @return array() $borders (keys: width(radius))
  * Called in splite_option_css() to generate custom CSS
@@ -97,8 +97,8 @@ function splite_get_popup_border_values($popup_corners) {
 /**
  * Get Side Button Options
  * Since Version 1.0
- * @param string $side_button_scheme (choosen scheme for side button (inherit,custom))
- * @param string $side_button_background (choosen color when scheme is custom)
+ * @param string $side_button_scheme (chosen scheme for side button (inherit,custom))
+ * @param string $side_button_background (chosen color when scheme is custom)
  
  * @return array() $side_button (keys: background-color)
  * Called in splite_option_css() to generate custom CSS
@@ -125,8 +125,8 @@ function splite_get_side_button_values($side_button_scheme, $side_button_backgro
 /**
  * Get Submit Button Options
  * Since Version 1.0
- * @param string $submit_button_scheme (choosen scheme for submit button (inherit,custom))
- * @param string $submit_button_background (choosen color when scheme is custom)
+ * @param string $submit_button_scheme (chosen scheme for submit button (inherit,custom))
+ * @param string $submit_button_background (chosen color when scheme is custom)
  
  * @return array() $submit_button (keys: background-color)
  * Called in splite_option_css() to generate custom CSS
@@ -168,7 +168,7 @@ function splite_get_submit_button_values($submit_button_scheme, $submit_button_b
  * @param string $activation_mode (manually,autopopup,onscroll,onexit) 
  
  * @return none
- * Echo the script for activation mode choosen
+ * Echo the script for activation mode chosen
  * Called in splite_add_my_popup() 
  */
 function splite_fire_activation_mode_script($activation_mode) {

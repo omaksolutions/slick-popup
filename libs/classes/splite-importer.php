@@ -2,12 +2,12 @@
 
 /*
 * splite_action_importDemo
-* New import feature to setup individual Popups
+* New import feature to set up individual Popups
 */
 add_action( 'wp_ajax_splite_action_importDemo', 'splite_action_importDemo' );
 function splite_action_importDemo() {
-	
-	$ajaxy = array(); 
+
+    $ajaxy = array();
 	
 	if(!current_user_can('manage_options')) {
 		$ajaxy['reason'] = __('You do not have sufficient permissions to perform this action.', 'slick-popup'); 
@@ -34,7 +34,6 @@ function splite_action_importDemo() {
 	
 	$title = sanitize_text_field($_POST['title']);
 	$formId = splite_import_cf7_demo(array('title'=>$title));
-	$form = get_page_by_title($title, 'OBJECT', 'wpcf7_contact_form');
 	
 	if($formId) {
 		$edit_link = '<a target="_blank" href="'.admin_url('/admin.php?page=wpcf7&post='.$formId.'&action=edit').'"><strong>Edit Form</strong></a>';
@@ -44,7 +43,7 @@ function splite_action_importDemo() {
 		wp_die(); 
 	}
 	
-	$ajaxy['reason'] = 'Could not be imported.';
+	$ajaxy['reason'] = __('Could not be imported.', 'slick-popup');
 	wp_send_json_success($ajaxy); 
 	wp_die(); 
 }
@@ -53,17 +52,31 @@ function splite_import_cf7_demo($args=array()) {
 	
 	if(!sizeof($args) or !isset($args['title']) or empty($args['title']) ) return false; 
 	
-	extract($args); 
-	
-	while( get_page_by_title($title, 'OBJECT', 'wpcf7_contact_form') ) {		
-		$form = get_page_by_title($title, 'OBJECT', 'wpcf7_contact_form');
-		$ajaxy['form_id'] = $form->ID;			
-		$edit_link = '<a target="_blank" href="'.admin_url('/admin.php?page=wpcf7&post='.$form->ID.'&action=edit').'"><strong>Edit Form</strong></a>';
-		$global_options = '<a target="_blank" href="'.admin_url('/admin.php?page=slick-options').'"><strong>Set Popup</strong></a>';
-		$ajaxy['reason'] =  'Already exists.<br>'.$edit_link. ' - '.$global_options; 		
-		//wp_send_json_error($form); 
-		wp_send_json_error($ajaxy); 
-		wp_die(); 
+	extract($args);
+
+    $query = new WP_Query(
+        array(
+            'post_type'              => 'wpcf7_contact_form',
+            'title'                  => $title,
+            'post_status'            => 'all',
+            'posts_per_page'         => 1,
+            'update_post_term_cache' => false,
+            'update_post_meta_cache' => false,
+            'orderby'                => 'post_date ID',
+            'order'                  => 'ASC',
+        )
+    );
+
+    if ( ! empty( $query->post ) ) {
+        $form = $query->post;
+		$ajaxy['form_id'] = $form->ID;
+
+		$edit_link = '<a target="_blank" href="'.admin_url('/admin.php?page=wpcf7&post='.$form->ID.'&action=edit').'"><strong>' . __('Edit Form', 'slick-popup') . '</strong></a>';
+		$global_options = '<a target="_blank" href="'.admin_url('/admin.php?page=slick-options').'"><strong>' . __('Set Popup', 'slick-popup') . '</strong></a>';
+        $ajaxy['reason'] =  __('Already exists.', 'slick-popup') . '<br>' .$edit_link. ' - '.$global_options;
+
+		wp_send_json_error($ajaxy);
+		wp_die();
 	}
 	
 	$contact_form = WPCF7_ContactForm::get_template( array(
@@ -78,6 +91,7 @@ function splite_import_cf7_demo($args=array()) {
 	$messages['invalid_email'] = 'X'; 	
 	$messages['invalid_number'] = 'X'; 	
 	$mail['use_html'] = true;
+
 	switch($title) {
 		case 'basic-enquiry': 
 			$form = '
@@ -331,11 +345,16 @@ The admin is advised to go through the customer's request and revert him back so
 	//wp_die(print_r(array($title, $form, $mail), true)); 
 	$contact_form->set_properties( array( 'mail' => $mail, 'form' => $form, 'messages' => $messages ) );
 	
-	$formId = $contact_form->save();	
-	
-	//global $sp_opts; $sp_opts['last_import'] = time(); 	
-	update_option('splite_last_import', time());
+	$formId = $contact_form->save();
+
+    // Update Redux Options as per the new Imported Popup
+//    Redux::set_option( SPLITE_REDUX_OPTION_NAME, 'where_to_show', "everywhere" );
+//    Redux::set_option( SPLITE_REDUX_OPTION_NAME, 'side-button-position', "pos_right" );
+//
+//    Redux::set_option( SPLITE_REDUX_OPTION_NAME, 'form-id', $formId );
+//    Redux::set_option( SPLITE_REDUX_OPTION_NAME, 'popup-heading', "new heading text" );
+//    Redux::set_option( SPLITE_REDUX_OPTION_NAME, 'popup-cta-text', "new heading text" );
+
+    update_option('splite_last_import', time());
 	return $formId; 
 }
-
-?>

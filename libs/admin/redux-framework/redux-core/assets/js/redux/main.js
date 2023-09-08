@@ -8,9 +8,8 @@
 	$( document ).ready(
 		function() {
 			var opt_name;
-			var li;
-
 			var tempArr = [];
+			var container;
 
 			$.fn.isOnScreen = function() {
 				var win;
@@ -21,17 +20,17 @@
 					return;
 				}
 
-				win = $( window );
+				win      = $( window );
 				viewport = {
 					top: win.scrollTop()
 				};
 
-				viewport.right = viewport.left + win.width();
+				viewport.right  = viewport.left + win.width();
 				viewport.bottom = viewport.top + win.height();
 
 				bounds = this.offset();
 
-				bounds.right = bounds.left + this.outerWidth();
+				bounds.right  = bounds.left + this.outerWidth();
 				bounds.bottom = bounds.top + this.outerHeight();
 
 				return ( ! ( viewport.right < bounds.left || viewport.left > bounds.right || viewport.bottom < bounds.top || viewport.top > bounds.bottom ) );
@@ -44,7 +43,9 @@
 				$( '.wp-full-overlay-sidebar' ).addClass( 'redux-container' );
 			}
 
-			$( '.redux-container' ).each(
+			container = $( '.redux-container' );
+
+			container.each(
 				function() {
 					opt_name = $.redux.getOptName( this );
 
@@ -56,7 +57,7 @@
 				}
 			);
 
-			$( '.redux-container' ).on(
+			container.on(
 				'click',
 				function() {
 					opt_name = $.redux.getOptName( this );
@@ -70,9 +71,50 @@
 				$.redux.initQtip();
 				$.redux.tabCheck();
 				$.redux.notices();
+
+				if ( 'undefined' === typeof $.redux.flyoutSubmenus ) {
+					$.redux.flyoutSubmenu();
+				}
 			}
 		}
 	);
+
+	$.redux.flyoutSubmenu = function() {
+
+		// Close flyouts when a new menu item is activated.
+		$( '.redux-group-tab-link-li a' ).on(
+			'click',
+			function() {
+				if ( true === redux.optName.args.flyout_submenus ) {
+					$( '.redux-group-tab-link-li' ).removeClass( 'redux-section-hover' );
+				}
+			}
+		);
+
+		if ( true === redux.optName.args.flyout_submenus ) {
+
+			// Submenus flyout when a main menu item is hovered.
+			$( '.redux-group-tab-link-li.hasSubSections' ).each(
+				function() {
+					$( this ).on(
+						'mouseenter',
+						function() {
+							if ( ! $( this ).hasClass( 'active' ) && ! $( this ).hasClass( 'activeChild' ) ) {
+								$( this ).addClass( 'redux-section-hover' );
+							}
+						}
+					);
+
+					$( this ).on(
+						'mouseleave',
+						function() {
+							$( this ).removeClass( 'redux-section-hover' );
+						}
+					);
+				}
+			);
+		}
+	};
 
 	$.redux.disableSections = function() {
 		$( '.redux-group-tab' ).each(
@@ -85,7 +127,7 @@
 	};
 
 	$.redux.disableFields = function() {
-		$( 'label[for="redux_disable_field"]' ).each(
+		$( 'tr.redux_disable_field' ).each(
 			function() {
 				$( this ).parents( 'tr' ).find( 'fieldset:first' ).find( 'input, select, textarea' ).attr( 'name', '' );
 			}
@@ -93,18 +135,15 @@
 	};
 
 	$.redux.hideFields = function() {
-		$( 'label[for="redux_hide_field"]' ).each(
+		$( 'tr.redux_hide_field' ).each(
 			function() {
-				var tr = $( this ).parent().parent();
-
-				$( tr ).addClass( 'hidden' );
+				$( this ).addClass( 'hidden' );
 			}
 		);
 	};
 
 	$.redux.getOptName = function( el ) {
 		var metabox;
-		var li;
 		var optName;
 		var item = $( el );
 
@@ -114,7 +153,7 @@
 			optName = $( el ).parents( '.redux-wrap-div' ).data( 'opt-name' );
 		}
 
-		// Compatibility for metaboxes
+		// Compatibility for metaboxes.
 		if ( undefined === optName ) {
 			metabox = $( el ).parents( '.postbox' );
 			if ( 0 === metabox.length ) {

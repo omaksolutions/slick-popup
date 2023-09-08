@@ -78,8 +78,7 @@ function splite_import_demos() { ?>
 						'survey' => 'Survey Form',
 						'booking' => 'Booking Form',
 					);
-					$output = '';
-					$output .= '<div id="welcome-panel" class="welcome-panel">';
+                    $output = '<div id="welcome-panel" class="welcome-panel" style="background:white">';
 						foreach($demos as $label => $demo) {			
 							$output .='<div class="import-box">';
 								$output .='<img src="'.splite_plugin_url('/libs/js/img/'.$label.'.jpg').'" title="'.$demo.'">'; 
@@ -87,7 +86,7 @@ function splite_import_demos() { ?>
 								$output .='<div class="import-box-result display-none"></div>';
 								$output .='<div class="import-box-title">';
 									$output .='<span class="splite-label">'.$demo.'</span>';
-									$output .='<span class="splite-import-handle">';
+									$output .='<span class="splite-import-handle" style="margin-left:10px">';
 										$output .='<span class="splite-loader v-hidden"><i class="fa fa-refresh fa-spin loader-fa-styles"></i></span>';						
 										$output .='<span class="splite-btn button-link splite-btn-importer splite-btn-importer" data-nonce="'.wp_create_nonce("import_demo_" . $label).'" data-title="'.$label.'"><strong>'.esc_html__('Import','slick-popup').'</strong></span>';
 									$output .='</span>';
