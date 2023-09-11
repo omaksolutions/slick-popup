@@ -1,7 +1,7 @@
 <?php
 
     // All extensions placed within the extensions directory will be auto-loaded for your Redux instance.
-    Redux::setExtensions( 'splite_opts', dirname( __FILE__ ) . '/extensions/' );
+    Redux::set_extensions( 'splite_opts', dirname( __FILE__ ) . '/extensions/' );
 
     // Any custom extension configs should be placed within the configs folder.
     if ( file_exists( dirname( __FILE__ ) . '/configs/' ) ) {
