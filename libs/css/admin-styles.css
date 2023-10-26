@@ -167,7 +167,58 @@ i.splite-loader-fa-styles {
 /**************************************************************/
 /********************* SUPPORT PAGE STYLES ********************/
 /**************************************************************/
-
+.splite-page #wpcontent{
+	 padding: 0;
+	 overflow-x: hidden!important;
+	 min-height: calc(100vh - 32px);
+	 background: #f0f0f1;
+	 color: #3c434a;
+ }
+.splite-page #wpbody {
+	margin-top: 70px;
+}
+.splite-layout__header {
+	background: #fff;
+	box-sizing: border-box;
+	padding: 0;
+	position: fixed;
+	width: calc(100% - 160px);
+	top: 32px;
+	z-index: 1001;
+}
+@media (min-width: 783px) and (max-width: 960px) {
+	.splite-layout__header {
+		width: calc(100% - 36px);
+	}
+}
+@media (max-width: 782px) {
+	.splite-layout__header {
+		flex-flow: row wrap;
+		top: 46px;
+		width: 100%;
+	}
+}
+.splite-layout__header-wrapper{
+	display: flex;
+	padding: 0 30px;
+	align-items: center
+}
+.splite-layout__header-wrapper h6{
+	height: 70px;
+	display: flex;
+	flex: 1 auto;
+	align-items: center;
+	margin: 0;
+}
+.splite-layout__header.is-scrolled {
+	box-shadow: 0 8px 16px 0 rgb(85 93 102 / 30%);
+}
+.splite-layout__body{
+}
+.wrap .splite-layout__body {
+	margin: 0!important;
+	padding: 20px !important;
+}
 /**************************************************************/
 /************************* NOTICE STYLES **********************/
 /**************************************************************/
@@ -175,8 +226,10 @@ span.color {
 	color: #0073aa;
 }
 div.splite-notice-left {
-  display: inline-block;
-  vertical-align: middle;
+    display: inline-block;
+    vertical-align: middle;
+    padding: 0.5rem;
+    border: 1px solid #f1f1f1;
 }
 div.splite-notice-right {
   max-width: calc(100% - 120px);

@@ -108,4 +108,17 @@ jQuery(document).ready(function() { // wait for page to finish loading
 		);
 	});
 	
+	jQuery(function() {
+		let header = jQuery(".splite-layout__header");
+		jQuery(window).scroll(function() {
+			let scroll = jQuery(window).scrollTop();
+
+			if (scroll >= 25) {
+				header.addClass("is-scrolled");
+			} else {
+				header.removeClass("is-scrolled");
+			}
+		});
+	});
+	
 });

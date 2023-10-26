@@ -5,12 +5,12 @@ Plugin URI:   http://www.omaksolutions.com
 Description:  A lightweight plugin that converts a Contact Form 7 form into a customizable pop-up form which is slick, beautiful and responsive to different screen-sizes.
 Author URI:   http://www.omaksolutions.com 
 Author:       Om Ak Solutions 
-Version:      1.7.10
+Version:      1.7.12
 Text Domain: slick-popup
 */
 
 
-define( 'SPLITE_VERSION', '1.7.10' );
+define( 'SPLITE_VERSION', '1.7.11' );
 
 define( 'SPLITE_REQUIRED_WP_VERSION', '3.0.1' );
 
@@ -139,8 +139,6 @@ function spplite_update_db() {
 	}
 }
 
-
-
 /////////////////////////////////////
 // Deactivation Hook
 /////////////////////////////////////
@@ -148,8 +146,6 @@ register_deactivation_hook(__FILE__, 'splite_on_deactivate');
 function splite_on_deactivate(){
 	// Empty Deactivation Hook
 }
-
-
 
 /////////////////////////////////////
 // Uninstall Hook
@@ -160,7 +156,6 @@ function splite_on_uninstall(){
 	// Temporary Fix
 	//delete_option( 'splite_opts' ); 		
 }
-
 
 /////////////////////////////////////////
 // Initialise the plugin and scripts
@@ -216,8 +211,6 @@ function splite_slick_popup_loaded(){
 	
 }
 
-
-
 /////////////////////////////////////////
 // Enqueue Scripts and Custom CSS
 /////////////////////////////////////////
@@ -227,14 +220,12 @@ function splite_add_html_and_scripts(){
 	add_action('wp_footer', 'splite_option_css');	
 }
 
-
 /////////////////////////////////////////
 // Add Popup HTML To the Footer
 /////////////////////////////////////////
 function splite_add_html(){
 	add_action('wp_footer', 'splite_add_my_popup');		
 }
-
 
 /////////////////////////////////////////
 // Add Popup
@@ -336,8 +327,6 @@ function splite_add_my_popup() {
 <?php
 	}
 }
-
-
 
 /////////////////////////////////////////
 // Add CSS Based on Options
@@ -526,7 +515,6 @@ function splite_option_css() {
 	}
 }
 
-
 /**
  * Set Plugin URL Path (SSL/non-SSL)
  * @param  string - $path
@@ -575,7 +563,6 @@ function splite_enqueue_popup_scripts() {
 		wp_enqueue_script( 'splite-js' );
 	}
 }
-
 
 /**
  * Enqueue Admin Scripts
@@ -640,6 +627,22 @@ function splite_redux_after_menu($redux_object) {
 	$output .= '</div>';
 	
 	echo $output; 
+}
+
+function splite_is_admin_page(){
+    if(isset($_GET['page'])) {
+        $page = sanitize_text_field($_GET['page']);
+        return (isset($page) && ((strpos($page, 'splite') !== false)));
+    }
+    return false;
+}
+
+add_filter('admin_body_class', 'splite_body_class');
+function splite_body_class($classes){
+    if (splite_is_admin_page()) {
+        $classes .= ' splite-page';
+    }
+    return $classes;
 }
 
 ?>

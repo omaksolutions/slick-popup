@@ -48,7 +48,11 @@ function splite_admin_notices() {
 	$install_date_object = DateTime::createFromFormat('Y-m-d H:i:s', $install_date);
 	
 	// review_notice - numeric counter for multiplying 14 days
-	$review_notice = get_option('splite_review_notice') ? get_option('splite_review_notice') : 1; 
+	$review_notice = get_option('splite_review_notice', 1);
+
+    if($review_notice == 0) {
+        return;
+    }
 	
 	if(! $install_date OR ! is_a($install_date_object, 'DATETIME')) {
 		update_option('splite_install_date', current_time('Y-m-d H:i:s')); 
@@ -59,10 +63,11 @@ function splite_admin_notices() {
 	$diff = $today->diff($install_date_object); 
 	//print_r($diff); 
 	
-	if($diff->d >= 14*$review_notice and $review_notice!=0) {
-		echo '<div class="notice notice-success">
-			<h3>Hope you are enjoying - <span class="color">Slick Popup Lite</span></h3>
+	if($diff->d >= 14*$review_notice) {
+		echo '<div class="notice notice-success" style="padding: 12px 12px;">
+			<h5>Hope you are enjoying - <span class="color">Slick Popup Lite '.get_option('splite_review_notice').'</span></h5>
 			<div class="row">
+			    <div class="col-md-12">			
 					<div class="splite-notice-left"><img src="'.splite_plugin_url('/libs/js/img/logo-slick-1-80x80.png').'" title="Logo Image"></div>
 					<div class="splite-notice-right">
 						<p>'.esc_html__( 'Thanks for using one of the best WordPress Popup Plugin for Contact Form 7. We hope that it has been useful for you and would like you to leave review on WordPres.org website, it will help us improve the product features.', 'slick-popup' ).'</p>
@@ -72,7 +77,8 @@ function splite_admin_notices() {
 						<span class="spinner"></span>
 						</p>						
 					</div>
-				</div>
+                </div>
+            </div>
 		</div>';		
 	}
 }
@@ -92,7 +98,7 @@ function splite_display_update_notice() {
 					<div class="splite-notice-right">
 						<h4>Thanks for updating - <span class="color">Slick Popup Lite</span></h4>
 						<p>'.__( 'One of the best WordPress Popup Plugin for Contact Form 7. ', 'slick-popup' ).'
-						<span class="admin-links"><a href="'.admin_url('admin.php?page=slick-options').'">Go to Settings</a> | <a href="'.admin_url('admin.php?page=import-demos').'">Import Demo Forms</a> </span></p>
+						<span class="admin-links"><a href="'.admin_url('admin.php?page=slick-options').'">Go to Settings</a> | <a href="'.admin_url('admin.php?page=splite-import-demos').'">Import Demo Forms</a> </span></p>
 					</div>
 				</div>
 			</div>';
@@ -120,7 +126,7 @@ function splite_display_install_notice() {
 					<div class="splite-notice-right">
 						<h4>Thanks for installing - <span class="color">Slick Popup Lite</span></h4>
 						<p>'.__( 'One of the best WordPress Popup Plugin for Contact Form 7. ', 'slick-popup' ).'
-						<span class="admin-links"><a href="'.admin_url('admin.php?page=slick-options').'">Go to Settings</a> | <a href="'.admin_url('admin.php?page=import-demos').'">Import Demo Forms</a> </span></p>
+						<span class="admin-links"><a href="'.admin_url('admin.php?page=slick-options').'">Go to Settings</a> | <a href="'.admin_url('admin.php?page=splite-import-demos').'">Import Demo Forms</a> </span></p>
 					</div>
 				</div>
 			</div>';

@@ -182,6 +182,8 @@ function splite_loader() {
 		one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){jQuery(this).removeClass(ef);})
 	);
 	
+	jQuery('body').disableScroll();
+	
 	return false;
 }
 
@@ -245,8 +247,6 @@ function splite_set_popup() {
 		
 		$popup.css( 'left', popLeft+'px' );
 		$popup.css( 'top', popTop+'px' );
-		
-		jQuery('body').disableScroll();
 	}
 	
 	splite_set_side_button();
