@@ -9,7 +9,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-if ( ! class_exists( 'Redux_Options_Object', false ) ) {
+if ( ! class_exists( 'Redux_Options_Constructor', false ) ) {
 
 	/**
 	 * Class Redux_Options
@@ -50,8 +50,8 @@ if ( ! class_exists( 'Redux_Options_Object', false ) ) {
 		 * @param object $parent ReduxFramework pointer.
 		 */
 		public function __construct( $parent ) {
-
 			parent::__construct( $parent );
+
 			add_action( 'admin_init', array( $this, 'register' ) );
 
 		}
@@ -59,17 +59,17 @@ if ( ! class_exists( 'Redux_Options_Object', false ) ) {
 		/**
 		 * If we switch language in wpml the id of the post/page selected will be in the wrong language
 		 * So it won't appear as selected in the list of options and will be lost on next save, this fixes this by translating this id
-		 * Bonus it also gives the user the id of the post in the right language when they retrieve it
+		 * Bonus it also gives the user the id of the post in the right language when they retrieve it.
 		 * The recursion allows for it to work in a repeatable field.
 		 *
-		 * @param array $sections Sections array.
+		 * @param array $sections       Sections array.
 		 * @param array $options_values Values array.
 		 */
-		private function translate_data_field_recursive( &$sections, &$options_values ) {
+		private function translate_data_field_recursive( array $sections, array &$options_values ) {
 			foreach ( $sections as $key => $section ) {
 				if ( 'fields' === $key ) {
 					foreach ( $section as $field ) {
-						if ( ! empty( $field['id'] ) && ! empty( $field['data'] ) && ! empty( $options_values[ $field['id'] ] ) && \Redux_Helpers::is_integer( $options_values[ $field['id'] ] ) ) {
+						if ( ! empty( $field['id'] ) && ! empty( $field['data'] ) && ! empty( $options_values[ $field['id'] ] ) && Redux_Helpers::is_integer( $options_values[ $field['id'] ] ) ) {
 							$options_values[ $field['id'] ] = apply_filters( 'wpml_object_id', $options_values[ $field['id'] ], $field['data'], true );
 						}
 					}
@@ -146,11 +146,11 @@ if ( ! class_exists( 'Redux_Options_Object', false ) ) {
 		}
 
 		/**
-		 * ->set_options(); This is used to set an arbitrary option in the options array
+		 * ->set_options(); This is used to set an arbitrary option in the option array
 		 *
 		 * @since ReduxFramework 3.0.0
 		 *
-		 * @param mixed $value the value of the option being added.
+		 * @param string|array $value the value of the option being added.
 		 */
 		public function set( $value = '' ) {
 			$core = $this->core();
@@ -208,11 +208,10 @@ if ( ! class_exists( 'Redux_Options_Object', false ) ) {
 		 *
 		 * @param object $core ReduxFramework core object.
 		 *
+		 * @return  void          (global was set)
 		 * @since   3.1.5
-		 *
-		 * @return  bool          (global was set)
 		 */
-		private function set_global_variable( $core ) {
+		private function set_global_variable( $core ): void {
 			if ( ! empty( $core->args['global_variable'] ) ) {
 				$options_global = $core->args['global_variable'];
 
@@ -227,26 +226,23 @@ if ( ! class_exists( 'Redux_Options_Object', false ) ) {
 
 				// Last save key.
 				if ( isset( $core->transients['last_save'] ) ) {
-					$GLOBALS[ $options_global ]['REDUX_LAST_SAVE'] = $core->transients['last_save'];
+					//$GLOBALS[ $options_global ]['REDUX_LAST_SAVE'] = $core->transients['last_save'] ?? '';
 				}
 
 				// Last compiler hook key.
 				if ( isset( $core->transients['last_compiler'] ) ) {
-					$GLOBALS[ $options_global ]['REDUX_LAST_COMPILER'] = $core->transients['last_compiler'];
+					//$GLOBALS[ $options_global ]['REDUX_LAST_COMPILER'] = $core->transients['last_compiler'] ?? '';
 				}
-
-				return true;
 			}
-
-			return false;
 		}
 
 		/**
 		 * Register Option for use
 		 *
-		 * @since       1.0.0
-		 * @access      public
-		 * @return      void
+		 * @return void
+		 * @throws ReflectionException Exception.
+		 * @since  1.0.0
+		 * @access public
 		 */
 		public function register() {
 			$core = $this->core();
@@ -271,7 +267,7 @@ if ( ! class_exists( 'Redux_Options_Object', false ) ) {
 			}
 
 			if ( empty( $core->options_defaults ) ) {
-				$core->options_defaults = $core->_default_values();
+				$core->options_defaults = $core->default_values();
 			}
 
 			$run_update = false;
@@ -313,19 +309,19 @@ if ( ! class_exists( 'Redux_Options_Object', false ) ) {
 					$core->sections[ $k ] = $section;
 				}
 
-				$heading = isset( $section['heading'] ) ? $section['heading'] : $section['title'];
+				$heading = $section['heading'] ?? $section['title'];
 
 				if ( isset( $section['permissions'] ) && false !== $section['permissions'] ) {
 					if ( ! Redux_Helpers::current_user_can( $section['permissions'] ) ) {
 						$core->hidden_perm_sections[] = $section['title'];
 
-						foreach ( $section['fields'] as $num => $field_data ) {
+						foreach ( $section['fields'] as $field_data ) {
 							$field_type = $field_data['type'];
 
 							if ( 'section' !== $field_type || 'divide' !== $field_type || 'info' !== $field_type || 'raw' !== $field_type ) {
 								$field_id = $field_data['id'];
-								$default  = isset( $core->options_defaults[ $field_id ] ) ? $core->options_defaults[ $field_id ] : '';
-								$data     = isset( $core->options[ $field_id ] ) ? $core->options[ $field_id ] : $default;
+								$default  = $core->options_defaults[ $field_id ] ?? '';
+								$data     = $core->options[ $field_id ] ?? $default;
 
 								$this->hidden_perm_fields[ $field_id ] = $data;
 							}
@@ -370,7 +366,7 @@ if ( ! class_exists( 'Redux_Options_Object', false ) ) {
 
 						if ( 'raw' === $field['type'] ) {
 							if ( isset( $field['align'] ) ) {
-								$field['full_width'] = $field['align'] ? false : true;
+								$field['full_width'] = ! $field['align'];
 								unset( $field['align'] );
 							} elseif ( ! isset( $field['full_width'] ) ) {
 								$field['full_width'] = true;
@@ -387,7 +383,7 @@ if ( ! class_exists( 'Redux_Options_Object', false ) ) {
 						// phpcs:ignore WordPress.NamingConventions.ValidHookName
 						$field = apply_filters( "redux/options/{$core->args['opt_name']}/field/{$field['id']}/register", $field );
 
-						$core->field_types[ $field['type'] ] = isset( $core->field_types[ $field['type'] ] ) ? $core->field_types[ $field['type'] ] : array();
+						$core->field_types[ $field['type'] ] = $core->field_types[ $field['type'] ] ?? array();
 
 						$core->field_sections[ $field['type'] ][ $field['id'] ] = $k;
 
@@ -409,7 +405,7 @@ if ( ! class_exists( 'Redux_Options_Object', false ) ) {
 
 						if ( isset( $field['permissions'] ) && false !== $field['permissions'] ) {
 							if ( ! Redux_Helpers::current_user_can( $field['permissions'] ) ) {
-								$data = isset( $core->options[ $field['id'] ] ) ? $core->options[ $field['id'] ] : $core->options_defaults[ $field['id'] ];
+								$data = $core->options[ $field['id'] ] ?? $core->options_defaults[ $field['id'] ];
 
 								$this->hidden_perm_fields[ $field['id'] ] = $data;
 
@@ -437,7 +433,7 @@ if ( ! class_exists( 'Redux_Options_Object', false ) ) {
 						}
 
 						if ( isset( $field['type'] ) && 'info' === $field['type'] && $section_ident ) {
-							$field['indent'] = $section_ident;
+							$field['indent'] = true;
 						}
 
 						$th = $core->render_class->get_header_html( $field );
@@ -445,7 +441,7 @@ if ( ! class_exists( 'Redux_Options_Object', false ) ) {
 						$field['name'] = $core->args['opt_name'] . '[' . $field['id'] . ']';
 
 						// Set the default value if present.
-						$core->options_defaults[ $field['id'] ] = isset( $core->options_defaults[ $field['id'] ] ) ? $core->options_defaults[ $field['id'] ] : '';
+						$core->options_defaults[ $field['id'] ] = $core->options_defaults[ $field['id'] ] ?? '';
 
 						// Set the defaults to the value if not present.
 						$do_update = false;
@@ -456,11 +452,11 @@ if ( ! class_exists( 'Redux_Options_Object', false ) ) {
 							$core->options[ $field['id'] ]          = $field['default'];
 							$do_update                              = true;
 
-							// Check fields that hae no default value, but an options value with settings to
+							// Check fields that hae no default value, but an option value with settings to
 							// be saved by default.
 						} elseif ( ! isset( $core->options[ $field['id'] ] ) && isset( $field['options'] ) ) {
 
-							// If sorter field, check for options as save them as defaults.
+							// If a sorter field, check for options and save them as defaults.
 							if ( 'sorter' === $field['type'] || 'sortable' === $field['type'] ) {
 								$core->options_defaults[ $field['id'] ] = $field['options'];
 								$core->options[ $field['id'] ]          = $field['options'];
@@ -540,10 +536,9 @@ if ( ! class_exists( 'Redux_Options_Object', false ) ) {
 							}
 						}
 
-						if ( ! isset( $field['class'] ) ) { // No errors please.
+						if ( ! isset( $field['class'] ) ) { // No errors, please.
 							$field['class'] = '';
 						}
-						$id = $field['id'];
 
 						/**
 						 * Filter 'redux/options/{opt_name}/field/{field.id}'.
@@ -554,7 +549,7 @@ if ( ! class_exists( 'Redux_Options_Object', false ) ) {
 						// phpcs:ignore WordPress.NamingConventions.ValidHookName
 						$field = apply_filters( "redux/options/{$core->args['opt_name']}/field/{$field['id']}", $field );
 
-						if ( empty( $field ) || ! $field || false === $field ) {
+						if ( empty( $field ) || ! $field ) {
 							unset( $core->sections[ $k ]['fields'][ $fieldk ] );
 							continue;
 						}
@@ -586,7 +581,7 @@ if ( ! class_exists( 'Redux_Options_Object', false ) ) {
 						}
 
 						/**
-						 * Action 'redux/options/{opt_name}/field/field.type}/register'
+						 * Action 'redux/options/{opt_name}/field/{field.type}/register'
 						 */
 
 						// phpcs:ignore WordPress.NamingConventions.ValidHookName
@@ -599,11 +594,11 @@ if ( ! class_exists( 'Redux_Options_Object', false ) ) {
 							$this->no_panel[] = $field['id'];
 						} else {
 							if ( isset( $field['disabled'] ) && $field['disabled'] ) {
-								$field['label_for'] = 'redux_disable_field';
+								$field['class'] .= ' redux_disable_field';
 							}
 
 							if ( isset( $field['hidden'] ) && $field['hidden'] ) {
-								$field['label_for'] = 'redux_hide_field';
+								$field['class'] .= ' redux_hide_field';
 							}
 
 							if ( true === $core->args['options_api'] ) {
@@ -627,7 +622,7 @@ if ( ! class_exists( 'Redux_Options_Object', false ) ) {
 			/**
 			 * Action 'redux/options/{opt_name}/register'
 			 *
-			 * @param array option sections
+			 * @param array $section Option sections
 			 */
 
 			// phpcs:ignore WordPress.NamingConventions.ValidHookName
@@ -641,22 +636,24 @@ if ( ! class_exists( 'Redux_Options_Object', false ) ) {
 
 				$core->no_output = true;
 				$temp            = $core->args['output_variables_prefix'];
-				// Allow the override of variables prefix for use by SCSS or LESS.
+				// Allow the override of variable's prefix for use by SCSS or LESS.
 				if ( isset( $core->args['compiler_output_variables_prefix'] ) ) {
 					$core->args['output_variables_prefix'] = $core->args['compiler_output_variables_prefix'];
 				}
 				$core->output_class->enqueue();
 				$core->args['output_variables_prefix'] = $temp;
 
+				// phpcs:ignore WordPress.NamingConventions.ValidVariableName
+				$compiler_css = $core->compilerCSS;
+
 				/**
 				 * Action 'redux/options/{opt_name}/compiler'
 				 *
-				 * @param array  options
-				 * @param string CSS that get sent to the compiler hook
+				 * @param array  $options Options.
+				 * @param string $css CSS that get sent to the compiler hook.
+				 * @param array  $changed_values Changed values.
+				 * @param array  $output_variables Output variables.
 				 */
-
-				// phpcs:ignore WordPress.NamingConventions.ValidVariableName
-				$compiler_css = $core->compilerCSS;
 
 				// phpcs:ignore WordPress.NamingConventions.ValidHookName
 				do_action( "redux/options/{$core->args['opt_name']}/compiler", $core->options, $compiler_css, $core->transients['changed_values'], $core->output_variables );
@@ -664,8 +661,7 @@ if ( ! class_exists( 'Redux_Options_Object', false ) ) {
 				/**
 				 * Action 'redux/options/{opt_name}/compiler/advanced'
 				 *
-				 * @param array  options
-				 * @param string CSS that get sent to the compiler hook, which sends the full Redux object
+				 * @param object $redux ReduxFramework object.
 				 */
 
 				// phpcs:ignore WordPress.NamingConventions.ValidHookName
@@ -683,7 +679,7 @@ if ( ! class_exists( 'Redux_Options_Object', false ) ) {
 		 * @access      public
 		 * @return      array $this->options_defaults
 		 */
-		public function default_values() {
+		public function default_values(): array {
 			$core = $this->core();
 
 			if ( ! is_null( $core->sections ) && is_null( $core->options_defaults ) ) {
@@ -696,7 +692,7 @@ if ( ! class_exists( 'Redux_Options_Object', false ) ) {
 			 * @param array $defaults option default values
 			 */
 
-			$core->transients['changed_values'] = isset( $core->transients['changed_values'] ) ? $core->transients['changed_values'] : array();
+			$core->transients['changed_values'] = $core->transients['changed_values'] ?? array();
 
 			// phpcs:ignore WordPress.NamingConventions.ValidHookName
 			$core->options_defaults = apply_filters( "redux/options/{$core->args['opt_name']}/defaults", $core->options_defaults, $core->transients['changed_values'] );
@@ -705,16 +701,15 @@ if ( ! class_exists( 'Redux_Options_Object', false ) ) {
 		}
 
 		/**
-		 * Validate the Options options before insertion
+		 * Validate the Options before insertion
 		 *
-		 * @since       3.0.0
-		 * @access      public
-		 *
-		 * @param       array $plugin_options The options array.
+		 * @param  array $plugin_options The option array.
 		 *
 		 * @return array|mixed|string
+		 * @since  3.0.0
+		 * @access public
 		 */
-		public function validate_options( $plugin_options ) {
+		public function validate_options( array $plugin_options ) {
 			$core = $this->core();
 
 			if ( isset( $core->validation_ran ) ) {
@@ -797,7 +792,7 @@ if ( ! class_exists( 'Redux_Options_Object', false ) ) {
 				if ( in_array( $core->args['database'], array( 'transient', 'theme_mods', 'theme_mods_expanded', 'network' ), true ) ) {
 					$this->set( $plugin_options );
 
-					return;
+					return null;
 				}
 
 				$plugin_options = wp_parse_args( $imported_options, $plugin_options );
@@ -842,7 +837,7 @@ if ( ! class_exists( 'Redux_Options_Object', false ) ) {
 				return $plugin_options;
 			}
 
-			// Section reset to defaults.
+			// Section reset to default.
 			if ( ! empty( $plugin_options['defaults-section'] ) ) {
 				if ( isset( $plugin_options['redux-section'] ) && isset( $core->sections[ $plugin_options['redux-section'] ]['fields'] ) ) {
 					if ( empty( $core->options_defaults ) ) {
@@ -957,7 +952,7 @@ if ( ! class_exists( 'Redux_Options_Object', false ) ) {
 			unset( $plugin_options['defaults'], $plugin_options['defaults_section'], $plugin_options['import'], $plugin_options['import_code'], $plugin_options['import_link'], $plugin_options['compiler'], $plugin_options['redux-section'] );
 			if ( in_array( $core->args['database'], array( 'transient', 'theme_mods', 'theme_mods_expanded' ), true ) ) {
 				$core->set( $core->args['opt_name'], $plugin_options );
-				return;
+				return null;
 			}
 
 			if ( defined( 'WP_CACHE' ) && WP_CACHE && class_exists( 'W3_ObjectCache' ) && function_exists( 'w3_instance' ) ) {
@@ -975,15 +970,14 @@ if ( ! class_exists( 'Redux_Options_Object', false ) ) {
 		/**
 		 * ->get_default(); This is used to return the default value if default_show is set.
 		 *
-		 * @since       1.0.1
-		 * @access      public
-		 *
-		 * @param       string $opt_name The option name to return.
-		 * @param       mixed  $default  (null)  The value to return if default not set.
+		 * @param string $opt_name The option name to return.
+		 * @param mixed  $default  (null) The value to return if default not set.
 		 *
 		 * @return      mixed $default
+		 * @since       1.0.1
+		 * @access      public
 		 */
-		public function get_default( $opt_name, $default = null ) {
+		public function get_default( string $opt_name, $default = null ) {
 			if ( true === $this->args['default_show'] ) {
 
 				if ( empty( $this->options_defaults ) ) {
@@ -999,15 +993,14 @@ if ( ! class_exists( 'Redux_Options_Object', false ) ) {
 		/**
 		 * Get the default value for an option
 		 *
-		 * @since  3.3.6
-		 * @access public
-		 *
 		 * @param string $key       The option's ID.
 		 * @param string $array_key The key of the default's array.
 		 *
 		 * @return mixed
+		 * @since  3.3.6
+		 * @access public
 		 */
-		public function get_default_value( $key, $array_key = false ) {
+		public function get_default_value( string $key, $array_key = false ) {
 			if ( empty( $this->options_defaults ) ) {
 				$this->options_defaults = $this->default_values();
 			}
@@ -1025,7 +1018,5 @@ if ( ! class_exists( 'Redux_Options_Object', false ) ) {
 
 			return $value;
 		}
-
 	}
-
 }

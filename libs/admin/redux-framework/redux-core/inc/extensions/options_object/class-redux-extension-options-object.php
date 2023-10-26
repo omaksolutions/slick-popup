@@ -25,7 +25,7 @@ if ( ! class_exists( 'Redux_Extension_Options_Object', false ) ) {
 		 *
 		 * @var string
 		 */
-		public static $version = '4.0';
+		public static $version = '4.0.0';
 
 		/**
 		 * Set the name of the field.  Ideally, this will also be your extension's name.
@@ -33,7 +33,7 @@ if ( ! class_exists( 'Redux_Extension_Options_Object', false ) ) {
 		 *
 		 * @var string
 		 */
-		private $field_name = 'my_extension';
+		private $field_name = 'options_object';
 
 		/**
 		 * Is field bit.
@@ -43,12 +43,12 @@ if ( ! class_exists( 'Redux_Extension_Options_Object', false ) ) {
 		public $is_field = false;
 
 		/**
-		 * Class Constructor. Defines the args for the extions class
+		 * Class Constructor. Defines the args for the extensions class
 		 *
 		 * @since       1.0.0
 		 * @access      public
 		 *
-		 * @param       array $parent Redux object.
+		 * @param       object $parent Redux object.
 		 *
 		 * @return      void
 		 */
@@ -64,7 +64,7 @@ if ( ! class_exists( 'Redux_Extension_Options_Object', false ) ) {
 		}
 
 		/**
-		 * Add sectio to panel.
+		 * Add section to panel.
 		 */
 		public function add_section() {
 			$this->parent->sections[] = array(

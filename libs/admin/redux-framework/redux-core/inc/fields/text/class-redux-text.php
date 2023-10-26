@@ -39,7 +39,7 @@ if ( ! class_exists( 'Redux_Text', false ) ) {
 		public function render() {
 
 			$this->field['attributes']            = wp_parse_args(
-				isset( $this->field['attributes'] ) ? $this->field['attributes'] : array(),
+				$this->field['attributes'] ?? array(),
 				array(
 					'qtip_title'   => '',
 					'qtip_text'    => '',
@@ -65,8 +65,8 @@ if ( ! class_exists( 'Redux_Text', false ) ) {
 						}
 					}
 				}
-				$this->field['attributes']['qtip_title'] = isset( $this->field['text_hint']['title'] ) ? 'qtip-title="' . $this->field['text_hint']['title'] . '" ' : '';
-				$this->field['attributes']['qtip_text']  = isset( $this->field['text_hint']['content'] ) ? 'qtip-content="' . $this->field['text_hint']['content'] . '" ' : '';
+				$this->field['attributes']['qtip-title'] = $this->field['text_hint']['title'] ?? '';
+				$this->field['attributes']['qtip-text']  = $this->field['text_hint']['content'] ?? '';
 			}
 
 			if ( ! empty( $this->field['data'] ) && is_array( $this->field['data'] ) ) {
@@ -91,7 +91,7 @@ if ( ! class_exists( 'Redux_Text', false ) ) {
 			$this->field['attributes']['class'] = implode( ' ', $this->field['attributes']['class'] );
 
 			if ( isset( $this->field['options'] ) && ! empty( $this->field['options'] ) ) {
-				if ( ! isset( $this->value ) || ( isset( $this->value ) && ! is_array( $this->value ) ) ) {
+				if ( ! isset( $this->value ) || ( ! is_array( $this->value ) ) ) {
 					$this->value = array();
 				}
 				foreach ( $this->field['options'] as $k => $v ) {
@@ -107,7 +107,7 @@ if ( ! class_exists( 'Redux_Text', false ) ) {
 					$attributes['id']   = esc_attr( $this->field['id'] . $k );
 
 					$attributes_string = $this->render_attributes( $attributes );
-					echo '<div class="input_wrapper"><label for="' . $attributes['name'] . '">' . $v . '</label><input placeholder="' . $v . '" ' . $attributes_string . '></div>'; // phpcs:ignore WordPress.Security.EscapeOutput
+					echo '<div class="input_wrapper"><label for="' . $attributes['id'] . '">' . $v . '</label><input placeholder="' . $v . '" ' . $attributes_string . '></div>'; // phpcs:ignore WordPress.Security.EscapeOutput
 
 				}
 			} else {
@@ -128,7 +128,12 @@ if ( ! class_exists( 'Redux_Text', false ) ) {
 		 */
 		public function enqueue() {
 			if ( $this->parent->args['dev_mode'] ) {
-				wp_enqueue_style( 'redux-field-text-css', Redux_Core::$url . 'inc/fields/text/redux-text.css', array(), $this->timestamp, 'all' );
+				wp_enqueue_style(
+					'redux-field-text',
+					Redux_Core::$url . 'inc/fields/text/redux-text.css',
+					array(),
+					$this->timestamp
+				);
 			}
 		}
 

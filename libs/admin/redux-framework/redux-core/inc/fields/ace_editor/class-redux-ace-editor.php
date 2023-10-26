@@ -56,6 +56,7 @@ if ( ! class_exists( 'Redux_Ace_Editor', false ) ) {
 					type="hidden"
 					class="localize_data"
 					value="<?php echo esc_html( wp_json_encode( $params ) ); ?>"/>
+				<label for="<?php echo esc_attr( $this->field['id'] ); ?>-textarea"></label>
 				<textarea
 					name="<?php echo esc_attr( $this->field['name'] . $this->field['name_suffix'] ); ?>"
 					id="<?php echo esc_attr( $this->field['id'] ); ?>-textarea"
@@ -82,11 +83,10 @@ if ( ! class_exists( 'Redux_Ace_Editor', false ) ) {
 		public function enqueue() {
 			if ( $this->parent->args['dev_mode'] ) {
 				wp_enqueue_style(
-					'redux-field-ace-editor-css',
+					'redux-field-ace-editor',
 					Redux_Core::$url . 'inc/fields/ace_editor/redux-ace-editor.css',
 					array(),
-					$this->timestamp,
-					'all'
+					$this->timestamp
 				);
 			}
 
@@ -94,15 +94,15 @@ if ( ! class_exists( 'Redux_Ace_Editor', false ) ) {
 				Redux_CDN::enqueue_script(
 					'ace-editor-js',
 					// phpcs:ignore Generic.Strings.UnnecessaryStringConcat
-					'//' . 'cdnjs' . '.cloudflare' . '.com/ajax/libs/ace/1.4.2/ace.js',
+					'//' . 'cdnjs' . '.cloudflare' . '.com/ajax/libs/ace/1.23.0/ace.min.js',
 					array( 'jquery' ),
-					'1.4.2',
+					'1.23.0',
 					true
 				);
 			}
 
 			wp_enqueue_script(
-				'redux-field-ace-editor-js',
+				'redux-field-ace-editor',
 				Redux_Core::$url . 'inc/fields/ace_editor/redux-ace-editor' . Redux_Functions::is_min() . '.js',
 				array( 'jquery', 'ace-editor-js', 'redux-js' ),
 				$this->timestamp,

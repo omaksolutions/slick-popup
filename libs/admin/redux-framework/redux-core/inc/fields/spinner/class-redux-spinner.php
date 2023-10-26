@@ -21,9 +21,9 @@ if ( ! class_exists( 'Redux_Spinner', false ) ) {
 		 */
 		public function set_defaults() {
 			$params = array(
-				'min'     => '',
-				'max'     => '',
-				'step'    => '',
+				'min'     => 0,
+				'max'     => 1,
+				'step'    => 1,
 				'default' => '',
 				'edit'    => true,
 				'plus'    => '+',
@@ -120,7 +120,7 @@ if ( ! class_exists( 'Redux_Spinner', false ) ) {
 		 */
 		public function enqueue() {
 			wp_enqueue_script(
-				'redux-field-spinner-custom-js',
+				'redux-field-spinner-custom',
 				Redux_Core::$url . 'inc/fields/spinner/vendor/jquery.ui.spinner' . Redux_Functions::is_min() . '.js',
 				array( 'jquery', 'redux-js' ),
 				$this->timestamp,
@@ -128,20 +128,19 @@ if ( ! class_exists( 'Redux_Spinner', false ) ) {
 			);
 
 			wp_enqueue_script(
-				'redux-field-spinner-js',
+				'redux-field-spinner',
 				Redux_Core::$url . 'inc/fields/spinner/redux-spinner' . Redux_Functions::is_min() . '.js',
-				array( 'jquery', 'redux-field-spinner-custom-js', 'jquery-ui-core', 'jquery-ui-dialog', 'redux-js' ),
+				array( 'jquery', 'redux-field-spinner-custom', 'jquery-ui-core', 'jquery-ui-dialog', 'redux-js' ),
 				$this->timestamp,
 				true
 			);
 
 			if ( $this->parent->args['dev_mode'] ) {
 				wp_enqueue_style(
-					'redux-field-spinner-css',
+					'redux-field-spinner',
 					Redux_Core::$url . 'inc/fields/spinner/redux-spinner.css',
 					array(),
-					$this->timestamp,
-					'all'
+					$this->timestamp
 				);
 			}
 		}
@@ -149,7 +148,7 @@ if ( ! class_exists( 'Redux_Spinner', false ) ) {
 		/**
 		 * CSS/compiler output.
 		 *
-		 * @param string $style CSS styles.
+		 * @param string|null|array $style CSS styles.
 		 */
 		public function output( $style = '' ) {
 			$style = '';
@@ -171,15 +170,15 @@ if ( ! class_exists( 'Redux_Spinner', false ) ) {
 		 * Compile CSS data for output.
 		 *
 		 * @param mixed $value Value.
-		 * @param array $output .
+		 * @param mixed $output .
 		 *
 		 * @return string
 		 */
-		private function parse_css( $value, $output ) {
+		private function parse_css( $value, $output ): string {
 			// No notices.
 			$css = '';
 
-			$unit = isset( $this->field['output_unit'] ) ? $this->field['output_unit'] : 'px';
+			$unit = $this->field['output_unit'] ?? 'px';
 
 			// Must be an array.
 			if ( is_array( $output ) ) {
@@ -191,6 +190,17 @@ if ( ! class_exists( 'Redux_Spinner', false ) ) {
 			}
 
 			return $css;
+		}
+
+		/**
+		 * Generate CSS style (unused, but needed).
+		 *
+		 * @param string $data Field data.
+		 *
+		 * @return string
+		 */
+		public function css_style( $data ): string {
+			return '';
 		}
 
 		/**
