@@ -5,28 +5,22 @@ Plugin URI:   http://www.omaksolutions.com
 Description:  A lightweight plugin that converts a Contact Form 7 form into a customizable pop-up form which is slick, beautiful and responsive to different screen-sizes.
 Author URI:   http://www.omaksolutions.com 
 Author:       Om Ak Solutions 
-Version:      1.7.14
+Version:      1.7.15
 Text Domain: slick-popup
 */
 
-const SPLITE_VERSION = '1.7.13';
-
+const SPLITE_VERSION = '1.7.15';
 const SPLITE_REQUIRED_WP_VERSION = '3.0.1';
-
 const SPLITE_PLUGIN = __FILE__;
+const SPLITE_TXT_DOMAIN = 'slick-popup';
 
 define( 'SPLITE_PLUGIN_BASENAME', plugin_basename( SPLITE_PLUGIN ) );
-
 define( 'SPLITE_PLUGIN_NAME', trim( dirname( SPLITE_PLUGIN_BASENAME ), '/' ) );
-
 define( 'SPLITE_PLUGIN_DIR', untrailingslashit( dirname( SPLITE_PLUGIN ) ) );
-
 define( 'SPLITE_PLUGIN_URL', plugins_url( '' , __FILE__ ) );
 
 const SPLITE_PLUGIN_IMG_URL = SPLITE_PLUGIN_URL . '/libs/admin/img';
-
 const SPLITE_DEBUG = FALSE;
-
 const SPLITE_REDUX_OPTION_NAME = "splite_opts";
 
 require_once( SPLITE_PLUGIN_DIR . '/libs/admin-functions.php' );
@@ -256,32 +250,32 @@ function splite_add_my_popup() {
 		$submit_button_scheme = $splite_opts['choose-submit-button'];
 		
 		$side_button_text = !empty($splite_opts['side-button-text']) ? $splite_opts['side-button-text'] : 'Contact Us';
-		$side_button_position = isset($splite_opts['side-button-position']) ? $splite_opts['side-button-position'] : 'left';
+		$side_button_position = $splite_opts['side-button-position'] ?? 'left';
 		$side_button_switch = isset($splite_opts['plugin_state_on_mobile']) ? 'enabled_on_mobile' : 'disabled_on_mobile';
 		
 		$activation_mode = array();
-		$activation_mode['mode'] = isset($splite_opts['activation_mode']) ? $splite_opts['activation_mode'] : 'manually';
-		$activation_mode['autopopup_delay'] = isset($splite_opts['autopopup-delay']) ? $splite_opts['autopopup-delay'] : 4;
-		$activation_mode['onscroll_type'] = isset($splite_opts['onscroll-type']) ? $splite_opts['onscroll-type'] : 'pixels';
-		$activation_mode['onscroll_pixels'] = isset($splite_opts['onscroll-pixels']) ? $splite_opts['onscroll-pixels'] : 300;	
-		$activation_mode['onscroll_percentage'] = isset($splite_opts['onscroll-percentage']) ? $splite_opts['onscroll-percentage'] : 20;
-		$activation_mode['onexit'] = isset($splite_opts['onexit']) ? $splite_opts['onexit'] : 'onexit';
+		$activation_mode['mode'] = $splite_opts['activation_mode'] ?? 'manually';
+		$activation_mode['autopopup_delay'] = $splite_opts['autopopup-delay'] ?? 4;
+		$activation_mode['onscroll_type'] = $splite_opts['onscroll-type'] ?? 'pixels';
+		$activation_mode['onscroll_pixels'] = $splite_opts['onscroll-pixels'] ?? 300;
+		$activation_mode['onscroll_percentage'] = $splite_opts['onscroll-percentage'] ?? 20;
+		$activation_mode['onexit'] = $splite_opts['onexit'] ?? 'onexit';
 
 		
-		$popup_load_effect = isset($splite_opts['loader-animation']) ? $splite_opts['loader-animation'] : 'fadeIn';
-		$popup_load_speed = isset($splite_opts['loader-speed']) ? $splite_opts['loader-speed'] : .75;
-		$popup_unload_effect = isset($splite_opts['unloader-animation']) ? $splite_opts['unloader-animation'] : 'fadeOut';
-		$popup_unload_speed = isset($splite_opts['unloader-speed']) ? $splite_opts['unloader-speed'] : .50;
+		$popup_load_effect = $splite_opts['loader-animation'] ?? 'fadeIn';
+		$popup_load_speed = $splite_opts['loader-speed'] ?? .75;
+		$popup_unload_effect = $splite_opts['unloader-animation'] ?? 'fadeOut';
+		$popup_unload_speed = $splite_opts['unloader-speed'] ?? .50;
 
-		$external_selector = isset($splite_opts['external-selector']) ? $splite_opts['external-selector'] : '';
+		$external_selector = $splite_opts['external-selector'] ?? '';
 		
-		$autoclose = isset($splite_opts['autoclose']) ? $splite_opts['autoclose'] : '';
-		$autoclose_time = isset($splite_opts['autoclose_time']) ? $splite_opts['autoclose_time'] : '';
+		$autoclose = $splite_opts['autoclose'] ?? '';
+		$autoclose_time = $splite_opts['autoclose_time'] ?? '';
 		
-		$redirect = isset($splite_opts['redirect']) ? $splite_opts['redirect'] : '';
-		$redirect_url = isset($splite_opts['redirect_url']) ? $splite_opts['redirect_url'] : '';
+		$redirect = $splite_opts['redirect'] ?? '';
+		$redirect_url = $splite_opts['redirect_url'] ?? '';
 		
-		$cf7_id = isset($splite_opts['form-id'])? $splite_opts['form-id'] : '';
+		$cf7_id = $splite_opts['form-id'] ?? '';
 
 		$cf7_id = apply_filters( 'splite_dollar_cf7_id', $cf7_id );
 		$side_button_text = apply_filters( 'splite_dollar_side_button_text', $side_button_text );
@@ -302,10 +296,10 @@ function splite_add_my_popup() {
 		<div class="splite_popup_animator" data-loadspeed="<?php echo $popup_load_speed; ?>" data-loadeffect="<?php echo $popup_load_effect; ?>" data-unloadeffect="<?php echo $popup_unload_effect; ?>" data-activationmode="<?php echo $activation_mode['mode']; ?>" data-unloadspeed="<?php echo $popup_unload_speed; ?>" data-external_selectors="<?php echo $external_selector; ?>" data-cf7-formID="<?php echo $cf7_id; ?>" data-autoclose="<?php echo $autoclose; ?>" data-autoclose_time="<?php echo $autoclose_time; ?>" data-redirect="<?php echo $redirect; ?>" data-redirect_url="<?php echo $redirect_url; ?>"></div>
 		<div id="splite_popup_box" class="<?php echo 'layout_'.$choose_layout; ?> manage">  			
 			<?php if($popup_heading!='') { ?>
-				<div id="splite_popup_title"><?php echo $popup_heading; ?></div>			
+				<div id="splite_popup_title"><?php esc_html_e($popup_heading, SPLITE_TXT_DOMAIN); ?></div>
 			<?php } ?>
 			<div id="splite_form_container" class="">			
-				<p id="splite_popup_description"><?php echo $cta_text; ?></p>
+				<p id="splite_popup_description"><?php esc_html_e($cta_text, SPLITE_TXT_DOMAIN); ?></p>
 				<?php 
 					if( empty($message) ) { 
 						echo do_shortcode( '[contact-form-7 id="' .$cf7_id. '" title="' . '' . '"]'); 
@@ -320,7 +314,7 @@ function splite_add_my_popup() {
 		</div>
 		
 		<?php if( $side_button_position != 'pos_none' ) { ?>
-			<a onClick="splite_loader();" class="splite_sideEnquiry <?php echo $side_button_position; ?> on_mobile <?php echo $side_button_switch; ?>"><?php echo $side_button_text; ?></a>
+			<a onClick="splite_loader();" class="splite_sideEnquiry <?php _e($side_button_position, SPLITE_TXT_DOMAIN); ?> on_mobile <?php _e($side_button_switch, SPLITE_TXT_DOMAIN); ?>"><?php esc_html_e($side_button_text, SPLITE_TXT_DOMAIN); ?></a>
 		<?php } ?>
 		
 		<!-- Slick Popup Lite Box and Curtain Arrangement -->		
@@ -345,7 +339,7 @@ function splite_option_css() {
 	$custom_form_background_color = $splite_opts['custom-form-background-color'];	
 	
 	$popup_corners = $splite_opts['popup-corners'];
-	$custom_popup_corners = isset($splite_opts['custom-popup-corners']) ? $splite_opts['custom-popup-corners'] : '';
+	$custom_popup_corners = $splite_opts['custom-popup-corners'] ?? '';
 
 	$custom_popup_layout = $splite_opts['custom-popup-layout'];
 	$popup_height = $splite_opts['popup-height'];
@@ -366,7 +360,7 @@ function splite_option_css() {
 	//$submit_button_border = $splite_opts['submit-button-border'];
   	
 	// Custom CSS Code
-	$custom_css_code = isset($splite_opts['custom-css-code']) ? $splite_opts['custom-css-code'] : '';
+	$custom_css_code = $splite_opts['custom-css-code'] ?? '';
 	
 	///////////////////////////////////////////
 	// Set Submit Button Styles
@@ -404,13 +398,13 @@ function splite_option_css() {
 	$submit_typo_font_weight = $submit_button_typography['font-weight'];
 	$submit_typo_line_height = $submit_button_typography['line-height'];
 	
-	$box_background_image = isset($theme_colors['background-image']) ? $theme_colors['background-image'] : ''; 
-	$box_background_position = isset($theme_colors['background-position']) ? $theme_colors['background-position'] : ''; 
-	$box_background_size = isset($theme_colors['background-size']) ? $theme_colors['background-size'] : 'cover'; 
-	$box_background_repeat = isset($theme_colors['background-repeat']) ? $theme_colors['background-repeat'] : ''; 
-	$box_background_media = isset($theme_colors['background-media']) ? $theme_colors['background-media'] : ''; 
-	$box_background_color = isset($theme_colors['background-color']) ? $theme_colors['background-color'] : ''; 
-	$box_background_attachment = isset($theme_colors['background-attachment']) ? $theme_colors['background-attachment'] : ''; 
+	$box_background_image = $theme_colors['background-image'] ?? '';
+	$box_background_position = $theme_colors['background-position'] ?? '';
+	$box_background_size = $theme_colors['background-size'] ?? 'cover';
+	$box_background_repeat = $theme_colors['background-repeat'] ?? '';
+	$box_background_media = $theme_colors['background-media'] ?? '';
+	$box_background_color = $theme_colors['background-color'] ?? '';
+	$box_background_attachment = $theme_colors['background-attachment'] ?? '';
 	
 	$image_background = $box_background_color.' url("'.$box_background_image.'") '.$box_background_repeat.' '.$box_background_position.' / '.$box_background_size; 
 	$box_background = empty($box_background_image) ? $theme_colors['main-background-color'] : $image_background; 
